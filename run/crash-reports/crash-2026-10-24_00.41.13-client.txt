@@ -1,0 +1,141 @@
+---- Minecraft Crash Report ----
+// I bet Cylons wouldn't have this problem.
+
+Time: 2026-10-24 00:41:13
+Description: Bootstrap
+
+net.neoforged.fml.ModLoadingException: Loading errors encountered:
+	- skram (skram) has failed to load correctly
+	  net.minecraft.IdentifierException: Non [a-z0-9/._-] character in path of location: skram:Digging
+
+	at net.neoforged.fml.ModLoader.waitForFuture(ModLoader.java:253) ~[loader-12.0.12.jar:12.0] {}
+	at net.neoforged.fml.ModLoader.dispatchParallelTask(ModLoader.java:216) ~[loader-12.0.12.jar:12.0] {}
+	at net.neoforged.fml.ModLoader.constructMods(ModLoader.java:124) ~[loader-12.0.12.jar:12.0] {}
+	at net.neoforged.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:101) ~[loader-12.0.12.jar:12.0] {}
+	at TRANSFORMER/neoforge@26.3.0.97/net.neoforged.neoforge.internal.CommonModLoader.begin(CommonModLoader.java:49) ~[neoforge-26.3.0.97-universal.jar:?] {}
+	at TRANSFORMER/neoforge@26.3.0.97/net.neoforged.neoforge.client.loading.ClientModLoader.begin(ClientModLoader.java:56) ~[neoforge-26.3.0.97-universal.jar:?] {}
+	at TRANSFORMER/minecraft@26.3/net.minecraft.client.main.Main.main(Main.java:167) [minecraft-patched-26.3.0.97.jar:?] {}
+	at net.neoforged.fml.startup.Client.main(Client.java:19) [loader-12.0.12.jar:12.0] {}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[?:?] {}
+	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: main
+Stacktrace:
+	at net.neoforged.fml.ModLoader.waitForFuture(ModLoader.java:253) ~[loader-12.0.12.jar:12.0] {}
+	at net.neoforged.fml.ModLoader.dispatchParallelTask(ModLoader.java:216) ~[loader-12.0.12.jar:12.0] {}
+	at net.neoforged.fml.ModLoader.constructMods(ModLoader.java:124) ~[loader-12.0.12.jar:12.0] {}
+	at net.neoforged.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:101) ~[loader-12.0.12.jar:12.0] {}
+	at TRANSFORMER/neoforge@26.3.0.97/net.neoforged.neoforge.internal.CommonModLoader.begin(CommonModLoader.java:49) ~[neoforge-26.3.0.97-universal.jar:?] {}
+	at TRANSFORMER/neoforge@26.3.0.97/net.neoforged.neoforge.client.loading.ClientModLoader.begin(ClientModLoader.java:56) ~[neoforge-26.3.0.97-universal.jar:?] {}
+-- Initialization --
+Details:
+	Modules: 
+Stacktrace:
+	at TRANSFORMER/minecraft@26.3/net.minecraft.client.main.Main.main(Main.java:167) [minecraft-patched-26.3.0.97.jar:?] {}
+	at net.neoforged.fml.startup.Client.main(Client.java:19) [loader-12.0.12.jar:12.0] {}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[?:?] {}
+	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?] {}
+
+
+-- System Details --
+Details:
+	Minecraft Version: 26.3
+	Minecraft Version ID: 26.3
+	Operating System: Mac OS X (aarch64) version 26.5.1
+	Java Version: 25.0.4.1, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 84333936 bytes (80 MiB) / 373293056 bytes (356 MiB) up to 8589934592 bytes (8192 MiB)
+	Memory (heap): init: 512MiB, used: 273MiB, committed: 356MiB, max: 8192MiB
+	Memory (non-heap): init: 007MiB, used: 137MiB, committed: 139MiB, max: 000MiB
+	CPUs: 12
+	Processor Vendor: Apple Inc.
+	Processor Name: Apple M2 Max
+	Identifier: Apple Inc. Family 0xda33d83d Model 0 Stepping 0
+	Microarchitecture: ARM64 SoC: Avalanche + Blizzard
+	Frequency (GHz): 3.70
+	Number of physical packages: 1
+	Number of physical CPUs: 12
+	Number of logical CPUs: 12
+	Graphics card #0 name: Apple M2 Max
+	Graphics card #0 vendor: Apple (0x106b)
+	Graphics card #0 VRAM (MiB): 0.00
+	Graphics card #0 deviceId: unknown
+	Graphics card #0 versionInfo: unknown
+	Memory slot #0 capacity (MiB): 0.00
+	Memory slot #0 clockSpeed (GHz): 0.00
+	Memory slot #0 type: unknown
+	Virtual memory max (MiB): 36864.00
+	Virtual memory used (MiB): 27925.63
+	Swap memory total (MiB): 4096.00
+	Swap memory used (MiB): 3706.19
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 443025.78, total: 948584.19
+	Space in storage for workdir (MiB): available: 443025.78, total: 948584.19
+	Operating System Version: Apple macOS 26.5.1 (Tahoe) build 25F80
+	Process Elevated: false
+	Process Loads: Uptime: 5s, user: 16s (286.13%), kernel: 1s (15.80%), total: 17s (301.93%)
+	Process Virtual Size (MiB): 435566.75
+	Process Resident Size (MiB): 892.53
+	JVM Flags: 1 total; -XX:StackShadowPages=32
+	Debug Flags: 0 total; 
+	Launched Version: 26.3.0.97
+	Backend library: LWJGL version 3.4.3+4
+	Window size: <not initialized>
+	Surface Info: <no surface>
+	SDL Platform: macOS
+	Graphics Device: <none>
+	GL debug messages: <no renderer available>
+	Is Modded: Definitely; Client brand changed to 'neoforge'
+	Universe: 404
+	Type: Client
+	Locale: en_US
+	System encoding: UTF-8
+	File encoding: UTF-8
+	CPU: 12x Apple M2 Max
+	Class Processors: 
+		04.32%: neoforge:access_transformer
+		00.00%: neoforge:neoforge_dev_dist_cleaner
+		00.00%: neoforge:mixin_frame_context
+		00.00%: neoforge:computing_frames (marker)
+		00.00%: neoforge:runtime_enum_extender
+		00.08%: neoforge:mixin
+		00.00%: neoforge:simple_processors_default (marker)
+		00.02%: neoforge.coremods:field_to_getter.net.minecraft.world.level.biome.biome
+		00.02%: neoforge.coremods:field_to_getter.net.minecraft.world.level.block.flowerpotblock
+		00.02%: neoforge.coremods:field_to_getter.net.minecraft.world.level.levelgen.structure.structure
+		00.34%: neoforge.coremods:method_redirector
+	Mod List: 
+		minecraft-patched-26.3.0.97.jar                   |Minecraft                     |minecraft                     |26.3                |Manifest: NOSIGNATURE
+		neoforge-26.3.0.97-universal.jar                  |NeoForge                      |neoforge                      |26.3.0.97           |Manifest: NOSIGNATURE
+		main                                              |skram                         |skram                         |1.0.0               |Manifest: NOSIGNATURE
+	Crash Report UUID: ba6651ac-568e-42b1-9ac0-255de36a8a8b
+	FML: 12.0.12
+	NeoForge: 26.3.0.97
+	Class Processors: 
+		04.32%: neoforge:access_transformer
+		00.00%: neoforge:neoforge_dev_dist_cleaner
+		00.00%: neoforge:mixin_frame_context
+		00.00%: neoforge:computing_frames (marker)
+		00.00%: neoforge:runtime_enum_extender
+		00.08%: neoforge:mixin
+		00.00%: neoforge:simple_processors_default (marker)
+		00.02%: neoforge.coremods:field_to_getter.net.minecraft.world.level.biome.biome
+		00.02%: neoforge.coremods:field_to_getter.net.minecraft.world.level.block.flowerpotblock
+		00.02%: neoforge.coremods:field_to_getter.net.minecraft.world.level.levelgen.structure.structure
+		00.34%: neoforge.coremods:method_redirector
+	Mod List: 
+		minecraft-patched-26.3.0.97.jar                   |Minecraft                     |minecraft                     |26.3                |Manifest: NOSIGNATURE
+		neoforge-26.3.0.97-universal.jar                  |NeoForge                      |neoforge                      |26.3.0.97           |Manifest: NOSIGNATURE
+		main                                              |skram                         |skram                         |1.0.0               |Manifest: NOSIGNATURE
+	Crash Report UUID: fd555745-8e21-45e6-96cf-1c5d1495d491
+	FML: 12.0.12
+	NeoForge: 26.3.0.97

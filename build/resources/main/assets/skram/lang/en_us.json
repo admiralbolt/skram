@@ -1,0 +1,13 @@
+{
+  "itemGroup.skram": "Example Mod Tab",
+  "block.skram.example_block": "Example Block",
+  "item.skram.example_item": "Example Item",
+
+  "skram.configuration.title": "skram Configs",
+  "skram.configuration.section.skram.common.toml": "skram Configs",
+  "skram.configuration.section.skram.common.toml.title": "skram Configs",
+  "skram.configuration.items": "Item List",
+  "skram.configuration.logDirtBlock": "Log Dirt Block",
+  "skram.configuration.magicNumberIntroduction": "Magic Number Text",
+  "skram.configuration.magicNumber": "Magic Number"
+}

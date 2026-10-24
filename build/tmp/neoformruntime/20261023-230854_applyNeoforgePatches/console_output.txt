@@ -1,0 +1,28 @@
+--------------------------------------------------------------------------------
+
+Command-Line:
+ - /Users/admiralbolt/.gradle/jdks/eclipse_adoptium-25-aarch64-os_x.2/jdk-25.0.4.1+1/Contents/Home/bin/java
+ - --sun-misc-unsafe-memory-access=allow
+ - -jar
+ - /Users/admiralbolt/.gradle/caches/modules-2/files-2.1/io.codechicken/DiffPatch/2.0.0.36/5b32f9baa0c0371c0dc80a3b88794960af0c6b44/DiffPatch-2.0.0.36-all.jar
+ - /Users/admiralbolt/.gradle/caches/neoformruntime/intermediate_results/patch_b46c81a6e5ac656d9c8d70f2e0792f94e431ed24_output.zip
+ - ./patches
+ - --patch
+ - --archive
+ - ZIP
+ - --output
+ - ./output.zip
+ - --log-level
+ - WARN
+ - --mode
+ - OFFSET
+ - --archive-rejects
+ - ZIP
+ - --reject
+ - ./outputRejects.zip
+ - --base-path-prefix
+ - a/
+ - --modified-path-prefix
+ - b/
+--------------------------------------------------------------------------------
+
