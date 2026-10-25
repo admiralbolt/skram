@@ -7,22 +7,35 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.common.util.ValueIOSerializable;
 
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Skill implements ValueIOSerializable {
 
   public static final int XP_FACTOR = 100;
+
+  public static Map<Integer, Integer> XP_FOR_LEVEL = new HashMap<>();
+
+  public static int getTotalXpForLevel(int level) {
+    if (level <= 1) return 0;
+
+    if (XP_FOR_LEVEL.containsKey(level)) return XP_FOR_LEVEL.get(level);
+
+    int xpNeeded = XP_FACTOR * (int) (
+      1 * Math.pow(level, 3) + 2 * Math.pow(level, 2) + 3 * Math.pow(level, 1)
+    );
+
+    XP_FOR_LEVEL.put(level, xpNeeded);
+
+    return xpNeeded;
+  }
 
   public String name;
   public int level = 1;
   public double xp = 0;
   public boolean enabled = true;
 
-  // Default constructor for level 1 / 0 xp.
-  public Skill(String name) {
-    this(name, 1, 0);
-  }
-
-  public Skill(String name, int level, int xp) {
+  public Skill(String name, int level, double xp) {
     this.name = name;
     this.level = level;
     this.xp = xp;
@@ -40,8 +53,13 @@ public class Skill implements ValueIOSerializable {
     buffer.writeInt(this.name.length());
     buffer.writeCharSequence(this.name, Charset.defaultCharset());
     buffer.writeInt(this.level);
-    buffer.writeDouble(this.level);
+    buffer.writeDouble(this.xp);
     buffer.writeBoolean(this.enabled);
+  }
+
+  @Override
+  public String toString() {
+    return "[" + this.name + "] Lvl: " + this.level + ". XP: " + (int) this.xp + " / " + Skill.getTotalXpForLevel(this.level + 1) + ". Enabled: " + this.enabled;
   }
 
   @Override
@@ -64,6 +82,9 @@ public class Skill implements ValueIOSerializable {
     if (xp <= 0) return;
 
     this.xp += (1 + 0.01 * player.experienceLevel) * xp;
+    while (this.xp > Skill.getTotalXpForLevel(this.level + 1)) {
+      this.level++;
+    }
   }
 
   public void toggleEnabled() {

@@ -12,14 +12,12 @@ public class Skills {
   public static void REGISTER() {
     DIGGING = Skram.ATTACHMENT_TYPES.register(
       SkillDigging.NAME, () -> AttachmentType.serializable(() -> new SkillDigging())
-        .sync(SkillDigging.STREAM_CODEC)
+        .sync((holder, to) -> holder == to, SkillDigging.STREAM_CODEC)
         .copyOnDeath()
         .build()
     );
 
   }
-
-
 
 
 }
