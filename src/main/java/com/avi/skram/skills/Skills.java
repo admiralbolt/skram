@@ -1,6 +1,12 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.component.Tool;
 import net.neoforged.neoforge.attachment.AttachmentType;
 
 import java.util.HashMap;
@@ -54,6 +60,23 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillMining.NAME, MINING);
+  }
+
+  public static int requiredLevel(ItemStack stack) {
+    // This is a pretty unfortunate way of checking, but the materials themselves aren't actually stored on the items
+    // in any way, they are simply used to set attribute values on construction.
+    // We instead check the names for the appropriate material.
+
+    String itemID = stack.getItem().toString();
+
+    if (itemID.contains("netherite")) return 40;
+    if (itemID.contains("diamond")) return 30;
+    if (itemID.contains("gold")) return 25;
+    if (itemID.contains("iron")) return 20;
+    if (itemID.contains("copper")) return 10;
+    if (itemID.contains("stone")) return 5;
+
+    return 1;
   }
 
 }

@@ -1,12 +1,19 @@
 package com.avi.skram.skills;
 
+import com.avi.skram.ui.GenericMessageToast;
+import com.avi.skram.ui.ToastUtils;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 
@@ -15,6 +22,7 @@ import java.util.List;
 public class SkillMining extends Skill {
 
   public static final String NAME = "mining";
+  public static final String REQUIRED_LEVEL_TOAST = "mining:req";
 
   public static final StreamCodec<ByteBuf, SkillMining> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillMining::new);
 
@@ -49,7 +57,7 @@ public class SkillMining extends Skill {
   }
 
   public int getFortuneAmount() {
-    return 2 + (this.level / 40);
+    return 1 + (this.level / 40);
   }
 
   public static void applySpeed(PlayerEvent.BreakSpeed event) {
@@ -82,8 +90,31 @@ public class SkillMining extends Skill {
     int dropSize = drops.size();
     for (int i = 0; i < dropSize; ++i) {
       ItemEntity drop = drops.get(i);
-      ItemStack dupItem = new ItemStack(drop.getItem().getItem(), drop.getItem().count() * mining.getFortuneAmount());
-      drops.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), dupItem));
+      ItemStack dupItem = new ItemStack(drop.getItem().getItem(), drop.getItem().count());
+      // Doing this as a loop to make N additional drops instead of 1 additional drop with N items.
+      for (int j = 0; j < mining.getFortuneAmount(); ++j) {
+        drops.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), dupItem));
+      }
+    }
+  }
+
+  public static void handleLeftClick(PlayerInteractEvent.LeftClickBlock event) {
+    ItemStack usedItem = event.getItemStack();
+    if (usedItem == ItemStack.EMPTY) return;
+    if (!usedItem.is(ItemTags.PICKAXES)) return;
+
+    SkillMining mining = event.getEntity().getData(Skills.MINING);
+    int requiredLevel = Skills.requiredLevel(usedItem);
+    if (mining.level < requiredLevel) {
+      event.setCanceled(true);
+      if (event.getLevel().isClientSide()) {
+        ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
+        if (!ToastUtils.hasGenericMessageToast(toastManager, REQUIRED_LEVEL_TOAST)) {
+          Minecraft.getInstance().gui.toastManager().addToast(new GenericMessageToast(
+            REQUIRED_LEVEL_TOAST, new ItemStack(Items.DIAMOND_PICKAXE), "Using a " + usedItem.getItemName().getString() + " requires a " + SkillMining.NAME + " level of " + requiredLevel + "."
+          ));
+        }
+      }
     }
   }
 

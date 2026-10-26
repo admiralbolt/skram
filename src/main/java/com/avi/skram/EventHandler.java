@@ -10,6 +10,7 @@ import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -67,15 +68,20 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_CHANGE_DIMENSION(PlayerEvent.PlayerChangedDimensionEvent event) {
-    SkillAcrobatics acrobatics = (SkillAcrobatics) event.getEntity().getData(Skills.ACROBATICS);
+    SkillAcrobatics acrobatics = event.getEntity().getData(Skills.ACROBATICS);
     acrobatics.applyModifiers(event.getEntity());
-    SkillAthletics athletics = (SkillAthletics) event.getEntity().getData(Skills.ATHLETICS);
+    SkillAthletics athletics = event.getEntity().getData(Skills.ATHLETICS);
     athletics.applyModifiers(event.getEntity());
   }
 
   @SubscribeEvent
   public static void ON_PLAYER_JUMP(LivingEvent.LivingJumpEvent event) {
     SkillAcrobatics.handleJump(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_PLAYER_LEFT_CLICK_BLOCK(PlayerInteractEvent.LeftClickBlock event) {
+    SkillMining.handleLeftClick(event);
   }
 
   @SubscribeEvent

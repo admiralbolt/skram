@@ -27,7 +27,7 @@ public class SkillScreen extends Screen {
 
     this.addRenderableWidget(Button.builder(Component.literal("Close Screen"), button -> this.onClose()).bounds(centerX - 100, 20, 200, 20).build());
 
-    SkillDigging digging = (SkillDigging) Minecraft.getInstance().player.getData(Skills.DIGGING);
+    SkillDigging digging = Minecraft.getInstance().player.getData(Skills.DIGGING);
     this.addRenderableWidget(new MultiLineTextWidget(
       centerX - 100,
       50,
@@ -35,7 +35,7 @@ public class SkillScreen extends Screen {
       this.font
     ));
 
-    SkillMining mining = (SkillMining) Minecraft.getInstance().player.getData(Skills.MINING);
+    SkillMining mining = Minecraft.getInstance().player.getData(Skills.MINING);
     this.addRenderableWidget(new MultiLineTextWidget(
       centerX - 100,
       70,
@@ -43,7 +43,7 @@ public class SkillScreen extends Screen {
       this.font
     ));
 
-    SkillAthletics athletics = (SkillAthletics) Minecraft.getInstance().player.getData(Skills.ATHLETICS);
+    SkillAthletics athletics = Minecraft.getInstance().player.getData(Skills.ATHLETICS);
     this.addRenderableWidget(new MultiLineTextWidget(
       centerX - 100,
       90,
@@ -51,7 +51,7 @@ public class SkillScreen extends Screen {
       this.font
     ));
 
-    SkillAcrobatics acrobatics = (SkillAcrobatics) Minecraft.getInstance().player.getData(Skills.ACROBATICS);
+    SkillAcrobatics acrobatics = Minecraft.getInstance().player.getData(Skills.ACROBATICS);
     this.addRenderableWidget(new MultiLineTextWidget(
       centerX - 100,
       110,
