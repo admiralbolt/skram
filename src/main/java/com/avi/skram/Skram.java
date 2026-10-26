@@ -1,7 +1,5 @@
 package com.avi.skram;
 
-import com.avi.skram.skills.Skill;
-import com.avi.skram.skills.SkillDigging;
 import com.avi.skram.skills.Skills;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.*;
@@ -20,7 +18,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -30,9 +27,6 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-
-import java.util.List;
-import java.util.function.Supplier;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Skram.MODID)
@@ -49,12 +43,6 @@ public class Skram {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
-//    public static final Supplier<AttachmentType<SkillDigging>> DIGGING = ATTACHMENT_TYPES.register(
-//      SkillDigging.NAME, () -> AttachmentType.serializable(SkillDigging::new).build()
-//    );
-
-    // public static final List<Supplier<AttachmentType<SkillDigging>>> ALL_SKILLS = List.of(DIGGING);
-
 
     // Creates a new Block with the id "skram:example_block", combining the namespace and path
     public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", p -> p.mapColor(MapColor.STONE));
@@ -87,7 +75,7 @@ public class Skram {
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
 
-        Skills.REGISTER();
+        Skills.register();
         ATTACHMENT_TYPES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.

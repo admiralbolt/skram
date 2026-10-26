@@ -1,17 +1,15 @@
 package com.avi.skram.ui;
 
+import com.avi.skram.skills.SkillAcrobatics;
+import com.avi.skram.skills.SkillAthletics;
 import com.avi.skram.skills.SkillDigging;
 import com.avi.skram.skills.Skills;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.MultiLineTextWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.FontDescription;
-
-import java.awt.*;
 
 public class SkillScreen extends Screen {
 
@@ -28,11 +26,27 @@ public class SkillScreen extends Screen {
 
     this.addRenderableWidget(Button.builder(Component.literal("Close Screen"), button -> this.onClose()).bounds(centerX - 100, 20, 200, 20).build());
 
-    SkillDigging digging = Minecraft.getInstance().player.getData(Skills.DIGGING);
+    SkillDigging digging = (SkillDigging) Minecraft.getInstance().player.getData(Skills.DIGGING);
     this.addRenderableWidget(new MultiLineTextWidget(
       centerX - 100,
       50,
       Component.literal(digging.toString()),
+      this.font
+    ));
+
+    SkillAthletics athletics = (SkillAthletics) Minecraft.getInstance().player.getData(Skills.ATHLETICS);
+    this.addRenderableWidget(new MultiLineTextWidget(
+      centerX - 100,
+      70,
+      Component.literal(athletics.toString()),
+      this.font
+    ));
+
+    SkillAcrobatics acrobatics = (SkillAcrobatics) Minecraft.getInstance().player.getData(Skills.ACROBATICS);
+    this.addRenderableWidget(new MultiLineTextWidget(
+      centerX - 100,
+      90,
+      Component.literal(acrobatics.toString()),
       this.font
     ));
   }
