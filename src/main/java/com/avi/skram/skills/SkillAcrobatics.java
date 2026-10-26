@@ -59,6 +59,7 @@ public class SkillAcrobatics extends Skill {
 
   @Override
   public void onLevelChange(Player player) {
+    super.onLevelChange(player);
     this.applyModifiers(player);
   }
 

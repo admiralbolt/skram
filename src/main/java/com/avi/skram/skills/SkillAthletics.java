@@ -73,6 +73,7 @@ public class SkillAthletics extends Skill {
 
   @Override
   public void onLevelChange(Player player) {
+    super.onLevelChange(player);
     this.applyModifiers(player);
   }
 
@@ -84,7 +85,7 @@ public class SkillAthletics extends Skill {
     // If we aren't moving at all, don't give xp.
     if (velocity.x == 0 && velocity.z == 0) return;
 
-    SkillAthletics athletics = (SkillAthletics) player.getData(Skills.ATHLETICS);
+    SkillAthletics athletics = player.getData(Skills.ATHLETICS);
 
     // Sprinting is worth the most.
     if (player.isSprinting()) {

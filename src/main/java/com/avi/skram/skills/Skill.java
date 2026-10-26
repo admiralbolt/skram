@@ -1,6 +1,8 @@
 package com.avi.skram.skills;
 
+import com.avi.skram.ui.GenericMessageToast;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -107,8 +109,13 @@ public abstract class Skill implements ValueIOSerializable {
     if (xp <= 0) return;
 
     this.xp += (1 + 0.01 * player.experienceLevel) * xp;
+    boolean leveledUp = false;
     while (this.xp > Skill.getTotalXpForLevel(this.level + 1)) {
+      leveledUp = true;
       this.level++;
+    }
+
+    if (leveledUp) {
       this.onLevelChange(player);
     }
 
@@ -123,7 +130,17 @@ public abstract class Skill implements ValueIOSerializable {
   }
 
   public void onLevelChange(Player player) {
-    return;
+    // If we are on the client side, display the level up toast!
+    if (player.level().isClientSide()) {
+      Minecraft.getInstance().gui.toastManager().addToast(new GenericMessageToast(
+        this.name + ":level_up",
+        Skills.getItemIcon(this.name),
+        this.name + " leveled up to Lvl " + this.level + "."
+      ));
+      // If we are on the server side, we need to send a packet to the client to display the toast.
+    } else {
+      System.out.println("Levlling up on server...");
+    }
   }
 
   public void toggleEnabled(int i) {

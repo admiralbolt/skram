@@ -4,3 +4,5 @@ run/*
 run
 .gradle
 .gradle/*
+.idea
+.idea/*

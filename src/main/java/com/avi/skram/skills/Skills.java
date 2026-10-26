@@ -1,12 +1,9 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ToolMaterial;
-import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.attachment.AttachmentType;
 
 import java.util.HashMap;
@@ -26,12 +23,15 @@ public class Skills {
   public static Supplier<AttachmentType<SkillDigging>> DIGGING;
   public static Supplier<AttachmentType<SkillMining>> MINING;
 
+  // Map skills to the item used for their icon.
+  public static Map<String, ItemStackTemplate> SKILL_ICONS;
+
   public static void register() {
     SKILLS_BY_NAME = new HashMap<>();
 
     ACROBATICS = Skram.ATTACHMENT_TYPES.register(
       SkillAcrobatics.NAME, () -> AttachmentType.serializable(() -> new SkillAcrobatics())
-        .sync((holder, to) -> holder == to, SkillAcrobatics.STREAM_CODEC)
+        .sync(new SkillSyncHandler<>(SkillAcrobatics.STREAM_CODEC))
         .copyOnDeath()
         .build()
     );
@@ -39,7 +39,7 @@ public class Skills {
 
     ATHLETICS = Skram.ATTACHMENT_TYPES.register(
       SkillAthletics.NAME, () -> AttachmentType.serializable(() -> new SkillAthletics())
-        .sync((holder, to) -> holder == to, SkillAthletics.STREAM_CODEC)
+        .sync(new SkillSyncHandler<>(SkillAthletics.STREAM_CODEC))
         .copyOnDeath()
         .build()
     );
@@ -47,7 +47,7 @@ public class Skills {
 
     DIGGING = Skram.ATTACHMENT_TYPES.register(
       SkillDigging.NAME, () -> AttachmentType.serializable(() -> new SkillDigging())
-        .sync((holder, to) -> holder == to, SkillDigging.STREAM_CODEC)
+        .sync(new SkillSyncHandler<>(SkillDigging.STREAM_CODEC))
         .copyOnDeath()
         .build()
     );
@@ -55,11 +55,27 @@ public class Skills {
 
     MINING = Skram.ATTACHMENT_TYPES.register(
       SkillMining.NAME, () -> AttachmentType.serializable(() -> new SkillMining())
-        .sync((holder, to) -> holder == to, SkillMining.STREAM_CODEC)
+        .sync(new SkillSyncHandler<>(SkillMining.STREAM_CODEC))
         .copyOnDeath()
         .build()
     );
     SKILLS_BY_NAME.put(SkillMining.NAME, MINING);
+  }
+
+  // This needs to be done in a separate handler to ensure that items have been registered.
+  public static void setupSkillIcons() {
+    SKILL_ICONS = new HashMap<>();
+
+    SKILL_ICONS.put(SkillDigging.NAME, new ItemStackTemplate(Items.DIAMOND_SHOVEL));
+    SKILL_ICONS.put(SkillMining.NAME, new ItemStackTemplate(Items.DIAMOND_PICKAXE));
+  }
+
+  public static ItemStack getItemIcon(String skillName) {
+    ItemStackTemplate template = SKILL_ICONS.get(skillName);
+
+    if (template == null) return new ItemStack(Items.COW_SPAWN_EGG);
+
+    return template.create();
   }
 
   public static int requiredLevel(ItemStack stack) {
