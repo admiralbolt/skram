@@ -10,18 +10,22 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import org.w3c.dom.Attr;
 
 public class SkillAthletics extends Skill {
 
   public static final String NAME = "athletics";
   public static final StreamCodec<ByteBuf, SkillAthletics> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillAthletics::new);
+
   public static final Identifier MOVEMENT_SPEED_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "athletics_movement_speed_boost");
+  public static final Identifier SWIM_SPEED_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "athletics_swim_speed_boost");
   public static final Identifier OXYGEN_BONUS = Identifier.fromNamespaceAndPath(Skram.MODID, "athletics_oxygen_bonus");
 
   public SkillAthletics() {
     super(NAME, 1, 0);
-    this.enabledAbilities = new boolean[]{true, true};
+    this.enabledAbilities = new boolean[]{true, true, true};
   }
 
   public SkillAthletics(ByteBuf buffer) {
@@ -30,7 +34,7 @@ public class SkillAthletics extends Skill {
 
   // This bonus is effectively (1 + X) * faster.
   public double getMovementSpeedBoost() {
-    return (double) this.level / 400;
+    return (double) this.level / 300;
   }
 
   // The relevant bit from the decreaseAirSupply method in LivingEntity:
@@ -49,6 +53,13 @@ public class SkillAthletics extends Skill {
     if (movementSpeed != null) {
       movementSpeed.addOrReplacePermanentModifier(new AttributeModifier(
         MOVEMENT_SPEED_BOOST, this.getMovementSpeedBoost(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+      ));
+    }
+
+    AttributeInstance swimSpeed = attributes.getInstance(NeoForgeMod.SWIM_SPEED);
+    if (swimSpeed != null) {
+      swimSpeed.addOrReplacePermanentModifier(new AttributeModifier(
+        SWIM_SPEED_BOOST, this.getMovementSpeedBoost(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
       ));
     }
 
