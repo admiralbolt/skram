@@ -18,6 +18,7 @@ public class Skills {
   public static Supplier<AttachmentType<SkillAcrobatics>> ACROBATICS;
   public static Supplier<AttachmentType<SkillAthletics>> ATHLETICS;
   public static Supplier<AttachmentType<SkillDigging>> DIGGING;
+  public static Supplier<AttachmentType<SkillMining>> MINING;
 
   public static void register() {
     SKILLS_BY_NAME = new HashMap<>();
@@ -45,6 +46,14 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillDigging.NAME, DIGGING);
+
+    MINING = Skram.ATTACHMENT_TYPES.register(
+      SkillMining.NAME, () -> AttachmentType.serializable(() -> new SkillMining())
+        .sync((holder, to) -> holder == to, SkillMining.STREAM_CODEC)
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillMining.NAME, MINING);
   }
 
 }

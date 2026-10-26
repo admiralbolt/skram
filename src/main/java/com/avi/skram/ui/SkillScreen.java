@@ -3,6 +3,7 @@ package com.avi.skram.ui;
 import com.avi.skram.skills.SkillAcrobatics;
 import com.avi.skram.skills.SkillAthletics;
 import com.avi.skram.skills.SkillDigging;
+import com.avi.skram.skills.SkillMining;
 import com.avi.skram.skills.Skills;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -34,10 +35,18 @@ public class SkillScreen extends Screen {
       this.font
     ));
 
-    SkillAthletics athletics = (SkillAthletics) Minecraft.getInstance().player.getData(Skills.ATHLETICS);
+    SkillMining mining = (SkillMining) Minecraft.getInstance().player.getData(Skills.MINING);
     this.addRenderableWidget(new MultiLineTextWidget(
       centerX - 100,
       70,
+      Component.literal(mining.toString()),
+      this.font
+    ));
+
+    SkillAthletics athletics = (SkillAthletics) Minecraft.getInstance().player.getData(Skills.ATHLETICS);
+    this.addRenderableWidget(new MultiLineTextWidget(
+      centerX - 100,
+      90,
       Component.literal(athletics.toString()),
       this.font
     ));
@@ -45,7 +54,7 @@ public class SkillScreen extends Screen {
     SkillAcrobatics acrobatics = (SkillAcrobatics) Minecraft.getInstance().player.getData(Skills.ACROBATICS);
     this.addRenderableWidget(new MultiLineTextWidget(
       centerX - 100,
-      90,
+      110,
       Component.literal(acrobatics.toString()),
       this.font
     ));

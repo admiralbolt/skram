@@ -10,6 +10,7 @@ import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -21,6 +22,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_BREAKING_BLOCK(PlayerEvent.BreakSpeed event) {
     SkillDigging.applySpeed(event);
+    SkillMining.applySpeed(event);
   }
 
   @SubscribeEvent
@@ -29,6 +31,12 @@ public class EventHandler {
     if (event.isCanceled()) return;
 
     SkillDigging.gainXp(event);
+    SkillMining.gainXp(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_BLOCK_DROPS(BlockDropsEvent event) {
+    SkillMining.applyFortune(event);
   }
 
   @SubscribeEvent

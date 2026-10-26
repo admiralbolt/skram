@@ -35,14 +35,14 @@ public class SkillDigging extends Skill {
   public static void applySpeed(PlayerEvent.BreakSpeed event) {
     if (!event.getState().is(BlockTags.MINEABLE_WITH_SHOVEL)) return;
 
-    SkillDigging digging = (SkillDigging) event.getEntity().getData(Skills.DIGGING);
+    SkillDigging digging = event.getEntity().getData(Skills.DIGGING);
     event.setNewSpeed(event.getOriginalSpeed() * (1 + digging.getSpeedBonus()));
   }
 
   public static void gainXp(BreakBlockEvent event) {
     if (!event.getState().is(BlockTags.MINEABLE_WITH_SHOVEL)) return;
 
-    SkillDigging digging = (SkillDigging) event.getPlayer().getData(Skills.DIGGING);
+    SkillDigging digging = event.getPlayer().getData(Skills.DIGGING);
     digging.addXp(event.getPlayer(), 50000);
   }
 
