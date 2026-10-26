@@ -15,6 +15,7 @@ public class SkillDigging extends Skill {
 
   public SkillDigging() {
     super(NAME, 1, 0);
+    this.enabledAbilities = new boolean[]{true};
   }
 
   public SkillDigging(ByteBuf buffer) {

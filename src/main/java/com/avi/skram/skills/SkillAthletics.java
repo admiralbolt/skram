@@ -21,6 +21,7 @@ public class SkillAthletics extends Skill {
 
   public SkillAthletics() {
     super(NAME, 1, 0);
+    this.enabledAbilities = new boolean[]{true, true};
   }
 
   public SkillAthletics(ByteBuf buffer) {

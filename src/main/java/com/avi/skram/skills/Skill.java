@@ -10,6 +10,7 @@ import net.neoforged.neoforge.common.util.ValueIOSerializable;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public abstract class Skill implements ValueIOSerializable {
 
@@ -34,7 +35,9 @@ public abstract class Skill implements ValueIOSerializable {
   public String name;
   public int level = 1;
   public double xp = 0;
-  public boolean enabled = true;
+  // For portability, we track if the ith ability of a skill is enabled by checking enabledAbilities[i]. This means
+  // each instantiated skill is responsible for keeping an appropriate mapping and order of abilities.
+  public boolean[] enabledAbilities;
 
   public Skill(String name, int level, double xp) {
     this.name = name;
@@ -47,7 +50,10 @@ public abstract class Skill implements ValueIOSerializable {
     this.name = buffer.readString(nameLength, Charset.defaultCharset());
     this.level = buffer.readInt();
     this.xp = buffer.readDouble();
-    this.enabled = buffer.readBoolean();
+    this.enabledAbilities = new boolean[buffer.readInt()];
+    for (int i = 0; i < this.enabledAbilities.length; ++i) {
+      this.enabledAbilities[i] = buffer.readBoolean();
+    }
   }
 
   public void encode(ByteBuf buffer) {
@@ -55,12 +61,15 @@ public abstract class Skill implements ValueIOSerializable {
     buffer.writeCharSequence(this.name, Charset.defaultCharset());
     buffer.writeInt(this.level);
     buffer.writeDouble(this.xp);
-    buffer.writeBoolean(this.enabled);
+    buffer.writeInt(this.enabledAbilities.length);
+    for (boolean enabledAbility : this.enabledAbilities) {
+      buffer.writeBoolean(enabledAbility);
+    }
   }
 
   @Override
   public String toString() {
-    return "[" + this.name + "] Lvl: " + this.level + ". XP: " + (int) this.xp + " / " + Skill.getTotalXpForLevel(this.level + 1) + ". Enabled: " + this.enabled;
+    return "[" + this.name + "] Lvl: " + this.level + ". XP: " + (int) this.xp + " / " + Skill.getTotalXpForLevel(this.level + 1) + ". Enabled: " + this.enabledAbilities;
   }
 
   @Override
@@ -68,7 +77,8 @@ public abstract class Skill implements ValueIOSerializable {
     output.putString("name", this.name);
     output.putInt("level", this.level);
     output.putDouble("xp", this.xp);
-    output.putBoolean("enabled", this.enabled);
+    // Doesn't support a bool array by default, just convert to int.
+    output.putIntArray("enabledAbilities", IntStream.range(0, this.enabledAbilities.length).map(i -> this.enabledAbilities[i] ? 1 : 0).toArray());
   }
 
   @Override
@@ -76,7 +86,15 @@ public abstract class Skill implements ValueIOSerializable {
     this.name = input.getStringOr("name", "die");
     this.level = input.getIntOr("level", -1);
     this.xp = input.getDoubleOr("xp", -2.2);
-    this.enabled = input.getBooleanOr("enabled", true);
+    // Convert back from an int array to a boolean one.
+    int[] enabled = input.getIntArray("enabledAbilities").get();
+    boolean[] boolArray = new boolean[enabled.length];
+
+    for (int i = 0; i < enabled.length; ++i) {
+      boolArray[i] = (enabled[i] == 1);
+    }
+
+    this.enabledAbilities = boolArray;
   }
 
   // Overload that assumes server side processing. If you want to do client side processing, make sure that you specify
@@ -100,7 +118,7 @@ public abstract class Skill implements ValueIOSerializable {
 
     // If we want to sync from client -> server we need to explicitly send a packet.
     if (syncToServer) {
-      ClientPacketDistributor.sendToServer(new SkillPacket(this.name, this.level, this.xp, this.enabled));
+      ClientPacketDistributor.sendToServer(new SkillPacket(this.name, this.level, this.xp, this.enabledAbilities));
     }
   }
 
@@ -108,8 +126,8 @@ public abstract class Skill implements ValueIOSerializable {
     return;
   }
 
-  public void toggleEnabled() {
-    this.enabled = !this.enabled;
+  public void toggleEnabled(int i) {
+    this.enabledAbilities[i] = !this.enabledAbilities[i];
   }
 
 }

@@ -18,6 +18,6 @@ public class ServerPayloadHandler {
       skill.onLevelChange(player);
     }
     skill.xp = packet.xp();
-    skill.enabled = packet.enabled();
+    skill.enabledAbilities = packet.enabledAbilities();
   }
 }

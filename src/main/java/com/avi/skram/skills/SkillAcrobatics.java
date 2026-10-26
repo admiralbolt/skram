@@ -18,6 +18,7 @@ public class SkillAcrobatics extends Skill {
 
   public SkillAcrobatics() {
     super(NAME, 1, 0);
+    this.enabledAbilities = new boolean[]{true, true};
   }
 
   public SkillAcrobatics(ByteBuf buffer) {
