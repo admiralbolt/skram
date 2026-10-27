@@ -4,16 +4,21 @@ import com.avi.skram.network.ClientPayloadHandler;
 import com.avi.skram.network.ServerPayloadHandler;
 import com.avi.skram.skills.*;
 import com.avi.skram.ui.AddSkillButtonToInventory;
+import com.avi.skram.ui.SkillScreen;
 import com.avi.skram.ui.XPGainGui;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
+import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -25,6 +30,9 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 @EventBusSubscriber(modid = Skram.MODID)
 public class EventHandler {
+
+  public static final KeyMapping.Category SKRAM_CATEGORY = new KeyMapping.Category(Identifier.fromNamespaceAndPath(Skram.MODID, "skram"));
+  public static final Lazy<KeyMapping> OPEN_SKILLS_UI = Lazy.of(() -> new KeyMapping("key.skram.open_skills_ui", InputConstants.Type.KEYBOARD, InputConstants.KEY_R, SKRAM_CATEGORY));
 
   @SubscribeEvent
   public static void ON_BREAKING_BLOCK(PlayerEvent.BreakSpeed event) {
@@ -119,6 +127,22 @@ public class EventHandler {
       CUSTOM_LAYER,
       XPGainGui.layer
     );
+  }
+
+  @SubscribeEvent
+  public static void REGISTER_BINDINGS(RegisterKeyMappingsEvent event) {
+    event.registerCategory(SKRAM_CATEGORY);
+    event.register(OPEN_SKILLS_UI.get());
+  }
+
+  @SubscribeEvent
+  public static void ON_CLIENT_TICK(ClientTickEvent.Post event) {
+    while (OPEN_SKILLS_UI.get().consumeClick()) {
+      Minecraft mc = Minecraft.getInstance();
+      if (!(mc.gui.screen() instanceof SkillScreen)) {
+        Minecraft.getInstance().setScreenAndShow(new SkillScreen());
+      }
+    }
   }
 
 }
