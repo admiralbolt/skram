@@ -4,14 +4,17 @@ import com.avi.skram.ui.GenericMessageToast;
 import com.avi.skram.ui.ToastUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.toasts.ToastManager;
+import net.minecraft.client.gui.layouts.Layout;
+import net.minecraft.client.gui.layouts.LinearLayout;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
@@ -26,8 +29,8 @@ public class SkillMining extends Skill {
 
   public static final StreamCodec<ByteBuf, SkillMining> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillMining::new);
 
-  public static final int SPEED_INDEX = 0;
-  public static final int FORTUNE_INDEX = 1;
+  public static final int MINING_SPEED_INDEX = 0;
+  public static final int MINING_FORTUNE_INDEX = 1;
 
   public SkillMining() {
     super(NAME, 1, 0);
@@ -64,7 +67,7 @@ public class SkillMining extends Skill {
     if (!event.getState().is(BlockTags.MINEABLE_WITH_PICKAXE)) return;
 
     SkillMining mining = event.getEntity().getData(Skills.MINING);
-    if (!mining.enabledAbilities[SPEED_INDEX]) return;
+    if (!mining.enabledAbilities[MINING_SPEED_INDEX]) return;
 
     event.setNewSpeed(event.getOriginalSpeed() * (1 + mining.getSpeedBonus()));
   }
@@ -81,7 +84,7 @@ public class SkillMining extends Skill {
     if (!(event.getBreaker() instanceof Player player)) return;
 
     SkillMining mining = player.getData(Skills.MINING);
-    if (!mining.enabledAbilities[FORTUNE_INDEX]) return;
+    if (!mining.enabledAbilities[MINING_FORTUNE_INDEX]) return;
     if (Math.random() > mining.getFortuneChance()) return;
 
     List<ItemEntity> drops = event.getDrops();
@@ -118,4 +121,31 @@ public class SkillMining extends Skill {
     }
   }
 
+  @Override
+  public Layout renderSkillAbilities() {
+    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
+    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
+
+    vertical.addChild(
+      Checkbox.builder(
+          Component.literal("Mining Speed: +" + (int) (100 * this.getSpeedBonus()) + "%."),
+          Minecraft.getInstance().font
+        )
+        .selected(this.enabledAbilities[MINING_SPEED_INDEX])
+        .onValueChange((checkbox, value) -> this.toggleEnabled(MINING_SPEED_INDEX))
+        .build()
+    );
+
+    vertical.addChild(
+      Checkbox.builder(
+          Component.literal("Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items."),
+          Minecraft.getInstance().font
+        )
+        .selected(this.enabledAbilities[MINING_SPEED_INDEX])
+        .onValueChange((checkbox, value) -> this.toggleEnabled(MINING_SPEED_INDEX))
+        .build()
+    );
+
+    return vertical;
+  }
 }

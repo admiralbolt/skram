@@ -2,6 +2,11 @@ package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.Checkbox;
+import net.minecraft.client.gui.layouts.Layout;
+import net.minecraft.client.gui.layouts.LinearLayout;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -12,7 +17,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import org.w3c.dom.Attr;
 
 public class SkillAthletics extends Skill {
 
@@ -22,6 +26,10 @@ public class SkillAthletics extends Skill {
   public static final Identifier MOVEMENT_SPEED_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "athletics_movement_speed_boost");
   public static final Identifier SWIM_SPEED_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "athletics_swim_speed_boost");
   public static final Identifier OXYGEN_BONUS = Identifier.fromNamespaceAndPath(Skram.MODID, "athletics_oxygen_bonus");
+
+  public static final int MOVEMENT_SPEED_INDEX = 0;
+  public static final int SWIM_SPEED_INDEX = 1;
+  public static final int OXYGEN_BONUS_INDEX = 2;
 
   public SkillAthletics() {
     super(NAME, 1, 0);
@@ -51,23 +59,35 @@ public class SkillAthletics extends Skill {
 
     AttributeInstance movementSpeed = attributes.getInstance(Attributes.MOVEMENT_SPEED);
     if (movementSpeed != null) {
-      movementSpeed.addOrReplacePermanentModifier(new AttributeModifier(
-        MOVEMENT_SPEED_BOOST, this.getMovementSpeedBoost(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
-      ));
+      if (this.enabledAbilities[MOVEMENT_SPEED_INDEX]) {
+        movementSpeed.addOrReplacePermanentModifier(new AttributeModifier(
+          MOVEMENT_SPEED_BOOST, this.getMovementSpeedBoost(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+        ));
+      } else {
+        movementSpeed.removeModifier(MOVEMENT_SPEED_BOOST);
+      }
     }
 
     AttributeInstance swimSpeed = attributes.getInstance(NeoForgeMod.SWIM_SPEED);
     if (swimSpeed != null) {
-      swimSpeed.addOrReplacePermanentModifier(new AttributeModifier(
-        SWIM_SPEED_BOOST, this.getMovementSpeedBoost(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
-      ));
+      if (this.enabledAbilities[SWIM_SPEED_INDEX]) {
+        swimSpeed.addOrReplacePermanentModifier(new AttributeModifier(
+          SWIM_SPEED_BOOST, this.getMovementSpeedBoost(), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+        ));
+      } else {
+        swimSpeed.removeModifier(SWIM_SPEED_BOOST);
+      }
     }
 
     AttributeInstance oxygenBonus = attributes.getInstance(Attributes.OXYGEN_BONUS);
     if (oxygenBonus != null) {
-      oxygenBonus.addOrReplacePermanentModifier(new AttributeModifier(
-        OXYGEN_BONUS, this.getOxygenBonus(), AttributeModifier.Operation.ADD_VALUE
-      ));
+      if (this.enabledAbilities[OXYGEN_BONUS_INDEX]) {
+        oxygenBonus.addOrReplacePermanentModifier(new AttributeModifier(
+          OXYGEN_BONUS, this.getOxygenBonus(), AttributeModifier.Operation.ADD_VALUE
+        ));
+      } else {
+        oxygenBonus.removeModifier(OXYGEN_BONUS);
+      }
     }
   }
 
@@ -108,5 +128,43 @@ public class SkillAthletics extends Skill {
     if (!player.onGround() || player.isOnRails()) return;
 
     athletics.addXp(player, 1, true);
+  }
+
+  @Override
+  public Layout renderSkillAbilities() {
+    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
+    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
+
+    vertical.addChild(
+      Checkbox.builder(
+          Component.literal("Movement Speed: +" + String.format("%.2f", this.getMovementSpeedBoost()) + "."),
+          Minecraft.getInstance().font
+        )
+        .selected(this.enabledAbilities[MOVEMENT_SPEED_INDEX])
+        .onValueChange((checkbox, value) -> this.toggleEnabled(MOVEMENT_SPEED_INDEX))
+        .build()
+    );
+
+    vertical.addChild(
+      Checkbox.builder(
+          Component.literal("Swim Speed: +" + String.format("%.2f", this.getMovementSpeedBoost()) + "."),
+          Minecraft.getInstance().font
+        )
+        .selected(this.enabledAbilities[SWIM_SPEED_INDEX])
+        .onValueChange((checkbox, value) -> this.toggleEnabled(SWIM_SPEED_INDEX))
+        .build()
+    );
+
+    vertical.addChild(
+      Checkbox.builder(
+          Component.literal("Oxygen Increase: +" + (100 * this.getOxygenBonus()) + "%."),
+          Minecraft.getInstance().font
+        )
+        .selected(this.enabledAbilities[OXYGEN_BONUS_INDEX])
+        .onValueChange((checkbox, value) -> this.toggleEnabled(OXYGEN_BONUS_INDEX))
+        .build()
+    );
+
+    return vertical;
   }
 }

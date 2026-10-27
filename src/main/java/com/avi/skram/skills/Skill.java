@@ -154,17 +154,26 @@ public abstract class Skill implements ValueIOSerializable {
     }
   }
 
+  public void applyModifiers(Player player) {
+    return;
+  }
+
   public void toggleEnabled(int i) {
     this.enabledAbilities[i] = !this.enabledAbilities[i];
+    // If we call this on the client side (which we expect to), update the server side as well.
+    if (Minecraft.getInstance().level != null && Minecraft.getInstance().level.isClientSide()) {
+      ClientPacketDistributor.sendToServer(new SkillPacket(this.name, this.level, this.xp, this.enabledAbilities));
+    }
   }
 
   public Layout renderToLayout() {
     LinearLayout layout = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
+    layout.spacing(2).defaultCellSetting().padding(2);
 
     layout.addChild(new ResizableTextureImageWidget(0, 0, 32, 32, Skills.SKILL_ICONS.get(this.name), 16, 16));
 
     LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1);
+    vertical.spacing(3).defaultCellSetting().paddingBottom(2);
 
     vertical.addChild(new MultiLineTextWidget(Component.literal(StringUtils.capitalize(this.name) + " Lvl " + this.level), Minecraft.getInstance().font));
 
@@ -174,11 +183,15 @@ public abstract class Skill implements ValueIOSerializable {
     xpBarLayout.addChild(new ResizableTextureImageWidget(0, 0, xpBarWidth, 3, YELLOW_BAR, 182, 5), 0, 0);
     vertical.addChild(xpBarLayout);
 
-    vertical.addChild(new MultiLineTextWidget(Component.literal(String.format(",%d", (int) this.xp) + " / " + String.format(",%d", Skill.getTotalXpForLevel(this.level + 1)) + "."), Minecraft.getInstance().font));
+    vertical.addChild(new MultiLineTextWidget(Component.literal("EXP:  " + String.format("%,d", (int) this.xp)), Minecraft.getInstance().font));
+    vertical.addChild(new MultiLineTextWidget(Component.literal("Next: " + String.format("%,d", Skill.getTotalXpForLevel(this.level + 1))), Minecraft.getInstance().font));
 
     layout.addChild(vertical);
+    layout.addChild(this.renderSkillAbilities());
 
     return layout;
   }
+
+  public abstract Layout renderSkillAbilities();
 
 }

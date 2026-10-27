@@ -6,6 +6,8 @@ import com.avi.skram.skills.Skills;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
+import java.util.Arrays;
+
 public class ServerPayloadHandler {
 
   public static void handleSkillPacket(final SkillPacket packet, final IPayloadContext context) {
@@ -18,6 +20,9 @@ public class ServerPayloadHandler {
       skill.onLevelChange(player);
     }
     skill.xp = packet.xp();
-    skill.enabledAbilities = packet.enabledAbilities();
+    if (!Arrays.equals(skill.enabledAbilities, packet.enabledAbilities())) {
+      skill.enabledAbilities = packet.enabledAbilities();
+      skill.applyModifiers(player);
+    }
   }
 }
