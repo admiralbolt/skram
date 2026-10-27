@@ -3,6 +3,7 @@ package com.avi.skram.ui;
 import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.MathUtils;
 import com.avi.skram.utils.ReflectionUtils;
+import com.avi.skram.utils.StringUtils;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -65,7 +66,7 @@ public class XPGainGui {
 
     public static final int PADDING_LEFT = 3;
     public static final int PADDING_TOP = 3;
-    public static final int PADDING_BETWEEN = 5;
+    public static final int PADDING_BETWEEN = 4;
     public static final int TEXT_OFFSET_TOP = 4;
     public static final int TEXT_OFFSET_LEFT = 17;
     public static final int ICON_OFFSET_TOP = 2;
@@ -98,7 +99,7 @@ public class XPGainGui {
 
         graphics.text(
           Minecraft.getInstance().font,
-          Component.literal(xpGain.skillName + " +" + String.format("%,d", (int) xpGain.totalXp)),
+          Component.literal(StringUtils.capitalize(xpGain.skillName) + " +" + String.format("%,d", (int) xpGain.totalXp)),
           PADDING_LEFT + TEXT_OFFSET_LEFT,
           baseY + TEXT_OFFSET_TOP,
           MathUtils.getColorValue(foregroundColor)

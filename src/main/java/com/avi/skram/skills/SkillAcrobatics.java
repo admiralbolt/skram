@@ -65,8 +65,9 @@ public class SkillAcrobatics extends Skill {
 
   public static void handleJump(LivingEvent.LivingJumpEvent event) {
     if (!(event.getEntity() instanceof Player player)) return;
+    if (player.level().isClientSide()) return;
 
-    SkillAcrobatics acrobatics = (SkillAcrobatics) player.getData(Skills.ACROBATICS);
+    SkillAcrobatics acrobatics = player.getData(Skills.ACROBATICS);
     acrobatics.addXp(player, 1000);
   }
   

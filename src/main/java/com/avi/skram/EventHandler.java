@@ -66,9 +66,9 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_RESPAWN(PlayerEvent.PlayerRespawnEvent event) {
-    SkillAcrobatics acrobatics = (SkillAcrobatics) event.getEntity().getData(Skills.ACROBATICS);
+    SkillAcrobatics acrobatics = event.getEntity().getData(Skills.ACROBATICS);
     acrobatics.applyModifiers(event.getEntity());
-    SkillAthletics athletics = (SkillAthletics) event.getEntity().getData(Skills.ATHLETICS);
+    SkillAthletics athletics = event.getEntity().getData(Skills.ATHLETICS);
     athletics.applyModifiers(event.getEntity());
   }
 

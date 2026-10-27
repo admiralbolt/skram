@@ -2,6 +2,7 @@ package com.avi.skram.skills;
 
 import com.avi.skram.ui.GenericMessageToast;
 import com.avi.skram.ui.XPGainGui;
+import com.avi.skram.utils.StringUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
@@ -137,11 +138,9 @@ public abstract class Skill implements ValueIOSerializable {
       Minecraft.getInstance().gui.toastManager().addToast(new GenericMessageToast(
         this.name + ":level_up",
         Skills.SKILL_ICONS.getOrDefault(this.name, Skills.DEFAULT_ICON),
-        this.name + " leveled up to Lvl " + this.level + "."
+        StringUtils.capitalize(this.name) + " leveled up to Lvl " + this.level + "."
       ));
       // If we are on the server side, we need to send a packet to the client to display the toast.
-    } else {
-      System.out.println("Levlling up on server...");
     }
   }
 
