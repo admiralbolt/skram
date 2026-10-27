@@ -7,7 +7,6 @@ import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class GenericMessageToast implements Toast {
@@ -16,17 +15,17 @@ public class GenericMessageToast implements Toast {
   public static final float SCALE_SIZE = 0.7f;
 
   public final String toastName;
-  public final ItemStack iconItem;
+  public final Identifier iconItem;
   public final String message;
   public final int displayTime;
 
   private Toast.Visibility wantedVisibility;
 
-  public GenericMessageToast(String toastName, ItemStack iconItem, String message) {
+  public GenericMessageToast(String toastName, Identifier iconItem, String message) {
     this(toastName, iconItem, message, 3000);
   }
 
-  public GenericMessageToast(String toastName, ItemStack iconItem, String message, int displayTime) {
+  public GenericMessageToast(String toastName, Identifier iconItem, String message, int displayTime) {
     this.toastName = toastName;
     this.iconItem = iconItem;
     this.message = message;
@@ -55,6 +54,7 @@ public class GenericMessageToast implements Toast {
     graphics.textWithWordWrap(font, FormattedText.of(this.message), (int) (30.0f / SCALE_SIZE), (int) (7.0f / SCALE_SIZE), (int) ((this.width() - 30.0f) / SCALE_SIZE), -1);
     graphics.pose().popMatrix();
 
-    graphics.fakeItem(this.iconItem, 8, 8);
+    graphics.pose().scale(1.2f);
+    graphics.blit(RenderPipelines.GUI_TEXTURED, this.iconItem, 5, 5, 0, 0, 16, 16, 16, 16);
   }
 }

@@ -111,7 +111,7 @@ public class SkillMining extends Skill {
         ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
         if (!ToastUtils.hasGenericMessageToast(toastManager, REQUIRED_LEVEL_TOAST)) {
           toastManager.addToast(new GenericMessageToast(
-            REQUIRED_LEVEL_TOAST, new ItemStack(Items.DIAMOND_PICKAXE), "Using a " + usedItem.getItemName().getString() + " requires a " + SkillMining.NAME + " level of " + requiredLevel + "."
+            REQUIRED_LEVEL_TOAST, Skills.SKILL_ICONS.getOrDefault(mining.name, Skills.DEFAULT_ICON), "Using a " + usedItem.getItemName().getString() + " requires a " + SkillMining.NAME + " level of " + requiredLevel + "."
           ));
         }
       }

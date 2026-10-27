@@ -4,9 +4,15 @@ import com.avi.skram.network.ClientPayloadHandler;
 import com.avi.skram.network.ServerPayloadHandler;
 import com.avi.skram.skills.*;
 import com.avi.skram.ui.AddSkillButtonToInventory;
+import com.avi.skram.ui.XPGainGui;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -102,6 +108,17 @@ public class EventHandler {
   @SubscribeEvent
   public static void REGISTER_CLIENT_PAYLOAD_HANDLERS(RegisterClientPayloadHandlersEvent event) {
     event.register(SkillPacket.TYPE, ClientPayloadHandler::handleSkillPacket);
+  }
+
+  public static final Identifier CUSTOM_LAYER = Identifier.fromNamespaceAndPath(Skram.MODID, "asdf");
+
+  @SubscribeEvent
+  public static void REGISTER_GUI_LAYERS(RegisterGuiLayersEvent event) {
+    event.registerAbove(
+      VanillaGuiLayers.HOTBAR,
+      CUSTOM_LAYER,
+      XPGainGui.layer
+    );
   }
 
 }

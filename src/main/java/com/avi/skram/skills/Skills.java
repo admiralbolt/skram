@@ -1,6 +1,7 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
@@ -24,7 +25,8 @@ public class Skills {
   public static Supplier<AttachmentType<SkillMining>> MINING;
 
   // Map skills to the item used for their icon.
-  public static Map<String, ItemStackTemplate> SKILL_ICONS;
+  public static Map<String, Identifier> SKILL_ICONS;
+  public static Identifier DEFAULT_ICON = Identifier.withDefaultNamespace("textures/item/cow_spawn_egg.png");
 
   public static void register() {
     SKILLS_BY_NAME = new HashMap<>();
@@ -66,16 +68,10 @@ public class Skills {
   public static void setupSkillIcons() {
     SKILL_ICONS = new HashMap<>();
 
-    SKILL_ICONS.put(SkillDigging.NAME, new ItemStackTemplate(Items.DIAMOND_SHOVEL));
-    SKILL_ICONS.put(SkillMining.NAME, new ItemStackTemplate(Items.DIAMOND_PICKAXE));
-  }
-
-  public static ItemStack getItemIcon(String skillName) {
-    ItemStackTemplate template = SKILL_ICONS.get(skillName);
-
-    if (template == null) return new ItemStack(Items.COW_SPAWN_EGG);
-
-    return template.create();
+    SKILL_ICONS.put(SkillAcrobatics.NAME, Identifier.withDefaultNamespace("textures/item/netherite_boots.png"));
+    SKILL_ICONS.put(SkillAthletics.NAME, Identifier.withDefaultNamespace("textures/item/rabbit_foot.png"));
+    SKILL_ICONS.put(SkillDigging.NAME, Identifier.withDefaultNamespace("textures/item/stone_shovel.png"));
+    SKILL_ICONS.put(SkillMining.NAME, Identifier.withDefaultNamespace("textures/item/stone_pickaxe.png"));
   }
 
   public static int requiredLevel(ItemStack stack) {

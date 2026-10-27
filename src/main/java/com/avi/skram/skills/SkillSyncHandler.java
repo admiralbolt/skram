@@ -1,5 +1,6 @@
 package com.avi.skram.skills;
 
+import com.avi.skram.ui.XPGainGui;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -26,7 +27,11 @@ public class SkillSyncHandler<T extends Skill> implements AttachmentSyncHandler<
   @Override
   public @Nullable T read(@NotNull IAttachmentHolder holder, @NotNull RegistryFriendlyByteBuf buf, @Nullable T previousValue) {
     T newValue = codec.decode(buf);
-    if (previousValue == null || newValue.level == previousValue.level) return newValue;
+    if (previousValue == null) return newValue;
+
+    XPGainGui.notify(newValue.name, newValue.xp - previousValue.xp);
+
+    if (newValue.level == previousValue.level) return newValue;
 
     if (holder instanceof Player player) {
       newValue.onLevelChange(player);
