@@ -2,12 +2,20 @@ package com.avi.skram.skills;
 
 import com.avi.skram.ui.GenericMessageToast;
 import com.avi.skram.ui.XPGainGui;
+import com.avi.skram.utils.MathUtils;
 import com.avi.skram.utils.StringUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.MultiLineTextWidget;
+import net.minecraft.client.gui.layouts.GridLayout;
+import net.minecraft.client.gui.layouts.Layout;
+import net.minecraft.client.gui.layouts.LinearLayout;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.client.gui.widget.ResizableTextureImageWidget;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.util.ValueIOSerializable;
 
@@ -19,6 +27,8 @@ import java.util.stream.IntStream;
 public abstract class Skill implements ValueIOSerializable {
 
   public static final int XP_FACTOR = 100;
+  public static Identifier YELLOW_BAR = Identifier.withDefaultNamespace("textures/gui/sprites/boss_bar/yellow_progress.png");
+  public static Identifier YELLOW_BAR_BACKGROUND = Identifier.withDefaultNamespace("textures/gui/sprites/boss_bar/yellow_background.png");
 
   public static Map<Integer, Integer> XP_FOR_LEVEL = new HashMap<>();
 
@@ -146,6 +156,29 @@ public abstract class Skill implements ValueIOSerializable {
 
   public void toggleEnabled(int i) {
     this.enabledAbilities[i] = !this.enabledAbilities[i];
+  }
+
+  public Layout renderToLayout() {
+    LinearLayout layout = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
+
+    layout.addChild(new ResizableTextureImageWidget(0, 0, 32, 32, Skills.SKILL_ICONS.get(this.name), 16, 16));
+
+    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
+    vertical.spacing(1);
+
+    vertical.addChild(new MultiLineTextWidget(Component.literal(StringUtils.capitalize(this.name) + " Lvl " + this.level), Minecraft.getInstance().font));
+
+    GridLayout xpBarLayout = new GridLayout();
+    int xpBarWidth = (int) MathUtils.linearRescale(this.xp, Skill.getTotalXpForLevel(this.level), Skill.getTotalXpForLevel(this.level + 1), 0, 100);
+    xpBarLayout.addChild(new ResizableTextureImageWidget(0, 0, 100, 3, YELLOW_BAR_BACKGROUND, 182, 5), 0, 0);
+    xpBarLayout.addChild(new ResizableTextureImageWidget(0, 0, xpBarWidth, 3, YELLOW_BAR, 182, 5), 0, 0);
+    vertical.addChild(xpBarLayout);
+
+    vertical.addChild(new MultiLineTextWidget(Component.literal(String.format(",%d", (int) this.xp) + " / " + String.format(",%d", Skill.getTotalXpForLevel(this.level + 1)) + "."), Minecraft.getInstance().font));
+
+    layout.addChild(vertical);
+
+    return layout;
   }
 
 }

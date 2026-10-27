@@ -1,18 +1,19 @@
 package com.avi.skram.ui;
 
-import com.avi.skram.skills.SkillAcrobatics;
-import com.avi.skram.skills.SkillAthletics;
-import com.avi.skram.skills.SkillDigging;
-import com.avi.skram.skills.SkillMining;
+import com.avi.skram.skills.Skill;
 import com.avi.skram.skills.Skills;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.MultiLineTextWidget;
+import net.minecraft.client.gui.components.ScrollableLayout;
+import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
+import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
 public class SkillScreen extends Screen {
+
+  public HeaderAndFooterLayout layout;
 
   public SkillScreen() {
     super(Component.literal("SkillScreen"));
@@ -22,42 +23,26 @@ public class SkillScreen extends Screen {
   protected void init() {
     super.init();
 
-    int centerX = this.width / 2;
-    int centerY = this.height / 2;
+    this.layout = new HeaderAndFooterLayout(this, 20, 8);
 
-    this.addRenderableWidget(Button.builder(Component.literal("Close Screen"), button -> this.onClose()).bounds(centerX - 100, 20, 200, 20).build());
+    // Header!
+    LinearLayout header = this.layout.addToHeader(new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL));
+    header.spacing(1).defaultCellSetting().paddingTop(5);
+    header.addChild(Button.builder(Component.literal("Close Screen"), button -> this.onClose()).build());
 
-    SkillDigging digging = Minecraft.getInstance().player.getData(Skills.DIGGING);
-    this.addRenderableWidget(new MultiLineTextWidget(
-      centerX - 100,
-      50,
-      Component.literal(digging.toString()),
-      this.font
-    ));
+    // Main content. We put it in a linear vertical layout, that then gets added to a scrollable layout below.
+    LinearLayout contentLayout = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
 
-    SkillMining mining = Minecraft.getInstance().player.getData(Skills.MINING);
-    this.addRenderableWidget(new MultiLineTextWidget(
-      centerX - 100,
-      70,
-      Component.literal(mining.toString()),
-      this.font
-    ));
+    for (String skillName : Skills.SKILLS_BY_NAME.keySet().stream().sorted().toList()) {
+      Skill skill = (Skill) Minecraft.getInstance().player.getData(Skills.SKILLS_BY_NAME.get(skillName));
+      contentLayout.addChild(skill.renderToLayout());
+    }
 
-    SkillAthletics athletics = Minecraft.getInstance().player.getData(Skills.ATHLETICS);
-    this.addRenderableWidget(new MultiLineTextWidget(
-      centerX - 100,
-      90,
-      Component.literal(athletics.toString()),
-      this.font
-    ));
+    ScrollableLayout mainContent = this.layout.addToContents(new ScrollableLayout(this.minecraft, contentLayout, this.height));
+    this.layout.addToContents(mainContent);
 
-    SkillAcrobatics acrobatics = Minecraft.getInstance().player.getData(Skills.ACROBATICS);
-    this.addRenderableWidget(new MultiLineTextWidget(
-      centerX - 100,
-      110,
-      Component.literal(acrobatics.toString()),
-      this.font
-    ));
+    this.layout.visitWidgets(this::addRenderableWidget);
+    this.layout.arrangeElements();
   }
 
   @Override
