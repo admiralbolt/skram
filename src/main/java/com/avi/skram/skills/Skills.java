@@ -3,7 +3,6 @@ package com.avi.skram.skills;
 import com.avi.skram.Skram;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.attachment.AttachmentType;
 
@@ -14,7 +13,7 @@ import java.util.function.Supplier;
 public class Skills {
 
   // Lord forgive me, for I have sinned.
-  // Most of the pain here was just the fact that I can use a generic type like
+  // Most of the pain here was just the fact that I can't use a generic type like:
   //   Supplier<AttachmentType<? extends Skill>>
   // As a result of using the non-typed Supplier, there WILL be unchecked casting.
   public static Map<String, Supplier> SKILLS_BY_NAME;
@@ -23,6 +22,7 @@ public class Skills {
   public static Supplier<AttachmentType<SkillAthletics>> ATHLETICS;
   public static Supplier<AttachmentType<SkillDigging>> DIGGING;
   public static Supplier<AttachmentType<SkillMining>> MINING;
+  public static Supplier<AttachmentType<SkillSmithing>> SMITHING;
 
   // Map skills to the item used for their icon.
   public static Map<String, Identifier> SKILL_ICONS;
@@ -62,6 +62,14 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillMining.NAME, MINING);
+
+    SMITHING = Skram.ATTACHMENT_TYPES.register(
+      SkillSmithing.NAME, () -> AttachmentType.serializable(() -> new SkillSmithing())
+        .sync(new SkillSyncHandler<>(SkillSmithing.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillSmithing.NAME, SMITHING);
   }
 
   // This needs to be done in a separate handler to ensure that items have been registered.
@@ -72,6 +80,12 @@ public class Skills {
     SKILL_ICONS.put(SkillAthletics.NAME, Identifier.withDefaultNamespace("textures/item/rabbit_foot.png"));
     SKILL_ICONS.put(SkillDigging.NAME, Identifier.withDefaultNamespace("textures/item/stone_shovel.png"));
     SKILL_ICONS.put(SkillMining.NAME, Identifier.withDefaultNamespace("textures/item/stone_pickaxe.png"));
+    SKILL_ICONS.put(SkillSmithing.NAME, Identifier.withDefaultNamespace("textures/item/campfire.png"));
+  }
+
+  // Same here, done in a separate handler to ensure that items have been registered.
+  public static void setupSkillXPMaps() {
+    SkillSmithing.setupXPMap();
   }
 
   public static int requiredLevel(ItemStack stack) {

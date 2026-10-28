@@ -1,5 +1,6 @@
 package com.avi.skram;
 
+import com.avi.skram.blocks.BlockData;
 import com.avi.skram.skills.Skills;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.*;
@@ -75,6 +76,7 @@ public class Skram {
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
 
+        BlockData.register();
         Skills.register();
         ATTACHMENT_TYPES.register(modEventBus);
 
@@ -92,6 +94,7 @@ public class Skram {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(Skills::setupSkillIcons);
+        event.enqueueWork(Skills::setupSkillXPMaps);
 
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");

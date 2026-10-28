@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.avi.skram.patches",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "FurnaceMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

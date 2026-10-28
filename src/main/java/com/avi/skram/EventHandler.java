@@ -1,5 +1,7 @@
 package com.avi.skram;
 
+import com.avi.skram.blocks.BlockData;
+import com.avi.skram.blocks.PlayerOwnedBlock;
 import com.avi.skram.network.ClientPayloadHandler;
 import com.avi.skram.network.ServerPayloadHandler;
 import com.avi.skram.skills.*;
@@ -10,6 +12,8 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
@@ -23,6 +27,7 @@ import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -33,6 +38,19 @@ public class EventHandler {
 
   public static final KeyMapping.Category SKRAM_CATEGORY = new KeyMapping.Category(Identifier.fromNamespaceAndPath(Skram.MODID, "skram"));
   public static final Lazy<KeyMapping> OPEN_SKILLS_UI = Lazy.of(() -> new KeyMapping("key.skram.open_skills_ui", InputConstants.Type.KEYBOARD, InputConstants.KEY_R, SKRAM_CATEGORY));
+
+  @SubscribeEvent
+  public static void ON_PLAYER_PLACED_BLOCK(BlockEvent.EntityPlaceEvent event) {
+    if (event.getLevel().isClientSide()) return;
+    if (!(event.getEntity() instanceof Player player)) return;
+
+    if (event.getPlacedBlock().hasBlockEntity()) {
+      // Get the block entity at the target location.
+      BlockEntity blockEntity = event.getLevel().getBlockEntity(event.getPos());
+      // Attach our data to mark this as "owned".
+      blockEntity.setData(BlockData.PLAYER_OWNED, PlayerOwnedBlock.fromPlayer(player));
+    }
+  }
 
   @SubscribeEvent
   public static void ON_BREAKING_BLOCK(PlayerEvent.BreakSpeed event) {
@@ -66,9 +84,9 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_JOIN_WORLD(PlayerEvent.PlayerLoggedInEvent event) {
-    SkillAcrobatics acrobatics = (SkillAcrobatics) event.getEntity().getData(Skills.ACROBATICS);
+    SkillAcrobatics acrobatics = event.getEntity().getData(Skills.ACROBATICS);
     acrobatics.applyModifiers(event.getEntity());
-    SkillAthletics athletics = (SkillAthletics) event.getEntity().getData(Skills.ATHLETICS);
+    SkillAthletics athletics = event.getEntity().getData(Skills.ATHLETICS);
     athletics.applyModifiers(event.getEntity());
   }
 
