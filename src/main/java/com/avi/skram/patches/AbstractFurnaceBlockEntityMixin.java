@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.lang.reflect.InvocationTargetException;
 
 @Mixin(value = {AbstractFurnaceBlockEntity.class})
-public class FurnaceMixin {
+public class AbstractFurnaceBlockEntityMixin {
 
   // We apply our smithing speed up by adjusting the total number of ticks it takes to cook a particular item.
   @Inject(method = {"getTotalCookTime(Lnet/minecraft/world/item/crafting/RecipeHolder;Lnet/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity;)I"}, at = {@At(value = "RETURN")}, cancellable = true)

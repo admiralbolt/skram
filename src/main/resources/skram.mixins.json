@@ -4,7 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "FurnaceBlockEntityMixin",
-    "FurnaceMixin"
+    "AbstractFurnaceBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

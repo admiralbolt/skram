@@ -24,13 +24,12 @@ public class FurnaceBlockEntityMixin {
     FurnaceBlockEntity blockEntity = (FurnaceBlockEntity) (Object) this;
 
     PlayerOwnedBlock pob = blockEntity.getData(BlockData.PLAYER_OWNED);
-    Player owner = pob.getOwner((ServerLevel) blockEntity.getLevel());
-
-    if (owner == null) return;
+    String displayName = pob.displayName;
+    if (displayName.isEmpty()) return;
 
     Component baseReturn = cir.getReturnValue();
     MutableComponent newComponent = Component.empty();
-    newComponent.append(owner.getDisplayName());
+    newComponent.append(displayName);
     newComponent.append(Component.literal("'s "));
     newComponent.append(baseReturn);
 

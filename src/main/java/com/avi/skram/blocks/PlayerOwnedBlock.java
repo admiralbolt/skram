@@ -10,6 +10,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.common.util.ValueIOSerializable;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
+import java.nio.charset.Charset;
 import java.util.UUID;
 
 public class PlayerOwnedBlock implements ValueIOSerializable {
@@ -17,10 +18,12 @@ public class PlayerOwnedBlock implements ValueIOSerializable {
   public static StreamCodec<ByteBuf, PlayerOwnedBlock> STREAM_CODEC = StreamCodec.ofMember(PlayerOwnedBlock::encode, PlayerOwnedBlock::new);
 
   public UUID uuid = null;
+  public String displayName = "";
 
   public static PlayerOwnedBlock fromPlayer(Player player) {
     PlayerOwnedBlock ppb = new PlayerOwnedBlock();
     ppb.uuid = player.getUUID();
+    ppb.displayName = player.getDisplayName().getString();
     return ppb;
   }
 
@@ -30,22 +33,31 @@ public class PlayerOwnedBlock implements ValueIOSerializable {
 
   public PlayerOwnedBlock(ByteBuf buffer) {
     this.uuid = new UUID(buffer.readLong(), buffer.readLong());
+    this.displayName = buffer.readString(buffer.readInt(), Charset.defaultCharset());
   }
 
   public void encode(ByteBuf buffer) {
+    if (this.uuid == null) return;
+
     buffer.writeLong(this.uuid.getMostSignificantBits());
     buffer.writeLong(this.uuid.getLeastSignificantBits());
+    buffer.writeInt(this.displayName.length());
+    buffer.writeCharSequence(this.displayName, Charset.defaultCharset());
   }
 
   @Override
   public void serialize(ValueOutput output) {
+    if (this.uuid == null) return;
+
     output.putLong("upperBits", this.uuid.getMostSignificantBits());
     output.putLong("lowerBits", this.uuid.getLeastSignificantBits());
+    output.putString("displayName", this.displayName);
   }
 
   @Override
   public void deserialize(ValueInput input) {
     this.uuid = new UUID(input.getLong("upperBits").get(), input.getLong("lowerBits").get());
+    this.displayName = input.getString("displayName").get();
   }
 
   public Player getOwner(ServerLevel level) {
