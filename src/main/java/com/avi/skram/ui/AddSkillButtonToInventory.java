@@ -1,6 +1,5 @@
 package com.avi.skram.ui;
 
-import com.avi.skram.skills.Skill;
 import com.avi.skram.utils.ReflectionUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;

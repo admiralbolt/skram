@@ -3,7 +3,6 @@ package com.avi.skram.skills;
 import com.avi.skram.Skram;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.attachment.AttachmentType;
 
 import java.util.HashMap;

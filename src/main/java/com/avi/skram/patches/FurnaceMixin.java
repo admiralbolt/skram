@@ -84,5 +84,4 @@ public class FurnaceMixin {
     smithing.addXp(owner, SkillSmithing.XP_MAP.get(burnResult.getItem()) + bonusXP);
   }
 
-
 }
