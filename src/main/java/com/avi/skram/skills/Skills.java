@@ -95,6 +95,8 @@ public class Skills {
   // Same here, done in a separate handler to ensure that items have been registered.
   public static void setupSkillXPMaps() {
     SkillCooking.setupXPMap();
+    SkillDigging.setupXPMap();
+    SkillMining.setupXPMap();
     SkillSmithing.setupXPMap();
   }
 

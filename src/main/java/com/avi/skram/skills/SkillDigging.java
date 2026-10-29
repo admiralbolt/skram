@@ -9,13 +9,19 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SkillDigging extends Skill {
 
   public static final String NAME = "digging";
   public static final StreamCodec<ByteBuf, SkillDigging> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillDigging::new);
+  public static Map<Block, Integer> XP_MAP;
 
   public static final int DIGGING_SPEED_INDEX = 0;
 
@@ -26,6 +32,23 @@ public class SkillDigging extends Skill {
 
   public SkillDigging(ByteBuf buffer) {
     super(buffer);
+  }
+
+  public static void setupXPMap() {
+    XP_MAP = new HashMap<>();
+
+    XP_MAP.put(Blocks.DIRT, 25);
+    XP_MAP.put(Blocks.GRASS_BLOCK, 35);
+    XP_MAP.put(Blocks.COARSE_DIRT, 35);
+    XP_MAP.put(Blocks.FARMLAND, 35);
+    XP_MAP.put(Blocks.SAND, 30);
+    XP_MAP.put(Blocks.GRAVEL, 45);
+    XP_MAP.put(Blocks.RED_SAND, 40);
+    XP_MAP.put(Blocks.ROOTED_DIRT, 80);
+    XP_MAP.put(Blocks.MUD, 45);
+    XP_MAP.put(Blocks.CLAY, 55);
+    XP_MAP.put(Blocks.PODZOL, 65);
+    XP_MAP.put(Blocks.MYCELIUM, 100);
   }
 
   @Override
@@ -51,7 +74,7 @@ public class SkillDigging extends Skill {
     if (!event.getState().is(BlockTags.MINEABLE_WITH_SHOVEL)) return;
 
     SkillDigging digging = event.getPlayer().getData(Skills.DIGGING);
-    digging.addXp(event.getPlayer(), 50000);
+    digging.addXp(event.getPlayer(), XP_MAP.getOrDefault(event.getState().getBlock(), 5));
   }
 
   @Override
