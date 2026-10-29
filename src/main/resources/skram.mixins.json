@@ -3,8 +3,10 @@
   "package": "com.avi.skram.patches",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AbstractFurnaceBlockEntityMixin",
+    "CraftingMenuMixin",
     "FurnaceBlockEntityMixin",
-    "AbstractFurnaceBlockEntityMixin"
+    "InventoryMenuMixin"
   ],
   "injectors": {
     "defaultRequire": 1

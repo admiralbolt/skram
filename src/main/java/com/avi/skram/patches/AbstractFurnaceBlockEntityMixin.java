@@ -2,6 +2,7 @@ package com.avi.skram.patches;
 
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlock;
+import com.avi.skram.skills.SkillCooking;
 import com.avi.skram.skills.SkillSmithing;
 import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.ReflectionUtils;
@@ -43,8 +44,6 @@ public class AbstractFurnaceBlockEntityMixin {
       throw new RuntimeException(e);
     }
 
-    if (!SkillSmithing.XP_MAP.containsKey(output)) return;
-
     PlayerOwnedBlock pob = blockEntity.getData(BlockData.PLAYER_OWNED);
     Player owner = pob.getOwner((ServerLevel) blockEntity.getLevel());
 
@@ -66,22 +65,30 @@ public class AbstractFurnaceBlockEntityMixin {
   )
   private static void beforeBurn(ServerLevel level, BlockPos pos, BlockState state, AbstractFurnaceBlockEntity entity, CallbackInfo ci, @Local(name = {"burnResult"}) ItemStack burnResult) {
     if (level.isClientSide()) return;
-    if (!SkillSmithing.XP_MAP.containsKey(burnResult.getItem())) return;
 
     PlayerOwnedBlock pob = entity.getData(BlockData.PLAYER_OWNED);
     Player owner = pob.getOwner(level);
 
     if (owner == null) return;
 
-    SkillSmithing smithing = owner.getData(Skills.SMITHING);
-
-    double bonusXP = 0;
-    if (smithing.enabledAbilities[SkillSmithing.DOUBLE_PRODUCTION_INDEX] && Math.random() < smithing.getDoubleProductionChance()) {
-      burnResult.setCount(burnResult.count() + 1);
-      bonusXP += 5;
+    // Cooking
+    if (SkillCooking.XP_MAP.containsKey(burnResult.getItem())) {
+      SkillCooking cooking = owner.getData(Skills.COOKING);
+      cooking.addXp(owner, SkillCooking.XP_MAP.get(burnResult.getItem()));
     }
 
-    smithing.addXp(owner, SkillSmithing.XP_MAP.get(burnResult.getItem()) + bonusXP);
+    // Smithing.
+    if (SkillSmithing.XP_MAP.containsKey(burnResult.getItem())) {
+      SkillSmithing smithing = owner.getData(Skills.SMITHING);
+
+      double bonusXP = 0;
+      if (smithing.enabledAbilities[SkillSmithing.DOUBLE_PRODUCTION_INDEX] && Math.random() < smithing.getDoubleProductionChance()) {
+        burnResult.setCount(burnResult.count() + 1);
+        bonusXP += 5;
+      }
+
+      smithing.addXp(owner, SkillSmithing.XP_MAP.get(burnResult.getItem()) + bonusXP);
+    }
   }
 
 }

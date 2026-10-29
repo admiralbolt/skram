@@ -73,6 +73,20 @@ public class EventHandler {
   }
 
   @SubscribeEvent
+  public static void ON_ITEM_SMELTED(PlayerEvent.ItemSmeltedEvent event) {
+    if (event.getEntity().level().isClientSide()) return;
+
+    SkillCooking.overrideFood(event.getEntity(), event.getSmelting());
+  }
+
+  @SubscribeEvent
+  public static void ON_ITEM_CRAFTED(PlayerEvent.ItemCraftedEvent event) {
+    if (event.getEntity().level().isClientSide()) return;
+
+    SkillCooking.handleCrafting(event.getEntity(), event.getCrafting());
+  }
+
+  @SubscribeEvent
   public static void ON_SCREEN_INIT_POST(ScreenEvent.Init.Post event) {
     AddSkillButtonToInventory.addButtonOnInit(event);
   }
