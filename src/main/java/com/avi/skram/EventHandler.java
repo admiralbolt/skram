@@ -24,6 +24,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
@@ -130,6 +131,11 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_LEFT_CLICK_BLOCK(PlayerInteractEvent.LeftClickBlock event) {
     SkillMining.handleLeftClick(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_PLAYER_FISHED(ItemFishedEvent event) {
+    SkillFishing.handleCatchFish(event);
   }
 
   @SubscribeEvent

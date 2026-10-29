@@ -24,6 +24,7 @@ public class Skills {
   public static Supplier<AttachmentType<SkillSmithing>> SMITHING;
   public static Supplier<AttachmentType<SkillCooking>> COOKING;
   public static Supplier<AttachmentType<SkillWoodcutting>> WOODCUTTING;
+  public static Supplier<AttachmentType<SkillFishing>> FISHING;
 
   // Map skills to the item used for their icon.
   public static Map<String, Identifier> SKILL_ICONS;
@@ -87,6 +88,14 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillWoodcutting.NAME, WOODCUTTING);
+
+    FISHING = Skram.ATTACHMENT_TYPES.register(
+      SkillFishing.NAME, () -> AttachmentType.serializable(() -> new SkillFishing())
+        .sync(new SkillSyncHandler<>(SkillFishing.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillFishing.NAME, FISHING);
   }
 
   // This needs to be done in a separate handler to ensure that items have been registered.
@@ -100,6 +109,7 @@ public class Skills {
     SKILL_ICONS.put(SkillMining.NAME, Identifier.withDefaultNamespace("textures/item/stone_pickaxe.png"));
     SKILL_ICONS.put(SkillSmithing.NAME, Identifier.withDefaultNamespace("textures/item/campfire.png"));
     SKILL_ICONS.put(SkillWoodcutting.NAME, Identifier.withDefaultNamespace("textures/item/stone_axe.png"));
+    SKILL_ICONS.put(SkillFishing.NAME, Identifier.withDefaultNamespace("textures/item/fishing_rod.png"));
   }
 
   // Same here, done in a separate handler to ensure that items have been registered.

@@ -5,6 +5,7 @@
   "mixins": [
     "AbstractFurnaceBlockEntityMixin",
     "CraftingMenuMixin",
+    "FishingHookMixin",
     "FurnaceBlockEntityMixin",
     "InventoryMenuMixin"
   ],
