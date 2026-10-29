@@ -14,8 +14,9 @@ import java.util.UUID;
 
 public class PlayerOwnedData implements ValueIOSerializable {
 
+  public static UUID EMPTY_UUID = new UUID(0, 0);
   // The UUID, used to look up the player. We use "0" as a way to
-  public UUID uuid = new UUID(0, 0);
+  public UUID uuid = EMPTY_UUID;
 
   // All other fields are fallbacks in case we can't look up the player.
   public String displayName = "";
@@ -56,7 +57,7 @@ public class PlayerOwnedData implements ValueIOSerializable {
   }
 
   public Player getOwner(ServerLevel level) {
-    if (this.uuid.getLeastSignificantBits() == 0 && this.uuid.getMostSignificantBits() == 0) return null;
+    if (this.uuid.equals(EMPTY_UUID)) return null;
 
     return level.getServer().getPlayerList().getPlayer(this.uuid);
   }
@@ -65,7 +66,7 @@ public class PlayerOwnedData implements ValueIOSerializable {
   // This _WILL_ throw an error if it is run on the client side.
   // User discretion is advised.
   public Player getOwner() {
-    if (this.uuid.getLeastSignificantBits() == 0 && this.uuid.getMostSignificantBits() == 0) return null;
+    if (this.uuid.equals(EMPTY_UUID)) return null;
 
     MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
     if (server == null) return null;

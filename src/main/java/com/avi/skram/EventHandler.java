@@ -14,6 +14,8 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -73,9 +75,19 @@ public class EventHandler {
     if (event.getLevel().isClientSide()) return;
     if (event.isCanceled()) return;
 
-    SkillDigging.gainXp(event);
-    SkillMining.gainXp(event);
-    SkillWoodcutting.gainXp(event);
+    // Check for player placed blocks.
+    LevelAccessor level = event.getLevel();
+    ChunkAccess chunk = level.getChunk(event.getPos());
+    PlayerOwnedBlocks pob = chunk.getData(BlockData.PLAYER_OWNED);
+    if (!pob.playerOwnedBlocks.containsKey(event.getPos())) {
+      SkillDigging.gainXp(event);
+      SkillMining.gainXp(event);
+      SkillWoodcutting.gainXp(event);
+    }
+
+    // Remove the block from our map.
+    pob.playerOwnedBlocks.remove(event.getPos());
+    chunk.markUnsaved();
   }
 
   @SubscribeEvent
