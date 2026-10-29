@@ -7,13 +7,14 @@ import java.util.function.Supplier;
 
 public class BlockData {
 
-  public static Supplier<AttachmentType<PlayerOwnedBlock>> PLAYER_OWNED;
+  public static Supplier<AttachmentType<PlayerOwnedBlocks>> PLAYER_OWNED;
 
   public static void register() {
     PLAYER_OWNED = Skram.ATTACHMENT_TYPES.register(
-      "player_placed", () -> AttachmentType.serializable(() -> new PlayerOwnedBlock())
-        .sync(PlayerOwnedBlock.STREAM_CODEC)
+      "player_owned_blocks", () -> AttachmentType.serializable(() -> new PlayerOwnedBlocks())
+        .sync(PlayerOwnedBlocks.STREAM_CODEC)
         .build()
     );
   }
+
 }

@@ -1,7 +1,6 @@
 package com.avi.skram.blocks;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
@@ -13,55 +12,51 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import java.nio.charset.Charset;
 import java.util.UUID;
 
-public class PlayerOwnedBlock implements ValueIOSerializable {
+public class PlayerOwnedData implements ValueIOSerializable {
 
-  public static StreamCodec<ByteBuf, PlayerOwnedBlock> STREAM_CODEC = StreamCodec.ofMember(PlayerOwnedBlock::encode, PlayerOwnedBlock::new);
+  // The UUID, used to look up the player. We use "0" as a way to
+  public UUID uuid = new UUID(0, 0);
 
-  public UUID uuid = null;
+  // All other fields are fallbacks in case we can't look up the player.
   public String displayName = "";
+  public float growthChance = 0;
 
-  public static PlayerOwnedBlock fromPlayer(Player player) {
-    PlayerOwnedBlock ppb = new PlayerOwnedBlock();
-    ppb.uuid = player.getUUID();
-    ppb.displayName = player.getDisplayName().getString();
-    return ppb;
-  }
-
-  public PlayerOwnedBlock() {
+  public PlayerOwnedData() {
 
   }
 
-  public PlayerOwnedBlock(ByteBuf buffer) {
+  public PlayerOwnedData(ByteBuf buffer) {
     this.uuid = new UUID(buffer.readLong(), buffer.readLong());
     this.displayName = buffer.readString(buffer.readInt(), Charset.defaultCharset());
+    this.growthChance = buffer.readFloat();
   }
 
   public void encode(ByteBuf buffer) {
-    if (this.uuid == null) return;
-
-    buffer.writeLong(this.uuid.getMostSignificantBits());
-    buffer.writeLong(this.uuid.getLeastSignificantBits());
+    buffer.writeLong((this.uuid == null) ? 0 : this.uuid.getMostSignificantBits());
+    buffer.writeLong((this.uuid == null) ? 0 : this.uuid.getLeastSignificantBits());
     buffer.writeInt(this.displayName.length());
     buffer.writeCharSequence(this.displayName, Charset.defaultCharset());
+    buffer.writeFloat(this.growthChance);
   }
 
   @Override
   public void serialize(ValueOutput output) {
-    if (this.uuid == null) return;
-
+    // If you update this, make sure you update the PlayerOwnedBlocks.serialize() method.
     output.putLong("upperBits", this.uuid.getMostSignificantBits());
     output.putLong("lowerBits", this.uuid.getLeastSignificantBits());
     output.putString("displayName", this.displayName);
+    output.putFloat("growthChance", this.growthChance);
   }
 
   @Override
   public void deserialize(ValueInput input) {
     this.uuid = new UUID(input.getLong("upperBits").get(), input.getLong("lowerBits").get());
     this.displayName = input.getString("displayName").get();
+    this.growthChance = input.getFloatOr("growthChance", 0);
   }
 
   public Player getOwner(ServerLevel level) {
-    if (this.uuid == null) return null;
+    if (this.uuid.getLeastSignificantBits() == 0 && this.uuid.getMostSignificantBits() == 0) return null;
 
     return level.getServer().getPlayerList().getPlayer(this.uuid);
   }
@@ -70,12 +65,11 @@ public class PlayerOwnedBlock implements ValueIOSerializable {
   // This _WILL_ throw an error if it is run on the client side.
   // User discretion is advised.
   public Player getOwner() {
-    if (this.uuid == null) return null;
+    if (this.uuid.getLeastSignificantBits() == 0 && this.uuid.getMostSignificantBits() == 0) return null;
 
     MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
     if (server == null) return null;
 
     return server.getPlayerList().getPlayer(this.uuid);
   }
-
 }

@@ -1,7 +1,8 @@
 package com.avi.skram.patches;
 
 import com.avi.skram.blocks.BlockData;
-import com.avi.skram.blocks.PlayerOwnedBlock;
+import com.avi.skram.blocks.PlayerOwnedBlocks;
+import com.avi.skram.blocks.PlayerOwnedData;
 import com.avi.skram.skills.SkillCooking;
 import com.avi.skram.skills.SkillSmithing;
 import com.avi.skram.skills.Skills;
@@ -15,8 +16,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -44,9 +47,15 @@ public class AbstractFurnaceBlockEntityMixin {
       throw new RuntimeException(e);
     }
 
-    PlayerOwnedBlock pob = blockEntity.getData(BlockData.PLAYER_OWNED);
-    Player owner = pob.getOwner((ServerLevel) blockEntity.getLevel());
+    Level level = blockEntity.getLevel();
+    if (level == null) return;
 
+    ChunkAccess chunk = level.getChunk(blockEntity.getBlockPos());
+    PlayerOwnedBlocks pob = chunk.getData(BlockData.PLAYER_OWNED);
+    PlayerOwnedData playerData = pob.playerOwnedBlocks.get(blockEntity.getBlockPos());
+    if (playerData == null) return;
+
+    Player owner = playerData.getOwner((ServerLevel) level);
     if (owner == null) return;
 
     SkillSmithing smithing = owner.getData(Skills.SMITHING);
@@ -66,8 +75,12 @@ public class AbstractFurnaceBlockEntityMixin {
   private static void beforeBurn(ServerLevel level, BlockPos pos, BlockState state, AbstractFurnaceBlockEntity entity, CallbackInfo ci, @Local(name = {"burnResult"}) ItemStack burnResult) {
     if (level.isClientSide()) return;
 
-    PlayerOwnedBlock pob = entity.getData(BlockData.PLAYER_OWNED);
-    Player owner = pob.getOwner(level);
+    ChunkAccess chunk = level.getChunk(pos);
+    PlayerOwnedBlocks pob = chunk.getData(BlockData.PLAYER_OWNED);
+    PlayerOwnedData playerData = pob.playerOwnedBlocks.get(pos);
+    if (playerData == null) return;
+
+    Player owner = playerData.getOwner(level);
 
     if (owner == null) return;
 

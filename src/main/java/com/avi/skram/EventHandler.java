@@ -1,7 +1,8 @@
 package com.avi.skram;
 
 import com.avi.skram.blocks.BlockData;
-import com.avi.skram.blocks.PlayerOwnedBlock;
+import com.avi.skram.blocks.PlayerOwnedBlocks;
+import com.avi.skram.blocks.PlayerOwnedData;
 import com.avi.skram.network.ClientPayloadHandler;
 import com.avi.skram.network.ServerPayloadHandler;
 import com.avi.skram.skills.*;
@@ -13,7 +14,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
@@ -30,6 +31,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
+import net.neoforged.neoforge.event.level.block.CropGrowEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -45,12 +47,18 @@ public class EventHandler {
     if (event.getLevel().isClientSide()) return;
     if (!(event.getEntity() instanceof Player player)) return;
 
-    if (event.getPlacedBlock().hasBlockEntity()) {
-      // Get the block entity at the target location.
-      BlockEntity blockEntity = event.getLevel().getBlockEntity(event.getPos());
-      // Attach our data to mark this as "owned".
-      blockEntity.setData(BlockData.PLAYER_OWNED, PlayerOwnedBlock.fromPlayer(player));
-    }
+    ChunkAccess chunk = event.getLevel().getChunk(event.getPos());
+    PlayerOwnedBlocks pob = chunk.getData(BlockData.PLAYER_OWNED);
+
+    SkillFarming farming = player.getData(Skills.FARMING);
+    PlayerOwnedData data = new PlayerOwnedData();
+    data.uuid = player.getUUID();
+    data.displayName = player.getDisplayName().getString();
+    data.growthChance = farming.getCropGrowthChance();
+
+    pob.playerOwnedBlocks.put(event.getPos(), data);
+    // Need to manually mark it unsaved so the data gets saved.
+    chunk.markUnsaved();
   }
 
   @SubscribeEvent
@@ -136,6 +144,11 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_FISHED(ItemFishedEvent event) {
     SkillFishing.handleCatchFish(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_CROP_GROW_PRE(CropGrowEvent.Pre event) {
+    SkillFarming.handleCropGrowth(event);
   }
 
   @SubscribeEvent

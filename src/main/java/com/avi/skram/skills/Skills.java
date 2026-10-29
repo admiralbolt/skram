@@ -25,6 +25,7 @@ public class Skills {
   public static Supplier<AttachmentType<SkillCooking>> COOKING;
   public static Supplier<AttachmentType<SkillWoodcutting>> WOODCUTTING;
   public static Supplier<AttachmentType<SkillFishing>> FISHING;
+  public static Supplier<AttachmentType<SkillFarming>> FARMING;
 
   // Map skills to the item used for their icon.
   public static Map<String, Identifier> SKILL_ICONS;
@@ -96,6 +97,14 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillFishing.NAME, FISHING);
+
+    FARMING = Skram.ATTACHMENT_TYPES.register(
+      SkillFarming.NAME, () -> AttachmentType.serializable(() -> new SkillFarming())
+        .sync(new SkillSyncHandler<>(SkillFarming.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillFarming.NAME, FARMING);
   }
 
   // This needs to be done in a separate handler to ensure that items have been registered.
@@ -110,6 +119,7 @@ public class Skills {
     SKILL_ICONS.put(SkillSmithing.NAME, Identifier.withDefaultNamespace("textures/item/campfire.png"));
     SKILL_ICONS.put(SkillWoodcutting.NAME, Identifier.withDefaultNamespace("textures/item/stone_axe.png"));
     SKILL_ICONS.put(SkillFishing.NAME, Identifier.withDefaultNamespace("textures/item/fishing_rod.png"));
+    SKILL_ICONS.put(SkillFarming.NAME, Identifier.withDefaultNamespace("textures/item/iron_hoe.png"));
   }
 
   // Same here, done in a separate handler to ensure that items have been registered.
@@ -119,6 +129,7 @@ public class Skills {
     SkillMining.setupXPMap();
     SkillSmithing.setupXPMap();
     SkillWoodcutting.setupXPMap();
+    SkillFarming.setupXPMap();
   }
 
   public static int requiredLevel(ItemStack stack) {
