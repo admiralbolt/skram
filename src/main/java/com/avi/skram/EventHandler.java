@@ -56,6 +56,7 @@ public class EventHandler {
   public static void ON_BREAKING_BLOCK(PlayerEvent.BreakSpeed event) {
     SkillDigging.applySpeed(event);
     SkillMining.applySpeed(event);
+    SkillWoodcutting.applySpeed(event);
   }
 
   @SubscribeEvent
@@ -65,6 +66,7 @@ public class EventHandler {
 
     SkillDigging.gainXp(event);
     SkillMining.gainXp(event);
+    SkillWoodcutting.gainXp(event);
   }
 
   @SubscribeEvent

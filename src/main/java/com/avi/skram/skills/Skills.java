@@ -23,6 +23,7 @@ public class Skills {
   public static Supplier<AttachmentType<SkillMining>> MINING;
   public static Supplier<AttachmentType<SkillSmithing>> SMITHING;
   public static Supplier<AttachmentType<SkillCooking>> COOKING;
+  public static Supplier<AttachmentType<SkillWoodcutting>> WOODCUTTING;
 
   // Map skills to the item used for their icon.
   public static Map<String, Identifier> SKILL_ICONS;
@@ -78,6 +79,14 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillCooking.NAME, COOKING);
+
+    WOODCUTTING = Skram.ATTACHMENT_TYPES.register(
+      SkillWoodcutting.NAME, () -> AttachmentType.serializable(() -> new SkillWoodcutting())
+        .sync(new SkillSyncHandler<>(SkillWoodcutting.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillWoodcutting.NAME, WOODCUTTING);
   }
 
   // This needs to be done in a separate handler to ensure that items have been registered.
@@ -86,10 +95,11 @@ public class Skills {
 
     SKILL_ICONS.put(SkillAcrobatics.NAME, Identifier.withDefaultNamespace("textures/item/netherite_boots.png"));
     SKILL_ICONS.put(SkillAthletics.NAME, Identifier.withDefaultNamespace("textures/item/rabbit_foot.png"));
+    SKILL_ICONS.put(SkillCooking.NAME, Identifier.withDefaultNamespace("textures/item/cooked_beef.png"));
     SKILL_ICONS.put(SkillDigging.NAME, Identifier.withDefaultNamespace("textures/item/stone_shovel.png"));
     SKILL_ICONS.put(SkillMining.NAME, Identifier.withDefaultNamespace("textures/item/stone_pickaxe.png"));
     SKILL_ICONS.put(SkillSmithing.NAME, Identifier.withDefaultNamespace("textures/item/campfire.png"));
-    SKILL_ICONS.put(SkillCooking.NAME, Identifier.withDefaultNamespace("textures/item/cooked_beef.png"));
+    SKILL_ICONS.put(SkillWoodcutting.NAME, Identifier.withDefaultNamespace("textures/item/stone_axe.png"));
   }
 
   // Same here, done in a separate handler to ensure that items have been registered.
@@ -98,6 +108,7 @@ public class Skills {
     SkillDigging.setupXPMap();
     SkillMining.setupXPMap();
     SkillSmithing.setupXPMap();
+    SkillWoodcutting.setupXPMap();
   }
 
   public static int requiredLevel(ItemStack stack) {

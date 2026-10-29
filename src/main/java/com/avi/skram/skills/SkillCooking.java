@@ -95,6 +95,8 @@ public class SkillCooking extends Skill {
 
   public static void overrideFood(Player player, ItemStack stack) {
     SkillCooking cooking = player.getData(Skills.COOKING);
+    if (!cooking.enabledAbilities[FOOD_BOOST_INDEX]) return;
+
     FoodProperties foodBase = stack.get(DataComponents.FOOD);
     if (foodBase == null) return;
 
