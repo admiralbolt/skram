@@ -25,6 +25,7 @@ public class Skills {
   public static Supplier<AttachmentType<SkillDigging>> DIGGING;
   public static Supplier<AttachmentType<SkillFarming>> FARMING;
   public static Supplier<AttachmentType<SkillFishing>> FISHING;
+  public static Supplier<AttachmentType<SkillMelee>> MELEE;
   public static Supplier<AttachmentType<SkillMining>> MINING;
   public static Supplier<AttachmentType<SkillSmithing>> SMITHING;
   public static Supplier<AttachmentType<SkillWoodcutting>> WOODCUTTING;
@@ -100,6 +101,14 @@ public class Skills {
     );
     SKILLS_BY_NAME.put(SkillFishing.NAME, FISHING);
 
+    MELEE = Skram.ATTACHMENT_TYPES.register(
+      SkillMelee.NAME, () -> AttachmentType.serializable(() -> new SkillMelee())
+        .sync(new SkillSyncHandler<>(SkillMelee.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillMelee.NAME, MELEE);
+
     MINING = Skram.ATTACHMENT_TYPES.register(
       SkillMining.NAME, () -> AttachmentType.serializable(() -> new SkillMining())
         .sync(new SkillSyncHandler<>(SkillMining.STREAM_CODEC))
@@ -137,6 +146,7 @@ public class Skills {
     SKILL_ICONS.put(SkillDigging.NAME, Identifier.withDefaultNamespace("textures/item/stone_shovel.png"));
     SKILL_ICONS.put(SkillFarming.NAME, Identifier.withDefaultNamespace("textures/item/iron_hoe.png"));
     SKILL_ICONS.put(SkillFishing.NAME, Identifier.withDefaultNamespace("textures/item/fishing_rod.png"));
+    SKILL_ICONS.put(SkillMelee.NAME, Identifier.withDefaultNamespace("textures/item/iron_sword.png"));
     SKILL_ICONS.put(SkillMining.NAME, Identifier.withDefaultNamespace("textures/item/stone_pickaxe.png"));
     SKILL_ICONS.put(SkillSmithing.NAME, Identifier.withDefaultNamespace("textures/item/campfire.png"));
     SKILL_ICONS.put(SkillWoodcutting.NAME, Identifier.withDefaultNamespace("textures/item/stone_axe.png"));

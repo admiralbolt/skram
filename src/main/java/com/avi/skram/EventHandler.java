@@ -25,6 +25,7 @@ import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -172,6 +173,11 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_FISHED(ItemFishedEvent event) {
     SkillFishing.handleCatchFish(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_ENTITY_HURT(LivingDamageEvent.Pre event) {
+    SkillMelee.handleDamageEvent(event);
   }
 
   @SubscribeEvent
