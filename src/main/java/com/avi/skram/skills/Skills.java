@@ -19,14 +19,15 @@ public class Skills {
 
   public static Supplier<AttachmentType<SkillAcrobatics>> ACROBATICS;
   public static Supplier<AttachmentType<SkillAthletics>> ATHLETICS;
+  public static Supplier<AttachmentType<SkillBotany>> BOTANY;
+  public static Supplier<AttachmentType<SkillBrewing>> BREWING;
+  public static Supplier<AttachmentType<SkillCooking>> COOKING;
   public static Supplier<AttachmentType<SkillDigging>> DIGGING;
+  public static Supplier<AttachmentType<SkillFarming>> FARMING;
+  public static Supplier<AttachmentType<SkillFishing>> FISHING;
   public static Supplier<AttachmentType<SkillMining>> MINING;
   public static Supplier<AttachmentType<SkillSmithing>> SMITHING;
-  public static Supplier<AttachmentType<SkillCooking>> COOKING;
   public static Supplier<AttachmentType<SkillWoodcutting>> WOODCUTTING;
-  public static Supplier<AttachmentType<SkillFishing>> FISHING;
-  public static Supplier<AttachmentType<SkillFarming>> FARMING;
-  public static Supplier<AttachmentType<SkillBotany>> BOTANY;
 
   // Map skills to the item used for their icon.
   public static Map<String, Identifier> SKILL_ICONS;
@@ -51,6 +52,30 @@ public class Skills {
     );
     SKILLS_BY_NAME.put(SkillAthletics.NAME, ATHLETICS);
 
+    BOTANY = Skram.ATTACHMENT_TYPES.register(
+      SkillBotany.NAME, () -> AttachmentType.serializable(() -> new SkillBotany())
+        .sync(new SkillSyncHandler<>(SkillBotany.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillBotany.NAME, BOTANY);
+
+    BREWING = Skram.ATTACHMENT_TYPES.register(
+      SkillBrewing.NAME, () -> AttachmentType.serializable(() -> new SkillBrewing())
+        .sync(new SkillSyncHandler<>(SkillBrewing.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillBrewing.NAME, BREWING);
+
+    COOKING = Skram.ATTACHMENT_TYPES.register(
+      SkillCooking.NAME, () -> AttachmentType.serializable(() -> new SkillCooking())
+        .sync(new SkillSyncHandler<>(SkillCooking.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillCooking.NAME, COOKING);
+
     DIGGING = Skram.ATTACHMENT_TYPES.register(
       SkillDigging.NAME, () -> AttachmentType.serializable(() -> new SkillDigging())
         .sync(new SkillSyncHandler<>(SkillDigging.STREAM_CODEC))
@@ -58,6 +83,22 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillDigging.NAME, DIGGING);
+
+    FARMING = Skram.ATTACHMENT_TYPES.register(
+      SkillFarming.NAME, () -> AttachmentType.serializable(() -> new SkillFarming())
+        .sync(new SkillSyncHandler<>(SkillFarming.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillFarming.NAME, FARMING);
+
+    FISHING = Skram.ATTACHMENT_TYPES.register(
+      SkillFishing.NAME, () -> AttachmentType.serializable(() -> new SkillFishing())
+        .sync(new SkillSyncHandler<>(SkillFishing.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillFishing.NAME, FISHING);
 
     MINING = Skram.ATTACHMENT_TYPES.register(
       SkillMining.NAME, () -> AttachmentType.serializable(() -> new SkillMining())
@@ -75,14 +116,6 @@ public class Skills {
     );
     SKILLS_BY_NAME.put(SkillSmithing.NAME, SMITHING);
 
-    COOKING = Skram.ATTACHMENT_TYPES.register(
-      SkillCooking.NAME, () -> AttachmentType.serializable(() -> new SkillCooking())
-        .sync(new SkillSyncHandler<>(SkillCooking.STREAM_CODEC))
-        .copyOnDeath()
-        .build()
-    );
-    SKILLS_BY_NAME.put(SkillCooking.NAME, COOKING);
-
     WOODCUTTING = Skram.ATTACHMENT_TYPES.register(
       SkillWoodcutting.NAME, () -> AttachmentType.serializable(() -> new SkillWoodcutting())
         .sync(new SkillSyncHandler<>(SkillWoodcutting.STREAM_CODEC))
@@ -90,30 +123,6 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillWoodcutting.NAME, WOODCUTTING);
-
-    FISHING = Skram.ATTACHMENT_TYPES.register(
-      SkillFishing.NAME, () -> AttachmentType.serializable(() -> new SkillFishing())
-        .sync(new SkillSyncHandler<>(SkillFishing.STREAM_CODEC))
-        .copyOnDeath()
-        .build()
-    );
-    SKILLS_BY_NAME.put(SkillFishing.NAME, FISHING);
-
-    FARMING = Skram.ATTACHMENT_TYPES.register(
-      SkillFarming.NAME, () -> AttachmentType.serializable(() -> new SkillFarming())
-        .sync(new SkillSyncHandler<>(SkillFarming.STREAM_CODEC))
-        .copyOnDeath()
-        .build()
-    );
-    SKILLS_BY_NAME.put(SkillFarming.NAME, FARMING);
-
-    BOTANY = Skram.ATTACHMENT_TYPES.register(
-      SkillBotany.NAME, () -> AttachmentType.serializable(() -> new SkillBotany())
-        .sync(new SkillSyncHandler<>(SkillBotany.STREAM_CODEC))
-        .copyOnDeath()
-        .build()
-    );
-    SKILLS_BY_NAME.put(SkillBotany.NAME, BOTANY);
   }
 
   // This needs to be done in a separate handler to ensure that items have been registered.
@@ -123,6 +132,7 @@ public class Skills {
     SKILL_ICONS.put(SkillAcrobatics.NAME, Identifier.withDefaultNamespace("textures/item/netherite_boots.png"));
     SKILL_ICONS.put(SkillAthletics.NAME, Identifier.withDefaultNamespace("textures/item/rabbit_foot.png"));
     SKILL_ICONS.put(SkillBotany.NAME, Identifier.withDefaultNamespace("textures/item/wildflowers.png"));
+    SKILL_ICONS.put(SkillBrewing.NAME, Identifier.withDefaultNamespace("textures/item/brewing_stand.png"));
     SKILL_ICONS.put(SkillCooking.NAME, Identifier.withDefaultNamespace("textures/item/cooked_beef.png"));
     SKILL_ICONS.put(SkillDigging.NAME, Identifier.withDefaultNamespace("textures/item/stone_shovel.png"));
     SKILL_ICONS.put(SkillFarming.NAME, Identifier.withDefaultNamespace("textures/item/iron_hoe.png"));
@@ -134,6 +144,7 @@ public class Skills {
 
   // Same here, done in a separate handler to ensure that items have been registered.
   public static void setupSkillXPMaps() {
+    SkillBrewing.registerXPMap();
     SkillCooking.setupXPMap();
     SkillDigging.setupXPMap();
     SkillFarming.setupXPMap();

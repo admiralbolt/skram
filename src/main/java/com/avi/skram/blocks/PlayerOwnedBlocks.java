@@ -71,6 +71,7 @@ public class PlayerOwnedBlocks implements ValueIOSerializable {
       output.putString(String.format("displayName_%d", i), data.displayName);
       output.putFloat(String.format("growthChance_%d", i), data.growthChance);
       output.putFloat(String.format("smithingSpeed_%d", i), data.smithingSpeed);
+      output.putFloat(String.format("brewingSpeed_%d", i), data.brewingSpeed);
       i++;
     }
   }
@@ -91,6 +92,7 @@ public class PlayerOwnedBlocks implements ValueIOSerializable {
       data.displayName = input.getString(String.format("displayName_%d", i)).get();
       data.growthChance = input.getFloatOr(String.format("growthChance_%d", i), 0);
       data.smithingSpeed = input.getFloatOr(String.format("smithingSpeed_%d", i), 0);
+      data.brewingSpeed = input.getFloatOr(String.format("brewingSpeed_%d", i), 0);
       this.playerOwnedBlocks.put(pos, data);
     }
   }
