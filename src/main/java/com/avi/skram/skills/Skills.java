@@ -26,6 +26,7 @@ public class Skills {
   public static Supplier<AttachmentType<SkillWoodcutting>> WOODCUTTING;
   public static Supplier<AttachmentType<SkillFishing>> FISHING;
   public static Supplier<AttachmentType<SkillFarming>> FARMING;
+  public static Supplier<AttachmentType<SkillBotany>> BOTANY;
 
   // Map skills to the item used for their icon.
   public static Map<String, Identifier> SKILL_ICONS;
@@ -105,6 +106,14 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillFarming.NAME, FARMING);
+
+    BOTANY = Skram.ATTACHMENT_TYPES.register(
+      SkillBotany.NAME, () -> AttachmentType.serializable(() -> new SkillBotany())
+        .sync(new SkillSyncHandler<>(SkillBotany.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillBotany.NAME, BOTANY);
   }
 
   // This needs to be done in a separate handler to ensure that items have been registered.
@@ -113,23 +122,24 @@ public class Skills {
 
     SKILL_ICONS.put(SkillAcrobatics.NAME, Identifier.withDefaultNamespace("textures/item/netherite_boots.png"));
     SKILL_ICONS.put(SkillAthletics.NAME, Identifier.withDefaultNamespace("textures/item/rabbit_foot.png"));
+    SKILL_ICONS.put(SkillBotany.NAME, Identifier.withDefaultNamespace("textures/item/wildflowers.png"));
     SKILL_ICONS.put(SkillCooking.NAME, Identifier.withDefaultNamespace("textures/item/cooked_beef.png"));
     SKILL_ICONS.put(SkillDigging.NAME, Identifier.withDefaultNamespace("textures/item/stone_shovel.png"));
+    SKILL_ICONS.put(SkillFarming.NAME, Identifier.withDefaultNamespace("textures/item/iron_hoe.png"));
+    SKILL_ICONS.put(SkillFishing.NAME, Identifier.withDefaultNamespace("textures/item/fishing_rod.png"));
     SKILL_ICONS.put(SkillMining.NAME, Identifier.withDefaultNamespace("textures/item/stone_pickaxe.png"));
     SKILL_ICONS.put(SkillSmithing.NAME, Identifier.withDefaultNamespace("textures/item/campfire.png"));
     SKILL_ICONS.put(SkillWoodcutting.NAME, Identifier.withDefaultNamespace("textures/item/stone_axe.png"));
-    SKILL_ICONS.put(SkillFishing.NAME, Identifier.withDefaultNamespace("textures/item/fishing_rod.png"));
-    SKILL_ICONS.put(SkillFarming.NAME, Identifier.withDefaultNamespace("textures/item/iron_hoe.png"));
   }
 
   // Same here, done in a separate handler to ensure that items have been registered.
   public static void setupSkillXPMaps() {
     SkillCooking.setupXPMap();
     SkillDigging.setupXPMap();
+    SkillFarming.setupXPMap();
     SkillMining.setupXPMap();
     SkillSmithing.setupXPMap();
     SkillWoodcutting.setupXPMap();
-    SkillFarming.setupXPMap();
   }
 
   public static int requiredLevel(ItemStack stack) {

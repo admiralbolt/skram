@@ -41,6 +41,7 @@ public class SkillWoodcutting extends Skill {
 
     XP_MAP.put(Blocks.ACACIA_LOG, 75);
     XP_MAP.put(Blocks.BIRCH_LOG, 75);
+    XP_MAP.put(Blocks.CHERRY_LOG, 80);
     XP_MAP.put(Blocks.DARK_OAK_LOG, 75);
     XP_MAP.put(Blocks.JUNGLE_LOG, 75);
     XP_MAP.put(Blocks.MANGROVE_LOG, 75);
@@ -67,10 +68,10 @@ public class SkillWoodcutting extends Skill {
   }
 
   public static void gainXp(BreakBlockEvent event) {
-    if (!event.getState().is(BlockTags.MINEABLE_WITH_AXE)) return;
+    if (!event.getState().is(BlockTags.MINEABLE_WITH_AXE) && !event.getState().is(BlockTags.LEAVES)) return;
 
     SkillWoodcutting woodcutting = event.getPlayer().getData(Skills.WOODCUTTING);
-    woodcutting.addXp(event.getPlayer(), XP_MAP.getOrDefault(event.getState().getBlock(), 10));
+    woodcutting.addXp(event.getPlayer(), XP_MAP.getOrDefault(event.getState().getBlock(), 5));
   }
 
   @Override

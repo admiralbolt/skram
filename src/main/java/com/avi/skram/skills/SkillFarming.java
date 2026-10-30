@@ -124,7 +124,7 @@ public class SkillFarming extends Skill {
     farming.addXp(event.getPlayer(), baseXp);
   }
 
-  public static void giveMoreCrops(BlockDropsEvent event) {
+  public static void applyFortune(BlockDropsEvent event) {
     if (!XP_MAP.containsKey(event.getState().getBlock())) return;
     if (!(event.getBreaker() instanceof Player player)) return;
 

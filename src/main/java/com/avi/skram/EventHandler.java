@@ -14,7 +14,6 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -80,6 +79,7 @@ public class EventHandler {
     ChunkAccess chunk = level.getChunk(event.getPos());
     PlayerOwnedBlocks pob = chunk.getData(BlockData.PLAYER_OWNED);
     if (!pob.playerOwnedBlocks.containsKey(event.getPos())) {
+      SkillBotany.gainXp(event);
       SkillDigging.gainXp(event);
       SkillFarming.gainXp(event);
       SkillMining.gainXp(event);
@@ -102,10 +102,11 @@ public class EventHandler {
     if (SkillFarming.isGrowablePlant(event.getState())) {
       // If it's a growable plant, it _must_ be fully grown.
       if (SkillFarming.isPlantFullyGrown(event.getState())) {
-        SkillFarming.giveMoreCrops(event);
+        SkillFarming.applyFortune(event);
       }
     } else if (!pob.playerOwnedBlocks.containsKey(event.getPos())) {
-      SkillFarming.giveMoreCrops(event);
+      SkillBotany.applyFortune(event);
+      SkillFarming.applyFortune(event);
       SkillMining.applyFortune(event);
     }
   }
