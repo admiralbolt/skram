@@ -81,8 +81,11 @@ public class EventHandler {
     PlayerOwnedBlocks pob = chunk.getData(BlockData.PLAYER_OWNED);
     if (!pob.playerOwnedBlocks.containsKey(event.getPos())) {
       SkillDigging.gainXp(event);
+      SkillFarming.gainXp(event);
       SkillMining.gainXp(event);
       SkillWoodcutting.gainXp(event);
+    } else if (SkillFarming.isPlantFullyGrown(event.getState())) {
+      SkillFarming.gainXp(event);
     }
 
     // Remove the block from our map.
@@ -92,7 +95,19 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_BLOCK_DROPS(BlockDropsEvent event) {
-    SkillMining.applyFortune(event);
+    LevelAccessor level = event.getLevel();
+    ChunkAccess chunk = level.getChunk(event.getPos());
+    PlayerOwnedBlocks pob = chunk.getData(BlockData.PLAYER_OWNED);
+
+    if (SkillFarming.isGrowablePlant(event.getState())) {
+      // If it's a growable plant, it _must_ be fully grown.
+      if (SkillFarming.isPlantFullyGrown(event.getState())) {
+        SkillFarming.giveMoreCrops(event);
+      }
+    } else if (!pob.playerOwnedBlocks.containsKey(event.getPos())) {
+      SkillFarming.giveMoreCrops(event);
+      SkillMining.applyFortune(event);
+    }
   }
 
   @SubscribeEvent
