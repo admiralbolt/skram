@@ -59,7 +59,7 @@ public class SkillRanged extends Skill {
     LivingEntity targetEntity = event.getEntity();
     double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 5 : 1;
 
-    ranged.addXp(player, (int) (event.getNewDamage() * xpMult));
+    ranged.addXp(player, event.getNewDamage() * xpMult);
   }
 
   public static void applyDrawSpeed(LivingEntityUseItemEvent.Tick event) {

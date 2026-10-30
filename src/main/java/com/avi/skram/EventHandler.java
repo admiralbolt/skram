@@ -143,6 +143,8 @@ public class EventHandler {
     acrobatics.applyModifiers(event.getEntity());
     SkillAthletics athletics = event.getEntity().getData(Skills.ATHLETICS);
     athletics.applyModifiers(event.getEntity());
+    SkillHealth health = event.getEntity().getData(Skills.HEALTH);
+    health.applyModifiers(event.getEntity());
   }
 
   @SubscribeEvent
@@ -151,6 +153,8 @@ public class EventHandler {
     acrobatics.applyModifiers(event.getEntity());
     SkillAthletics athletics = event.getEntity().getData(Skills.ATHLETICS);
     athletics.applyModifiers(event.getEntity());
+    SkillHealth health = event.getEntity().getData(Skills.HEALTH);
+    health.applyModifiers(event.getEntity());
   }
 
   @SubscribeEvent
@@ -159,6 +163,8 @@ public class EventHandler {
     acrobatics.applyModifiers(event.getEntity());
     SkillAthletics athletics = event.getEntity().getData(Skills.ATHLETICS);
     athletics.applyModifiers(event.getEntity());
+    SkillHealth health = event.getEntity().getData(Skills.HEALTH);
+    health.applyModifiers(event.getEntity());
   }
 
   @SubscribeEvent
@@ -185,6 +191,9 @@ public class EventHandler {
   public static void ON_ENTITY_HURT(LivingDamageEvent.Pre event) {
     SkillMelee.handleDamageEvent(event);
     SkillRanged.handleDamageEvent(event);
+
+    // Make sure that SkillHealth.handleDamageEvent() is called last, so that damage values get updated by skills.
+    SkillHealth.handleDamageEvent(event);
   }
 
   @SubscribeEvent

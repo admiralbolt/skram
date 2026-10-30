@@ -30,6 +30,9 @@ public class XPGainGui {
   public static Map<String, Integer> notificationsBySkill = new HashMap<>();
 
   public static void notify(String skillName, double xp) {
+    // If the amount of XP is less than one, don't display it.
+    if (xp < 1) return;
+
     // If this is not a skill currently in our set of notifications, we should add it.
     int index = notificationsBySkill.getOrDefault(skillName, -1);
     if (index == -1) {
