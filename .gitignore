@@ -6,3 +6,5 @@ run
 .gradle/*
 .idea
 .idea/*
+dev_mods
+dev_mods/*
