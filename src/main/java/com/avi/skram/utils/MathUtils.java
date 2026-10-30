@@ -13,4 +13,12 @@ public class MathUtils {
     return (color.getAlpha() << 24) | (color.getRed() << 16) | (color.getGreen() << 8) | (color.getBlue());
   }
 
+  // A helper function for generating an int from a random chance when the chance value can be greater than 1.
+  // In cases where we have a random chance like 1.5 (i.e. 150%), we return either 1 OR 2.
+  public static int getScalingRandom(double chance) {
+    int flat = (int) chance;
+
+    return flat + ((Math.random() < (chance - flat)) ? 1 : 0);
+  }
+
 }

@@ -67,7 +67,7 @@ public class SkillMelee extends Skill {
   }
 
   public static void handleDamageEvent(LivingDamageEvent.Pre event) {
-    if (!(event.getSource().getEntity() instanceof Player player)) return;
+    if (!(event.getSource().getDirectEntity() instanceof Player player)) return;
     if (player.level().isClientSide()) return;
 
     SkillMelee melee = player.getData(Skills.MELEE);
