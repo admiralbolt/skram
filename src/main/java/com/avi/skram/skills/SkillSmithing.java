@@ -79,7 +79,7 @@ public class SkillSmithing extends Skill {
   }
 
   public float getSmithingSpeed() {
-    return 0.02f * this.level;
+    return 0.03f * this.level;
   }
 
   public double getDoubleProductionChance() {

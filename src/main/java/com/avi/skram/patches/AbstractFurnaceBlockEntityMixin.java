@@ -58,7 +58,7 @@ public class AbstractFurnaceBlockEntityMixin {
     Player owner = playerData.getOwner((ServerLevel) level);
     if (owner == null) {
       // If the owner is offline, used the saved value of smithing speed.
-      returnValue.setReturnValue((int) Math.max(1, returnValue.getReturnValue() * (1 / (1 + playerData.smithingSpeed))));
+      returnValue.setReturnValue((int) Math.max(1, returnValue.getReturnValue() * (1f / (1 + playerData.smithingSpeed))));
       return;
     }
 

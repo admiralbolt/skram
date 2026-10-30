@@ -87,7 +87,7 @@ public class SkillBrewing extends Skill {
   }
 
   public float getBrewingSpeed() {
-    return 0.02f * this.level;
+    return 0.03f * this.level;
   }
 
   @Override
