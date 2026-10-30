@@ -21,6 +21,7 @@ public class PlayerOwnedData implements ValueIOSerializable {
   // All other fields are fallbacks in case we can't look up the player.
   public String displayName = "";
   public float growthChance = 0;
+  public float smithingSpeed = 0;
 
   public PlayerOwnedData() {
 
@@ -30,6 +31,7 @@ public class PlayerOwnedData implements ValueIOSerializable {
     this.uuid = new UUID(buffer.readLong(), buffer.readLong());
     this.displayName = buffer.readString(buffer.readInt(), Charset.defaultCharset());
     this.growthChance = buffer.readFloat();
+    this.smithingSpeed = buffer.readFloat();
   }
 
   public void encode(ByteBuf buffer) {
@@ -38,6 +40,7 @@ public class PlayerOwnedData implements ValueIOSerializable {
     buffer.writeInt(this.displayName.length());
     buffer.writeCharSequence(this.displayName, Charset.defaultCharset());
     buffer.writeFloat(this.growthChance);
+    buffer.writeFloat(this.smithingSpeed);
   }
 
   @Override
@@ -47,6 +50,7 @@ public class PlayerOwnedData implements ValueIOSerializable {
     output.putLong("lowerBits", this.uuid.getLeastSignificantBits());
     output.putString("displayName", this.displayName);
     output.putFloat("growthChance", this.growthChance);
+    output.putFloat("smithingSpeed", this.smithingSpeed);
   }
 
   @Override
@@ -54,6 +58,7 @@ public class PlayerOwnedData implements ValueIOSerializable {
     this.uuid = new UUID(input.getLong("upperBits").get(), input.getLong("lowerBits").get());
     this.displayName = input.getString("displayName").get();
     this.growthChance = input.getFloatOr("growthChance", 0);
+    this.smithingSpeed = input.getFloatOr("smithingSpeed", 0);
   }
 
   public Player getOwner(ServerLevel level) {

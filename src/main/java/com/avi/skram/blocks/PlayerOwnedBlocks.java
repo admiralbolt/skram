@@ -70,6 +70,7 @@ public class PlayerOwnedBlocks implements ValueIOSerializable {
       output.putLong(String.format("lowerBits_%d", i), data.uuid.getLeastSignificantBits());
       output.putString(String.format("displayName_%d", i), data.displayName);
       output.putFloat(String.format("growthChance_%d", i), data.growthChance);
+      output.putFloat(String.format("smithingSpeed_%d", i), data.smithingSpeed);
       i++;
     }
   }
@@ -89,6 +90,7 @@ public class PlayerOwnedBlocks implements ValueIOSerializable {
       data.uuid = new UUID(input.getLong(String.format("upperBits_%d", i)).get(), input.getLong(String.format("lowerBits_%d", i)).get());
       data.displayName = input.getString(String.format("displayName_%d", i)).get();
       data.growthChance = input.getFloatOr(String.format("growthChance_%d", i), 0);
+      data.smithingSpeed = input.getFloatOr(String.format("smithingSpeed_%d", i), 0);
       this.playerOwnedBlocks.put(pos, data);
     }
   }
