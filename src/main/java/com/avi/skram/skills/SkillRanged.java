@@ -8,6 +8,7 @@ import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ProjectileWeaponItem;
@@ -54,7 +55,11 @@ public class SkillRanged extends Skill {
     if (ranged.enabledAbilities[DAMAGE_BOOST_INDEX]) {
       event.setNewDamage(event.getOriginalDamage() * (float) (1 + ranged.getDamageBoost()));
     }
-    ranged.addXp(player, (int) (event.getNewDamage() * 5));
+
+    LivingEntity targetEntity = event.getEntity();
+    double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 5 : 1;
+
+    ranged.addXp(player, (int) (event.getNewDamage() * xpMult));
   }
 
   public static void applyDrawSpeed(LivingEntityUseItemEvent.Tick event) {

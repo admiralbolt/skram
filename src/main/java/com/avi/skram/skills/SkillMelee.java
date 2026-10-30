@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -74,7 +75,11 @@ public class SkillMelee extends Skill {
     if (melee.enabledAbilities[DAMAGE_BOOST_INDEX]) {
       event.setNewDamage(event.getOriginalDamage() * (float) (1 + melee.getDamageBoost()));
     }
-    melee.addXp(player, (int) (event.getNewDamage() * 5));
+
+    LivingEntity targetEntity = event.getEntity();
+    double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 5 : 1;
+
+    melee.addXp(player, (int) (event.getNewDamage() * xpMult));
   }
 
   @Override
