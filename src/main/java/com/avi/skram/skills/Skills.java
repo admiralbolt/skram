@@ -28,6 +28,7 @@ public class Skills {
   public static Supplier<AttachmentType<SkillFishing>> FISHING;
   public static Supplier<AttachmentType<SkillHealth>> HEALTH;
   public static Supplier<AttachmentType<SkillMelee>> MELEE;
+  public static Supplier<AttachmentType<SkillMercantile>> MERCANTILE;
   public static Supplier<AttachmentType<SkillMining>> MINING;
   public static Supplier<AttachmentType<SkillRanged>> RANGED;
   public static Supplier<AttachmentType<SkillSmithing>> SMITHING;
@@ -129,6 +130,14 @@ public class Skills {
     );
     SKILLS_BY_NAME.put(SkillMelee.NAME, MELEE);
 
+    MERCANTILE = Skram.ATTACHMENT_TYPES.register(
+      SkillMercantile.NAME, () -> AttachmentType.serializable(() -> new SkillMercantile())
+        .sync(new SkillSyncHandler<>(SkillMercantile.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillMercantile.NAME, MERCANTILE);
+
     MINING = Skram.ATTACHMENT_TYPES.register(
       SkillMining.NAME, () -> AttachmentType.serializable(() -> new SkillMining())
         .sync(new SkillSyncHandler<>(SkillMining.STREAM_CODEC))
@@ -179,12 +188,13 @@ public class Skills {
     SKILL_ICONS.put(SkillBotany.NAME, Identifier.withDefaultNamespace("textures/item/wildflowers.png"));
     SKILL_ICONS.put(SkillBrewing.NAME, Identifier.withDefaultNamespace("textures/item/brewing_stand.png"));
     SKILL_ICONS.put(SkillCooking.NAME, Identifier.withDefaultNamespace("textures/item/cooked_beef.png"));
-    SKILL_ICONS.put(SkillDemolition.NAME, Identifier.withDefaultNamespace("textures/item/tnt.png"));
+    SKILL_ICONS.put(SkillDemolition.NAME, Identifier.withDefaultNamespace("textures/block/tnt_side.png"));
     SKILL_ICONS.put(SkillDigging.NAME, Identifier.withDefaultNamespace("textures/item/stone_shovel.png"));
     SKILL_ICONS.put(SkillFarming.NAME, Identifier.withDefaultNamespace("textures/item/iron_hoe.png"));
     SKILL_ICONS.put(SkillFishing.NAME, Identifier.withDefaultNamespace("textures/item/fishing_rod.png"));
     SKILL_ICONS.put(SkillHealth.NAME, Identifier.withDefaultNamespace("textures/gui/sprites/hud/heart/full.png"));
     SKILL_ICONS.put(SkillMelee.NAME, Identifier.withDefaultNamespace("textures/item/iron_sword.png"));
+    SKILL_ICONS.put(SkillMercantile.NAME, Identifier.withDefaultNamespace("textures/item/emerald.png"));
     SKILL_ICONS.put(SkillMining.NAME, Identifier.withDefaultNamespace("textures/item/stone_pickaxe.png"));
     SKILL_ICONS.put(SkillRanged.NAME, Identifier.withDefaultNamespace("textures/item/bow.png"));
     SKILL_ICONS.put(SkillSmithing.NAME, Identifier.withDefaultNamespace("textures/item/campfire.png"));

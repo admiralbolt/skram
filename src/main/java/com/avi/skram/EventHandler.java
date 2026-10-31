@@ -31,6 +31,7 @@ import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.TradeWithVillagerEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
@@ -209,6 +210,11 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_SNEAKING(LivingEvent.LivingVisibilityEvent event) {
     SkillStealth.applyVisibility(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_VILLAGER_TRADE(TradeWithVillagerEvent event) {
+    SkillMercantile.handleTrade(event);
   }
 
   @SubscribeEvent

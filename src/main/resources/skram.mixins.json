@@ -10,7 +10,8 @@
     "FurnaceBlockEntityMixin",
     "InventoryMenuMixin",
     "PrimedTntMixin",
-    "TntBlockMixin"
+    "TntBlockMixin",
+    "VillagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
