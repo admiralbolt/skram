@@ -30,6 +30,7 @@ public class Skills {
   public static Supplier<AttachmentType<SkillMining>> MINING;
   public static Supplier<AttachmentType<SkillRanged>> RANGED;
   public static Supplier<AttachmentType<SkillSmithing>> SMITHING;
+  public static Supplier<AttachmentType<SkillStealth>> STEALTH;
   public static Supplier<AttachmentType<SkillWoodcutting>> WOODCUTTING;
 
   // Map skills to the item used for their icon.
@@ -143,6 +144,14 @@ public class Skills {
     );
     SKILLS_BY_NAME.put(SkillSmithing.NAME, SMITHING);
 
+    STEALTH = Skram.ATTACHMENT_TYPES.register(
+      SkillStealth.NAME, () -> AttachmentType.serializable(() -> new SkillStealth())
+        .sync(new SkillSyncHandler<>(SkillStealth.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillStealth.NAME, STEALTH);
+
     WOODCUTTING = Skram.ATTACHMENT_TYPES.register(
       SkillWoodcutting.NAME, () -> AttachmentType.serializable(() -> new SkillWoodcutting())
         .sync(new SkillSyncHandler<>(SkillWoodcutting.STREAM_CODEC))
@@ -169,6 +178,7 @@ public class Skills {
     SKILL_ICONS.put(SkillMining.NAME, Identifier.withDefaultNamespace("textures/item/stone_pickaxe.png"));
     SKILL_ICONS.put(SkillRanged.NAME, Identifier.withDefaultNamespace("textures/item/bow.png"));
     SKILL_ICONS.put(SkillSmithing.NAME, Identifier.withDefaultNamespace("textures/item/campfire.png"));
+    SKILL_ICONS.put(SkillStealth.NAME, Identifier.withDefaultNamespace("textures/environment/celestial/moon/waning_gibbous.png"));
     SKILL_ICONS.put(SkillWoodcutting.NAME, Identifier.withDefaultNamespace("textures/item/stone_axe.png"));
   }
 

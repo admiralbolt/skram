@@ -145,6 +145,8 @@ public class EventHandler {
     athletics.applyModifiers(event.getEntity());
     SkillHealth health = event.getEntity().getData(Skills.HEALTH);
     health.applyModifiers(event.getEntity());
+    SkillStealth stealth = event.getEntity().getData(Skills.STEALTH);
+    stealth.applyModifiers(event.getEntity());
   }
 
   @SubscribeEvent
@@ -155,6 +157,8 @@ public class EventHandler {
     athletics.applyModifiers(event.getEntity());
     SkillHealth health = event.getEntity().getData(Skills.HEALTH);
     health.applyModifiers(event.getEntity());
+    SkillStealth stealth = event.getEntity().getData(Skills.STEALTH);
+    stealth.applyModifiers(event.getEntity());
   }
 
   @SubscribeEvent
@@ -165,6 +169,8 @@ public class EventHandler {
     athletics.applyModifiers(event.getEntity());
     SkillHealth health = event.getEntity().getData(Skills.HEALTH);
     health.applyModifiers(event.getEntity());
+    SkillStealth stealth = event.getEntity().getData(Skills.STEALTH);
+    stealth.applyModifiers(event.getEntity());
   }
 
   @SubscribeEvent
@@ -188,9 +194,15 @@ public class EventHandler {
   }
 
   @SubscribeEvent
+  public static void ON_PLAYER_SNEAKING(LivingEvent.LivingVisibilityEvent event) {
+    SkillStealth.applyVisibility(event);
+  }
+
+  @SubscribeEvent
   public static void ON_ENTITY_HURT(LivingDamageEvent.Pre event) {
     SkillMelee.handleDamageEvent(event);
     SkillRanged.handleDamageEvent(event);
+    SkillStealth.handleDamageEvent(event);
 
     // Make sure that SkillHealth.handleDamageEvent() is called last, so that damage values get updated by skills.
     SkillHealth.handleDamageEvent(event);
