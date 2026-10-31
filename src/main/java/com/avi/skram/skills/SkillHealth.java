@@ -17,6 +17,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 
 public class SkillHealth extends Skill {
 
@@ -89,6 +90,15 @@ public class SkillHealth extends Skill {
     health.addXp(player, event.getNewDamage() * xpMult);
   }
 
+  public static void handleShieldBlockEvent(LivingShieldBlockEvent event) {
+    if (event.getEntity().level().isClientSide()) return;
+    if (!(event.getEntity() instanceof Player player)) return;
+    if (event.getBlockedDamage() <= 0) return;
+
+    SkillHealth health = player.getData(Skills.HEALTH);
+    health.addXp(player, event.getBlockedDamage() * 10);
+  }
+
   @Override
   public Layout renderSkillAbilities() {
     LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
@@ -96,7 +106,7 @@ public class SkillHealth extends Skill {
 
     vertical.addChild(
       Checkbox.builder(
-          Component.literal("Bonus Health: +" + this.getBonusHealth() + " health."),
+          Component.literal("Bonus Health: +" + this.getBonusHealth() + "."),
           Minecraft.getInstance().font
         )
         .selected(this.enabledAbilities[BONUS_HEALTH_INDEX])

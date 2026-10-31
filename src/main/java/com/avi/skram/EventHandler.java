@@ -28,6 +28,7 @@ import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -219,6 +220,11 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_SNEAKING(LivingEvent.LivingVisibilityEvent event) {
     SkillStealth.applyVisibility(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_PLAYER_SHIELD_BLOCK(LivingShieldBlockEvent event) {
+    SkillHealth.handleShieldBlockEvent(event);
   }
 
   @SubscribeEvent
