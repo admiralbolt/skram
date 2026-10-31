@@ -1,11 +1,8 @@
 package com.avi.skram.skills;
 
-import com.avi.skram.ui.GenericMessageToast;
-import com.avi.skram.ui.ToastUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.core.BlockPos;

@@ -9,7 +9,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
+import net.neoforged.neoforge.event.entity.player.AnvilCraftEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,10 +25,11 @@ public class SkillSmithing extends Skill {
 
   public static final int SMITHING_SPEED_INDEX = 0;
   public static final int DOUBLE_PRODUCTION_INDEX = 1;
+  public static final int ENHANCE_REPAIR_INDEX = 2;
 
   public SkillSmithing() {
     super(NAME, 1, 0);
-    this.enabledAbilities = new boolean[]{true, true};
+    this.enabledAbilities = new boolean[]{true, true, true};
   }
 
   public SkillSmithing(ByteBuf buffer) {
@@ -86,6 +90,40 @@ public class SkillSmithing extends Skill {
     return 0.01 * this.level;
   }
 
+  public double getRepairBonus() {
+    return 0.02 * this.level;
+  }
+
+  public static void handleAnvilUpdate(AnvilUpdateEvent event) {
+    // Check to see if it's a repair event.
+    ItemStack left = event.getLeft();
+    ItemStack right = event.getRight();
+    if (!left.isValidRepairItem(right)) return;
+
+    Player player = event.getPlayer();
+    SkillSmithing smithing = player.getData(Skills.SMITHING);
+    ItemStack output = event.getOutput();
+    if (smithing.enabledAbilities[ENHANCE_REPAIR_INDEX]) {
+      int additionalRepair = (int) ((left.getDamageValue() - output.getDamageValue()) * smithing.getRepairBonus());
+      output.setDamageValue(output.getDamageValue() - additionalRepair);
+    }
+  }
+
+  public static void handleAnvilCraft(AnvilCraftEvent.Pre event) {
+    // Make sure it's a repair event!
+    ItemStack left = event.getLeft();
+    ItemStack right = event.getRight();
+    if (!left.isValidRepairItem(right)) return;
+
+    Player player = event.getEntity();
+    SkillSmithing smithing = player.getData(Skills.SMITHING);
+    ItemStack output = event.getOutput();
+
+    if (player.level().isClientSide()) return;
+
+    smithing.addXp(player, left.getDamageValue() - output.getDamageValue());
+  }
+
   @Override
   public Layout renderSkillAbilities() {
     LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
@@ -108,6 +146,16 @@ public class SkillSmithing extends Skill {
         )
         .selected(this.enabledAbilities[DOUBLE_PRODUCTION_INDEX])
         .onValueChange((checkbox, value) -> this.toggleEnabled(DOUBLE_PRODUCTION_INDEX))
+        .build()
+    );
+
+    vertical.addChild(
+      Checkbox.builder(
+          Component.literal("Enhance Repairs: +" + (int) (100 * this.getRepairBonus()) + "%."),
+          Minecraft.getInstance().font
+        )
+        .selected(this.enabledAbilities[ENHANCE_REPAIR_INDEX])
+        .onValueChange((checkbox, value) -> this.toggleEnabled(ENHANCE_REPAIR_INDEX))
         .build()
     );
 

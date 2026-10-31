@@ -25,6 +25,7 @@ import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
@@ -194,6 +195,7 @@ public class EventHandler {
   public static void ON_PLAYER_ATTACK_ENTITY(AttackEntityEvent event) {
     SkillMelee.handleAttackEvent(event);
   }
+
   @SubscribeEvent
   public static void ON_PLAYER_LEFT_CLICK_BLOCK(PlayerInteractEvent.LeftClickBlock event) {
     SkillDigging.handleLeftClick(event);
@@ -226,6 +228,16 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_SHIELD_BLOCK(LivingShieldBlockEvent event) {
     SkillHealth.handleShieldBlockEvent(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_ANVIL_UPDATE(AnvilUpdateEvent event) {
+    SkillSmithing.handleAnvilUpdate(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_ANVIL_CRAFT(AnvilCraftEvent.Pre event) {
+    SkillSmithing.handleAnvilCraft(event);
   }
 
   @SubscribeEvent

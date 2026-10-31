@@ -227,6 +227,7 @@ public class Skills {
     if (itemID.contains("diamond")) return 20;
     if (itemID.contains("gold")) return 15;
     if (itemID.contains("iron")) return 15;
+    if (itemID.contains("chainmail")) return 13;
     if (itemID.contains("copper")) return 10;
     if (itemID.contains("stone")) return 5;
 
