@@ -38,15 +38,12 @@ public class BrewingStandBlockEntityMixin {
     if (playerData == null) return;
 
     Player owner = playerData.getOwner(level);
-    float brewingSpeed = 0;
+    float brewingSpeed = playerData.brewingSpeed;
     if (owner != null) {
       SkillBrewing brewing = owner.getData(Skills.BREWING);
       if (brewing.enabledAbilities[SkillBrewing.BREWING_SPEED_INDEX]) {
         brewingSpeed = brewing.getBrewingSpeed();
       }
-    } else {
-      // If the owner is offline, used the saved value of brewing speed.
-      brewingSpeed = 0.1f;
     }
 
     // I think there's a more "proper" way of accessing private field vars, but we just use reflection.

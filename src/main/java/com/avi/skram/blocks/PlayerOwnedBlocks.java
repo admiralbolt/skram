@@ -17,6 +17,8 @@ import java.util.UUID;
 // The data itself is primarily the UUID of the player, but will also include some extra bits of info we want to store.
 // This *might* end up being very memory expensive. If it ends up being a bottleneck, this can be reworked into two
 // separate classes, one for PlayerPlacedBlocks (simply storing (x, y, z) -> bool), and one for richer data if needed.
+//
+// When updating, don't forget to also update the EventHandler.ON_PLAYER_PLACED_BLOCK() method.
 public class PlayerOwnedBlocks implements ValueIOSerializable {
 
   public static StreamCodec<ByteBuf, PlayerOwnedBlocks> STREAM_CODEC = StreamCodec.ofMember(PlayerOwnedBlocks::encode, PlayerOwnedBlocks::new);
@@ -72,6 +74,7 @@ public class PlayerOwnedBlocks implements ValueIOSerializable {
       output.putFloat(String.format("growthChance_%d", i), data.growthChance);
       output.putFloat(String.format("smithingSpeed_%d", i), data.smithingSpeed);
       output.putFloat(String.format("brewingSpeed_%d", i), data.brewingSpeed);
+      output.putFloat(String.format("explosionPower_%d", i), data.explosionPower);
       i++;
     }
   }
@@ -93,6 +96,7 @@ public class PlayerOwnedBlocks implements ValueIOSerializable {
       data.growthChance = input.getFloatOr(String.format("growthChance_%d", i), 0);
       data.smithingSpeed = input.getFloatOr(String.format("smithingSpeed_%d", i), 0);
       data.brewingSpeed = input.getFloatOr(String.format("brewingSpeed_%d", i), 0);
+      data.explosionPower = input.getFloatOr(String.format("explosionPower_%d", i), 0);
       this.playerOwnedBlocks.put(pos, data);
     }
   }

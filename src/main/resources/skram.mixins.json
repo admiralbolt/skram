@@ -8,7 +8,9 @@
     "CraftingMenuMixin",
     "FishingHookMixin",
     "FurnaceBlockEntityMixin",
-    "InventoryMenuMixin"
+    "InventoryMenuMixin",
+    "PrimedTntMixin",
+    "TntBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

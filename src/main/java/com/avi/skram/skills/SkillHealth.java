@@ -9,13 +9,13 @@ import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 public class SkillHealth extends Skill {
@@ -82,6 +82,9 @@ public class SkillHealth extends Skill {
 
     LivingEntity targetEntity = event.getEntity();
     double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 2 : 0.4;
+    if (event.getSource().is(DamageTypes.PLAYER_EXPLOSION)) {
+      xpMult *= SkillDemolition.EXPLOSION_DAMAGE_XP_MODIFIER;
+    }
 
     health.addXp(player, event.getNewDamage() * xpMult);
   }

@@ -22,6 +22,7 @@ public class Skills {
   public static Supplier<AttachmentType<SkillBotany>> BOTANY;
   public static Supplier<AttachmentType<SkillBrewing>> BREWING;
   public static Supplier<AttachmentType<SkillCooking>> COOKING;
+  public static Supplier<AttachmentType<SkillDemolition>> DEMOLITION;
   public static Supplier<AttachmentType<SkillDigging>> DIGGING;
   public static Supplier<AttachmentType<SkillFarming>> FARMING;
   public static Supplier<AttachmentType<SkillFishing>> FISHING;
@@ -79,6 +80,14 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillCooking.NAME, COOKING);
+
+    DEMOLITION = Skram.ATTACHMENT_TYPES.register(
+      SkillDemolition.NAME, () -> AttachmentType.serializable(() -> new SkillDemolition())
+        .sync(new SkillSyncHandler<>(SkillDemolition.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillDemolition.NAME, DEMOLITION);
 
     DIGGING = Skram.ATTACHMENT_TYPES.register(
       SkillDigging.NAME, () -> AttachmentType.serializable(() -> new SkillDigging())
@@ -170,6 +179,7 @@ public class Skills {
     SKILL_ICONS.put(SkillBotany.NAME, Identifier.withDefaultNamespace("textures/item/wildflowers.png"));
     SKILL_ICONS.put(SkillBrewing.NAME, Identifier.withDefaultNamespace("textures/item/brewing_stand.png"));
     SKILL_ICONS.put(SkillCooking.NAME, Identifier.withDefaultNamespace("textures/item/cooked_beef.png"));
+    SKILL_ICONS.put(SkillDemolition.NAME, Identifier.withDefaultNamespace("textures/item/tnt.png"));
     SKILL_ICONS.put(SkillDigging.NAME, Identifier.withDefaultNamespace("textures/item/stone_shovel.png"));
     SKILL_ICONS.put(SkillFarming.NAME, Identifier.withDefaultNamespace("textures/item/iron_hoe.png"));
     SKILL_ICONS.put(SkillFishing.NAME, Identifier.withDefaultNamespace("textures/item/fishing_rod.png"));

@@ -11,14 +11,13 @@ import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 
@@ -102,7 +101,13 @@ public class SkillStealth extends Skill {
     // Modify the XP gained based on the distance between the player and the mob they hit.
     // Nerfing stealth archer even in pre-release.
     float distanceBetween = mob.distanceTo(player);
-    stealth.addXp(player, event.getNewDamage() * 12 / Math.max(1, distanceBetween));
+    double xpMult = 12 / Math.max(1, distanceBetween);
+
+    if (event.getSource().is(DamageTypes.PLAYER_EXPLOSION)) {
+      xpMult *= SkillDemolition.EXPLOSION_DAMAGE_XP_MODIFIER;
+    }
+
+    stealth.addXp(player, event.getNewDamage() * xpMult);
   }
 
   public static void applyVisibility(LivingEvent.LivingVisibilityEvent event) {

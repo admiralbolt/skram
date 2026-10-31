@@ -10,17 +10,13 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SkillBotany extends Skill {
 

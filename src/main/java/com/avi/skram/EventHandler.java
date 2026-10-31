@@ -53,11 +53,18 @@ public class EventHandler {
     ChunkAccess chunk = event.getLevel().getChunk(event.getPos());
     PlayerOwnedBlocks pob = chunk.getData(BlockData.PLAYER_OWNED);
 
+    SkillBrewing brewing = player.getData(Skills.BREWING);
+    SkillDemolition demolition = player.getData(Skills.DEMOLITION);
     SkillFarming farming = player.getData(Skills.FARMING);
+    SkillSmithing smithing = player.getData(Skills.SMITHING);
+
     PlayerOwnedData data = new PlayerOwnedData();
     data.uuid = player.getUUID();
     data.displayName = player.getDisplayName().getString();
     data.growthChance = farming.getCropGrowthChance();
+    data.smithingSpeed = smithing.getSmithingSpeed();
+    data.brewingSpeed = brewing.getBrewingSpeed();
+    data.explosionPower = demolition.getBlastPower();
 
     pob.playerOwnedBlocks.put(event.getPos(), data);
     // Need to manually mark it unsaved so the data gets saved.
@@ -143,6 +150,8 @@ public class EventHandler {
     acrobatics.applyModifiers(event.getEntity());
     SkillAthletics athletics = event.getEntity().getData(Skills.ATHLETICS);
     athletics.applyModifiers(event.getEntity());
+    SkillDemolition demolition = event.getEntity().getData(Skills.DEMOLITION);
+    demolition.applyModifiers(event.getEntity());
     SkillHealth health = event.getEntity().getData(Skills.HEALTH);
     health.applyModifiers(event.getEntity());
     SkillStealth stealth = event.getEntity().getData(Skills.STEALTH);
@@ -155,6 +164,8 @@ public class EventHandler {
     acrobatics.applyModifiers(event.getEntity());
     SkillAthletics athletics = event.getEntity().getData(Skills.ATHLETICS);
     athletics.applyModifiers(event.getEntity());
+    SkillDemolition demolition = event.getEntity().getData(Skills.DEMOLITION);
+    demolition.applyModifiers(event.getEntity());
     SkillHealth health = event.getEntity().getData(Skills.HEALTH);
     health.applyModifiers(event.getEntity());
     SkillStealth stealth = event.getEntity().getData(Skills.STEALTH);
@@ -167,6 +178,8 @@ public class EventHandler {
     acrobatics.applyModifiers(event.getEntity());
     SkillAthletics athletics = event.getEntity().getData(Skills.ATHLETICS);
     athletics.applyModifiers(event.getEntity());
+    SkillDemolition demolition = event.getEntity().getData(Skills.DEMOLITION);
+    demolition.applyModifiers(event.getEntity());
     SkillHealth health = event.getEntity().getData(Skills.HEALTH);
     health.applyModifiers(event.getEntity());
     SkillStealth stealth = event.getEntity().getData(Skills.STEALTH);
@@ -200,6 +213,8 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_ENTITY_HURT(LivingDamageEvent.Pre event) {
+    SkillDemolition.applyBlastResistance(event);
+    SkillDemolition.handleDamageEvent(event);
     SkillMelee.handleDamageEvent(event);
     SkillRanged.handleDamageEvent(event);
     SkillStealth.handleDamageEvent(event);
