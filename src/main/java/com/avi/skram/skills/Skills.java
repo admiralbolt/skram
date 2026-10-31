@@ -219,6 +219,10 @@ public class Skills {
     // We instead check the names for the appropriate material.
     String itemID = stack.getItem().toString();
 
+    // A funny-ish hack for melee weapons, but this should work fine.
+    if (itemID.contains("mace")) return 30;
+    if (itemID.contains("trident")) return 20;
+
     if (itemID.contains("netherite")) return 25;
     if (itemID.contains("diamond")) return 20;
     if (itemID.contains("gold")) return 15;
