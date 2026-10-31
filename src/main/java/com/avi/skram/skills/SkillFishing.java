@@ -79,7 +79,7 @@ public class SkillFishing extends Skill {
       player.level().addFreshEntity(entity);
     }
 
-    fishing.addXp(player, 100);
+    fishing.addXp(player, 200);
   }
 
   @Override

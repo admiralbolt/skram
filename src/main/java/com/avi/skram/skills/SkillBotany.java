@@ -52,12 +52,12 @@ public class SkillBotany extends Skill {
     BlockState state = event.getState();
     if (!state.is(BlockTags.FLOWERS)) return;
 
-    int xp = 10;
+    int xp = 20;
     // We want to give more XP for tall flowers and small flowers.
     if (state.is(Tags.BlockItems.FLOWERS_TALL.block())) {
-      xp = 100;
+      xp = 180;
     } else if (state.is(Tags.BlockItems.FLOWERS_SMALL.block())) {
-      xp = 40;
+      xp = 80;
     }
 
     SkillBotany botany = event.getPlayer().getData(Skills.BOTANY);

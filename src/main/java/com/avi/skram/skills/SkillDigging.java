@@ -45,18 +45,18 @@ public class SkillDigging extends Skill {
   public static void setupXPMap() {
     XP_MAP = new HashMap<>();
 
-    XP_MAP.put(Blocks.DIRT, 30);
-    XP_MAP.put(Blocks.GRASS_BLOCK, 40);
-    XP_MAP.put(Blocks.COARSE_DIRT, 40);
-    XP_MAP.put(Blocks.FARMLAND, 40);
-    XP_MAP.put(Blocks.SAND, 35);
-    XP_MAP.put(Blocks.GRAVEL, 50);
-    XP_MAP.put(Blocks.RED_SAND, 45);
-    XP_MAP.put(Blocks.ROOTED_DIRT, 85);
-    XP_MAP.put(Blocks.MUD, 50);
-    XP_MAP.put(Blocks.CLAY, 60);
-    XP_MAP.put(Blocks.PODZOL, 70);
-    XP_MAP.put(Blocks.MYCELIUM, 120);
+    XP_MAP.put(Blocks.DIRT, 60);
+    XP_MAP.put(Blocks.GRASS_BLOCK, 80);
+    XP_MAP.put(Blocks.COARSE_DIRT, 80);
+    XP_MAP.put(Blocks.FARMLAND, 80);
+    XP_MAP.put(Blocks.SAND, 70);
+    XP_MAP.put(Blocks.GRAVEL, 100);
+    XP_MAP.put(Blocks.RED_SAND, 90);
+    XP_MAP.put(Blocks.ROOTED_DIRT, 170);
+    XP_MAP.put(Blocks.MUD, 100);
+    XP_MAP.put(Blocks.CLAY, 120);
+    XP_MAP.put(Blocks.PODZOL, 140);
+    XP_MAP.put(Blocks.MYCELIUM, 200);
   }
 
   @Override
@@ -82,7 +82,7 @@ public class SkillDigging extends Skill {
     if (!event.getState().is(BlockTags.MINEABLE_WITH_SHOVEL)) return;
 
     SkillDigging digging = event.getPlayer().getData(Skills.DIGGING);
-    digging.addXp(event.getPlayer(), XP_MAP.getOrDefault(event.getState().getBlock(), 5));
+    digging.addXp(event.getPlayer(), XP_MAP.getOrDefault(event.getState().getBlock(), 10));
   }
 
   public static void handleLeftClick(PlayerInteractEvent.LeftClickBlock event) {
@@ -107,7 +107,7 @@ public class SkillDigging extends Skill {
     BlockState state = event.getLevel().getBlockState(pos);
     if (!state.is(BlockTags.TURNS_INTO_DIRT_PATH)) return;
 
-    digging.addXp(event.getEntity(), 5);
+    digging.addXp(event.getEntity(), 10);
   }
 
   @Override

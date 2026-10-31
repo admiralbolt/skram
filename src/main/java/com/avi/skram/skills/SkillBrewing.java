@@ -37,32 +37,32 @@ public class SkillBrewing extends Skill {
 
   public static void registerXPMap() {
     XP_MAP = new HashMap<>();
-    XP_MAP.put("item.minecraft.potion.effect.awkward", 50);
-    XP_MAP.put("item.minecraft.potion.effect.empty", 50);
-    XP_MAP.put("item.minecraft.potion.effect.fire_resistance", 50);
-    XP_MAP.put("item.minecraft.potion.effect.harming", 50);
-    XP_MAP.put("item.minecraft.potion.effect.healing", 50);
-    XP_MAP.put("item.minecraft.potion.effect.infested", 50);
-    XP_MAP.put("item.minecraft.potion.effect.invisibility", 50);
-    XP_MAP.put("item.minecraft.potion.effect.leaping", 50);
-    XP_MAP.put("item.minecraft.potion.effect.levitation", 50);
-    XP_MAP.put("item.minecraft.potion.effect.luck", 50);
-    XP_MAP.put("item.minecraft.potion.effect.mundane", 50);
-    XP_MAP.put("item.minecraft.potion.effect.night_vision", 50);
-    XP_MAP.put("item.minecraft.potion.effect.oozing", 50);
-    XP_MAP.put("item.minecraft.potion.effect.poison", 50);
-    XP_MAP.put("item.minecraft.potion.effect.regeneration", 50);
-    XP_MAP.put("item.minecraft.potion.effect.slow_falling", 50);
-    XP_MAP.put("item.minecraft.potion.effect.slowness", 50);
-    XP_MAP.put("item.minecraft.potion.effect.strength", 50);
-    XP_MAP.put("item.minecraft.potion.effect.swiftness", 50);
-    XP_MAP.put("item.minecraft.potion.effect.thick", 50);
-    XP_MAP.put("item.minecraft.potion.effect.turtle_master", 50);
-    XP_MAP.put("item.minecraft.potion.effect.water", 50);
-    XP_MAP.put("item.minecraft.potion.effect.water_breathing", 50);
-    XP_MAP.put("item.minecraft.potion.effect.weakness", 50);
-    XP_MAP.put("item.minecraft.potion.effect.weaving", 50);
-    XP_MAP.put("item.minecraft.potion.effect.wind_charged", 50);
+    XP_MAP.put("item.minecraft.potion.effect.awkward", 100);
+    XP_MAP.put("item.minecraft.potion.effect.empty", 100);
+    XP_MAP.put("item.minecraft.potion.effect.fire_resistance", 100);
+    XP_MAP.put("item.minecraft.potion.effect.harming", 100);
+    XP_MAP.put("item.minecraft.potion.effect.healing", 100);
+    XP_MAP.put("item.minecraft.potion.effect.infested", 100);
+    XP_MAP.put("item.minecraft.potion.effect.invisibility", 100);
+    XP_MAP.put("item.minecraft.potion.effect.leaping", 100);
+    XP_MAP.put("item.minecraft.potion.effect.levitation", 100);
+    XP_MAP.put("item.minecraft.potion.effect.luck", 100);
+    XP_MAP.put("item.minecraft.potion.effect.mundane", 100);
+    XP_MAP.put("item.minecraft.potion.effect.night_vision", 100);
+    XP_MAP.put("item.minecraft.potion.effect.oozing", 100);
+    XP_MAP.put("item.minecraft.potion.effect.poison", 100);
+    XP_MAP.put("item.minecraft.potion.effect.regeneration", 100);
+    XP_MAP.put("item.minecraft.potion.effect.slow_falling", 100);
+    XP_MAP.put("item.minecraft.potion.effect.slowness", 100);
+    XP_MAP.put("item.minecraft.potion.effect.strength", 100);
+    XP_MAP.put("item.minecraft.potion.effect.swiftness", 100);
+    XP_MAP.put("item.minecraft.potion.effect.thick", 100);
+    XP_MAP.put("item.minecraft.potion.effect.turtle_master", 100);
+    XP_MAP.put("item.minecraft.potion.effect.water", 100);
+    XP_MAP.put("item.minecraft.potion.effect.water_breathing", 100);
+    XP_MAP.put("item.minecraft.potion.effect.weakness", 100);
+    XP_MAP.put("item.minecraft.potion.effect.weaving", 100);
+    XP_MAP.put("item.minecraft.potion.effect.wind_charged", 100);
   }
 
   @Override

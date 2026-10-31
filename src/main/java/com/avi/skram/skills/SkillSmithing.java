@@ -36,40 +36,40 @@ public class SkillSmithing extends Skill {
     XP_MAP = new HashMap<>();
 
     // Ingots.
-    XP_MAP.put(Items.COPPER_INGOT, 50);
-    XP_MAP.put(Items.IRON_INGOT, 60);
-    XP_MAP.put(Items.GOLD_INGOT, 85);
-    XP_MAP.put(Items.NETHERITE_SCRAP, 120);
+    XP_MAP.put(Items.COPPER_INGOT, 100);
+    XP_MAP.put(Items.IRON_INGOT, 120);
+    XP_MAP.put(Items.GOLD_INGOT, 170);
+    XP_MAP.put(Items.NETHERITE_SCRAP, 240);
 
     // Nuggets, from smelting things down.
-    XP_MAP.put(Items.COPPER_NUGGET, 10);
-    XP_MAP.put(Items.IRON_NUGGET, 15);
-    XP_MAP.put(Items.GOLD_NUGGET, 20);
+    XP_MAP.put(Items.COPPER_NUGGET, 20);
+    XP_MAP.put(Items.IRON_NUGGET, 30);
+    XP_MAP.put(Items.GOLD_NUGGET, 40);
 
     // Stone.
-    XP_MAP.put(Items.STONE, 10);
-    XP_MAP.put(Items.SMOOTH_STONE, 10);
-    XP_MAP.put(Items.CRACKED_STONE_BRICKS, 10);
-    XP_MAP.put(Items.DEEPSLATE, 10);
-    XP_MAP.put(Items.CRACKED_DEEPSLATE_BRICKS, 10);
-    XP_MAP.put(Items.CRACKED_DEEPSLATE_TILES, 10);
-    XP_MAP.put(Items.SMOOTH_SANDSTONE, 20);
-    XP_MAP.put(Items.SMOOTH_RED_SANDSTONE, 30);
-    XP_MAP.put(Items.CRACKED_NETHER_BRICKS, 20);
-    XP_MAP.put(Items.SMOOTH_BASALT, 10);
-    XP_MAP.put(Items.CRACKED_POLISHED_BLACKSTONE_BRICKS, 10);
-    XP_MAP.put(Items.SMOOTH_QUARTZ, 10);
-    XP_MAP.put(Items.TERRACOTTA, 20);
+    XP_MAP.put(Items.STONE, 20);
+    XP_MAP.put(Items.SMOOTH_STONE, 20);
+    XP_MAP.put(Items.CRACKED_STONE_BRICKS, 20);
+    XP_MAP.put(Items.DEEPSLATE, 20);
+    XP_MAP.put(Items.CRACKED_DEEPSLATE_BRICKS, 20);
+    XP_MAP.put(Items.CRACKED_DEEPSLATE_TILES, 20);
+    XP_MAP.put(Items.SMOOTH_SANDSTONE, 40);
+    XP_MAP.put(Items.SMOOTH_RED_SANDSTONE, 60);
+    XP_MAP.put(Items.CRACKED_NETHER_BRICKS, 40);
+    XP_MAP.put(Items.SMOOTH_BASALT, 20);
+    XP_MAP.put(Items.CRACKED_POLISHED_BLACKSTONE_BRICKS, 20);
+    XP_MAP.put(Items.SMOOTH_QUARTZ, 20);
+    XP_MAP.put(Items.TERRACOTTA, 40);
 
     for (Item item : Items.GLAZED_TERRACOTTA.asList()) {
-      XP_MAP.put(item, 30);
+      XP_MAP.put(item, 60);
     }
 
     // Misc.
-    XP_MAP.put(Items.GLASS, 15);
-    XP_MAP.put(Items.BRICK, 20);
-    XP_MAP.put(Items.NETHER_BRICK, 25);
-    XP_MAP.put(Items.RESIN_BRICK, 30);
+    XP_MAP.put(Items.GLASS, 30);
+    XP_MAP.put(Items.BRICK, 40);
+    XP_MAP.put(Items.NETHER_BRICK, 50);
+    XP_MAP.put(Items.RESIN_BRICK, 60);
   }
 
   @Override

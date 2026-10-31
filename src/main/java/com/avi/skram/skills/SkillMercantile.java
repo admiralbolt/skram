@@ -41,7 +41,7 @@ public class SkillMercantile extends Skill {
     Player player = event.getEntity();
 
     SkillMercantile mercantile = player.getData(Skills.MERCANTILE);
-    double baseXp = 200;
+    double baseXp = 400;
 
     // Modify XP based on uses and demand, to mildly encourage not spamming the same trade.
     MerchantOffer offer = event.getMerchantOffer();

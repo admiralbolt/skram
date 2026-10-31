@@ -87,7 +87,7 @@ public class SkillAcrobatics extends Skill {
     if (player.level().isClientSide()) return;
 
     SkillAcrobatics acrobatics = player.getData(Skills.ACROBATICS);
-    acrobatics.addXp(player, 50);
+    acrobatics.addXp(player, 100);
   }
 
   @Override

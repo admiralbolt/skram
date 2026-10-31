@@ -35,6 +35,6 @@ public class PrimedTntMixin {
     if (!(entity instanceof Player player)) return;
 
     SkillDemolition demolition = player.getData(Skills.DEMOLITION);
-    demolition.addXp(player, 40 * this.explosionPower);
+    demolition.addXp(player, 80 * this.explosionPower);
   }
 }

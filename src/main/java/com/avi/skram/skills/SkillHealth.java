@@ -81,7 +81,7 @@ public class SkillHealth extends Skill {
     SkillHealth health = player.getData(Skills.HEALTH);
 
     LivingEntity targetEntity = event.getEntity();
-    double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 2 : 0.4;
+    double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 4 : 0.8;
     if (event.getSource().is(DamageTypes.PLAYER_EXPLOSION)) {
       xpMult *= SkillDemolition.EXPLOSION_DAMAGE_XP_MODIFIER;
     }

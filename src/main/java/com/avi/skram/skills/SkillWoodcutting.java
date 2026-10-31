@@ -48,15 +48,15 @@ public class SkillWoodcutting extends Skill {
   public static void setupXPMap() {
     XP_MAP = new HashMap<>();
 
-    XP_MAP.put(Blocks.OAK_LOG, 60);
+    XP_MAP.put(Blocks.OAK_LOG, 100);
 
-    XP_MAP.put(Blocks.ACACIA_LOG, 75);
-    XP_MAP.put(Blocks.BIRCH_LOG, 75);
-    XP_MAP.put(Blocks.CHERRY_LOG, 80);
-    XP_MAP.put(Blocks.DARK_OAK_LOG, 75);
-    XP_MAP.put(Blocks.JUNGLE_LOG, 75);
-    XP_MAP.put(Blocks.MANGROVE_LOG, 75);
-    XP_MAP.put(Blocks.SPRUCE_LOG, 75);
+    XP_MAP.put(Blocks.ACACIA_LOG, 150);
+    XP_MAP.put(Blocks.BIRCH_LOG, 150);
+    XP_MAP.put(Blocks.CHERRY_LOG, 160);
+    XP_MAP.put(Blocks.DARK_OAK_LOG, 150);
+    XP_MAP.put(Blocks.JUNGLE_LOG, 150);
+    XP_MAP.put(Blocks.MANGROVE_LOG, 150);
+    XP_MAP.put(Blocks.SPRUCE_LOG, 150);
   }
 
   @Override
@@ -82,7 +82,7 @@ public class SkillWoodcutting extends Skill {
     if (!event.getState().is(BlockTags.MINEABLE_WITH_AXE) && !event.getState().is(BlockTags.LEAVES)) return;
 
     SkillWoodcutting woodcutting = event.getPlayer().getData(Skills.WOODCUTTING);
-    woodcutting.addXp(event.getPlayer(), XP_MAP.getOrDefault(event.getState().getBlock(), 5));
+    woodcutting.addXp(event.getPlayer(), XP_MAP.getOrDefault(event.getState().getBlock(), 10));
   }
 
   public static void handleLeftClick(PlayerInteractEvent.LeftClickBlock event) {
@@ -123,20 +123,20 @@ public class SkillWoodcutting extends Skill {
     if (state.getBlock() instanceof WeatheringCopper weatheringCopper) {
       WeatheringCopper.WeatherState weatherState = weatheringCopper.getAge();
       if (weatherState != WeatheringCopper.WeatherState.UNAFFECTED) {
-        woodcutting.addXp(event.getEntity(), 5);
+        woodcutting.addXp(event.getEntity(), 10);
         return;
       }
     }
 
     // Stripped some logs...
     if (state.is(BlockTags.LOGS)) {
-      woodcutting.addXp(event.getEntity(), 5);
+      woodcutting.addXp(event.getEntity(), 10);
       return;
     }
 
     // Wax OFF.
     if (state.getBlock().getName().toString().contains("waxed")) {
-      woodcutting.addXp(event.getEntity(), 5);
+      woodcutting.addXp(event.getEntity(), 10);
       return;
     }
   }

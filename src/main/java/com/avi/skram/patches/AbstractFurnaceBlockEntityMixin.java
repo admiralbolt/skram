@@ -101,7 +101,7 @@ public class AbstractFurnaceBlockEntityMixin {
       double bonusXP = 0;
       if (smithing.enabledAbilities[SkillSmithing.DOUBLE_PRODUCTION_INDEX] && Math.random() < smithing.getDoubleProductionChance()) {
         burnResult.setCount(burnResult.count() + 1);
-        bonusXP += 5;
+        bonusXP += 10;
       }
 
       smithing.addXp(owner, SkillSmithing.XP_MAP.get(burnResult.getItem()) + bonusXP);

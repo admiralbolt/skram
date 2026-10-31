@@ -54,35 +54,35 @@ public class SkillFarming extends Skill {
     XP_MAP = new HashMap<>();
 
     // "Regular" crops.
-    XP_MAP.put(Blocks.WHEAT, 40);
-    XP_MAP.put(Blocks.CARROTS, 50);
-    XP_MAP.put(Blocks.POTATOES, 50);
-    XP_MAP.put(Blocks.BEETROOTS, 60);
-    XP_MAP.put(Blocks.PUMPKIN, 75);
-    XP_MAP.put(Blocks.MELON, 85);
+    XP_MAP.put(Blocks.WHEAT, 60);
+    XP_MAP.put(Blocks.CARROTS, 80);
+    XP_MAP.put(Blocks.POTATOES, 80);
+    XP_MAP.put(Blocks.BEETROOTS, 90);
+    XP_MAP.put(Blocks.PUMPKIN, 110);
+    XP_MAP.put(Blocks.MELON, 120);
 
     // Mushrooms.
-    XP_MAP.put(Blocks.BROWN_MUSHROOM, 55);
-    XP_MAP.put(Blocks.RED_MUSHROOM, 55);
+    XP_MAP.put(Blocks.BROWN_MUSHROOM, 100);
+    XP_MAP.put(Blocks.RED_MUSHROOM, 100);
 
     // Both a flower and a crop!
-    XP_MAP.put(Blocks.PITCHER_CROP, 30);
-    XP_MAP.put(Blocks.TORCHFLOWER_CROP, 30);
+    XP_MAP.put(Blocks.PITCHER_CROP, 50);
+    XP_MAP.put(Blocks.TORCHFLOWER_CROP, 50);
 
     // ???
-    XP_MAP.put(Blocks.SWEET_BERRY_BUSH, 40);
-    XP_MAP.put(Blocks.CAVE_VINES_PLANT, 40);
-    XP_MAP.put(Blocks.CHORUS_FLOWER, 40);
-    XP_MAP.put(Blocks.COCOA, 30);
+    XP_MAP.put(Blocks.SWEET_BERRY_BUSH, 60);
+    XP_MAP.put(Blocks.CAVE_VINES_PLANT, 60);
+    XP_MAP.put(Blocks.CHORUS_FLOWER, 60);
+    XP_MAP.put(Blocks.COCOA, 40);
 
     // Nether!
-    XP_MAP.put(Blocks.NETHER_WART, 60);
-    XP_MAP.put(Blocks.CRIMSON_FUNGUS, 40);
-    XP_MAP.put(Blocks.WARPED_FUNGUS, 50);
+    XP_MAP.put(Blocks.NETHER_WART, 90);
+    XP_MAP.put(Blocks.CRIMSON_FUNGUS, 60);
+    XP_MAP.put(Blocks.WARPED_FUNGUS, 80);
 
     // Tall.
-    XP_MAP.put(Blocks.BAMBOO, 10);
-    XP_MAP.put(Blocks.SUGAR_CANE, 10);
+    XP_MAP.put(Blocks.BAMBOO, 15);
+    XP_MAP.put(Blocks.SUGAR_CANE, 15);
   }
 
   @Override
@@ -206,7 +206,7 @@ public class SkillFarming extends Skill {
     BlockState state = event.getLevel().getBlockState(pos);
     if (!state.is(BlockTags.TURNS_INTO_FARMLAND)) return;
 
-    farming.addXp(event.getEntity(), 5);
+    farming.addXp(event.getEntity(), 10);
   }
 
   @Override
