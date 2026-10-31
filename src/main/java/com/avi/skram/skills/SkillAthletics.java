@@ -109,7 +109,7 @@ public class SkillAthletics extends Skill {
 
     // Sprinting is worth the most.
     if (player.isSprinting()) {
-      athletics.addXp(player, 40000, true);
+      athletics.addXp(player, 4, true);
       return;
     }
 
