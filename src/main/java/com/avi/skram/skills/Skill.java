@@ -32,6 +32,9 @@ public abstract class Skill implements ValueIOSerializable {
 
   public static Map<Integer, Integer> XP_FOR_LEVEL = new HashMap<>();
 
+  // Probably unnecessary optimization, but cache this value so we don't concat this string all the time.
+  public String requiredLevelToastName = "";
+
   public static int getTotalXpForLevel(int level) {
     if (level <= 1) return 0;
 
@@ -109,6 +112,13 @@ public abstract class Skill implements ValueIOSerializable {
     }
 
     this.enabledAbilities = boolArray;
+  }
+
+  public String getRequiredLevelToastName() {
+    if (this.requiredLevelToastName.isEmpty()) {
+      this.requiredLevelToastName = this.name + ":required_level";
+    }
+    return this.requiredLevelToastName;
   }
 
   // Overload that assumes server side processing. If you want to do client side processing, make sure that you specify

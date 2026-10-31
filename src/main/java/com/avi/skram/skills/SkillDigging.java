@@ -1,17 +1,23 @@
 package com.avi.skram.skills;
 
+import com.avi.skram.ui.GenericMessageToast;
+import com.avi.skram.ui.ToastUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Checkbox;
+import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 
 import java.util.HashMap;
@@ -75,6 +81,27 @@ public class SkillDigging extends Skill {
 
     SkillDigging digging = event.getPlayer().getData(Skills.DIGGING);
     digging.addXp(event.getPlayer(), XP_MAP.getOrDefault(event.getState().getBlock(), 5));
+  }
+
+  public static void handleLeftClick(PlayerInteractEvent.LeftClickBlock event) {
+    ItemStack usedItem = event.getItemStack();
+    if (usedItem == ItemStack.EMPTY) return;
+    if (!usedItem.is(ItemTags.SHOVELS)) return;
+    if (event.getEntity().isCreative()) return;
+
+    SkillDigging digging = event.getEntity().getData(Skills.DIGGING);
+    int requiredLevel = Skills.requiredLevel(usedItem);
+    if (digging.level < requiredLevel) {
+      event.setCanceled(true);
+      if (event.getLevel().isClientSide()) {
+        ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
+        if (!ToastUtils.hasGenericMessageToast(toastManager, digging.getRequiredLevelToastName())) {
+          toastManager.addToast(new GenericMessageToast(
+            digging.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(digging.name, Skills.DEFAULT_ICON), "Using a " + usedItem.getItemName().getString() + " requires a " + SkillDigging.NAME + " level of " + requiredLevel + "."
+          ));
+        }
+      }
+    }
   }
 
   @Override

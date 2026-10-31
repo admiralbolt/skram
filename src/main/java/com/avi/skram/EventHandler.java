@@ -194,7 +194,9 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_LEFT_CLICK_BLOCK(PlayerInteractEvent.LeftClickBlock event) {
+    SkillDigging.handleLeftClick(event);
     SkillMining.handleLeftClick(event);
+    SkillWoodcutting.handleLeftClick(event);
   }
 
   @SubscribeEvent

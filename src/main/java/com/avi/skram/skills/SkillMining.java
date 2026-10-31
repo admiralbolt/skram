@@ -29,7 +29,6 @@ import java.util.Map;
 public class SkillMining extends Skill {
 
   public static final String NAME = "mining";
-  public static final String REQUIRED_LEVEL_TOAST = "mining:req";
   public static final StreamCodec<ByteBuf, SkillMining> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillMining::new);
   public static Map<Block, Integer> XP_MAP;
 
@@ -146,6 +145,7 @@ public class SkillMining extends Skill {
     ItemStack usedItem = event.getItemStack();
     if (usedItem == ItemStack.EMPTY) return;
     if (!usedItem.is(ItemTags.PICKAXES)) return;
+    if (event.getEntity().isCreative()) return;
 
     SkillMining mining = event.getEntity().getData(Skills.MINING);
     int requiredLevel = Skills.requiredLevel(usedItem);
@@ -153,9 +153,9 @@ public class SkillMining extends Skill {
       event.setCanceled(true);
       if (event.getLevel().isClientSide()) {
         ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
-        if (!ToastUtils.hasGenericMessageToast(toastManager, REQUIRED_LEVEL_TOAST)) {
+        if (!ToastUtils.hasGenericMessageToast(toastManager, mining.getRequiredLevelToastName())) {
           toastManager.addToast(new GenericMessageToast(
-            REQUIRED_LEVEL_TOAST, Skills.SKILL_ICONS.getOrDefault(mining.name, Skills.DEFAULT_ICON), "Using a " + usedItem.getItemName().getString() + " requires a " + SkillMining.NAME + " level of " + requiredLevel + "."
+            mining.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(mining.name, Skills.DEFAULT_ICON), "Using a " + usedItem.getItemName().getString() + " requires a " + SkillMining.NAME + " level of " + requiredLevel + "."
           ));
         }
       }

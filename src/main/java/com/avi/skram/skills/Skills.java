@@ -217,15 +217,15 @@ public class Skills {
     // This is a pretty unfortunate way of checking, but the materials themselves aren't actually stored on the items
     // in any way, they are simply used to set attribute values on construction.
     // We instead check the names for the appropriate material.
-
     String itemID = stack.getItem().toString();
 
-    if (itemID.contains("netherite")) return 40;
-    if (itemID.contains("diamond")) return 30;
-    if (itemID.contains("gold")) return 25;
-    if (itemID.contains("iron")) return 20;
+    if (itemID.contains("netherite")) return 25;
+    if (itemID.contains("diamond")) return 20;
+    if (itemID.contains("gold")) return 15;
+    if (itemID.contains("iron")) return 15;
     if (itemID.contains("copper")) return 10;
     if (itemID.contains("stone")) return 5;
+    if (itemID.contains("leather")) return 5;
 
     return 1;
   }
