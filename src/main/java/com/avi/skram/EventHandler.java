@@ -200,6 +200,11 @@ public class EventHandler {
   }
 
   @SubscribeEvent
+  public static void ON_PLAYER_RIGHT_CLICK_BLOCK(PlayerInteractEvent.RightClickBlock event) {
+    SkillFarming.handleRightClick(event);
+  }
+
+  @SubscribeEvent
   public static void ON_PLAYER_FISHED(ItemFishedEvent event) {
     SkillFishing.handleCatchFish(event);
   }

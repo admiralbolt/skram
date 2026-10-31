@@ -3,21 +3,27 @@ package com.avi.skram.skills;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
+import com.avi.skram.ui.GenericMessageToast;
+import com.avi.skram.ui.ToastUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Checkbox;
+import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.neoforge.event.level.block.CropGrowEvent;
@@ -184,6 +190,36 @@ public class SkillFarming extends Skill {
 //      }
 //    }
 
+  }
+
+  public static void handleRightClick(PlayerInteractEvent.RightClickBlock event) {
+    ItemStack usedItem = event.getItemStack();
+    if (usedItem == ItemStack.EMPTY) return;
+    if (!usedItem.is(ItemTags.HOES)) return;
+    if (event.getEntity().isCreative()) return;
+
+    SkillFarming farming = event.getEntity().getData(Skills.FARMING);
+    int requiredLevel = Skills.requiredLevel(usedItem);
+    if (farming.level < requiredLevel) {
+      event.setCanceled(true);
+      if (event.getLevel().isClientSide()) {
+        ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
+        if (!ToastUtils.hasGenericMessageToast(toastManager, farming.getRequiredLevelToastName())) {
+          toastManager.addToast(new GenericMessageToast(
+            farming.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(farming.name, Skills.DEFAULT_ICON), "Using a " + usedItem.getItemName().getString() + " requires a " + SkillFarming.NAME + " level of " + requiredLevel + "."
+          ));
+        }
+      }
+    }
+
+    // Otherwise IF we successfully made farmland, gain some xp.
+    if (event.getLevel().isClientSide()) return;
+
+    BlockPos pos = event.getHitVec().getBlockPos();
+    BlockState state = event.getLevel().getBlockState(pos);
+    if (!state.is(BlockTags.TURNS_INTO_FARMLAND)) return;
+
+    farming.addXp(event.getEntity(), 5);
   }
 
   @Override
