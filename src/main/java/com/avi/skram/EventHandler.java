@@ -26,10 +26,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.event.AnvilUpdateEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -243,6 +240,26 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_VILLAGER_TRADE(TradeWithVillagerEvent event) {
     SkillMercantile.handleTrade(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_BABY_SPAWNED(BabyEntitySpawnEvent event) {
+    SkillHusbandry.handleBreedEvent(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_LIVING_DROPS(LivingDropsEvent event) {
+    SkillHusbandry.applyFortune(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_LIVING_DEATH(LivingDeathEvent event) {
+    SkillHusbandry.handleAnimalKilled(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_ANIMAL_TAMED(AnimalTameEvent event) {
+    SkillHusbandry.handleAnimalTamed(event);
   }
 
   @SubscribeEvent

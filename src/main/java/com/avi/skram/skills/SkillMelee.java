@@ -95,7 +95,7 @@ public class SkillMelee extends Skill {
     }
 
     LivingEntity targetEntity = event.getEntity();
-    double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 10 : 2;
+    double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 10 : 1;
 
     melee.addXp(player, event.getNewDamage() * xpMult);
   }

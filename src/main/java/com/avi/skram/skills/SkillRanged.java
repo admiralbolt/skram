@@ -57,7 +57,7 @@ public class SkillRanged extends Skill {
     }
 
     LivingEntity targetEntity = event.getEntity();
-    double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 10 : 2;
+    double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 10 : 1;
 
     ranged.addXp(player, event.getNewDamage() * xpMult);
   }

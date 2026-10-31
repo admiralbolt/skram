@@ -9,9 +9,6 @@ SkillFarming:
 
 
 SkillSmithing:
-  - Add increased repair.
   - [PERK] Heart of the forge, reduce time on fire by X%.
 
-SkillStealth:
-  - There is a sneaking_speed attribute.
   
