@@ -3,6 +3,7 @@ package com.avi.skram;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
+import com.avi.skram.commands.SkramCommands;
 import com.avi.skram.network.ClientPayloadHandler;
 import com.avi.skram.network.ServerPayloadHandler;
 import com.avi.skram.skills.*;
@@ -26,6 +27,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.event.AnvilUpdateEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
@@ -324,6 +326,11 @@ public class EventHandler {
         Minecraft.getInstance().setScreenAndShow(new SkillScreen());
       }
     }
+  }
+
+  @SubscribeEvent
+  public static void registerCommands(RegisterCommandsEvent event) {
+    SkramCommands.register(event);
   }
 
 }
