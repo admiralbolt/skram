@@ -201,7 +201,9 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_RIGHT_CLICK_BLOCK(PlayerInteractEvent.RightClickBlock event) {
+    SkillDigging.handleRightClick(event);
     SkillFarming.handleRightClick(event);
+    SkillWoodcutting.handleRightClick(event);
   }
 
   @SubscribeEvent

@@ -1,23 +1,31 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.ui.GenericMessageToast;
+import com.avi.skram.ui.ToastUtils;
 import com.avi.skram.ui.XPGainGui;
 import com.avi.skram.utils.MathUtils;
 import com.avi.skram.utils.StringUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.MultiLineTextWidget;
+import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.bus.api.ICancellableEvent;
 import net.neoforged.neoforge.client.gui.widget.ResizableTextureImageWidget;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.util.ValueIOSerializable;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.nio.charset.Charset;
 import java.util.HashMap;
@@ -173,6 +181,25 @@ public abstract class Skill implements ValueIOSerializable {
     // If we call this on the client side (which we expect to), update the server side as well.
     if (Minecraft.getInstance().level != null && Minecraft.getInstance().level.isClientSide()) {
       ClientPacketDistributor.sendToServer(new SkillPacket(this.name, this.level, this.xp, this.enabledAbilities));
+    }
+  }
+
+  public <T extends PlayerInteractEvent & ICancellableEvent> void requiredLevelCheck(T event) {
+    ItemStack usedItem = event.getItemStack();
+    if (usedItem == ItemStack.EMPTY) return;
+    if (event.getEntity().isCreative()) return;
+
+    int requiredLevel = Skills.requiredLevel(usedItem);
+    if (this.level >= requiredLevel) return;
+
+    event.setCanceled(true);
+    if (!event.getLevel().isClientSide()) return;
+    ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
+
+    if (!ToastUtils.hasGenericMessageToast(toastManager, this.getRequiredLevelToastName())) {
+      toastManager.addToast(new GenericMessageToast(
+        this.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(this.name, Skills.DEFAULT_ICON), "Using a " + usedItem.getItemName().getString() + " requires a " + this.name + " level of " + requiredLevel + "."
+      ));
     }
   }
 

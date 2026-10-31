@@ -194,26 +194,13 @@ public class SkillFarming extends Skill {
 
   public static void handleRightClick(PlayerInteractEvent.RightClickBlock event) {
     ItemStack usedItem = event.getItemStack();
-    if (usedItem == ItemStack.EMPTY) return;
     if (!usedItem.is(ItemTags.HOES)) return;
-    if (event.getEntity().isCreative()) return;
 
     SkillFarming farming = event.getEntity().getData(Skills.FARMING);
-    int requiredLevel = Skills.requiredLevel(usedItem);
-    if (farming.level < requiredLevel) {
-      event.setCanceled(true);
-      if (event.getLevel().isClientSide()) {
-        ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
-        if (!ToastUtils.hasGenericMessageToast(toastManager, farming.getRequiredLevelToastName())) {
-          toastManager.addToast(new GenericMessageToast(
-            farming.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(farming.name, Skills.DEFAULT_ICON), "Using a " + usedItem.getItemName().getString() + " requires a " + SkillFarming.NAME + " level of " + requiredLevel + "."
-          ));
-        }
-      }
-    }
+    farming.requiredLevelCheck(event);
 
     // Otherwise IF we successfully made farmland, gain some xp.
-    if (event.getLevel().isClientSide()) return;
+    if (event.isCanceled() || event.getLevel().isClientSide()) return;
 
     BlockPos pos = event.getHitVec().getBlockPos();
     BlockState state = event.getLevel().getBlockState(pos);

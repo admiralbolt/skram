@@ -8,17 +8,22 @@ import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.HoneycombItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
+import net.neoforged.neoforge.registries.datamaps.builtin.Waxable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -98,6 +103,41 @@ public class SkillWoodcutting extends Skill {
           ));
         }
       }
+    }
+  }
+
+  public static void handleRightClick(PlayerInteractEvent.RightClickBlock event) {
+    ItemStack usedItem = event.getItemStack();
+    if (!usedItem.is(ItemTags.AXES)) return;
+
+    SkillWoodcutting woodcutting = event.getEntity().getData(Skills.WOODCUTTING);
+    woodcutting.requiredLevelCheck(event);
+
+    // Otherwise, if we successfully scraped, waxed, or stripped, gain some xp.
+    if (!event.isCanceled() && event.getLevel().isClientSide()) return;
+
+    BlockPos pos = event.getHitVec().getBlockPos();
+    BlockState state = event.getLevel().getBlockState(pos);
+
+    // Removed weathering...
+    if (state.getBlock() instanceof WeatheringCopper weatheringCopper) {
+      WeatheringCopper.WeatherState weatherState = weatheringCopper.getAge();
+      if (weatherState != WeatheringCopper.WeatherState.UNAFFECTED) {
+        woodcutting.addXp(event.getEntity(), 5);
+        return;
+      }
+    }
+
+    // Stripped some logs...
+    if (state.is(BlockTags.LOGS)) {
+      woodcutting.addXp(event.getEntity(), 5);
+      return;
+    }
+
+    // Wax OFF.
+    if (state.getBlock().getName().toString().contains("waxed")) {
+      woodcutting.addXp(event.getEntity(), 5);
+      return;
     }
   }
 

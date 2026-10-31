@@ -143,23 +143,10 @@ public class SkillMining extends Skill {
 
   public static void handleLeftClick(PlayerInteractEvent.LeftClickBlock event) {
     ItemStack usedItem = event.getItemStack();
-    if (usedItem == ItemStack.EMPTY) return;
     if (!usedItem.is(ItemTags.PICKAXES)) return;
-    if (event.getEntity().isCreative()) return;
 
     SkillMining mining = event.getEntity().getData(Skills.MINING);
-    int requiredLevel = Skills.requiredLevel(usedItem);
-    if (mining.level < requiredLevel) {
-      event.setCanceled(true);
-      if (event.getLevel().isClientSide()) {
-        ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
-        if (!ToastUtils.hasGenericMessageToast(toastManager, mining.getRequiredLevelToastName())) {
-          toastManager.addToast(new GenericMessageToast(
-            mining.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(mining.name, Skills.DEFAULT_ICON), "Using a " + usedItem.getItemName().getString() + " requires a " + SkillMining.NAME + " level of " + requiredLevel + "."
-          ));
-        }
-      }
-    }
+    mining.requiredLevelCheck(event);
   }
 
   @Override
