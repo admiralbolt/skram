@@ -1,0 +1,28 @@
+{
+  "parent": "skram:mine_gold_ore",
+  "criteria": {
+    "mine_block": {
+      "conditions": {
+        "blocks": "minecraft:diamond_ore"
+      },
+      "trigger": "skram:break_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Holy shit",
+    "icon": {
+      "id": "minecraft:diamond_ore"
+    },
+    "title": "Break: Diamond Ore"
+  },
+  "requirements": [
+    [
+      "mine_block"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:mining_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

@@ -1,6 +1,5 @@
 package com.avi.skram.network;
 
-import com.avi.skram.skills.SkillPacket;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class ClientPayloadHandler {

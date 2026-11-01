@@ -1,0 +1,32 @@
+{
+  "criteria": {
+    "pickup_dirt": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:dirt"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "background": "minecraft:gui/advancements/background/stone",
+    "description": "Test description text. This can go on for a little while, just to see what it looks like. Line wrapping and all that.",
+    "frame": "goal",
+    "icon": {
+      "id": "minecraft:grass_block"
+    },
+    "title": "Test Title"
+  },
+  "requirements": [
+    [
+      "pickup_dirt"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

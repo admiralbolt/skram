@@ -1,7 +1,6 @@
 package com.avi.skram.network;
 
 import com.avi.skram.skills.Skill;
-import com.avi.skram.skills.SkillPacket;
 import com.avi.skram.skills.Skills;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -20,6 +19,7 @@ public class ServerPayloadHandler {
       skill.onLevelChange(player);
     }
     skill.xp = packet.xp();
+    skill.xpMultiplier = packet.xpMultiplier();
     if (!Arrays.equals(skill.enabledAbilities, packet.enabledAbilities())) {
       skill.enabledAbilities = packet.enabledAbilities();
       skill.applyModifiers(player);

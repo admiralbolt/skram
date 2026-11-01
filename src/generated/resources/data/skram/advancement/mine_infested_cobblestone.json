@@ -1,0 +1,28 @@
+{
+  "parent": "skram:mine_cobblestone",
+  "criteria": {
+    "mine_block": {
+      "conditions": {
+        "blocks": "minecraft:infested_cobblestone"
+      },
+      "trigger": "skram:break_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Holy shit",
+    "icon": {
+      "id": "minecraft:infested_cobblestone"
+    },
+    "title": "Break: Infested Cobblestone"
+  },
+  "requirements": [
+    [
+      "mine_block"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:mining_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

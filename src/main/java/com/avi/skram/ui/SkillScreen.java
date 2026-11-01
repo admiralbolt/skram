@@ -49,7 +49,7 @@ public class SkillScreen extends Screen {
     GridLayout actualMainContentLayout = new GridLayout();
 
     LinearLayout contentLayout = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    contentLayout.spacing(1).defaultCellSetting().paddingTop(2);
+    contentLayout.spacing(2).defaultCellSetting().paddingTop(4);
 
     for (String skillName : Skills.SKILLS_BY_NAME.keySet().stream().sorted().toList()) {
       Skill skill = (Skill) Minecraft.getInstance().player.getData(Skills.SKILLS_BY_NAME.get(skillName));

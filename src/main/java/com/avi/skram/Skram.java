@@ -1,8 +1,10 @@
 package com.avi.skram;
 
+import com.avi.skram.advancements.BreakBlockTrigger;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.skills.Skills;
 import com.mojang.logging.LogUtils;
+import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -26,6 +28,8 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.*;
 import org.slf4j.Logger;
+
+import java.util.function.Supplier;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Skram.MODID)
@@ -52,6 +56,12 @@ public class Skram {
     public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", p -> p.food(new FoodProperties.Builder()
             .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
 
+    public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES =
+      DeferredRegister.create(Registries.TRIGGER_TYPE, Skram.MODID);
+
+    public static final Supplier<BreakBlockTrigger> BREAK_BLOCK_TRIGGER =
+      TRIGGER_TYPES.register("break_block", BreakBlockTrigger::new);
+
     // Creates a creative tab with the id "skram:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.skram")) //The language key for the title of your CreativeModeTab
@@ -77,6 +87,7 @@ public class Skram {
         BlockData.register();
         Skills.register();
         ATTACHMENT_TYPES.register(modEventBus);
+        TRIGGER_TYPES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (skram) to respond directly to events.

@@ -2,9 +2,6 @@
 TODO
 ====
 
-- Command for setting skill level.
-
-
 SkillFarming:
   - Extend increased growth chance to crops that grow upwards (SugarCane + Bamboo).
 
@@ -23,7 +20,6 @@ SkillHealth:
   - Health regeneration?
 
 
-
 Misc Ideas:
  - Additional accesory slots (Seems like this can be done easily with https://github.com/TheIllusiveC4/Curios).
  - Artifacts? They are fun.
@@ -39,10 +35,6 @@ Misc Ideas:
  - Perk: Can kill with poison?
  - Perk: Cluster Bomb, chance to duplicate thrown potions?
  - Perk: Twins!!? Chance to spawn two babis.
- 
-
-
-
 
  
 Collection Log.

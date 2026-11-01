@@ -1,5 +1,6 @@
 package com.avi.skram.skills;
 
+import com.avi.skram.network.SkillPacket;
 import com.avi.skram.ui.GenericMessageToast;
 import com.avi.skram.ui.ToastUtils;
 import com.avi.skram.ui.XPGainGui;
@@ -57,6 +58,7 @@ public abstract class Skill implements ValueIOSerializable {
   public String name;
   public int level = 1;
   public double xp = 0;
+  public double xpMultiplier = 1;
   // For portability, we track if the ith ability of a skill is enabled by checking enabledAbilities[i]. This means
   // each instantiated skill is responsible for keeping an appropriate mapping and order of abilities.
   public boolean[] enabledAbilities;
@@ -72,6 +74,7 @@ public abstract class Skill implements ValueIOSerializable {
     this.name = buffer.readString(nameLength, Charset.defaultCharset());
     this.level = buffer.readInt();
     this.xp = buffer.readDouble();
+    this.xpMultiplier = buffer.readDouble();
     this.enabledAbilities = new boolean[buffer.readInt()];
     for (int i = 0; i < this.enabledAbilities.length; ++i) {
       this.enabledAbilities[i] = buffer.readBoolean();
@@ -83,6 +86,7 @@ public abstract class Skill implements ValueIOSerializable {
     buffer.writeCharSequence(this.name, Charset.defaultCharset());
     buffer.writeInt(this.level);
     buffer.writeDouble(this.xp);
+    buffer.writeDouble(this.xpMultiplier);
     buffer.writeInt(this.enabledAbilities.length);
     for (boolean enabledAbility : this.enabledAbilities) {
       buffer.writeBoolean(enabledAbility);
@@ -99,6 +103,7 @@ public abstract class Skill implements ValueIOSerializable {
     output.putString("name", this.name);
     output.putInt("level", this.level);
     output.putDouble("xp", this.xp);
+    output.putDouble("xpMultiplier", this.xpMultiplier);
     // Doesn't support a bool array by default, just convert to int.
     output.putIntArray("enabledAbilities", IntStream.range(0, this.enabledAbilities.length).map(i -> this.enabledAbilities[i] ? 1 : 0).toArray());
   }
@@ -108,6 +113,7 @@ public abstract class Skill implements ValueIOSerializable {
     this.name = input.getStringOr("name", "die");
     this.level = input.getIntOr("level", -1);
     this.xp = input.getDoubleOr("xp", -2.2);
+    this.xpMultiplier = input.getDoubleOr("xpMultiplier", 1);
     // Convert back from an int array to a boolean one.
     int[] enabled = input.getIntArray("enabledAbilities").get();
     boolean[] boolArray = new boolean[enabled.length];
@@ -135,7 +141,7 @@ public abstract class Skill implements ValueIOSerializable {
   public void addXp(Player player, double xp, boolean syncToServer) {
     if (xp <= 0) return;
 
-    this.xp += (1 + 0.01 * player.experienceLevel) * xp;
+    this.xp += this.xpMultiplier * xp;
     boolean leveledUp = false;
     while (this.xp > Skill.getTotalXpForLevel(this.level + 1)) {
       leveledUp = true;
@@ -153,7 +159,7 @@ public abstract class Skill implements ValueIOSerializable {
     // If we want to sync from client -> server we need to explicitly send a packet.
     if (syncToServer) {
       XPGainGui.notify(this.name, xp);
-      ClientPacketDistributor.sendToServer(new SkillPacket(this.name, this.level, this.xp, this.enabledAbilities));
+      ClientPacketDistributor.sendToServer(new SkillPacket(this.name, this.level, this.xp, this.xpMultiplier, this.enabledAbilities));
     }
   }
 
@@ -177,7 +183,7 @@ public abstract class Skill implements ValueIOSerializable {
     this.enabledAbilities[i] = !this.enabledAbilities[i];
     // If we call this on the client side (which we expect to), update the server side as well.
     if (Minecraft.getInstance().level != null && Minecraft.getInstance().level.isClientSide()) {
-      ClientPacketDistributor.sendToServer(new SkillPacket(this.name, this.level, this.xp, this.enabledAbilities));
+      ClientPacketDistributor.sendToServer(new SkillPacket(this.name, this.level, this.xp, this.xpMultiplier, this.enabledAbilities));
     }
   }
 
@@ -219,6 +225,7 @@ public abstract class Skill implements ValueIOSerializable {
 
     vertical.addChild(new MultiLineTextWidget(Component.literal("EXP:  " + String.format("%,d", (int) this.xp)), Minecraft.getInstance().font));
     vertical.addChild(new MultiLineTextWidget(Component.literal("Next: " + String.format("%,d", Skill.getTotalXpForLevel(this.level + 1))), Minecraft.getInstance().font));
+    vertical.addChild(new MultiLineTextWidget(Component.literal("Bonus: +" + (int) ((this.xpMultiplier - 1) * 100) + "%"), Minecraft.getInstance().font));
 
     layout.addChild(vertical);
     layout.addChild(this.renderSkillAbilities());

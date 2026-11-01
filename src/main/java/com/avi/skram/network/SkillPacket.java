@@ -1,4 +1,4 @@
-package com.avi.skram.skills;
+package com.avi.skram.network;
 
 import com.avi.skram.Skram;
 import com.avi.skram.utils.CodecUtils;
@@ -9,7 +9,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 
-public record SkillPacket(String name, int level, double xp, boolean[] enabledAbilities) implements CustomPacketPayload {
+public record SkillPacket(String name, int level, double xp, double xpMultiplier, boolean[] enabledAbilities) implements CustomPacketPayload {
   public static final CustomPacketPayload.Type<@NotNull SkillPacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(Skram.MODID, "skill_packet"));
 
   public static final StreamCodec<ByteBuf, SkillPacket> STREAM_CODEC = StreamCodec.composite(
@@ -19,6 +19,8 @@ public record SkillPacket(String name, int level, double xp, boolean[] enabledAb
     SkillPacket::level,
     ByteBufCodecs.DOUBLE,
     SkillPacket::xp,
+    ByteBufCodecs.DOUBLE,
+    SkillPacket::xpMultiplier,
     CodecUtils.BOOLEAN_ARRAY_STREAM_CODEC,
     SkillPacket::enabledAbilities,
     SkillPacket::new

@@ -6,6 +6,7 @@ import com.avi.skram.blocks.PlayerOwnedData;
 import com.avi.skram.commands.SkramCommands;
 import com.avi.skram.network.ClientPayloadHandler;
 import com.avi.skram.network.ServerPayloadHandler;
+import com.avi.skram.network.SkillPacket;
 import com.avi.skram.skills.*;
 import com.avi.skram.ui.AddSkillButtonToInventory;
 import com.avi.skram.ui.SkillScreen;
@@ -14,6 +15,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.chunk.ChunkAccess;
@@ -99,6 +101,9 @@ public class EventHandler {
     // Remove the block from our map.
     pob.playerOwnedBlocks.remove(event.getPos());
     chunk.markUnsaved();
+
+    // Trigger the break block criteria!
+    Skram.BREAK_BLOCK_TRIGGER.get().trigger((ServerPlayer) event.getPlayer(), event.getState());
   }
 
   @SubscribeEvent
