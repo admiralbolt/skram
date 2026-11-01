@@ -65,6 +65,7 @@ public class SkramAdvancements {
           InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIRT)
         ).save(this.output, Identifier.fromNamespaceAndPath(Skram.MODID, "skram_root"));
 
+      BotanyAdvancements.generate(this.output, this.skramRoot);
       DiggingAdvancements.generate(this.output, this.skramRoot);
       FarmingAdvancements.generate(this.output, this.skramRoot);
       MeleeAdvancements.generate(this.output, this.skramRoot);

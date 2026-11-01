@@ -1,0 +1,28 @@
+{
+  "parent": "skram:gather_cornflower",
+  "criteria": {
+    "gather_block": {
+      "conditions": {
+        "blocks": "minecraft:dandelion"
+      },
+      "trigger": "skram:break_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Gathering this block grants a permanent +1% boost to all botany xp.",
+    "icon": {
+      "id": "minecraft:dandelion"
+    },
+    "title": "Gather: Dandelion"
+  },
+  "requirements": [
+    [
+      "gather_block"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:botany_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

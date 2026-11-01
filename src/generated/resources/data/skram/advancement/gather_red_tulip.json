@@ -1,0 +1,28 @@
+{
+  "parent": "skram:gather_poppy",
+  "criteria": {
+    "gather_block": {
+      "conditions": {
+        "blocks": "minecraft:red_tulip"
+      },
+      "trigger": "skram:break_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Gathering this block grants a permanent +1% boost to all botany xp.",
+    "icon": {
+      "id": "minecraft:red_tulip"
+    },
+    "title": "Gather: Red Tulip"
+  },
+  "requirements": [
+    [
+      "gather_block"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:botany_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}
