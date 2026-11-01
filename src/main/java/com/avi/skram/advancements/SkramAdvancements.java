@@ -1,9 +1,7 @@
 package com.avi.skram.advancements;
 
 import com.avi.skram.Skram;
-import com.avi.skram.advancements.skills.DiggingAdvancements;
-import com.avi.skram.advancements.skills.MiningAdvancements;
-import com.avi.skram.advancements.skills.WoodcuttingAdvancements;
+import com.avi.skram.advancements.skills.*;
 import com.avi.skram.item.SkramItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
@@ -68,7 +66,9 @@ public class SkramAdvancements {
         ).save(this.output, Identifier.fromNamespaceAndPath(Skram.MODID, "skram_root"));
 
       DiggingAdvancements.generate(this.output, this.skramRoot);
+      MeleeAdvancements.generate(this.output, this.skramRoot);
       MiningAdvancements.generate(this.output, this.skramRoot);
+      RangedAdvancements.generate(this.output, this.skramRoot);
       WoodcuttingAdvancements.generate(this.output, this.skramRoot);
     }
   }

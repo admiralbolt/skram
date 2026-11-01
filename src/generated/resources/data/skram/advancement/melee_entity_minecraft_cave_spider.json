@@ -1,0 +1,42 @@
+{
+  "parent": "skram:melee_entity_minecraft_camel_husk",
+  "criteria": {
+    "melee_entity": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:cave_spider"
+          }
+        },
+        "killing_blow": {
+          "tags": [
+            {
+              "expected": true,
+              "id": "#minecraft:is_player_attack"
+            }
+          ]
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Slaying this entity (with a melee weapon) grants a permanent +1% boost to all melee xp.",
+    "icon": {
+      "id": "minecraft:cave_spider_spawn_egg"
+    },
+    "title": "Slay: Cave Spider"
+  },
+  "requirements": [
+    [
+      "melee_entity"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:melee_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,42 @@
+{
+  "parent": "skram:ranged_entity_minecraft_elder_guardian",
+  "criteria": {
+    "ranged_entity": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:ender_dragon"
+          }
+        },
+        "killing_blow": {
+          "tags": [
+            {
+              "expected": true,
+              "id": "#minecraft:is_projectile"
+            }
+          ]
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Slaying this entity (with a projectile) grants a permanent +3% boost to all ranged xp.",
+    "icon": {
+      "id": "minecraft:ender_dragon_spawn_egg"
+    },
+    "title": "Snipe: Ender Dragon"
+  },
+  "requirements": [
+    [
+      "ranged_entity"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:ranged_xp_mult_up3"
+  },
+  "sends_telemetry_event": true
+}

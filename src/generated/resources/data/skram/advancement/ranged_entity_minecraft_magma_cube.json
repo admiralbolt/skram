@@ -1,0 +1,42 @@
+{
+  "parent": "skram:ranged_entity_minecraft_husk",
+  "criteria": {
+    "ranged_entity": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:magma_cube"
+          }
+        },
+        "killing_blow": {
+          "tags": [
+            {
+              "expected": true,
+              "id": "#minecraft:is_projectile"
+            }
+          ]
+        }
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Slaying this entity (with a projectile) grants a permanent +1% boost to all ranged xp.",
+    "icon": {
+      "id": "minecraft:magma_cube_spawn_egg"
+    },
+    "title": "Snipe: Magma Cube"
+  },
+  "requirements": [
+    [
+      "ranged_entity"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:ranged_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}
