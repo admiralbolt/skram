@@ -6,22 +6,19 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.triggers.InventoryChangeTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MiningAdvancements extends AdvancementSubProvider {
+public class MiningAdvancements {
 
   // Unfortunately we are defining a giant list here, because tags aren't available.
   // If they are available, I can't figure out how to access them.
@@ -64,39 +61,15 @@ public class MiningAdvancements extends AdvancementSubProvider {
     Pair.of(Blocks.TUFF, 1)
   );
 
-  private final HolderGetter<Block> blocks;
-
-  protected MiningAdvancements(BootstrapContext<Advancement> output) {
-    super(output);
-    this.blocks = output.lookup(Registries.BLOCK);
-  }
-
-  @Override
-  public void generate() {
-    @SuppressWarnings("removal") AdvancementHolder example = Advancement.Builder.advancement()
-      .rootDisplay(
-        new ItemStackTemplate(Items.GRASS_BLOCK),
-        Component.literal("Test Title"),
-        Component.literal("Test description text. This can go on for a little while, just to see what it looks like. Line wrapping and all that."),
-        Identifier.withDefaultNamespace("gui/advancements/background/stone"),
-        AdvancementType.GOAL,
-        true,
-        true,
-        false
-      ).rewards(
-        AdvancementRewards.Builder.experience(100)
-      ).addCriterion(
-        "pickup_dirt",
-        InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIRT)
-      ).save(this.output, Identifier.fromNamespaceAndPath(Skram.MODID, "example_advancement"));
-
+  public static void generate(BootstrapContext<Advancement> output, AdvancementHolder skramRoot) {
+    HolderGetter<Block> blocks = output.lookup(Registries.BLOCK);
     List<AdvancementHolder> breakAdvancements = new ArrayList<>();
 
     for (Pair<Block, Integer> blockPair : MINING_LOG) {
       Block block = blockPair.getFirst();
       Integer xpMult = blockPair.getSecond();
       breakAdvancements.add(Advancement.Builder.advancement()
-        .parent(breakAdvancements.isEmpty() ? example : breakAdvancements.getLast())
+        .parent(breakAdvancements.isEmpty() ? skramRoot : breakAdvancements.getLast())
         .display(
           new ItemStackTemplate(block.asItem()),
           Component.literal("Mine: " + block.getName().getString()),
@@ -109,13 +82,8 @@ public class MiningAdvancements extends AdvancementSubProvider {
           AdvancementRewards.Builder.function(Identifier.fromNamespaceAndPath(Skram.MODID, "mining_xp_mult_up" + xpMult))
         ).addCriterion(
           "mine_block",
-          BreakBlockTrigger.TriggerInstance.breaksBlock(this.blocks, block)
-        ).save(this.output, Identifier.fromNamespaceAndPath(Skram.MODID, prettify("mine_" + block.getName().getString()))));
+          BreakBlockTrigger.TriggerInstance.breaksBlock(blocks, block)
+        ).save(output, Identifier.fromNamespaceAndPath(Skram.MODID, SkramAdvancements.prettify("mine_" + block.getName().getString()))));
     }
   }
-
-  public static String prettify(String input) {
-    return input.toLowerCase().replace(".", "_").replace(" ", "_");
-  }
-
 }

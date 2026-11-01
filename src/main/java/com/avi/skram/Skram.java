@@ -2,6 +2,7 @@ package com.avi.skram;
 
 import com.avi.skram.advancements.BreakBlockTrigger;
 import com.avi.skram.blocks.BlockData;
+import com.avi.skram.item.SkramItems;
 import com.avi.skram.skills.Skills;
 import com.mojang.logging.LogUtils;
 import net.minecraft.advancements.triggers.CriterionTrigger;
@@ -79,6 +80,8 @@ public class Skram {
 
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
+
+        SkramItems.register();
         // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered

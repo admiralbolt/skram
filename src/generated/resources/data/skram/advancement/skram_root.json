@@ -12,13 +12,13 @@
     }
   },
   "display": {
-    "background": "minecraft:gui/advancements/background/stone",
-    "description": "Test description text. This can go on for a little while, just to see what it looks like. Line wrapping and all that.",
+    "background": "skram:ui/advancement_background",
+    "description": "We ride again.",
     "frame": "goal",
     "icon": {
-      "id": "minecraft:grass_block"
+      "id": "skram:awesome_snake"
     },
-    "title": "Test Title"
+    "title": "Skram"
   },
   "requirements": [
     [

@@ -1,6 +1,20 @@
-// 26.3	2026-11-01T09:48:40.099899	Registries for Reloadable (skram[1]): [minecraft, skram]
-12fb774cbb99a2261736aabe32b91ef7ff966822 data/skram/advancement/example_advancement.json
-d3d8580a3d7f5031ec1f472a7447ec30ce69066c data/skram/advancement/mine_ancient_debris.json
+// 26.3	2026-11-01T12:06:02.329252	Registries for Reloadable (skram[1]): [minecraft, skram]
+ccdb4f888f19c95aea3a1b79874d32ff4e45607d data/skram/advancement/dig_clay.json
+7a7fb5d8f9162f8316ec2a42c1134910868753b7 data/skram/advancement/dig_coarse_dirt.json
+4cea4be54351bcffc92be924b1c9f16a625a0c27 data/skram/advancement/dig_dirt.json
+f7b31939921ed229e28519a1b59a74b3e155947f data/skram/advancement/dig_dirt_path.json
+591860e022fe4cf3c29c168ae56f11d51fbf893c data/skram/advancement/dig_farmland.json
+98b1170c8c3271b0158bf7b1848c954ee3a713cb data/skram/advancement/dig_grass_block.json
+6f35191dd8280013df1e903fbca87769fe497142 data/skram/advancement/dig_gravel.json
+26bc22fe9c526f5619df6a67310825108740ff39 data/skram/advancement/dig_mud.json
+f8a796d1a7eee64885dfc7f8a584dbcdc54231cf data/skram/advancement/dig_mycelium.json
+ebede96afe4282c09b99f0cc7e55bc59388f70f1 data/skram/advancement/dig_podzol.json
+3463702e79da75c6fb0560039a148fc2d6ebe02c data/skram/advancement/dig_red_sand.json
+9ff2ecfe9166c7ce3df549d9760d72b70173951e data/skram/advancement/dig_rooted_dirt.json
+7558be6100fb8a54dd8e8761b429a07e3a11417a data/skram/advancement/dig_sand.json
+bd920a4a9a19ae55d1bf16de46610073421ee14b data/skram/advancement/dig_suspicious_gravel.json
+c3953662a64794ab0daa8758900f56ba0e304c78 data/skram/advancement/dig_suspicious_sand.json
+293030511d1e2077600cbe46c8ec3e822c72b379 data/skram/advancement/mine_ancient_debris.json
 041e90533e6c5651f7400a39b08941ec4533777a data/skram/advancement/mine_andesite.json
 844127de70aa55b534ba237f8507071f0396924e data/skram/advancement/mine_basalt.json
 b536273144bc905983f34164e5f8c41c6258a9d1 data/skram/advancement/mine_blackstone.json
@@ -35,3 +49,4 @@ abf4cf0d2e230f5b10ce2eae612ca929da033391 data/skram/advancement/mine_nether_gold
 939f3fd9b1ada0aade09ffad970a8390c0c786da data/skram/advancement/mine_stone.json
 8f18fa17c9d104e0370a4d335aadc97725530a3f data/skram/advancement/mine_sulfur.json
 e82f7e83ce4c61c32833a5cdd5397d8f5934d948 data/skram/advancement/mine_tuff.json
+667d11d6647dffee441c9ef8c325552b9ba4333a data/skram/advancement/skram_root.json

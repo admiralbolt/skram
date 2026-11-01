@@ -1,0 +1,28 @@
+{
+  "parent": "skram:dig_coarse_dirt",
+  "criteria": {
+    "dig_block": {
+      "conditions": {
+        "blocks": "minecraft:dirt"
+      },
+      "trigger": "skram:break_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Digging this block grants a permanent +1% boost to all digging xp.",
+    "icon": {
+      "id": "minecraft:dirt"
+    },
+    "title": "Dig: Dirt"
+  },
+  "requirements": [
+    [
+      "dig_block"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:digging_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

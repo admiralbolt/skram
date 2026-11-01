@@ -2,6 +2,7 @@
   "itemGroup.skram": "Example Mod Tab",
   "block.skram.example_block": "Example Block",
   "item.skram.example_item": "Example Item",
+  "item.skram.awesome_snake": "Awesome Snake",
 
   "skram.configuration.title": "skram Configs",
   "skram.configuration.section.skram.common.toml": "skram Configs",

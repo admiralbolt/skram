@@ -1,5 +1,5 @@
 {
-  "parent": "skram:example_advancement",
+  "parent": "skram:skram_root",
   "criteria": {
     "mine_block": {
       "conditions": {

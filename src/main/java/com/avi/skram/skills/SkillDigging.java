@@ -42,18 +42,20 @@ public class SkillDigging extends Skill {
   public static void setupXPMap() {
     XP_MAP = new HashMap<>();
 
-    XP_MAP.put(Blocks.DIRT, 60);
-    XP_MAP.put(Blocks.GRASS_BLOCK, 80);
+    XP_MAP.put(Blocks.CLAY, 120);
     XP_MAP.put(Blocks.COARSE_DIRT, 80);
+    XP_MAP.put(Blocks.DIRT, 60);
     XP_MAP.put(Blocks.FARMLAND, 80);
-    XP_MAP.put(Blocks.SAND, 70);
+    XP_MAP.put(Blocks.GRASS_BLOCK, 80);
     XP_MAP.put(Blocks.GRAVEL, 100);
+    XP_MAP.put(Blocks.MUD, 100);
+    XP_MAP.put(Blocks.MYCELIUM, 200);
+    XP_MAP.put(Blocks.PODZOL, 140);
     XP_MAP.put(Blocks.RED_SAND, 90);
     XP_MAP.put(Blocks.ROOTED_DIRT, 170);
-    XP_MAP.put(Blocks.MUD, 100);
-    XP_MAP.put(Blocks.CLAY, 120);
-    XP_MAP.put(Blocks.PODZOL, 140);
-    XP_MAP.put(Blocks.MYCELIUM, 200);
+    XP_MAP.put(Blocks.SAND, 70);
+    XP_MAP.put(Blocks.SUSPICIOUS_GRAVEL, 200);
+    XP_MAP.put(Blocks.SUSPICIOUS_SAND, 200);
   }
 
   @Override

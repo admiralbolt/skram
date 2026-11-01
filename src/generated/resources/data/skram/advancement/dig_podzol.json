@@ -1,0 +1,28 @@
+{
+  "parent": "skram:dig_mycelium",
+  "criteria": {
+    "dig_block": {
+      "conditions": {
+        "blocks": "minecraft:podzol"
+      },
+      "trigger": "skram:break_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Digging this block grants a permanent +2% boost to all digging xp.",
+    "icon": {
+      "id": "minecraft:podzol"
+    },
+    "title": "Dig: Podzol"
+  },
+  "requirements": [
+    [
+      "dig_block"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:digging_xp_mult_up2"
+  },
+  "sends_telemetry_event": true
+}
