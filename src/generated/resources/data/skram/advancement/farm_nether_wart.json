@@ -1,0 +1,28 @@
+{
+  "parent": "skram:farm_melon",
+  "criteria": {
+    "farm_block": {
+      "conditions": {
+        "blocks": "minecraft:nether_wart"
+      },
+      "trigger": "skram:break_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Farming this block grants a permanent +2% boost to all farming xp.",
+    "icon": {
+      "id": "minecraft:nether_wart"
+    },
+    "title": "Farm: Nether Wart"
+  },
+  "requirements": [
+    [
+      "farm_block"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:farming_xp_mult_up2"
+  },
+  "sends_telemetry_event": true
+}

@@ -66,6 +66,7 @@ public class SkramAdvancements {
         ).save(this.output, Identifier.fromNamespaceAndPath(Skram.MODID, "skram_root"));
 
       DiggingAdvancements.generate(this.output, this.skramRoot);
+      FarmingAdvancements.generate(this.output, this.skramRoot);
       MeleeAdvancements.generate(this.output, this.skramRoot);
       MiningAdvancements.generate(this.output, this.skramRoot);
       RangedAdvancements.generate(this.output, this.skramRoot);

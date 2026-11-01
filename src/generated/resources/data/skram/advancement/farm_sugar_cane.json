@@ -1,0 +1,28 @@
+{
+  "parent": "skram:farm_red_mushroom",
+  "criteria": {
+    "farm_block": {
+      "conditions": {
+        "blocks": "minecraft:sugar_cane"
+      },
+      "trigger": "skram:break_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Farming this block grants a permanent +1% boost to all farming xp.",
+    "icon": {
+      "id": "minecraft:sugar_cane"
+    },
+    "title": "Farm: Sugar Cane"
+  },
+  "requirements": [
+    [
+      "farm_block"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:farming_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}
