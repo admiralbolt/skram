@@ -1,6 +1,8 @@
-package com.avi.skram.advancements;
+package com.avi.skram.advancements.skills;
 
 import com.avi.skram.Skram;
+import com.avi.skram.advancements.BreakBlockTrigger;
+import com.avi.skram.advancements.SkramAdvancements;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;

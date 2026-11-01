@@ -1,6 +1,9 @@
 package com.avi.skram.advancements;
 
 import com.avi.skram.Skram;
+import com.avi.skram.advancements.skills.DiggingAdvancements;
+import com.avi.skram.advancements.skills.MiningAdvancements;
+import com.avi.skram.advancements.skills.WoodcuttingAdvancements;
 import com.avi.skram.item.SkramItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
@@ -13,7 +16,6 @@ import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.ai.behavior.warden.Digging;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -67,6 +69,7 @@ public class SkramAdvancements {
 
       DiggingAdvancements.generate(this.output, this.skramRoot);
       MiningAdvancements.generate(this.output, this.skramRoot);
+      WoodcuttingAdvancements.generate(this.output, this.skramRoot);
     }
   }
 

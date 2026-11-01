@@ -46,15 +46,18 @@ public class SkillWoodcutting extends Skill {
   public static void setupXPMap() {
     XP_MAP = new HashMap<>();
 
-    XP_MAP.put(Blocks.OAK_LOG, 100);
-
     XP_MAP.put(Blocks.ACACIA_LOG, 150);
     XP_MAP.put(Blocks.BIRCH_LOG, 150);
     XP_MAP.put(Blocks.CHERRY_LOG, 160);
+    XP_MAP.put(Blocks.CRIMSON_STEM, 220);
     XP_MAP.put(Blocks.DARK_OAK_LOG, 150);
     XP_MAP.put(Blocks.JUNGLE_LOG, 150);
     XP_MAP.put(Blocks.MANGROVE_LOG, 150);
+    XP_MAP.put(Blocks.OAK_LOG, 100);
+    XP_MAP.put(Blocks.PALE_OAK_LOG, 180);
+    XP_MAP.put(Blocks.POPLAR_LOG, 150);
     XP_MAP.put(Blocks.SPRUCE_LOG, 150);
+    XP_MAP.put(Blocks.WARPED_STEM, 220);
   }
 
   @Override

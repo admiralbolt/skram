@@ -1,4 +1,16 @@
-// 26.3	2026-11-01T12:06:02.329252	Registries for Reloadable (skram[1]): [minecraft, skram]
+// 26.3	2026-11-01T12:22:58.249284	Registries for Reloadable (skram[1]): [minecraft, skram]
+10e470f9621a05e693603c08fbce97b0922e1cdd data/skram/advancement/chop_acacia_log.json
+a6f4e67de1bac2a34d11c8cdff3882703780c62b data/skram/advancement/chop_birch_log.json
+f4987ea5db311760261ba6fd2981d67553296dd3 data/skram/advancement/chop_cherry_log.json
+0054de271f87da40d9f0d4df1dcf2935e3cc6cd5 data/skram/advancement/chop_crimson_stem.json
+071a5036e8b9cef5b827657b8ab7ee95055c8c67 data/skram/advancement/chop_dark_oak_log.json
+f3b325603ef9162e5eb89e6933c29ff0bf3d180a data/skram/advancement/chop_jungle_log.json
+9e37fa4440714d747b8a724af50b735aee077b55 data/skram/advancement/chop_mangrove_log.json
+3ed662ce2d58688d10768b39851bd8ecbf6308f5 data/skram/advancement/chop_oak_log.json
+8ade4180e5ea50da30eef6f3474ffbb7e3947b8b data/skram/advancement/chop_pale_oak_log.json
+d68a6a8a0c5b44294f8bde23d23888b2e4cc1230 data/skram/advancement/chop_poplar_log.json
+3b73d94bb8ac94b8a2b7d25fa7c5e60793b6ad3a data/skram/advancement/chop_spruce_log.json
+4d38daec18df4538aef67936c066af906fddf84c data/skram/advancement/chop_warped_stem.json
 ccdb4f888f19c95aea3a1b79874d32ff4e45607d data/skram/advancement/dig_clay.json
 7a7fb5d8f9162f8316ec2a42c1134910868753b7 data/skram/advancement/dig_coarse_dirt.json
 4cea4be54351bcffc92be924b1c9f16a625a0c27 data/skram/advancement/dig_dirt.json

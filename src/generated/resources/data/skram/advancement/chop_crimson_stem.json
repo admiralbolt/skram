@@ -1,0 +1,28 @@
+{
+  "parent": "skram:chop_cherry_log",
+  "criteria": {
+    "chop_block": {
+      "conditions": {
+        "blocks": "minecraft:crimson_stem"
+      },
+      "trigger": "skram:break_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Chopping this block grants a permanent +3% boost to all woodcutting xp.",
+    "icon": {
+      "id": "minecraft:crimson_stem"
+    },
+    "title": "Chop: Crimson Stem"
+  },
+  "requirements": [
+    [
+      "chop_block"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:woodcutting_xp_mult_up3"
+  },
+  "sends_telemetry_event": true
+}

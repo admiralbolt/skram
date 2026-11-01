@@ -1,0 +1,28 @@
+{
+  "parent": "skram:chop_oak_log",
+  "criteria": {
+    "chop_block": {
+      "conditions": {
+        "blocks": "minecraft:pale_oak_log"
+      },
+      "trigger": "skram:break_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Chopping this block grants a permanent +2% boost to all woodcutting xp.",
+    "icon": {
+      "id": "minecraft:pale_oak_log"
+    },
+    "title": "Chop: Pale Oak Log"
+  },
+  "requirements": [
+    [
+      "chop_block"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:woodcutting_xp_mult_up2"
+  },
+  "sends_telemetry_event": true
+}

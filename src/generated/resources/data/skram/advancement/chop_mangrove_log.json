@@ -1,0 +1,28 @@
+{
+  "parent": "skram:chop_jungle_log",
+  "criteria": {
+    "chop_block": {
+      "conditions": {
+        "blocks": "minecraft:mangrove_log"
+      },
+      "trigger": "skram:break_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Chopping this block grants a permanent +2% boost to all woodcutting xp.",
+    "icon": {
+      "id": "minecraft:mangrove_log"
+    },
+    "title": "Chop: Mangrove Log"
+  },
+  "requirements": [
+    [
+      "chop_block"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:woodcutting_xp_mult_up2"
+  },
+  "sends_telemetry_event": true
+}
