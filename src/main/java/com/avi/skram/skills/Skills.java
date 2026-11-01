@@ -32,6 +32,7 @@ public class Skills {
   public static Supplier<AttachmentType<SkillMercantile>> MERCANTILE;
   public static Supplier<AttachmentType<SkillMining>> MINING;
   public static Supplier<AttachmentType<SkillRanged>> RANGED;
+  public static Supplier<AttachmentType<SkillSailing>> SAILING;
   public static Supplier<AttachmentType<SkillSmithing>> SMITHING;
   public static Supplier<AttachmentType<SkillStealth>> STEALTH;
   public static Supplier<AttachmentType<SkillWoodcutting>> WOODCUTTING;
@@ -163,6 +164,14 @@ public class Skills {
     );
     SKILLS_BY_NAME.put(SkillRanged.NAME, RANGED);
 
+    SAILING = Skram.ATTACHMENT_TYPES.register(
+      SkillSailing.NAME, () -> AttachmentType.serializable(() -> new SkillSailing())
+        .sync(new SkillSyncHandler<>(SkillSailing.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    SKILLS_BY_NAME.put(SkillSailing.NAME, SAILING);
+
     SMITHING = Skram.ATTACHMENT_TYPES.register(
       SkillSmithing.NAME, () -> AttachmentType.serializable(() -> new SkillSmithing())
         .sync(new SkillSyncHandler<>(SkillSmithing.STREAM_CODEC))
@@ -186,6 +195,9 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillWoodcutting.NAME, WOODCUTTING);
+
+    // Using this for other scripts.
+    System.out.println(SKILLS_BY_NAME.keySet().stream().sorted());
   }
 
   // This needs to be done in a separate handler to ensure that items have been registered.
@@ -208,6 +220,7 @@ public class Skills {
     SKILL_ICONS.put(SkillMining.NAME, Identifier.withDefaultNamespace("textures/item/stone_pickaxe.png"));
     SKILL_ICONS.put(SkillRanged.NAME, Identifier.withDefaultNamespace("textures/item/bow.png"));
     SKILL_ICONS.put(SkillSmithing.NAME, Identifier.withDefaultNamespace("textures/item/campfire.png"));
+    SKILL_ICONS.put(SkillSailing.NAME, Identifier.withDefaultNamespace("textures/item/oak_boat.png"));
     SKILL_ICONS.put(SkillStealth.NAME, Identifier.withDefaultNamespace("textures/environment/celestial/moon/waning_gibbous.png"));
     SKILL_ICONS.put(SkillWoodcutting.NAME, Identifier.withDefaultNamespace("textures/item/stone_axe.png"));
   }
