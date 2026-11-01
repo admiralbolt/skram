@@ -1,0 +1,1 @@
+skram setskill @s digging xpmult 0.02

@@ -1,0 +1,1 @@
+skram setskill @s fishing xpmult 0.02

@@ -1,0 +1,1 @@
+skram setskill @s farming xpmult 0.02

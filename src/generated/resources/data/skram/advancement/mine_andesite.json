@@ -1,5 +1,5 @@
 {
-  "parent": "skram:mine_granite",
+  "parent": "skram:mine_ancient_debris",
   "criteria": {
     "mine_block": {
       "conditions": {
@@ -10,11 +10,11 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Holy shit",
+    "description": "Mining this block grants a permanent +1% boost to all mining xp.",
     "icon": {
       "id": "minecraft:andesite"
     },
-    "title": "Break: Andesite"
+    "title": "Mine: Andesite"
   },
   "requirements": [
     [

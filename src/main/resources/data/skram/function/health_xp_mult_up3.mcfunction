@@ -1,0 +1,1 @@
+skram setskill @s health xpmult 0.03

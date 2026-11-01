@@ -1,5 +1,5 @@
 {
-  "parent": "skram:mine_deepslate_lapis_lazuli_ore",
+  "parent": "skram:mine_deepslate_diamond_ore",
   "criteria": {
     "mine_block": {
       "conditions": {
@@ -10,11 +10,11 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Holy shit",
+    "description": "Mining this block grants a permanent +2% boost to all mining xp.",
     "icon": {
       "id": "minecraft:deepslate_emerald_ore"
     },
-    "title": "Break: Deepslate Emerald Ore"
+    "title": "Mine: Deepslate Emerald Ore"
   },
   "requirements": [
     [
@@ -22,7 +22,7 @@
     ]
   ],
   "rewards": {
-    "function": "skram:mining_xp_mult_up1"
+    "function": "skram:mining_xp_mult_up2"
   },
   "sends_telemetry_event": true
 }

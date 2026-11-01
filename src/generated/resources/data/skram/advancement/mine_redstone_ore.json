@@ -1,5 +1,5 @@
 {
-  "parent": "skram:mine_dripstone_block",
+  "parent": "skram:mine_obsidian",
   "criteria": {
     "mine_block": {
       "conditions": {
@@ -10,11 +10,11 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Holy shit",
+    "description": "Mining this block grants a permanent +1% boost to all mining xp.",
     "icon": {
       "id": "minecraft:redstone_ore"
     },
-    "title": "Break: Redstone Ore"
+    "title": "Mine: Redstone Ore"
   },
   "requirements": [
     [

@@ -1,0 +1,1 @@
+skram setskill @s stealth xpmult 0.02

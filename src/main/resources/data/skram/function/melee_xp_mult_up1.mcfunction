@@ -1,0 +1,1 @@
+skram setskill @s melee xpmult 0.01

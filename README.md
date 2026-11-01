@@ -35,6 +35,7 @@ Misc Ideas:
  - Perk: Can kill with poison?
  - Perk: Cluster Bomb, chance to duplicate thrown potions?
  - Perk: Twins!!? Chance to spawn two babis.
+ - Perk: Lava Sailer? <-- not sure if possible.
 
  
 Collection Log.
@@ -219,7 +220,9 @@ Precise Smasher:
   Effect: Gain a 10% chance to not damage any tool when breaking a block. (stacks with unbreaking)
   Required Levels: Digging 20, Mining 20, Woodcutting 20
 
-
+Captain of Legend:
+  Effect: Boats you are in can no longer break.
+  Required Levels: Sailing 30
 
 
 

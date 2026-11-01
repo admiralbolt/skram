@@ -1,5 +1,5 @@
 {
-  "parent": "skram:mine_deepslate_iron_ore",
+  "parent": "skram:mine_deepslate_emerald_ore",
   "criteria": {
     "mine_block": {
       "conditions": {
@@ -10,11 +10,11 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Holy shit",
+    "description": "Mining this block grants a permanent +1% boost to all mining xp.",
     "icon": {
       "id": "minecraft:deepslate_gold_ore"
     },
-    "title": "Break: Deepslate Gold Ore"
+    "title": "Mine: Deepslate Gold Ore"
   },
   "requirements": [
     [

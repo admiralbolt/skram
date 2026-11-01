@@ -10,11 +10,11 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Holy shit",
+    "description": "Mining this block grants a permanent +1% boost to all mining xp.",
     "icon": {
       "id": "minecraft:deepslate_copper_ore"
     },
-    "title": "Break: Deepslate Copper Ore"
+    "title": "Mine: Deepslate Copper Ore"
   },
   "requirements": [
     [

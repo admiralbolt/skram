@@ -1,5 +1,5 @@
 {
-  "parent": "skram:mine_coal_ore",
+  "parent": "skram:mine_cobblestone",
   "criteria": {
     "mine_block": {
       "conditions": {
@@ -10,11 +10,11 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Holy shit",
+    "description": "Mining this block grants a permanent +1% boost to all mining xp.",
     "icon": {
       "id": "minecraft:copper_ore"
     },
-    "title": "Break: Copper Ore"
+    "title": "Mine: Copper Ore"
   },
   "requirements": [
     [

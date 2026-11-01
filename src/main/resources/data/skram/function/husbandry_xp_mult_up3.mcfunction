@@ -1,0 +1,1 @@
+skram setskill @s husbandry xpmult 0.03

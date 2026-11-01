@@ -48,39 +48,41 @@ public class SkillMining extends Skill {
   public static void setupXPMap() {
     XP_MAP = new HashMap<>();
 
-    // Stone.
-    XP_MAP.put(Blocks.STONE, 20);
-    XP_MAP.put(Blocks.COBBLESTONE, 20);
-    XP_MAP.put(Blocks.DRIPSTONE_BLOCK, 30);
-    XP_MAP.put(Blocks.MOSSY_COBBLESTONE, 50);
-    XP_MAP.put(Blocks.ANDESITE, 25);
-    XP_MAP.put(Blocks.DIORITE, 25);
-    XP_MAP.put(Blocks.GRANITE, 25);
-    XP_MAP.put(Blocks.SANDSTONE, 30);
-    XP_MAP.put(Blocks.DEEPSLATE, 30);
-    XP_MAP.put(Blocks.OBSIDIAN, 130);
-    XP_MAP.put(Blocks.CRYING_OBSIDIAN, 1000);
-
-    // Ore.
-    XP_MAP.put(Blocks.COAL_ORE, 100);
-    XP_MAP.put(Blocks.DEEPSLATE_COAL_ORE, 140);
-    XP_MAP.put(Blocks.COPPER_ORE, 140);
-    XP_MAP.put(Blocks.DEEPSLATE_COPPER_ORE, 190);
-    XP_MAP.put(Blocks.IRON_ORE, 180);
-    XP_MAP.put(Blocks.DEEPSLATE_IRON_ORE, 250);
-    XP_MAP.put(Blocks.GOLD_ORE, 220);
-    XP_MAP.put(Blocks.DEEPSLATE_GOLD_ORE, 300);
-    XP_MAP.put(Blocks.DIAMOND_ORE, 340);
-    XP_MAP.put(Blocks.DEEPSLATE_DIAMOND_ORE, 370);
-    XP_MAP.put(Blocks.EMERALD_ORE, 500);
-    XP_MAP.put(Blocks.DEEPSLATE_EMERALD_ORE, 700);
-    XP_MAP.put(Blocks.LAPIS_ORE, 200);
-    XP_MAP.put(Blocks.DEEPSLATE_LAPIS_ORE, 280);
-    XP_MAP.put(Blocks.REDSTONE_ORE, 180);
-    XP_MAP.put(Blocks.DEEPSLATE_REDSTONE_ORE, 250);
-
-    XP_MAP.put(Blocks.NETHER_GOLD_ORE, 300);
     XP_MAP.put(Blocks.ANCIENT_DEBRIS, 500);
+    XP_MAP.put(Blocks.ANDESITE, 25);
+    XP_MAP.put(Blocks.BASALT, 30);
+    XP_MAP.put(Blocks.BLACKSTONE, 30);
+    XP_MAP.put(Blocks.CINNABAR, 30);
+    XP_MAP.put(Blocks.COAL_ORE, 100);
+    XP_MAP.put(Blocks.COBBLESTONE, 20);
+    XP_MAP.put(Blocks.COPPER_ORE, 140);
+    XP_MAP.put(Blocks.CRYING_OBSIDIAN, 1000);
+    XP_MAP.put(Blocks.DEEPSLATE, 30);
+    XP_MAP.put(Blocks.DEEPSLATE_COAL_ORE, 140);
+    XP_MAP.put(Blocks.DEEPSLATE_COPPER_ORE, 190);
+    XP_MAP.put(Blocks.DEEPSLATE_DIAMOND_ORE, 370);
+    XP_MAP.put(Blocks.DEEPSLATE_EMERALD_ORE, 700);
+    XP_MAP.put(Blocks.DEEPSLATE_GOLD_ORE, 300);
+    XP_MAP.put(Blocks.DEEPSLATE_IRON_ORE, 250);
+    XP_MAP.put(Blocks.DEEPSLATE_LAPIS_ORE, 280);
+    XP_MAP.put(Blocks.DEEPSLATE_REDSTONE_ORE, 250);
+    XP_MAP.put(Blocks.DIAMOND_ORE, 340);
+    XP_MAP.put(Blocks.DIORITE, 25);
+    XP_MAP.put(Blocks.DRIPSTONE_BLOCK, 30);
+    XP_MAP.put(Blocks.EMERALD_ORE, 500);
+    XP_MAP.put(Blocks.GOLD_ORE, 220);
+    XP_MAP.put(Blocks.GRANITE, 25);
+    XP_MAP.put(Blocks.INFESTED_COBBLESTONE, 50);
+    XP_MAP.put(Blocks.IRON_ORE, 180);
+    XP_MAP.put(Blocks.LAPIS_ORE, 200);
+    XP_MAP.put(Blocks.MOSSY_COBBLESTONE, 50);
+    XP_MAP.put(Blocks.NETHER_GOLD_ORE, 300);
+    XP_MAP.put(Blocks.OBSIDIAN, 130);
+    XP_MAP.put(Blocks.REDSTONE_ORE, 180);
+    XP_MAP.put(Blocks.SANDSTONE, 30);
+    XP_MAP.put(Blocks.STONE, 20);
+    XP_MAP.put(Blocks.SULFUR, 25);
+    XP_MAP.put(Blocks.TUFF, 30);
   }
 
   @Override

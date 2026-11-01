@@ -1,5 +1,5 @@
 {
-  "parent": "skram:example_advancement",
+  "parent": "skram:mine_sandstone",
   "criteria": {
     "mine_block": {
       "conditions": {
@@ -10,11 +10,11 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Holy shit",
+    "description": "Mining this block grants a permanent +1% boost to all mining xp.",
     "icon": {
       "id": "minecraft:stone"
     },
-    "title": "Break: Stone"
+    "title": "Mine: Stone"
   },
   "requirements": [
     [

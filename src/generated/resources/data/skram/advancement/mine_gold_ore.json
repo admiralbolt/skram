@@ -1,5 +1,5 @@
 {
-  "parent": "skram:mine_iron_ore",
+  "parent": "skram:mine_emerald_ore",
   "criteria": {
     "mine_block": {
       "conditions": {
@@ -10,11 +10,11 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Holy shit",
+    "description": "Mining this block grants a permanent +1% boost to all mining xp.",
     "icon": {
       "id": "minecraft:gold_ore"
     },
-    "title": "Break: Gold Ore"
+    "title": "Mine: Gold Ore"
   },
   "requirements": [
     [

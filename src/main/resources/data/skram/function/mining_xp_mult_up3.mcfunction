@@ -1,0 +1,1 @@
+skram setskill @s mining xpmult 0.03

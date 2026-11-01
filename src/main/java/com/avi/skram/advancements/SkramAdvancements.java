@@ -11,18 +11,18 @@ import java.util.List;
 
 // This is mostly just advancements, but with some added tracking to give skill XP bonuses.
 @EventBusSubscriber(modid = Skram.MODID)
-public class SkramJournal {
+public class SkramAdvancements {
 
   @SubscribeEvent
   public static void onGatherRegistries(GatherDataRegistryEntriesEvent event) {
     System.out.println("GATHER_REGISTRIES --> THIS IS GETTING CALLED.");
     event.add(Registries.ADVANCEMENT, bootstrap -> {
       new AdvancementProvider(
-        List.of(MiningJournal::new)
+        List.of(MiningAdvancements::new)
       );
     });
 
     event.gatherFor("minecraft", Skram.MODID)
-      .advancement(MiningJournal::new);
+      .advancement(MiningAdvancements::new);
   }
 }

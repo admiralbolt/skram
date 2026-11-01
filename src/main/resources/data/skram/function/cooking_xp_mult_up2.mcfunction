@@ -1,0 +1,1 @@
+skram setskill @s cooking xpmult 0.02

@@ -1,0 +1,1 @@
+skram setskill @s sailing xpmult 0.03

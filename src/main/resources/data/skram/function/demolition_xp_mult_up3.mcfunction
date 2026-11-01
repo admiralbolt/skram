@@ -1,0 +1,1 @@
+skram setskill @s demolition xpmult 0.03

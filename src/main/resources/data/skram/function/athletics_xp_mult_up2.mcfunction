@@ -1,0 +1,1 @@
+skram setskill @s athletics xpmult 0.02

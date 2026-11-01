@@ -1,0 +1,1 @@
+skram setskill @s woodcutting xpmult 0.03

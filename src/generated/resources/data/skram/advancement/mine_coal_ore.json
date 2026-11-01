@@ -1,5 +1,5 @@
 {
-  "parent": "skram:mine_redstone_ore",
+  "parent": "skram:mine_cinnabar",
   "criteria": {
     "mine_block": {
       "conditions": {
@@ -10,11 +10,11 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Holy shit",
+    "description": "Mining this block grants a permanent +1% boost to all mining xp.",
     "icon": {
       "id": "minecraft:coal_ore"
     },
-    "title": "Break: Coal Ore"
+    "title": "Mine: Coal Ore"
   },
   "requirements": [
     [

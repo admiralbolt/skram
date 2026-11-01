@@ -1,5 +1,5 @@
 {
-  "parent": "skram:mine_deepslate_diamond_ore",
+  "parent": "skram:mine_deepslate_iron_ore",
   "criteria": {
     "mine_block": {
       "conditions": {
@@ -10,11 +10,11 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Holy shit",
+    "description": "Mining this block grants a permanent +1% boost to all mining xp.",
     "icon": {
       "id": "minecraft:deepslate_lapis_ore"
     },
-    "title": "Break: Deepslate Lapis Lazuli Ore"
+    "title": "Mine: Deepslate Lapis Lazuli Ore"
   },
   "requirements": [
     [

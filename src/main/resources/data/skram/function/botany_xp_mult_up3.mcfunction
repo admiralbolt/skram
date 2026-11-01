@@ -1,0 +1,1 @@
+skram setskill @s botany xpmult 0.03

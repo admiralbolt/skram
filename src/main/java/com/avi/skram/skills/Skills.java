@@ -197,7 +197,8 @@ public class Skills {
     SKILLS_BY_NAME.put(SkillWoodcutting.NAME, WOODCUTTING);
 
     // Using this for other scripts.
-    System.out.println(SKILLS_BY_NAME.keySet().stream().sorted());
+    System.out.println("HEY! LISTEN!");
+    System.out.println(SKILLS_BY_NAME.keySet().stream().sorted().toList());
   }
 
   // This needs to be done in a separate handler to ensure that items have been registered.

@@ -1,0 +1,1 @@
+skram setskill @s mercantile xpmult 0.01

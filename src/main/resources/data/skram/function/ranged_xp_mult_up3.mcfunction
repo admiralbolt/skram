@@ -1,0 +1,1 @@
+skram setskill @s ranged xpmult 0.03

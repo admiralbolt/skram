@@ -1,5 +1,5 @@
 {
-  "parent": "skram:mine_andesite",
+  "parent": "skram:mine_diorite",
   "criteria": {
     "mine_block": {
       "conditions": {
@@ -10,11 +10,11 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Holy shit",
+    "description": "Mining this block grants a permanent +1% boost to all mining xp.",
     "icon": {
       "id": "minecraft:dripstone_block"
     },
-    "title": "Break: Dripstone Block"
+    "title": "Mine: Dripstone Block"
   },
   "requirements": [
     [

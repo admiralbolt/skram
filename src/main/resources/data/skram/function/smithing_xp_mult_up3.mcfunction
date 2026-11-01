@@ -1,0 +1,1 @@
+skram setskill @s smithing xpmult 0.03
