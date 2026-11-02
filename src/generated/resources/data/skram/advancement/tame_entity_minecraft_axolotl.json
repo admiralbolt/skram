@@ -1,0 +1,34 @@
+{
+  "parent": "skram:tame_entity_minecraft_allay",
+  "criteria": {
+    "tame_entity": {
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:axolotl"
+          }
+        }
+      },
+      "trigger": "minecraft:tame_animal"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Taming this entity grants a permanent +1% boost to all husbandry xp.",
+    "icon": {
+      "id": "minecraft:axolotl_spawn_egg"
+    },
+    "title": "Tame: Axolotl"
+  },
+  "requirements": [
+    [
+      "tame_entity"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:husbandry_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

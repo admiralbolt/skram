@@ -1,0 +1,34 @@
+{
+  "parent": "skram:breed_entity_minecraft_llama",
+  "criteria": {
+    "breed_entity": {
+      "conditions": {
+        "child": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:mooshroom"
+          }
+        }
+      },
+      "trigger": "minecraft:bred_animals"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Breeding this entity grants a permanent +3% boost to all husbandry xp.",
+    "icon": {
+      "id": "minecraft:mooshroom_spawn_egg"
+    },
+    "title": "Breed: Mooshroom"
+  },
+  "requirements": [
+    [
+      "breed_entity"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:husbandry_xp_mult_up3"
+  },
+  "sends_telemetry_event": true
+}
