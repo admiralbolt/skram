@@ -31,20 +31,21 @@ public class AthleticsAdvancements {
     HolderGetter<Biome> biomes = output.lookup(Registries.BIOME);
     List<AdvancementHolder> biomeAdvancements = new ArrayList<>();
 
+
     List<ResourceKey<Biome>> allBiomes = Stream.concat(MultiNoiseBiomeSourceParameterList.Preset.OVERWORLD.usedBiomes(), MultiNoiseBiomeSourceParameterList.Preset.NETHER.usedBiomes()).toList();
     for (ResourceKey<Biome> biome : allBiomes) {
       biomeAdvancements.add(Advancement.Builder.advancement()
         .parent(biomeAdvancements.isEmpty() ? skramRoot : biomeAdvancements.getLast())
         .display(
-          new ItemStackTemplate(Items.FLOWER_POT),
+          new ItemStackTemplate(DataGenerationUtils.BIOME_TO_ITEM.get(biome)),
           Component.literal("Discover: " + DataGenerationUtils.titleize(biome.identifier().toShortString())),
-          Component.literal("Discovering this biome grants a permanent +1% boost to all athletics xp."),
+          Component.literal("Discovering this biome grants a permanent +1% boost to all athletics & sailing xp."),
           AdvancementType.TASK,
           true,
           false,
           false
         ).rewards(
-          AdvancementRewards.Builder.function(Identifier.fromNamespaceAndPath(Skram.MODID, "athletics_xp_mult_up1"))
+          AdvancementRewards.Builder.function(Identifier.fromNamespaceAndPath(Skram.MODID, "athletics_and_sailing_xp_mult_up1"))
         ).addCriterion(
           "discover_biome",
           PlayerTrigger.TriggerInstance.located(LocationPredicate.Builder.inBiome(biomes.getOrThrow(biome)))

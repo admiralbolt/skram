@@ -20,7 +20,7 @@
     "announce_to_chat": false,
     "description": "Discovering this biome grants a permanent +1% boost to all athletics xp.",
     "icon": {
-      "id": "minecraft:flower_pot"
+      "id": "skram:frozen_river"
     },
     "title": "Discover: Frozen River"
   },
