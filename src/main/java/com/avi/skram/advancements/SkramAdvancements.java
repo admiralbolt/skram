@@ -65,9 +65,11 @@ public class SkramAdvancements {
           InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIRT)
         ).save(this.output, Identifier.fromNamespaceAndPath(Skram.MODID, "skram_root"));
 
+      AthleticsAdvancements.generate(this.output, this.skramRoot);
       BotanyAdvancements.generate(this.output, this.skramRoot);
       DiggingAdvancements.generate(this.output, this.skramRoot);
       FarmingAdvancements.generate(this.output, this.skramRoot);
+      HealthAdvancements.generate(this.output, this.skramRoot);
       MeleeAdvancements.generate(this.output, this.skramRoot);
       MiningAdvancements.generate(this.output, this.skramRoot);
       RangedAdvancements.generate(this.output, this.skramRoot);
@@ -76,7 +78,7 @@ public class SkramAdvancements {
   }
 
   public static String prettify(String input) {
-    return input.toLowerCase().replace(".", "_").replace(" ", "_");
+    return input.toLowerCase().replace(".", "_").replace(" ", "_").replace(":", "_");
   }
 
 }

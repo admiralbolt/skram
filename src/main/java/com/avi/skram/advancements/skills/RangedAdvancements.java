@@ -2,7 +2,7 @@ package com.avi.skram.advancements.skills;
 
 import com.avi.skram.Skram;
 import com.avi.skram.advancements.SkramAdvancements;
-import com.avi.skram.utils.EntityUtils;
+import com.avi.skram.utils.DataGenerationUtils;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
@@ -83,7 +83,7 @@ public class RangedAdvancements {
       mobAdvancements.add(Advancement.Builder.advancement()
         .parent(mobAdvancements.isEmpty() ? skramRoot : mobAdvancements.getLast())
         .display(
-          new ItemStackTemplate(EntityUtils.ENTITY_TO_SPAWN_EGG.get(entityType)),
+          new ItemStackTemplate(DataGenerationUtils.ENTITY_TO_SPAWN_EGG.get(entityType)),
           Component.literal("Snipe: " + entityType.getDescription().getString()),
           Component.literal("Slaying this entity (with a projectile) grants a permanent +" + xpMult + "% boost to all ranged xp."),
           AdvancementType.TASK,

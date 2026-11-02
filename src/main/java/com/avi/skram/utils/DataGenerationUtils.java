@@ -8,7 +8,7 @@ import net.minecraft.world.item.Items;
 
 import java.util.Map;
 
-public class EntityUtils {
+public class DataGenerationUtils {
 
   // The ONLY reason I'm doing this is because I can't lookup spawn eggs during datagen. Cries.
   public static final Map<EntityType<?>, Item> ENTITY_TO_SPAWN_EGG = ImmutableMap.<EntityType<?>, Item>builder()
@@ -54,5 +54,24 @@ public class EntityUtils {
     .put(EntityTypes.ZOMBIFIED_PIGLIN, Items.ZOMBIFIED_PIGLIN_SPAWN_EGG)
     .put(EntityTypes.ZOMBIE_NAUTILUS, Items.ZOMBIE_NAUTILUS_SPAWN_EGG)
     .build();
+
+  public static String titleize(String input) {
+    String output = input;
+    if (input.startsWith("minecraft")) {
+      output = input.split(":")[0];
+    }
+
+    StringBuilder builder = new StringBuilder();
+    String[] words = output.split("_");
+    for (int i = 0; i < words.length; ++i) {
+      String word = words[i];
+      builder.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1));
+      if (i < words.length - 1) {
+        builder.append(" ");
+      }
+    }
+
+    return builder.toString();
+  }
 
 }
