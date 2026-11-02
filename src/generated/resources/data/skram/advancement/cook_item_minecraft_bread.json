@@ -1,0 +1,37 @@
+{
+  "parent": "skram:cook_item_minecraft_beetroot_soup",
+  "criteria": {
+    "craft_thing": {
+      "conditions": {
+        "recipes": "minecraft:bread"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "smelt_thing": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:bread"
+        }
+      },
+      "trigger": "skram:item_smelted"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Cooking this item grants a +1% boost to all cooking xp.",
+    "icon": {
+      "id": "minecraft:bread"
+    },
+    "title": "Cook: Bread"
+  },
+  "requirements": [
+    [
+      "smelt_thing",
+      "craft_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:cooking_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

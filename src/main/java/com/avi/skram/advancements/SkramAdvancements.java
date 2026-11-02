@@ -67,6 +67,7 @@ public class SkramAdvancements {
 
       AthleticsSailingAdvancements.generate(this.output, this.skramRoot);
       BotanyAdvancements.generate(this.output, this.skramRoot);
+      CookingAdvancements.generate(this.output, this.skramRoot);
       DiggingAdvancements.generate(this.output, this.skramRoot);
       FarmingAdvancements.generate(this.output, this.skramRoot);
       MeleeAdvancements.generate(this.output, this.skramRoot);

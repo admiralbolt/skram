@@ -1,0 +1,37 @@
+{
+  "parent": "skram:cook_item_minecraft_cookie",
+  "criteria": {
+    "craft_thing": {
+      "conditions": {
+        "recipes": "minecraft:dried_kelp"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "smelt_thing": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:dried_kelp"
+        }
+      },
+      "trigger": "skram:item_smelted"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Cooking this item grants a +1% boost to all cooking xp.",
+    "icon": {
+      "id": "minecraft:dried_kelp"
+    },
+    "title": "Cook: Dried Kelp"
+  },
+  "requirements": [
+    [
+      "smelt_thing",
+      "craft_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:cooking_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

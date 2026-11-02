@@ -1,0 +1,37 @@
+{
+  "parent": "skram:cook_item_minecraft_golden_carrot",
+  "criteria": {
+    "craft_thing": {
+      "conditions": {
+        "recipes": "minecraft:mushroom_stew"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "smelt_thing": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:mushroom_stew"
+        }
+      },
+      "trigger": "skram:item_smelted"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Cooking this item grants a +2% boost to all cooking xp.",
+    "icon": {
+      "id": "minecraft:mushroom_stew"
+    },
+    "title": "Cook: Mushroom Stew"
+  },
+  "requirements": [
+    [
+      "smelt_thing",
+      "craft_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:cooking_xp_mult_up2"
+  },
+  "sends_telemetry_event": true
+}

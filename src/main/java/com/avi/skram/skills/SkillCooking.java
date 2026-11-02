@@ -38,21 +38,22 @@ public class SkillCooking extends Skill {
   public static void setupXPMap() {
     XP_MAP = new HashMap<>();
 
-    XP_MAP.put(Items.BAKED_POTATO, 20);
-    XP_MAP.put(Items.BEETROOT_SOUP, 40);
-    XP_MAP.put(Items.BREAD, 25);
+    XP_MAP.put(Items.BAKED_POTATO, 40);
+    XP_MAP.put(Items.BEETROOT_SOUP, 50);
+    XP_MAP.put(Items.BREAD, 20);
     XP_MAP.put(Items.CAKE, 200);
-    XP_MAP.put(Items.COOKED_BEEF, 50);
-    XP_MAP.put(Items.COOKED_CHICKEN, 50);
-    XP_MAP.put(Items.COOKED_COD, 50);
-    XP_MAP.put(Items.COOKED_MUTTON, 50);
-    XP_MAP.put(Items.COOKED_RABBIT, 50);
-    XP_MAP.put(Items.COOKED_SALMON, 50);
+    XP_MAP.put(Items.COOKED_BEEF, 70);
+    XP_MAP.put(Items.COOKED_CHICKEN, 70);
+    XP_MAP.put(Items.COOKED_COD, 70);
+    XP_MAP.put(Items.COOKED_MUTTON, 70);
+    XP_MAP.put(Items.COOKED_RABBIT, 100);
+    XP_MAP.put(Items.COOKED_SALMON, 70);
     XP_MAP.put(Items.COOKIE, 2);
     XP_MAP.put(Items.DRIED_KELP, 30);
-    XP_MAP.put(Items.GOLDEN_CARROT, 60);
+    XP_MAP.put(Items.GOLDEN_APPLE, 100);
+    XP_MAP.put(Items.GOLDEN_CARROT, 80);
     XP_MAP.put(Items.HONEY_BLOCK, 40);
-    XP_MAP.put(Items.PUMPKIN_PIE, 160);
+    XP_MAP.put(Items.PUMPKIN_PIE, 90);
     XP_MAP.put(Items.RABBIT_STEW, 250);
     XP_MAP.put(Items.SUSPICIOUS_STEW, 200);
   }

@@ -1,0 +1,37 @@
+{
+  "parent": "skram:cook_item_minecraft_cooked_rabbit",
+  "criteria": {
+    "craft_thing": {
+      "conditions": {
+        "recipes": "minecraft:cooked_cod"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    },
+    "smelt_thing": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:cooked_cod"
+        }
+      },
+      "trigger": "skram:item_smelted"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Cooking this item grants a +1% boost to all cooking xp.",
+    "icon": {
+      "id": "minecraft:cooked_cod"
+    },
+    "title": "Cook: Cooked Cod"
+  },
+  "requirements": [
+    [
+      "smelt_thing",
+      "craft_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:cooking_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

@@ -240,6 +240,8 @@ This is a maybe skill. Two issues:
 
 Mega Chests -> You know 'em and you love 'em.
 Backpack -> You know 'em and you love 'em.
+Compactor? -> Turns cobblestone into coal, turns coal into diamonds?
+
 
 
 
