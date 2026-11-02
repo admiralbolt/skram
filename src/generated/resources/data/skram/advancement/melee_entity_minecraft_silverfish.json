@@ -24,7 +24,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Slaying this entity (with a melee weapon) grants a permanent +1% boost to all melee xp.",
+    "description": "Slaying this entity (with a melee weapon) grants a permanent +1% boost to all melee xp, and a +0.5% boost to all health xp.",
     "icon": {
       "id": "minecraft:silverfish_spawn_egg"
     },

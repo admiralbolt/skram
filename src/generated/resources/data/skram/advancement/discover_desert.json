@@ -1,5 +1,5 @@
 {
-  "parent": "skram:discover_badlands",
+  "parent": "skram:discover_deep_ocean",
   "criteria": {
     "discover_biome": {
       "conditions": {
@@ -18,7 +18,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Discovering this biome grants a permanent +1% boost to all athletics xp.",
+    "description": "Discovering this biome grants a permanent +1% boost to all athletics & sailing xp.",
     "icon": {
       "id": "skram:desert"
     },
@@ -30,7 +30,7 @@
     ]
   ],
   "rewards": {
-    "function": "skram:athletics_xp_mult_up1"
+    "function": "skram:athletics_and_sailing_xp_mult_up1"
   },
   "sends_telemetry_event": true
 }

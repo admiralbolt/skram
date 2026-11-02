@@ -34,6 +34,7 @@ public class SkramItems {
   public static DeferredItem<Item> FROZEN_PEAKS;
   public static DeferredItem<Item> FROZEN_RIVER;
   public static DeferredItem<Item> GROVE;
+  public static DeferredItem<Item> ICE_SPIKES;
   public static DeferredItem<Item> JAGGED_PEAKS;
   public static DeferredItem<Item> JUNGLE;
   public static DeferredItem<Item> LUKEWARM_OCEAN;
@@ -103,6 +104,7 @@ public class SkramItems {
     FROZEN_PEAKS = Skram.ITEMS.registerSimpleItem("frozen_peaks");
     FROZEN_RIVER = Skram.ITEMS.registerSimpleItem("frozen_river");
     GROVE = Skram.ITEMS.registerSimpleItem("grove");
+    ICE_SPIKES = Skram.ITEMS.registerSimpleItem("ice_spikes");
     JAGGED_PEAKS = Skram.ITEMS.registerSimpleItem("jagged_peaks");
     JUNGLE = Skram.ITEMS.registerSimpleItem("jungle");
     LUKEWARM_OCEAN = Skram.ITEMS.registerSimpleItem("lukewarm_ocean");

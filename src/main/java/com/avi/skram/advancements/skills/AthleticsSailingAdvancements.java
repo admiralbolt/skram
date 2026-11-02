@@ -9,7 +9,6 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.predicates.LocationPredicate;
 import net.minecraft.advancements.triggers.PlayerTrigger;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -17,7 +16,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList;
 
@@ -25,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class AthleticsAdvancements {
+public class AthleticsSailingAdvancements {
 
   public static void generate(BootstrapContext<Advancement> output, AdvancementHolder skramRoot) {
     HolderGetter<Biome> biomes = output.lookup(Registries.BIOME);
@@ -33,7 +31,7 @@ public class AthleticsAdvancements {
 
 
     List<ResourceKey<Biome>> allBiomes = Stream.concat(MultiNoiseBiomeSourceParameterList.Preset.OVERWORLD.usedBiomes(), MultiNoiseBiomeSourceParameterList.Preset.NETHER.usedBiomes()).toList();
-    for (ResourceKey<Biome> biome : allBiomes) {
+    for (ResourceKey<Biome> biome : allBiomes.stream().sorted().toList()) {
       biomeAdvancements.add(Advancement.Builder.advancement()
         .parent(biomeAdvancements.isEmpty() ? skramRoot : biomeAdvancements.getLast())
         .display(

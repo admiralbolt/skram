@@ -85,7 +85,7 @@ public class RangedAdvancements {
         .display(
           new ItemStackTemplate(DataGenerationUtils.ENTITY_TO_SPAWN_EGG.get(entityType)),
           Component.literal("Snipe: " + entityType.getDescription().getString()),
-          Component.literal("Slaying this entity (with a projectile) grants a permanent +" + xpMult + "% boost to all ranged xp."),
+          Component.literal("Slaying this entity (with a projectile) grants a permanent +" + xpMult + "% boost to all ranged xp and a +" + ((double) xpMult) / 2 + "% boost to all health xp."),
           AdvancementType.TASK,
           true,
           false,

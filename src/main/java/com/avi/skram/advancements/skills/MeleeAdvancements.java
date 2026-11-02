@@ -85,7 +85,7 @@ public class MeleeAdvancements {
         .display(
           new ItemStackTemplate(DataGenerationUtils.ENTITY_TO_SPAWN_EGG.get(entityType)),
           Component.literal("Melee: " + entityType.getDescription().getString()),
-          Component.literal("Slaying this entity (with a melee weapon) grants a permanent +" + xpMult + "% boost to all melee xp."),
+          Component.literal("Slaying this entity (with a melee weapon) grants a permanent +" + xpMult + "% boost to all melee xp, and a +" + ((double) xpMult) / 2 + "% boost to all health xp."),
           AdvancementType.TASK,
           true,
           false,

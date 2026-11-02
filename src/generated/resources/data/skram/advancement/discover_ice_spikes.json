@@ -1,5 +1,5 @@
 {
-  "parent": "skram:discover_river",
+  "parent": "skram:discover_grove",
   "criteria": {
     "discover_biome": {
       "conditions": {
@@ -18,9 +18,9 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Discovering this biome grants a permanent +1% boost to all athletics xp.",
+    "description": "Discovering this biome grants a permanent +1% boost to all athletics & sailing xp.",
     "icon": {
-      "id": "skram:awesome_snake"
+      "id": "skram:ice_spikes"
     },
     "title": "Discover: Ice Spikes"
   },
@@ -30,7 +30,7 @@
     ]
   ],
   "rewards": {
-    "function": "skram:athletics_xp_mult_up1"
+    "function": "skram:athletics_and_sailing_xp_mult_up1"
   },
   "sends_telemetry_event": true
 }

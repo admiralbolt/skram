@@ -89,7 +89,7 @@ public class DataGenerationUtils {
     .put(Biomes.FROZEN_PEAKS, SkramItems.FROZEN_PEAKS)
     .put(Biomes.FROZEN_RIVER, SkramItems.FROZEN_RIVER)
     .put(Biomes.GROVE, SkramItems.GROVE)
-    .put(Biomes.ICE_SPIKES, SkramItems.AWESOME_SNAKE)
+    .put(Biomes.ICE_SPIKES, SkramItems.ICE_SPIKES)
     .put(Biomes.JAGGED_PEAKS, SkramItems.JAGGED_PEAKS)
     .put(Biomes.JUNGLE, SkramItems.JUNGLE)
     .put(Biomes.LUKEWARM_OCEAN, SkramItems.LUKEWARM_OCEAN)

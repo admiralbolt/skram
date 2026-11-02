@@ -24,7 +24,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "description": "Slaying this entity (with a projectile) grants a permanent +1% boost to all ranged xp.",
+    "description": "Slaying this entity (with a projectile) grants a permanent +1% boost to all ranged xp and a +0.5% boost to all health xp.",
     "icon": {
       "id": "minecraft:breeze_spawn_egg"
     },
