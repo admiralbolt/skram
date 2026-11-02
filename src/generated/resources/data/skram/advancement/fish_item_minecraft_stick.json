@@ -1,0 +1,30 @@
+{
+  "parent": "skram:fish_item_minecraft_salmon",
+  "criteria": {
+    "fish_thing": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:stick"
+        }
+      },
+      "trigger": "minecraft:fishing_rod_hooked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Fishing this item grants a +1% boost to all fishing xp.",
+    "icon": {
+      "id": "minecraft:stick"
+    },
+    "title": "Fish: Stick"
+  },
+  "requirements": [
+    [
+      "fish_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:fishing_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

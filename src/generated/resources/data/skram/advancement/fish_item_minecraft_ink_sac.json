@@ -1,0 +1,30 @@
+{
+  "parent": "skram:fish_item_minecraft_leather_boots",
+  "criteria": {
+    "fish_thing": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:ink_sac"
+        }
+      },
+      "trigger": "minecraft:fishing_rod_hooked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Fishing this item grants a +1% boost to all fishing xp.",
+    "icon": {
+      "id": "minecraft:ink_sac"
+    },
+    "title": "Fish: Ink Sac"
+  },
+  "requirements": [
+    [
+      "fish_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:fishing_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

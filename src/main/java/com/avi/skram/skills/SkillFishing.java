@@ -45,11 +45,11 @@ public class SkillFishing extends Skill {
   }
 
   public float getSpeedBonus() {
-    return 0.8f * this.level;
+    return 0.02f * this.level;
   }
 
   public double catchTreasureChance() {
-    return 0.5 * this.level;
+    return 0.01 * this.level;
   }
 
   public static void handleCatchFish(ItemFishedEvent event) {
@@ -71,7 +71,7 @@ public class SkillFishing extends Skill {
       LootTable lootTable = player.level().getServer().reloadableRegistries().getLootTable(BuiltInLootTables.BURIED_TREASURE);
       List<ItemStack> items = lootTable.getRandomItems(params);
 
-      ItemEntity entity = new ItemEntity(hook.level(), hook.getX(), hook.getY(), hook.getZ(), items.getFirst());
+      ItemEntity entity = new ItemEntity(hook.level(), hook.getX(), hook.getY(), hook.getZ(), items.get((items.size() >= 2) ? 1 : 0));
       double xa = player.getX() - hook.getX();
       double ya = player.getY() - hook.getY();
       double za = player.getZ() - hook.getZ();

@@ -1,0 +1,30 @@
+{
+  "parent": "skram:fish_block_minecraft_lily_pad",
+  "criteria": {
+    "fish_thing": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:nautilus_shell"
+        }
+      },
+      "trigger": "minecraft:fishing_rod_hooked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Fishing this item grants a +1% boost to all fishing xp.",
+    "icon": {
+      "id": "minecraft:nautilus_shell"
+    },
+    "title": "Fish: Nautilus Shell"
+  },
+  "requirements": [
+    [
+      "fish_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:fishing_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

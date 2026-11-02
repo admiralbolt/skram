@@ -1,0 +1,30 @@
+{
+  "parent": "skram:fish_block_minecraft_tripwire_hook",
+  "criteria": {
+    "fish_thing": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:tropical_fish"
+        }
+      },
+      "trigger": "minecraft:fishing_rod_hooked"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Fishing this item grants a +1% boost to all fishing xp.",
+    "icon": {
+      "id": "minecraft:tropical_fish"
+    },
+    "title": "Fish: Tropical Fish"
+  },
+  "requirements": [
+    [
+      "fish_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:fishing_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}
