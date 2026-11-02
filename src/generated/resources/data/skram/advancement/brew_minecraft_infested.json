@@ -1,0 +1,35 @@
+{
+  "parent": "skram:brew_minecraft_healing",
+  "criteria": {
+    "brew_thing": {
+      "conditions": {
+        "potion": {
+          "potions": "minecraft:infested"
+        }
+      },
+      "trigger": "minecraft:brewed_potion"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Brewing this potion grants a +1% boost to all brewing xp.",
+    "icon": {
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 9214860
+        }
+      },
+      "id": "minecraft:potion"
+    },
+    "title": "Brew: Potion of Infested"
+  },
+  "requirements": [
+    [
+      "brew_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:brewing_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

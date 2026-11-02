@@ -1,0 +1,35 @@
+{
+  "parent": "skram:brew_minecraft_night_vision",
+  "criteria": {
+    "brew_thing": {
+      "conditions": {
+        "potion": {
+          "potions": "minecraft:oozing"
+        }
+      },
+      "trigger": "minecraft:brewed_potion"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Brewing this potion grants a +1% boost to all brewing xp.",
+    "icon": {
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 10092451
+        }
+      },
+      "id": "minecraft:potion"
+    },
+    "title": "Brew: Potion of Oozing"
+  },
+  "requirements": [
+    [
+      "brew_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:brewing_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

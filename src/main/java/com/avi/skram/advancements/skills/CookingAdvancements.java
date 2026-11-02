@@ -6,7 +6,6 @@ import com.avi.skram.advancements.SkramAdvancements;
 import com.avi.skram.utils.DataGenerationUtils;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.advancements.*;
-import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.advancements.triggers.RecipeCraftedTrigger;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;

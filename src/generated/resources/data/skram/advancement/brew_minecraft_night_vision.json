@@ -1,0 +1,35 @@
+{
+  "parent": "skram:brew_minecraft_leaping",
+  "criteria": {
+    "brew_thing": {
+      "conditions": {
+        "potion": {
+          "potions": "minecraft:night_vision"
+        }
+      },
+      "trigger": "minecraft:brewed_potion"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Brewing this potion grants a +2% boost to all brewing xp.",
+    "icon": {
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 12779366
+        }
+      },
+      "id": "minecraft:potion"
+    },
+    "title": "Brew: Potion of Night Vision"
+  },
+  "requirements": [
+    [
+      "brew_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:brewing_xp_mult_up2"
+  },
+  "sends_telemetry_event": true
+}

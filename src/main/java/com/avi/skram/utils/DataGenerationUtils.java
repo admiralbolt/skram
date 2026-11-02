@@ -2,11 +2,15 @@ package com.avi.skram.utils;
 
 import com.avi.skram.item.SkramItems;
 import com.google.common.collect.ImmutableMap;
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -130,6 +134,31 @@ public class DataGenerationUtils {
     .put(Biomes.WINDSWEPT_SAVANNA, SkramItems.WINDSWEPT_SAVANNA)
     .put(Biomes.WOODED_BADLANDS, SkramItems.WOODED_BADLANDS)
     .build();
+
+  // AAAAAAAAH
+  public static Map<Holder<Potion>, Integer> POTION_COLOR_MAP = ImmutableMap.<Holder<Potion>, Integer>builder()
+    .put(Potions.AWKWARD, 3694022)
+    .put(Potions.FIRE_RESISTANCE, 16750848)
+    .put(Potions.HARMING, 11101546)
+    .put(Potions.HEALING, 16262179)
+    .put(Potions.INFESTED, 9214860)
+    .put(Potions.INVISIBILITY, 16185078)
+    .put(Potions.LEAPING, 16646020)
+    .put(Potions.NIGHT_VISION, 12779366)
+    .put(Potions.OOZING, 10092451)
+    .put(Potions.POISON, 8889187)
+    .put(Potions.REGENERATION, 13458603)
+    .put(Potions.SLOW_FALLING, 15978425)
+    .put(Potions.SLOWNESS, 9154528)
+    .put(Potions.STRENGTH, 16762624)
+    .put(Potions.SWIFTNESS, 3402751)
+    .put(Potions.TURTLE_MASTER, 9142499)
+    .put(Potions.WATER_BREATHING, 10017472)
+    .put(Potions.WIND_CHARGED, 12438015)
+    .put(Potions.WEAKNESS, 4738376)
+    .put(Potions.WEAVING, 7891290)
+    .build();
+
 
   public static String titleize(String input) {
     String output = input;
