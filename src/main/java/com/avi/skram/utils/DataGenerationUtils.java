@@ -163,7 +163,7 @@ public class DataGenerationUtils {
   public static String titleize(String input) {
     String output = input;
     if (input.startsWith("minecraft")) {
-      output = input.split(":")[0];
+      output = input.split(":")[1];
     }
 
     StringBuilder builder = new StringBuilder();

@@ -1,5 +1,6 @@
 package com.avi.skram.skills;
 
+import com.avi.skram.Skram;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Checkbox;
@@ -7,6 +8,9 @@ import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.npc.villager.AbstractVillager;
+import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.neoforged.neoforge.event.entity.player.TradeWithVillagerEvent;
@@ -46,11 +50,16 @@ public class SkillMercantile extends Skill {
     // Modify XP based on uses and demand, to mildly encourage not spamming the same trade.
     MerchantOffer offer = event.getMerchantOffer();
     if (offer.getDemand() > 0) {
-      baseXp -= 50 * offer.getDemand();
+      baseXp -= 75 * offer.getDemand();
     }
-    baseXp -= 5 * offer.getUses();
+    baseXp -= 10 * offer.getUses();
 
     mercantile.addXp(player, Math.max(baseXp, 50));
+    // Also send a trigger based on the villager profession type.
+    AbstractVillager abstractVillager = event.getAbstractVillager();
+    if (!(abstractVillager instanceof Villager villager)) return;
+
+    Skram.ARBITRARY_STRING_TRIGGER.get().trigger((ServerPlayer) player, "traded_with_" + villager.getVillagerData().profession().getRegisteredName().split(":")[1]);
   }
 
   @Override

@@ -1,0 +1,28 @@
+{
+  "parent": "skram:mercantile_mason",
+  "criteria": {
+    "arbitrary_string": {
+      "conditions": {
+        "expectedValue": "traded_with_shepherd"
+      },
+      "trigger": "skram:arbitrary_string_trigger"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Trading with this villager grants a +1% boost to all mercantile xp.",
+    "icon": {
+      "id": "minecraft:villager_spawn_egg"
+    },
+    "title": "Trade With: Shepherd"
+  },
+  "requirements": [
+    [
+      "arbitrary_string"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:mercantile_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}
