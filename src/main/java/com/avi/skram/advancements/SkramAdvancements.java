@@ -72,6 +72,7 @@ public class SkramAdvancements {
       MeleeAdvancements.generate(this.output, this.skramRoot);
       MiningAdvancements.generate(this.output, this.skramRoot);
       RangedAdvancements.generate(this.output, this.skramRoot);
+      SmithingAdvancements.generate(this.output, this.skramRoot);
       WoodcuttingAdvancements.generate(this.output, this.skramRoot);
     }
   }

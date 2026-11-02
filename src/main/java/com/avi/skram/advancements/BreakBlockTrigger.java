@@ -4,9 +4,7 @@ import com.avi.skram.Skram;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
-import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.advancements.triggers.Criterion;
-import net.minecraft.advancements.triggers.EnterBlockTrigger;
 import net.minecraft.advancements.triggers.SimpleCriterionTrigger;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -17,14 +15,14 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Optional;
 
 public class BreakBlockTrigger extends SimpleCriterionTrigger<BreakBlockTrigger.TriggerInstance> {
 
-  // 1. Define the codec so Minecraft knows how to parse your conditions from JSON datagen
   @Override
-  public Codec<TriggerInstance> codec() {
+  public @NonNull Codec<TriggerInstance> codec() {
     return TriggerInstance.CODEC;
   }
 

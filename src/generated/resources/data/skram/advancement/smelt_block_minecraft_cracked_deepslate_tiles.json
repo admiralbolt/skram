@@ -1,0 +1,30 @@
+{
+  "parent": "skram:smelt_block_minecraft_cracked_deepslate_bricks",
+  "criteria": {
+    "smelt_thing": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:cracked_deepslate_tiles"
+        }
+      },
+      "trigger": "skram:item_smelted"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Smelting this item grants a permanent +1% boost to all smithing xp.",
+    "icon": {
+      "id": "minecraft:cracked_deepslate_tiles"
+    },
+    "title": "Smelt: Cracked Deepslate Tiles"
+  },
+  "requirements": [
+    [
+      "smelt_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:smithing_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

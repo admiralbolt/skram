@@ -1,5 +1,6 @@
 package com.avi.skram.patches;
 
+import com.avi.skram.Skram;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
@@ -10,6 +11,7 @@ import com.avi.skram.utils.ReflectionUtils;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -106,6 +108,9 @@ public class AbstractFurnaceBlockEntityMixin {
 
       smithing.addXp(owner, SkillSmithing.XP_MAP.get(burnResult.getItem()) + bonusXP);
     }
+
+    // And trigger our condition for an item smelted.
+    Skram.ITEM_SMELTED_TRIGGER.get().trigger((ServerPlayer) owner, burnResult);
   }
 
 }

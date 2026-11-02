@@ -1,0 +1,30 @@
+{
+  "parent": "skram:smelt_item_minecraft_copper_ingot",
+  "criteria": {
+    "smelt_thing": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:cracked_deepslate_bricks"
+        }
+      },
+      "trigger": "skram:item_smelted"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Smelting this item grants a permanent +1% boost to all smithing xp.",
+    "icon": {
+      "id": "minecraft:cracked_deepslate_bricks"
+    },
+    "title": "Smelt: Cracked Deepslate Bricks"
+  },
+  "requirements": [
+    [
+      "smelt_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:smithing_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

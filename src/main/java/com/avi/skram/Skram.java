@@ -1,6 +1,7 @@
 package com.avi.skram;
 
 import com.avi.skram.advancements.BreakBlockTrigger;
+import com.avi.skram.advancements.ItemSmeltedTrigger;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.item.SkramItems;
 import com.avi.skram.skills.Skills;
@@ -62,6 +63,8 @@ public class Skram {
 
     public static final Supplier<BreakBlockTrigger> BREAK_BLOCK_TRIGGER =
       TRIGGER_TYPES.register("break_block", BreakBlockTrigger::new);
+    public static final Supplier<ItemSmeltedTrigger> ITEM_SMELTED_TRIGGER =
+      TRIGGER_TYPES.register("item_smelted", ItemSmeltedTrigger::new);
 
     // Creates a creative tab with the id "skram:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()

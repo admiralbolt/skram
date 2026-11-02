@@ -1,0 +1,30 @@
+{
+  "parent": "skram:smelt_item_minecraft_netherite_scrap",
+  "criteria": {
+    "smelt_thing": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:smooth_basalt"
+        }
+      },
+      "trigger": "skram:item_smelted"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Smelting this item grants a permanent +1% boost to all smithing xp.",
+    "icon": {
+      "id": "minecraft:smooth_basalt"
+    },
+    "title": "Smelt: Smooth Basalt"
+  },
+  "requirements": [
+    [
+      "smelt_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:smithing_xp_mult_up1"
+  },
+  "sends_telemetry_event": true
+}

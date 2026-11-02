@@ -1,0 +1,30 @@
+{
+  "parent": "skram:smelt_item_minecraft_gold_nugget",
+  "criteria": {
+    "smelt_thing": {
+      "conditions": {
+        "item": {
+          "items": "minecraft:nether_brick"
+        }
+      },
+      "trigger": "skram:item_smelted"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Smelting this item grants a permanent +2% boost to all smithing xp.",
+    "icon": {
+      "id": "minecraft:nether_brick"
+    },
+    "title": "Smelt: Nether Brick"
+  },
+  "requirements": [
+    [
+      "smelt_thing"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:smithing_xp_mult_up2"
+  },
+  "sends_telemetry_event": true
+}
