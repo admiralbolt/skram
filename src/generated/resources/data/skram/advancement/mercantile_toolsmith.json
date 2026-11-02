@@ -12,7 +12,7 @@
     "announce_to_chat": false,
     "description": "Trading with this villager grants a +1% boost to all mercantile xp.",
     "icon": {
-      "id": "minecraft:villager_spawn_egg"
+      "id": "minecraft:smithing_table"
     },
     "title": "Trade With: Toolsmith"
   },

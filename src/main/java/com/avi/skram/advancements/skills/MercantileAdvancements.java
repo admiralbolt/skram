@@ -9,22 +9,11 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.predicates.DamageSourcePredicate;
-import net.minecraft.advancements.predicates.TagPredicate;
-import net.minecraft.advancements.predicates.entity.EntityPredicate;
-import net.minecraft.advancements.triggers.KilledTrigger;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.npc.villager.VillagerProfession;
-import net.minecraft.world.entity.npc.villager.VillagerType;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 
@@ -59,7 +48,7 @@ public class MercantileAdvancements {
       mobAdvancements.add(Advancement.Builder.advancement()
         .parent(mobAdvancements.isEmpty() ? skramRoot : mobAdvancements.getLast())
         .display(
-          new ItemStackTemplate(Items.VILLAGER_SPAWN_EGG),
+          new ItemStackTemplate(DataGenerationUtils.VILLAGER_PROFESSION_TO_BLOCK.get(villagerProfession).asItem()),
           Component.literal("Trade With: " + DataGenerationUtils.titleize(villagerProfession.identifier().toShortString())),
           Component.literal("Trading with this villager grants a +" + xpMult + "% boost to all mercantile xp."),
           AdvancementType.TASK,
@@ -73,5 +62,22 @@ public class MercantileAdvancements {
           ArbitraryStringTrigger.TriggerInstance.make("traded_with_" + villagerProfession.identifier().toShortString())
         ).save(output, Identifier.fromNamespaceAndPath(Skram.MODID, SkramAdvancements.prettify("mercantile_" + villagerProfession.identifier().toShortString()))));
     }
+
+    mobAdvancements.add(Advancement.Builder.advancement()
+      .parent(mobAdvancements.getLast())
+      .display(
+        new ItemStackTemplate(Items.TRADER_LLAMA_SPAWN_EGG),
+        Component.literal("Trade With: Wandering Trader"),
+        Component.literal("Trading with this villager grants a +2% boost to all mercantile xp."),
+        AdvancementType.TASK,
+        true,
+        false,
+        false
+      ).rewards(
+        AdvancementRewards.Builder.function(Identifier.fromNamespaceAndPath(Skram.MODID, "mercantile_xp_mult_up2"))
+      ).addCriterion(
+        "arbitrary_string",
+        ArbitraryStringTrigger.TriggerInstance.make("traded_with_wandering_trader")
+      ).save(output, Identifier.fromNamespaceAndPath(Skram.MODID, SkramAdvancements.prettify("mercantile_wandering_trader"))));
   }
 }

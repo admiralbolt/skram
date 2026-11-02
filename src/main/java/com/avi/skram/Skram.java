@@ -1,8 +1,8 @@
 package com.avi.skram;
 
+import com.avi.skram.advancements.ArbitraryStringTrigger;
 import com.avi.skram.advancements.BreakBlockTrigger;
 import com.avi.skram.advancements.ItemSmeltedTrigger;
-import com.avi.skram.advancements.ArbitraryStringTrigger;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.item.SkramItems;
 import com.avi.skram.skills.Skills;

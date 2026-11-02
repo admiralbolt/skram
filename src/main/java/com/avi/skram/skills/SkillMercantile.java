@@ -11,6 +11,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.npc.villager.AbstractVillager;
 import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.entity.npc.wanderingtrader.WanderingTrader;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.neoforged.neoforge.event.entity.player.TradeWithVillagerEvent;
@@ -55,8 +56,14 @@ public class SkillMercantile extends Skill {
     baseXp -= 10 * offer.getUses();
 
     mercantile.addXp(player, Math.max(baseXp, 50));
+
     // Also send a trigger based on the villager profession type.
     AbstractVillager abstractVillager = event.getAbstractVillager();
+    if (abstractVillager instanceof WanderingTrader) {
+      Skram.ARBITRARY_STRING_TRIGGER.get().trigger((ServerPlayer) player, "traded_with_wandering_trader");
+      return;
+    }
+
     if (!(abstractVillager instanceof Villager villager)) return;
 
     Skram.ARBITRARY_STRING_TRIGGER.get().trigger((ServerPlayer) player, "traded_with_" + villager.getVillagerData().profession().getRegisteredName().split(":")[1]);

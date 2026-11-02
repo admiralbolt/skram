@@ -1,0 +1,28 @@
+{
+  "parent": "skram:mercantile_weaponsmith",
+  "criteria": {
+    "arbitrary_string": {
+      "conditions": {
+        "expectedValue": "traded_with_wandering_trader"
+      },
+      "trigger": "skram:arbitrary_string_trigger"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Trading with this villager grants a +2% boost to all mercantile xp.",
+    "icon": {
+      "id": "minecraft:trader_llama_spawn_egg"
+    },
+    "title": "Trade With: Wandering Trader"
+  },
+  "requirements": [
+    [
+      "arbitrary_string"
+    ]
+  ],
+  "rewards": {
+    "function": "skram:mercantile_xp_mult_up2"
+  },
+  "sends_telemetry_event": true
+}

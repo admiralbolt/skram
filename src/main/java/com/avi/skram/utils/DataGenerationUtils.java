@@ -2,17 +2,19 @@ package com.avi.skram.utils;
 
 import com.avi.skram.item.SkramItems;
 import com.google.common.collect.ImmutableMap;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.Map;
@@ -159,6 +161,22 @@ public class DataGenerationUtils {
     .put(Potions.WEAVING, 7891290)
     .build();
 
+  // Wheew.
+  public static Map<ResourceKey<VillagerProfession>, Block> VILLAGER_PROFESSION_TO_BLOCK = ImmutableMap.<ResourceKey<VillagerProfession>, Block>builder()
+    .put(VillagerProfession.ARMORER, Blocks.BLAST_FURNACE)
+    .put(VillagerProfession.BUTCHER, Blocks.SMOKER)
+    .put(VillagerProfession.CARTOGRAPHER, Blocks.CARTOGRAPHY_TABLE)
+    .put(VillagerProfession.CLERIC, Blocks.BREWING_STAND)
+    .put(VillagerProfession.FARMER, Blocks.COMPOSTER)
+    .put(VillagerProfession.FISHERMAN, Blocks.BARREL)
+    .put(VillagerProfession.FLETCHER, Blocks.FLETCHING_TABLE)
+    .put(VillagerProfession.LEATHERWORKER, Blocks.CAULDRON)
+    .put(VillagerProfession.LIBRARIAN, Blocks.LECTERN)
+    .put(VillagerProfession.MASON, Blocks.STONECUTTER)
+    .put(VillagerProfession.SHEPHERD, Blocks.LOOM)
+    .put(VillagerProfession.TOOLSMITH, Blocks.SMITHING_TABLE)
+    .put(VillagerProfession.WEAPONSMITH, Blocks.GRINDSTONE)
+    .build();
 
   public static String titleize(String input) {
     String output = input;
