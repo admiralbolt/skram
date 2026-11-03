@@ -75,11 +75,6 @@ Spell Ideas:
 
 Perks
 =====
-Chain Reaction:
-  Effect: Whenever one of your crops grows, there's a 20% chance it grows again.
-  Required Levels: Farming 30
-  Cost: 1x Netherite Hoe, 128x wheat, 128x potato, 128x carrot, 128x beetroot
-
 Master Blacksmith:
   Effect: Significantly reduce prior work cost for anvil item events.
   Required Levels: Smithing 50

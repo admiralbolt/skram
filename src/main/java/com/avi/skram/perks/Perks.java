@@ -23,6 +23,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkChainReaction>> CHAIN_REACTION;
   public static Supplier<AttachmentType<PerkHeartOfTheForge>> HEART_OF_THE_FORGE;
   public static Supplier<AttachmentType<PerkLuckyDog>> LUCKY_DOG;
+  public static Supplier<AttachmentType<PerkMasterBlacksmith>> MASTER_BLACKSMITH;
 
   public static Map<String, Supplier<List<ItemStack>>> PERK_RESEARCH_COST_BY_NAME;
   public static Map<String, List<Supplier>> SKILLS_TO_PERKS;
@@ -40,6 +41,16 @@ public class Perks {
     PERKS_BY_NAME.put(PerkChainReaction.NAME, CHAIN_REACTION);
     PERK_RESEARCH_COST_BY_NAME.put(PerkChainReaction.NAME, PerkChainReaction::getResearchCost);
     PerkChainReaction.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(CHAIN_REACTION));
+
+    MASTER_BLACKSMITH = Skram.ATTACHMENT_TYPES.register(
+      PerkMasterBlacksmith.NAME, () -> AttachmentType.serializable(() -> new PerkMasterBlacksmith())
+        .sync(new PerkSyncHandler<>(PerkMasterBlacksmith.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkMasterBlacksmith.NAME, MASTER_BLACKSMITH);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkMasterBlacksmith.NAME, PerkMasterBlacksmith::getResearchCost);
+    PerkMasterBlacksmith.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(MASTER_BLACKSMITH));
 
     HEART_OF_THE_FORGE = Skram.ATTACHMENT_TYPES.register(
       PerkHeartOfTheForge.NAME, () -> AttachmentType.serializable(() -> new PerkHeartOfTheForge())

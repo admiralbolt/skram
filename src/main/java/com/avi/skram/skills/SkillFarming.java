@@ -115,6 +115,7 @@ public class SkillFarming extends Skill {
     Block block = state.getBlock();
 
     // Check for the AGE property on applicable types.
+    if (block instanceof BeetrootBlock) return state.getValue(BeetrootBlock.AGE) == BeetrootBlock.MAX_AGE;
     if (block instanceof CropBlock) return state.getValue(CropBlock.AGE) == CropBlock.MAX_AGE;
     if (block instanceof NetherWartBlock) return state.getValue(NetherWartBlock.AGE) == NetherWartBlock.MAX_AGE;
     if (block instanceof PitcherCropBlock) return state.getValue(PitcherCropBlock.AGE) == PitcherCropBlock.MAX_AGE;
@@ -181,22 +182,6 @@ public class SkillFarming extends Skill {
     if (Math.random() < growthChance) {
       event.setResult(CropGrowEvent.Pre.Result.GROW);
     }
-
-    // If PerkChainReaction is fully enabled, roll an additional chance to multi tick crops.
-    if (owner != null) {
-      PerkChainReaction chainReaction = owner.getData(Perks.CHAIN_REACTION);
-      if (chainReaction.isFullyEnabled()) {
-        if (Math.random() < 0.333333) {
-          BlockState state = event.getState();
-          try {
-            ReflectionUtils.invokeMethod(state.getBlock(), "randomTick", state, level, pos, MathUtils.RANDOM);
-          } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            System.out.println("Can't invoke randomTick: " + e);
-          }
-        }
-      }
-    }
-
   }
 
   public static void handleRightClick(PlayerInteractEvent.RightClickBlock event) {

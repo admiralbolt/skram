@@ -9,6 +9,8 @@ import com.avi.skram.network.PerkPacket;
 import com.avi.skram.network.PerkResearchPacket;
 import com.avi.skram.network.ServerPayloadHandler;
 import com.avi.skram.network.SkillPacket;
+import com.avi.skram.perks.PerkChainReaction;
+import com.avi.skram.perks.PerkMasterBlacksmith;
 import com.avi.skram.skills.*;
 import com.avi.skram.ui.AddSkillButtonToInventory;
 import com.avi.skram.ui.SkramScreen;
@@ -113,6 +115,7 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_BLOCK_DROPS(BlockDropsEvent event) {
+    if (!(event.getBreaker() instanceof Player)) return;
     LevelAccessor level = event.getLevel();
     ChunkAccess chunk = level.getChunk(event.getPos());
     PlayerOwnedBlocks pob = chunk.getData(BlockData.PLAYER_OWNED);
@@ -248,6 +251,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_ANVIL_UPDATE(AnvilUpdateEvent event) {
     SkillSmithing.handleAnvilUpdate(event);
+    PerkMasterBlacksmith.handleAnvilUpdate(event);
   }
 
   @SubscribeEvent
@@ -296,6 +300,11 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_CROP_GROW_PRE(CropGrowEvent.Pre event) {
     SkillFarming.handleCropGrowth(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_CROP_GROW_POST(CropGrowEvent.Post event) {
+    PerkChainReaction.handleCropGrowth(event);
   }
 
   @SubscribeEvent
