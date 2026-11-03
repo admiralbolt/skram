@@ -96,6 +96,7 @@ public class Skram {
 
     BlockData.register();
     Skills.register();
+    Perks.register();
     ATTACHMENT_TYPES.register(modEventBus);
     TRIGGER_TYPES.register(modEventBus);
 

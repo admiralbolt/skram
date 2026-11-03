@@ -5,11 +5,11 @@ import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
 import com.avi.skram.commands.SkramCommands;
 import com.avi.skram.network.ClientPayloadHandler;
+import com.avi.skram.network.PerkPacket;
 import com.avi.skram.network.ServerPayloadHandler;
 import com.avi.skram.network.SkillPacket;
 import com.avi.skram.skills.*;
 import com.avi.skram.ui.AddSkillButtonToInventory;
-import com.avi.skram.ui.SkillScreen;
 import com.avi.skram.ui.SkramScreen;
 import com.avi.skram.ui.XPGainGui;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -310,11 +310,17 @@ public class EventHandler {
       SkillPacket.STREAM_CODEC,
       ServerPayloadHandler::handleSkillPacket
     );
+    registrar.playBidirectional(
+      PerkPacket.TYPE,
+      PerkPacket.STREAM_CODEC,
+      ServerPayloadHandler::handlePerkPacket
+    );
   }
 
   @SubscribeEvent
   public static void REGISTER_CLIENT_PAYLOAD_HANDLERS(RegisterClientPayloadHandlersEvent event) {
     event.register(SkillPacket.TYPE, ClientPayloadHandler::handleSkillPacket);
+    event.register(PerkPacket.TYPE, ClientPayloadHandler::handlePerkPacket);
   }
 
   public static final Identifier CUSTOM_LAYER = Identifier.fromNamespaceAndPath(Skram.MODID, "asdf");

@@ -39,6 +39,8 @@ public class SkramScreen extends Screen {
     this.saveScrollAmount();
     super.init();
 
+    System.out.println("SkramScreen.init");
+
     HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this, 10, 8);
 
     LinearLayout header = layout.addToHeader(new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL));

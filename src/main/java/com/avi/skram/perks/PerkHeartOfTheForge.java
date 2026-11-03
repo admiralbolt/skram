@@ -23,7 +23,7 @@ public class PerkHeartOfTheForge extends Perk {
 
   public static List<ItemStack> getResearchCost() {
     return List.of(
-      new ItemStack(Items.IRON_INGOT, 64),
+      new ItemStack(Items.IRON_INGOT, 128),
       new ItemStack(Items.BLAZE_ROD, 64)
     );
   }
@@ -33,7 +33,7 @@ public class PerkHeartOfTheForge extends Perk {
   }
 
   public PerkHeartOfTheForge(ByteBuf buffer) {
-    super(buffer);
+    super(buffer, DESCRIPTION, REQUIRED_SKILLS);
   }
 
 }

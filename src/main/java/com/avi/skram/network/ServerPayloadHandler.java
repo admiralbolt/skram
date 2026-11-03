@@ -31,11 +31,7 @@ public class ServerPayloadHandler {
   public static void handlePerkPacket(final PerkPacket packet, final IPayloadContext context) {
     Player player = context.player();
     Perk perk = (Perk) player.getData(Perks.PERKS_BY_NAME.get(packet.name()));
-    // Modify the perk settings. Same here, it's assumed that this method is invoked because we are syncing from client
-    // to server, in which case the client should have the correct values.
-    perk.discovered = packet.discovered();
-    perk.researched = packet.researched();
-    if (packet.enabled() != perk.enabled) {
+    if (perk.researched && packet.enabled() != perk.enabled) {
       perk.enabled = packet.enabled();
       perk.applyModifiers(player);
     }

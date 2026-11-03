@@ -7,6 +7,7 @@ public class SkramCommands {
 
   public static void register(RegisterCommandsEvent event) {
     SetSkillCommand.register(event);
+    SetPerkCommand.register(event);
   }
 
 }
