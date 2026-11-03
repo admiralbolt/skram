@@ -7,4 +7,8 @@ public class ClientPayloadHandler {
   public static void handleSkillPacket(final SkillPacket packet, final IPayloadContext context) {
     return;
   }
+
+  public static void handlePerkPacket(final PerkPacket packet, final IPayloadContext context) {
+    return;
+  }
 }

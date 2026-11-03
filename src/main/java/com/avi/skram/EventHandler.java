@@ -10,6 +10,7 @@ import com.avi.skram.network.SkillPacket;
 import com.avi.skram.skills.*;
 import com.avi.skram.ui.AddSkillButtonToInventory;
 import com.avi.skram.ui.SkillScreen;
+import com.avi.skram.ui.SkramScreen;
 import com.avi.skram.ui.XPGainGui;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
@@ -337,8 +338,8 @@ public class EventHandler {
   public static void ON_CLIENT_TICK(ClientTickEvent.Post event) {
     while (OPEN_SKILLS_UI.get().consumeClick()) {
       Minecraft mc = Minecraft.getInstance();
-      if (!(mc.gui.screen() instanceof SkillScreen)) {
-        Minecraft.getInstance().setScreenAndShow(new SkillScreen());
+      if (!(mc.gui.screen() instanceof SkramScreen)) {
+        Minecraft.getInstance().setScreenAndShow(new SkramScreen());
       }
     }
   }

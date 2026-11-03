@@ -5,6 +5,7 @@ import com.avi.skram.advancements.BreakBlockTrigger;
 import com.avi.skram.advancements.ItemSmeltedTrigger;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.item.SkramItems;
+import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.Skills;
 import com.mojang.logging.LogUtils;
 import net.minecraft.advancements.triggers.CriterionTrigger;
@@ -113,6 +114,7 @@ public class Skram {
   private void commonSetup(FMLCommonSetupEvent event) {
     event.enqueueWork(Skills::setupSkillIcons);
     event.enqueueWork(Skills::setupSkillXPMaps);
+    event.enqueueWork(Perks::setupPerkResearchCosts);
 
     // Some common setup code
     LOGGER.info("HELLO FROM COMMON SETUP");

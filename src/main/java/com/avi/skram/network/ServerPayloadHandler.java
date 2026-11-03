@@ -1,5 +1,7 @@
 package com.avi.skram.network;
 
+import com.avi.skram.perks.Perk;
+import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.Skill;
 import com.avi.skram.skills.Skills;
 import net.minecraft.world.entity.player.Player;
@@ -25,4 +27,18 @@ public class ServerPayloadHandler {
       skill.applyModifiers(player);
     }
   }
+
+  public static void handlePerkPacket(final PerkPacket packet, final IPayloadContext context) {
+    Player player = context.player();
+    Perk perk = (Perk) player.getData(Perks.PERKS_BY_NAME.get(packet.name()));
+    // Modify the perk settings. Same here, it's assumed that this method is invoked because we are syncing from client
+    // to server, in which case the client should have the correct values.
+    perk.discovered = packet.discovered();
+    perk.researched = packet.researched();
+    if (packet.enabled() != perk.enabled) {
+      perk.enabled = packet.enabled();
+      perk.applyModifiers(player);
+    }
+  }
+
 }

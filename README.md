@@ -198,6 +198,18 @@ Captain of Legend:
   Required Levels: Sailing 30
 
 
+QOL
+=====
+Make UI look pretty. Show XP for all blocks / items / things that each skill 
+does.
+
+Multiple tabs in main skill screen.
+
+Overview + Skill Detail
+Perks
+Magic
+Misc/About
+
 
 Construction
 ============
@@ -213,4 +225,5 @@ This is a maybe skill. Two issues:
 
 Mega Chests -> You know 'em and you love 'em.
 Backpack -> You know 'em and you love 'em.
+Research Station -> For unlocking perks.
 Compactor? -> Turns cobblestone into coal, turns coal into diamonds?
