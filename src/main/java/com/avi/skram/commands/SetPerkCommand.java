@@ -3,11 +3,15 @@ package com.avi.skram.commands;
 import com.avi.skram.Skram;
 import com.avi.skram.perks.Perk;
 import com.avi.skram.perks.Perks;
+import com.avi.skram.skills.Skills;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import com.mojang.brigadier.suggestion.SuggestionProvider;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -25,7 +29,7 @@ public class SetPerkCommand {
       Commands.literal(Skram.MODID)
         .then(Commands.literal("setperk")
           .then(Commands.argument("entity", EntityArgument.player())
-            .then(Commands.argument("perk", StringArgumentType.word())
+            .then(Commands.argument("perk", StringArgumentType.word()).suggests(perkSuggestions())
               .then(Commands.literal("discovered")
                 .then(Commands.argument("discoveredValue", BoolArgumentType.bool())
                   .executes(context -> {
@@ -64,5 +68,9 @@ public class SetPerkCommand {
           )
         ).requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
     );
+  }
+
+  private static SuggestionProvider<CommandSourceStack> perkSuggestions() {
+    return (context, builder) -> SharedSuggestionProvider.suggest(Perks.PERKS_BY_NAME.keySet().stream().sorted().toList(), builder);
   }
 }

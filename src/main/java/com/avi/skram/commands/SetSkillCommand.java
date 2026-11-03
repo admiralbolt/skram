@@ -8,7 +8,10 @@ import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import com.mojang.brigadier.suggestion.SuggestionProvider;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +32,7 @@ public class SetSkillCommand {
       Commands.literal(Skram.MODID)
         .then(Commands.literal("setskill")
           .then(Commands.argument("entity", EntityArgument.player())
-            .then(Commands.argument("skill", StringArgumentType.word())
+            .then(Commands.argument("skill", StringArgumentType.word()).suggests(skillSuggestions())
               .then(Commands.literal("xpmult")
                 .then(Commands.argument("xpmult", DoubleArgumentType.doubleArg())
                   .executes(context -> {
@@ -72,5 +75,9 @@ public class SetSkillCommand {
           )
         ).requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
     );
+  }
+
+  private static SuggestionProvider<CommandSourceStack> skillSuggestions() {
+    return (context, builder) -> SharedSuggestionProvider.suggest(Skills.SKILLS_BY_NAME.keySet().stream().sorted().toList(), builder);
   }
 }

@@ -34,7 +34,6 @@ import java.util.stream.Collectors;
 
 public abstract class Perk implements ValueIOSerializable {
 
-  private static final Identifier PLACEHOLDER_ICON = Identifier.withDefaultNamespace("textures/item/nether_star.png");
   private static final WidgetSprites RESEARCH_BUTTON_SPRITES = new WidgetSprites(
     Identifier.fromNamespaceAndPath(Skram.MODID, "research")
   );
@@ -110,6 +109,10 @@ public abstract class Perk implements ValueIOSerializable {
     return this.discovered && this.researched && this.enabled;
   }
 
+  public Identifier getIcon() {
+    return Identifier.fromNamespaceAndPath(Skram.MODID, "textures/perks/" + this.name + ".png");
+  }
+
   public boolean canResearch(Player player) {
     for (Map.Entry<String, Integer> entry : requiredSkills.entrySet()) {
       Skill skill = (Skill) player.getData(Skills.SKILLS_BY_NAME.get(entry.getKey()));
@@ -159,8 +162,8 @@ public abstract class Perk implements ValueIOSerializable {
 
     LinearLayout heading = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
     heading.spacing(4).defaultCellSetting();
-    heading.addChild(new ResizableTextureImageWidget(0, 0, 32, 32, PLACEHOLDER_ICON, 16, 16));
-    heading.addChild(textWidget(formatName(this.name), 140));
+    heading.addChild(new ResizableTextureImageWidget(0, 0, 32, 32, this.getIcon(), 32, 32));
+    heading.addChild(textWidget(StringUtils.snakeToTitle(this.name), 140));
     layout.addChild(heading);
 
     layout.addChild(textWidget(this.description, 180));
@@ -191,7 +194,7 @@ public abstract class Perk implements ValueIOSerializable {
         ));
       }
 
-      Component levelText = Component.literal(formatName(entry.getKey()) + " ")
+      Component levelText = Component.literal(StringUtils.snakeToTitle(entry.getKey()) + " ")
         .append(Component.literal(String.valueOf(entry.getValue()))
           .withStyle(skill.level >= entry.getValue() ? ChatFormatting.GREEN : ChatFormatting.RED));
       MultiLineTextWidget levelWidget = new MultiLineTextWidget((this.discovered) ? levelText : styledText(entry.getKey() + " level 99"), Minecraft.getInstance().font);
@@ -235,12 +238,6 @@ public abstract class Perk implements ValueIOSerializable {
     if (!this.researched) return Component.literal(text).withStyle(ChatFormatting.GRAY);
 
     return Component.literal(text);
-  }
-
-  private static String formatName(String name) {
-    return java.util.Arrays.stream(name.split("_"))
-      .map(StringUtils::capitalize)
-      .collect(Collectors.joining(" "));
   }
 
   private void setEnabled(Player player, boolean enabled) {

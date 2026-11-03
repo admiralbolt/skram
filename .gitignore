@@ -8,3 +8,4 @@ run
 .idea/*
 dev_mods
 dev_mods/*
+*.DS_Store
