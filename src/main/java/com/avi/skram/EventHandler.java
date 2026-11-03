@@ -10,6 +10,7 @@ import com.avi.skram.network.PerkResearchPacket;
 import com.avi.skram.network.ServerPayloadHandler;
 import com.avi.skram.network.SkillPacket;
 import com.avi.skram.perks.PerkChainReaction;
+import com.avi.skram.perks.PerkJuggernaut;
 import com.avi.skram.perks.PerkMasterBlacksmith;
 import com.avi.skram.skills.*;
 import com.avi.skram.ui.AddSkillButtonToInventory;
@@ -295,6 +296,8 @@ public class EventHandler {
 
     // Make sure that SkillHealth.handleDamageEvent() is called last, so that damage values get updated by skills.
     SkillHealth.handleDamageEvent(event);
+
+    PerkJuggernaut.handleDamageEvent(event);
   }
 
   @SubscribeEvent

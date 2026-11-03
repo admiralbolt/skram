@@ -120,11 +120,6 @@ Vampirism:
   Required Levels: Melee 30, Magic 20, Health 20
   Cost: ???
 
-Spin Slash:
-  Effect: Increase sweep damage ratio.
-  Required Levels: Melee 30
-  Cost: ???
-
 Backstab:
   Effect: Deal +25% damage to unaware entities.
   Required Levels: Stealth 30, Melee 20, Ranged 20

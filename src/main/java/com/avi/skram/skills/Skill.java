@@ -146,7 +146,7 @@ public abstract class Skill implements ValueIOSerializable {
     this.xp += gainedXp;
 
     // Whenever we gain xp, we want to give a chance of discovering a relevant perk.
-    if (Math.random() < (gainedXp / 100)) {
+    if (Math.random() < (gainedXp / 100.0)) {
       Perks.discoverRandomPerk(player, this, syncToServer);
     }
 

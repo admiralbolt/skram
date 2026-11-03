@@ -31,6 +31,7 @@ public class ServerPayloadHandler {
   public static void handlePerkPacket(final PerkPacket packet, final IPayloadContext context) {
     Player player = context.player();
     Perk perk = (Perk) player.getData(Perks.PERKS_BY_NAME.get(packet.name()));
+    perk.discovered = packet.discovered();
     if (perk.researched && packet.enabled() != perk.enabled) {
       perk.enabled = packet.enabled();
       perk.applyModifiers(player);

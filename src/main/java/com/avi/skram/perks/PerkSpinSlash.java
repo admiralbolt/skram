@@ -25,7 +25,7 @@ public class PerkSpinSlash extends Perk {
 
   public static List<ItemStack> getResearchCost() {
     return List.of(
-      new ItemStack(Items.DIAMOND_SWORD, 5)
+      new ItemStack(Items.DIAMOND_SWORD, 8)
     );
   }
 

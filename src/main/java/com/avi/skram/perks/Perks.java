@@ -3,8 +3,12 @@ package com.avi.skram.perks;
 import com.avi.skram.Skram;
 import com.avi.skram.network.PerkPacket;
 import com.avi.skram.skills.Skill;
+import com.avi.skram.ui.GenericMessageToast;
+import com.avi.skram.ui.ToastUtils;
 import com.avi.skram.utils.MathUtils;
+import com.avi.skram.utils.StringUtils;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -24,6 +28,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkHeartOfTheForge>> HEART_OF_THE_FORGE;
   public static Supplier<AttachmentType<PerkLuckyDog>> LUCKY_DOG;
   public static Supplier<AttachmentType<PerkMasterBlacksmith>> MASTER_BLACKSMITH;
+  public static Supplier<AttachmentType<PerkJuggernaut>> JUGGERNAUT;
   public static Supplier<AttachmentType<PerkSpinSlash>> SPIN_SLASH;
 
   public static Map<String, Supplier<List<ItemStack>>> PERK_RESEARCH_COST_BY_NAME;
@@ -74,6 +79,16 @@ public class Perks {
 
     PerkLuckyDog.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(LUCKY_DOG));
 
+    JUGGERNAUT = Skram.ATTACHMENT_TYPES.register(
+      PerkJuggernaut.NAME, () -> AttachmentType.serializable(() -> new PerkJuggernaut())
+        .sync(new PerkSyncHandler<>(PerkJuggernaut.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkJuggernaut.NAME, JUGGERNAUT);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkJuggernaut.NAME, PerkJuggernaut::getResearchCost);
+    PerkJuggernaut.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(JUGGERNAUT));
+
     SPIN_SLASH = Skram.ATTACHMENT_TYPES.register(
       PerkSpinSlash.NAME, () -> AttachmentType.serializable(() -> new PerkSpinSlash())
         .sync(new PerkSyncHandler<>(PerkSpinSlash.STREAM_CODEC))
@@ -99,13 +114,20 @@ public class Perks {
     // Otherwise, randomly choose one to discover.
     Pair<Perk, Supplier> toDiscover = perks.get(MathUtils.RANDOM.nextInt(perks.size()));
     Perk perkToDiscover = toDiscover.getFirst();
-    ;
+    perkToDiscover.discovered = true;
+
     Supplier supplier = toDiscover.getSecond();
     if (syncToServer) {
       ClientPacketDistributor.sendToServer(new PerkPacket(perkToDiscover.name, true, false, true));
+      if (!ToastUtils.hasGenericMessageToast(Minecraft.getInstance().gui.toastManager(), perkToDiscover.name + ":discovered")) {
+        Minecraft.getInstance().gui.toastManager().addToast(new GenericMessageToast(
+          perkToDiscover.name + ":discovered",
+          perkToDiscover.getIcon(),
+          "Perk discovered: " + StringUtils.snakeToTitle(perkToDiscover.name)
+        ));
+      }
     } else {
       // This should sync back to the client automatically.
-      perkToDiscover.discovered = true;
       player.setData(supplier, perkToDiscover);
     }
   }
