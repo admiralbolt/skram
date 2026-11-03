@@ -34,9 +34,6 @@ import java.util.stream.Collectors;
 
 public abstract class Perk implements ValueIOSerializable {
 
-  private static final WidgetSprites RESEARCH_BUTTON_SPRITES = new WidgetSprites(
-    Identifier.fromNamespaceAndPath(Skram.MODID, "research")
-  );
   private static final FontDescription ALT_FONT = new FontDescription.Resource(Identifier.withDefaultNamespace("alt"));
   private static final Style BLURRED_TEXT = Style.EMPTY.withFont(ALT_FONT);
 
@@ -212,18 +209,17 @@ public abstract class Perk implements ValueIOSerializable {
     }
 
     if (this.discovered && !this.researched) {
+      layout.addChild(textWidget("Required materials:", 180));
+      List<ItemStack> researchCost = Perks.PERK_RESEARCH_COST_BY_NAME.get(this.name).get();
+      boolean hasAllResearchMaterials = researchCost.stream().allMatch(cost -> inventoryResources.stream()
+        .filter(resource -> ItemStack.isSameItemSameComponents(resource, cost))
+        .mapToInt(ItemStack::getCount)
+        .sum() >= cost.getCount());
+
       LinearLayout researchMaterials = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
       researchMaterials.spacing(4).defaultCellSetting().alignVerticallyMiddle();
 
-      ImageButton researchButton = new ImageButton(
-        0, 0, 20, 20, RESEARCH_BUTTON_SPRITES,
-        button -> ClientPacketDistributor.sendToServer(new PerkResearchPacket(this.name)),
-        Component.literal("Research This Perk")
-      );
-      researchButton.setTooltip(Tooltip.create(Component.literal("Researching this perk costs the listed resources. Resources must be in your inventory.")));
-      researchMaterials.addChild(researchButton);
-
-      for (var stack : Perks.PERK_RESEARCH_COST_BY_NAME.get(this.name).get()) {
+      for (var stack : researchCost) {
         int available = inventoryResources.stream()
           .filter(resource -> ItemStack.isSameItemSameComponents(resource, stack))
           .mapToInt(ItemStack::getCount)
@@ -238,6 +234,16 @@ public abstract class Perk implements ValueIOSerializable {
         researchMaterials.addChild(countWidget);
       }
       layout.addChild(researchMaterials);
+
+      Button researchButton = Button.builder(
+        Component.literal("Research"),
+        button -> ClientPacketDistributor.sendToServer(new PerkResearchPacket(this.name))
+      )
+        .size(100, 20)
+        .tooltip(Tooltip.create(Component.literal("Researching this perk costs the listed resources. Resources must be in your inventory.")))
+        .build();
+      researchButton.active = hasAllResearchMaterials;
+      layout.addChild(researchButton);
     }
 
     return layout;

@@ -24,7 +24,7 @@ public final class MiscTab {
     LinearLayout indexContent = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
     indexContent.spacing(4).defaultCellSetting().alignVerticallyMiddle();
     indexContent.addChild(new ResizableTextureImageWidget(
-      0, 0, 20, 20, Identifier.withDefaultNamespace("textures/item/book.png"), 16, 16
+      0, 0, 16, 16, Identifier.withDefaultNamespace("textures/item/book.png"), 16, 16
     ));
     indexContent.addChild(new MultiLineTextWidget(Component.literal("Miscellaneous"), Minecraft.getInstance().font));
     return List.of(new TabEntry(

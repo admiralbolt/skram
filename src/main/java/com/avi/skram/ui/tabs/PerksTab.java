@@ -21,7 +21,7 @@ public final class PerksTab {
       Perk perk = (Perk) Minecraft.getInstance().player.getData(Perks.PERKS_BY_NAME.get(perkName));
       LinearLayout indexContent = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
       indexContent.spacing(4).defaultCellSetting().alignVerticallyMiddle();
-      indexContent.addChild(new ResizableTextureImageWidget(0, 0, 16, 16, perk.getIcon(), 32, 32));
+      indexContent.addChild(new ResizableTextureImageWidget(0, 0, 16, 16, perk.getIcon(), 16, 16));
       indexContent.addChild(new MultiLineTextWidget(perk.getDisplayName(), Minecraft.getInstance().font));
       entries.add(new TabEntry(
         perkName,
