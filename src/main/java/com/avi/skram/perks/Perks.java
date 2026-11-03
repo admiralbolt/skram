@@ -21,6 +21,7 @@ public class Perks {
   public static Map<String, Supplier> PERKS_BY_NAME;
 
   public static Supplier<AttachmentType<PerkHeartOfTheForge>> HEART_OF_THE_FORGE;
+  public static Supplier<AttachmentType<PerkLuckyDog>> LUCKY_DOG;
 
   public static Map<String, Supplier<List<ItemStack>>> PERK_RESEARCH_COST_BY_NAME;
   public static Map<String, List<Supplier>> SKILLS_TO_PERKS;
@@ -36,6 +37,15 @@ public class Perks {
     );
     PERKS_BY_NAME.put(PerkHeartOfTheForge.NAME, HEART_OF_THE_FORGE);
     PerkHeartOfTheForge.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(HEART_OF_THE_FORGE));
+
+    LUCKY_DOG = Skram.ATTACHMENT_TYPES.register(
+      PerkLuckyDog.NAME, () -> AttachmentType.serializable(() -> new PerkLuckyDog())
+        .sync(new PerkSyncHandler<>(PerkLuckyDog.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkLuckyDog.NAME, LUCKY_DOG);
+    PerkLuckyDog.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(LUCKY_DOG));
   }
 
   public static void setupPerkResearchCosts() {

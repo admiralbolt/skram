@@ -75,35 +75,6 @@ Spell Ideas:
 
 Perks
 =====
-
-I want to define some additional special bonuses / things governed by one or
-more skills. These will typically be more unique than just +X% per level of
-thing, though there will probably be some "boring" perks as well.
-
-Two parts to this:
-
-Perks should be randomly discovered, whenever you gain XP in a relevant skill
-you have a chance of discovering a perk that is governed by that skill. In the
-case of a perk that is governed by multiple, you can discover it from any.
-
-Perks should then have a research requirement. In addition to necessary skill
-levels, I want it to also cost a LARGE amount of resources. This will probably
-need to happen through a custom block entity. I don't want it to be an actual
-crafting thing, it shouldn't be possible to get a perk item if you haven't
-discovered it or don't have the necessary levels.
-
-This will be a large amount of work to get 'er done.
-
-Heart of the Forge:
-  Effect: Reduce time spent burning by 25%.
-  Required Levels: Smithing 30, Health 20
-  Cost: 64x Iron Blocks, 64x Blaze Rods.
-
-Lucker Dog:
-  Effect: Increase all fortune chances by +3%.
-  Required Levels: Fishing 10, Farming 10, Husbandry 10, Mining 10, Botany 10
-  Cost: 64x Rabbit's Foot
-
 Chain Reaction:
   Effect: Whenever one of your crops grows, there's a 20% chance it grows again.
   Required Levels: Farming 30
@@ -196,19 +167,6 @@ Precise Smasher:
 Captain of Legend:
   Effect: Boats you are in can no longer break.
   Required Levels: Sailing 30
-
-
-QOL
-=====
-Make UI look pretty. Show XP for all blocks / items / things that each skill 
-does.
-
-Multiple tabs in main skill screen.
-
-Overview + Skill Detail
-Perks
-Magic
-Misc/About
 
 
 Construction
