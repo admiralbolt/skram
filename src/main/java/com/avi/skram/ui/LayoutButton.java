@@ -56,7 +56,9 @@ public class LayoutButton extends AbstractWidget {
   }
 
   private void arrangeContent() {
-    this.content.setPosition(this.getX() + PADDING, this.getY() + PADDING);
+    this.content.arrangeElements();
+    int verticalOffset = Math.max(0, (this.getHeight() - 2 * PADDING - this.content.getHeight()) / 2);
+    this.content.setPosition(this.getX() + PADDING, this.getY() + PADDING + verticalOffset);
     this.content.arrangeElements();
   }
 
