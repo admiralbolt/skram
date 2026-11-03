@@ -24,6 +24,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkHeartOfTheForge>> HEART_OF_THE_FORGE;
   public static Supplier<AttachmentType<PerkLuckyDog>> LUCKY_DOG;
   public static Supplier<AttachmentType<PerkMasterBlacksmith>> MASTER_BLACKSMITH;
+  public static Supplier<AttachmentType<PerkSpinSlash>> SPIN_SLASH;
 
   public static Map<String, Supplier<List<ItemStack>>> PERK_RESEARCH_COST_BY_NAME;
   public static Map<String, List<Supplier>> SKILLS_TO_PERKS;
@@ -72,6 +73,16 @@ public class Perks {
     PERK_RESEARCH_COST_BY_NAME.put(PerkLuckyDog.NAME, PerkLuckyDog::getResearchCost);
 
     PerkLuckyDog.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(LUCKY_DOG));
+
+    SPIN_SLASH = Skram.ATTACHMENT_TYPES.register(
+      PerkSpinSlash.NAME, () -> AttachmentType.serializable(() -> new PerkSpinSlash())
+        .sync(new PerkSyncHandler<>(PerkSpinSlash.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkSpinSlash.NAME, SPIN_SLASH);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkSpinSlash.NAME, PerkSpinSlash::getResearchCost);
+    PerkSpinSlash.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(SPIN_SLASH));
   }
 
   public static void discoverRandomPerk(Player player, Skill skill, boolean syncToServer) {

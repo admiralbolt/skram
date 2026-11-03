@@ -12,6 +12,7 @@
     "FurnaceBlockEntityMixin",
     "IItemStackExtensionMixin",
     "InventoryMenuMixin",
+    "PlayerMixin",
     "PrimedTntMixin",
     "TntBlockMixin",
     "VillagerMixin"
