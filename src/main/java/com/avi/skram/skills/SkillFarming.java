@@ -3,6 +3,11 @@ package com.avi.skram.skills;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
+import com.avi.skram.perks.Perk;
+import com.avi.skram.perks.PerkChainReaction;
+import com.avi.skram.perks.Perks;
+import com.avi.skram.utils.MathUtils;
+import com.avi.skram.utils.ReflectionUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Checkbox;
@@ -25,6 +30,7 @@ import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.neoforge.event.level.block.CropGrowEvent;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -176,16 +182,20 @@ public class SkillFarming extends Skill {
       event.setResult(CropGrowEvent.Pre.Result.GROW);
     }
 
-    // Roll an additional chance to multi tick crops.
-//    if (Math.random() < 0.6) {
-//      try {
-//        System.out.println("  Invoking randomTick()!");
-//        ReflectionUtils.invokeMethod(state.getBlock(), "randomTick", state, level, pos, random);
-//        System.out.println("  Success!");
-//      } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-//        System.out.println("Can't invoke randomTick: " + e);
-//      }
-//    }
+    // If PerkChainReaction is fully enabled, roll an additional chance to multi tick crops.
+    if (owner != null) {
+      PerkChainReaction chainReaction = owner.getData(Perks.CHAIN_REACTION);
+      if (chainReaction.isFullyEnabled()) {
+        if (Math.random() < 0.333333) {
+          BlockState state = event.getState();
+          try {
+            ReflectionUtils.invokeMethod(state.getBlock(), "randomTick", state, level, pos, MathUtils.RANDOM);
+          } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            System.out.println("Can't invoke randomTick: " + e);
+          }
+        }
+      }
+    }
 
   }
 

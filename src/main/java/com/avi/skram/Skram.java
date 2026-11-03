@@ -115,7 +115,6 @@ public class Skram {
   private void commonSetup(FMLCommonSetupEvent event) {
     event.enqueueWork(Skills::setupSkillIcons);
     event.enqueueWork(Skills::setupSkillXPMaps);
-    event.enqueueWork(Perks::setupPerkResearchCosts);
 
     // Some common setup code
     LOGGER.info("HELLO FROM COMMON SETUP");

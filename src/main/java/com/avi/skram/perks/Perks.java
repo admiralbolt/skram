@@ -20,6 +20,7 @@ public class Perks {
 
   public static Map<String, Supplier> PERKS_BY_NAME;
 
+  public static Supplier<AttachmentType<PerkChainReaction>> CHAIN_REACTION;
   public static Supplier<AttachmentType<PerkHeartOfTheForge>> HEART_OF_THE_FORGE;
   public static Supplier<AttachmentType<PerkLuckyDog>> LUCKY_DOG;
 
@@ -28,6 +29,17 @@ public class Perks {
 
   public static void register() {
     PERKS_BY_NAME = new HashMap<>();
+    PERK_RESEARCH_COST_BY_NAME = new HashMap<>();
+
+    CHAIN_REACTION = Skram.ATTACHMENT_TYPES.register(
+      PerkChainReaction.NAME, () -> AttachmentType.serializable(() -> new PerkChainReaction())
+        .sync(new PerkSyncHandler<>(PerkChainReaction.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkChainReaction.NAME, CHAIN_REACTION);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkChainReaction.NAME, PerkChainReaction::getResearchCost);
+    PerkChainReaction.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(CHAIN_REACTION));
 
     HEART_OF_THE_FORGE = Skram.ATTACHMENT_TYPES.register(
       PerkHeartOfTheForge.NAME, () -> AttachmentType.serializable(() -> new PerkHeartOfTheForge())
@@ -36,6 +48,7 @@ public class Perks {
         .build()
     );
     PERKS_BY_NAME.put(PerkHeartOfTheForge.NAME, HEART_OF_THE_FORGE);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkHeartOfTheForge.NAME, PerkHeartOfTheForge::getResearchCost);
     PerkHeartOfTheForge.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(HEART_OF_THE_FORGE));
 
     LUCKY_DOG = Skram.ATTACHMENT_TYPES.register(
@@ -45,13 +58,9 @@ public class Perks {
         .build()
     );
     PERKS_BY_NAME.put(PerkLuckyDog.NAME, LUCKY_DOG);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkLuckyDog.NAME, PerkLuckyDog::getResearchCost);
+
     PerkLuckyDog.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(LUCKY_DOG));
-  }
-
-  public static void setupPerkResearchCosts() {
-    PERK_RESEARCH_COST_BY_NAME = new HashMap<>();
-
-    PERK_RESEARCH_COST_BY_NAME.put(PerkHeartOfTheForge.NAME, PerkHeartOfTheForge::getResearchCost);
   }
 
   public static void discoverRandomPerk(Player player, Skill skill, boolean syncToServer) {
