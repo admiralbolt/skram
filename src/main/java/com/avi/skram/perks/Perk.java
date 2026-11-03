@@ -156,7 +156,7 @@ public abstract class Perk implements ValueIOSerializable {
   }
 
   // This method is giant and disgusting and mostly AI generated, but god damn it, it works.
-  public Layout renderToLayout(Player player) {
+  public Layout renderToLayout(Player player, List<ItemStack> inventoryResources) {
     LinearLayout layout = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
     layout.spacing(2).defaultCellSetting().padding(2);
 
@@ -178,30 +178,34 @@ public abstract class Perk implements ValueIOSerializable {
     layout.addChild(SpacerElement.height(10));
 
     layout.addChild(textWidget("Required levels:", 180));
-    LinearLayout skillRequirement = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
-    skillRequirement.spacing(3).defaultCellSetting().alignVerticallyMiddle();
-
-    for (Map.Entry<String, Integer> entry : this.requiredSkills.entrySet().stream()
+    List<Map.Entry<String, Integer>> requiredSkills = this.requiredSkills.entrySet().stream()
       .sorted(Map.Entry.comparingByKey())
-      .toList()) {
-      Skill skill = (Skill) player.getData(Skills.SKILLS_BY_NAME.get(entry.getKey()));
+      .toList();
+    for (int i = 0; i < requiredSkills.size(); i += 3) {
+      LinearLayout skillRequirement = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
+      skillRequirement.spacing(3).defaultCellSetting().alignVerticallyMiddle();
 
-      if (this.discovered) {
-        skillRequirement.addChild(new ResizableTextureImageWidget(
-          0, 0, 16, 16,
-          Skills.SKILL_ICONS.getOrDefault(entry.getKey(), Skills.DEFAULT_ICON),
-          16, 16
-        ));
+      for (Map.Entry<String, Integer> entry : requiredSkills.subList(i, Math.min(i + 3, requiredSkills.size()))) {
+        Skill skill = (Skill) player.getData(Skills.SKILLS_BY_NAME.get(entry.getKey()));
+
+        if (this.discovered) {
+          skillRequirement.addChild(new ResizableTextureImageWidget(
+            0, 0, 16, 16,
+            Skills.SKILL_ICONS.getOrDefault(entry.getKey(), Skills.DEFAULT_ICON),
+            16, 16
+          ));
+        }
+
+        Component levelText = Component.literal(StringUtils.snakeToTitle(entry.getKey()) + " ")
+          .append(Component.literal(String.valueOf(entry.getValue()))
+            .withStyle(skill.level >= entry.getValue() ? ChatFormatting.GREEN : ChatFormatting.RED));
+        MultiLineTextWidget levelWidget = new MultiLineTextWidget((this.discovered) ? levelText : styledText(entry.getKey() + " level 99"), Minecraft.getInstance().font);
+        levelWidget.setMaxWidth(160);
+        skillRequirement.addChild(levelWidget);
       }
 
-      Component levelText = Component.literal(StringUtils.snakeToTitle(entry.getKey()) + " ")
-        .append(Component.literal(String.valueOf(entry.getValue()))
-          .withStyle(skill.level >= entry.getValue() ? ChatFormatting.GREEN : ChatFormatting.RED));
-      MultiLineTextWidget levelWidget = new MultiLineTextWidget((this.discovered) ? levelText : styledText(entry.getKey() + " level 99"), Minecraft.getInstance().font);
-      levelWidget.setMaxWidth(160);
-      skillRequirement.addChild(levelWidget);
+      layout.addChild(skillRequirement);
     }
-    layout.addChild(skillRequirement);
 
     if (this.discovered && !this.researched) {
       LinearLayout researchMaterials = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
@@ -216,10 +220,18 @@ public abstract class Perk implements ValueIOSerializable {
       researchMaterials.addChild(researchButton);
 
       for (var stack : Perks.PERK_RESEARCH_COST_BY_NAME.get(this.name).get()) {
+        int available = inventoryResources.stream()
+          .filter(resource -> ItemStack.isSameItemSameComponents(resource, stack))
+          .mapToInt(ItemStack::getCount)
+          .sum();
         researchMaterials.addChild(new ItemDisplayWidget(
           Minecraft.getInstance(), 0, 0, 16, 16, stack.getHoverName(), stack, false, true
         ));
-        researchMaterials.addChild(textWidget(String.valueOf(stack.getCount()), 32));
+        Component countText = Component.literal(String.valueOf(stack.getCount()))
+          .withStyle(available >= stack.getCount() ? ChatFormatting.GREEN : ChatFormatting.RED);
+        MultiLineTextWidget countWidget = new MultiLineTextWidget(countText, Minecraft.getInstance().font);
+        countWidget.setMaxWidth(32);
+        researchMaterials.addChild(countWidget);
       }
       layout.addChild(researchMaterials);
     }

@@ -12,7 +12,7 @@ import java.util.Map;
 public class PerkChainReaction extends Perk {
 
   public static final String NAME = "chain_reaction";
-  public static final String DESCRIPTION = "Whenever one of your plant successfully grows, it has a 33% of growing again.";
+  public static final String DESCRIPTION = "Whenever one of your crops grows, it has a 33% chance of growing again.";
   public static final Map<String, Integer> REQUIRED_SKILLS = Map.of(
     SkillFarming.NAME, 40
   );

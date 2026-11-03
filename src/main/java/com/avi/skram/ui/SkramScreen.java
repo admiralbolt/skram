@@ -17,11 +17,14 @@ import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class SkramScreen extends Screen {
@@ -29,6 +32,7 @@ public class SkramScreen extends Screen {
   private static Tab selectedTab = Tab.SKILLS;
   private static final Map<Tab, Double> SCROLL_AMOUNTS = new EnumMap<>(Tab.class);
   private ScrollableLayout scrollableContent;
+  private List<ItemStack> inventoryResources = List.of();
 
   public SkramScreen() {
     super(Component.literal("Skram"));
@@ -38,6 +42,7 @@ public class SkramScreen extends Screen {
   protected void init() {
     this.saveScrollAmount();
     super.init();
+    this.inventoryResources = this.gatherInventoryResources();
 
     System.out.println("SkramScreen.init");
 
@@ -66,10 +71,31 @@ public class SkramScreen extends Screen {
   private Layout renderSelectedTab() {
     return switch (selectedTab) {
       case SKILLS -> SkillsTab.render();
-      case PERKS -> PerksTab.render();
+      case PERKS -> PerksTab.render(this.inventoryResources);
       case MAGIC -> MagicTab.render();
       case MISC -> MiscTab.render();
     };
+  }
+
+  private List<ItemStack> gatherInventoryResources() {
+    List<ItemStack> resources = new ArrayList<>();
+    var inventory = this.minecraft.player.getInventory();
+    for (int slot = 0; slot < inventory.getContainerSize(); ++slot) {
+      ItemStack item = inventory.getItem(slot);
+      if (item.isEmpty()) continue;
+
+      ItemStack matchingResource = resources.stream()
+        .filter(resource -> ItemStack.isSameItemSameComponents(resource, item))
+        .findFirst()
+        .orElse(null);
+      if (matchingResource == null) {
+        resources.add(item.copy());
+      } else {
+        matchingResource.grow(item.getCount());
+      }
+    }
+
+    return resources;
   }
 
   private void selectTab(Tab tab) {

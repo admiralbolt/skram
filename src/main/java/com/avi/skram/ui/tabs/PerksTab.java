@@ -6,7 +6,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.gui.widget.ResizableTextureImageWidget;
+
+import java.util.List;
 
 public final class PerksTab {
 
@@ -14,13 +17,13 @@ public final class PerksTab {
 
   private PerksTab() {}
 
-  public static Layout render() {
+  public static Layout render(List<ItemStack> inventoryResources) {
     LinearLayout content = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
     content.spacing(2).defaultCellSetting().paddingTop(4);
 
     for (String perkName : Perks.PERKS_BY_NAME.keySet().stream().sorted().toList()) {
       Perk perk = (Perk) Minecraft.getInstance().player.getData(Perks.PERKS_BY_NAME.get(perkName));
-      content.addChild(perk.renderToLayout(Minecraft.getInstance().player));
+      content.addChild(perk.renderToLayout(Minecraft.getInstance().player, inventoryResources));
       content.addChild(new ResizableTextureImageWidget(0, 0, 180, 3, WHITE_BAR, 182, 5));
     }
 
