@@ -25,16 +25,7 @@ Misc Ideas:
  - Elites -- one or more attributes that mobs can spawn in with to increase difficulty.
  - Overall difficulty adjustments: All entities should have more health and damage, disable base regen?
  - Loot duplication perk for melee/range?
- - Perk: Strafer, Aim down sights speed for bows.
- - Perk: Slayer, Gain additional experience from mobs.
- - Perk: Cripple, chance to inflict slowness.
- - Perk: Enchanter, chance to not use levels when enchanting.
- - Perk: pugilist, unarmed attacks deal bonus damage.
- - Perk: Speed eater, decrease 
- - Perk: Can kill with poison?
- - Perk: Cluster Bomb, chance to duplicate thrown potions?
- - Perk: Twins!!? Chance to spawn two babis.
- - Perk: Lava Sailer? <-- not sure if possible.
+
 
 MAGIC
 =====
@@ -80,49 +71,39 @@ Grenadier:
   Required Levels: Ranged 20, Brewing 40
   Cost: ???
 
-Panacea:
-  Effect: Your cooked food now removes nausea, and poison.
-  Required Levels: Cooking 30, Magic 20
-  Cost: ???
-
 Glutton:
-  Effect: Your cooked food now applies regeneration and hunger.
-  Required Levels: Cooking 30, Health 20
+  Effect: Eating food now applies regeneration and hunger.
+  Required Levels: Cooking 40, Health 20
   Cost: ???
 
 Blast Mining:
   Effect: Your TNT has a 100% chance to drop broken blocks.
-  Required Levels: Demolition 30, Mining 10, Digging 10, Woodcutting 10.
+  Required Levels: Demolition 30, Mining 20, Digging 20, Woodcutting 20.
   Cost: ???
 
 Defuser:
   Effect: Dealing damage to a creeper defuses it.
-  Required Levels: Demolition 20, Melee 10, Ranged 10
+  Required Levels: Demolition 30, Melee 20, Ranged 20
   Cost: ???
 
 Vitalic Breathing:
   Effect: No longer take suffocation damage from being trapped in walls.
-  Required Levels: Digging 20, Athletics 20
+  Required Levels: Digging 30, Athletics 20
   Cost: ???
 
 Batman:
   Effect: Your fishing rod can now be used as a grappling hook.
-  Required Levels: Fishing 30, Athletics 20, Acrobatics 20
+  Required Levels: Fishing 40, Athletics 20, Acrobatics 20
   Cost: ???
 
 Bountiful Catch:
-  Effect: Catch additional xp when fishing.
+  Effect: Fishing grants +2 XP per catch.
   Required Levels: Fishing 30
-  Cost: ???
-
-Vampirism:
-  Effect: Killing a mob restores 1/2 heart.
-  Required Levels: Melee 30, Magic 20, Health 20
   Cost: ???
 
 Backstab:
   Effect: Deal +25% damage to unaware entities.
-  Required Levels: Stealth 30, Melee 20, Ranged 20
+  Required Levels: Stealth 30, Melee 20
   Cost: ???
 
 Thievery:
@@ -130,28 +111,72 @@ Thievery:
   Required Levels: Stealth 40, Mercantile 20
   Cost: ???
 
-Weirwood Trees:
-  Effect: Enables the crafting of weirdwood saplings.
-  Required Levels: Woodcutting 50, Magic 50
-  Cost: ???
-
 Sniper:
   Effect: Deal up to +25% damage depending on how far away you are from the target.
   Required Levels: Ranged 30
   Cost: ???
 
-Juggernaut:
-  Effect: While sprinting, you have a 25% chance to negate all incoming damage.
-  Required Levels: Athletics 30, Health 50
-  Cost: ???
-
 Precise Smasher:
   Effect: Gain a 10% chance to not damage any tool when breaking a block. (stacks with unbreaking)
-  Required Levels: Digging 20, Mining 20, Woodcutting 20
+  Required Levels: Digging 30, Mining 30, Woodcutting 30
 
 Captain of Legend:
   Effect: Boats you are in can no longer break.
-  Required Levels: Sailing 30
+  Required Levels: Sailing 50
+  Cost: ???
+
+Slayer:
+  Effect: Gain +25% XP from slain mobs.
+  Required Levels: Melee 30, Ranged 30
+  Cost: ???
+
+Swift Strafer:
+  Effect: Move at full speed while aiming down sights.
+  Required Levels: Ranged 40, Athletics 20
+  Cost: ???
+
+Hamstring:
+  Effect: Melee attacks inflict slowness.
+  Required Levels: Melee 40, Stealth 20
+  Cost: ???
+
+Pugilist:
+  Effect: Unarmed melee attacks deal +10 damage.
+  Required Levels: Melee 60, Athletics 20
+  Cost: ???
+
+Speed Eater:
+  Effect: Consume food twice as fast.
+  Required Levels: Cooking 40, Health 20
+  Cost: ???
+
+Gemini:
+  Effect: Whenever you breed animals, there is a 40% chance to breed twins.
+  Required Levels: Husbandry 40
+  Cost: ???
+
+Vampirism:
+  Effect: Whenever you kill a mob with a melee attack, restore 1/2 heart.
+  Required Levels: Melee 40, Magic 30
+  Cost: ???
+
+Expert Enchanter:
+  Effect: Whenever you enchant an item, you have a 25% chance to pay no XP.
+  Required Levels: Magic 40
+  Cost: ???
+
+Cluster Bomb:
+  Effect: Create 2 additional copies of any splash potion thrown.
+  Required Levels: Brewing 60, Magic 40, Ranged 30
+  Cost: ???
+
+Debonair:
+  Effect: Use flowers on villagers to increase your favor with them.
+  Required Levels: Mercantile 40, Botany 30
+  Cost: ???
+
+
+
 
 
 Construction
