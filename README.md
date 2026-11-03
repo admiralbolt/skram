@@ -75,11 +75,6 @@ Spell Ideas:
 
 Perks
 =====
-Master Blacksmith:
-  Effect: Significantly reduce prior work cost for anvil item events.
-  Required Levels: Smithing 50
-  Cost: ???
-
 Grenadier:
   Effect: Double the range and radius of thrown potions.
   Required Levels: Ranged 20, Brewing 40

@@ -234,9 +234,9 @@ public abstract class Skill implements ValueIOSerializable {
     vertical.addChild(new MultiLineTextWidget(Component.literal("EXP:  " + String.format("%,d", (int) this.xp)), Minecraft.getInstance().font));
     vertical.addChild(new MultiLineTextWidget(Component.literal("Next: " + String.format("%,d", Skill.getTotalXpForLevel(this.level + 1))), Minecraft.getInstance().font));
     vertical.addChild(new MultiLineTextWidget(Component.literal("Bonus: +" + (int) ((this.xpMultiplier - 1) * 100) + "%"), Minecraft.getInstance().font));
+    vertical.addChild(this.renderSkillAbilities());
 
     layout.addChild(vertical);
-    layout.addChild(this.renderSkillAbilities());
 
     return layout;
   }

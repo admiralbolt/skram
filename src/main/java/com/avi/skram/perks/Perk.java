@@ -113,6 +113,10 @@ public abstract class Perk implements ValueIOSerializable {
     return Identifier.fromNamespaceAndPath(Skram.MODID, "textures/perks/" + this.name + ".png");
   }
 
+  public Component getDisplayName() {
+    return styledText(StringUtils.snakeToTitle(this.name));
+  }
+
   public boolean canResearch(Player player) {
     for (Map.Entry<String, Integer> entry : requiredSkills.entrySet()) {
       Skill skill = (Skill) player.getData(Skills.SKILLS_BY_NAME.get(entry.getKey()));
@@ -163,7 +167,7 @@ public abstract class Perk implements ValueIOSerializable {
     LinearLayout heading = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
     heading.spacing(4).defaultCellSetting();
     heading.addChild(new ResizableTextureImageWidget(0, 0, 32, 32, this.getIcon(), 32, 32));
-    heading.addChild(textWidget(StringUtils.snakeToTitle(this.name), 140));
+    heading.addChild(new MultiLineTextWidget(this.getDisplayName(), Minecraft.getInstance().font));
     layout.addChild(heading);
 
     layout.addChild(textWidget(this.description, 180));
@@ -181,11 +185,11 @@ public abstract class Perk implements ValueIOSerializable {
     List<Map.Entry<String, Integer>> requiredSkills = this.requiredSkills.entrySet().stream()
       .sorted(Map.Entry.comparingByKey())
       .toList();
-    for (int i = 0; i < requiredSkills.size(); i += 3) {
+    for (int i = 0; i < requiredSkills.size(); i += 2) {
       LinearLayout skillRequirement = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
       skillRequirement.spacing(3).defaultCellSetting().alignVerticallyMiddle();
 
-      for (Map.Entry<String, Integer> entry : requiredSkills.subList(i, Math.min(i + 3, requiredSkills.size()))) {
+      for (Map.Entry<String, Integer> entry : requiredSkills.subList(i, Math.min(i + 2, requiredSkills.size()))) {
         Skill skill = (Skill) player.getData(Skills.SKILLS_BY_NAME.get(entry.getKey()));
 
         if (this.discovered) {

@@ -2,29 +2,32 @@ package com.avi.skram.ui.tabs;
 
 import com.avi.skram.skills.Skill;
 import com.avi.skram.skills.Skills;
+import com.avi.skram.utils.StringUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.gui.widget.ResizableTextureImageWidget;
 
-public final class SkillsTab {
+import java.util.ArrayList;
+import java.util.List;
 
-  private static final Identifier WHITE_BAR = Identifier.withDefaultNamespace("textures/gui/sprites/boss_bar/white_progress.png");
+public final class SkillsTab {
 
   private SkillsTab() {}
 
-  public static Layout render() {
-    LinearLayout content = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    content.spacing(2).defaultCellSetting().paddingTop(4);
-
+  public static List<TabEntry> entries() {
+    List<TabEntry> entries = new ArrayList<>();
     for (String skillName : Skills.SKILLS_BY_NAME.keySet().stream().sorted().toList()) {
       Skill skill = (Skill) Minecraft.getInstance().player.getData(Skills.SKILLS_BY_NAME.get(skillName));
-      content.addChild(skill.renderToLayout());
-      content.addChild(new ResizableTextureImageWidget(0, 0, 180, 3, WHITE_BAR, 182, 5));
+      entries.add(new TabEntry(
+        skillName,
+        Component.literal(StringUtils.snakeToTitle(skillName) + " " + skill.level),
+        Skills.SKILL_ICONS.getOrDefault(skillName, Skills.DEFAULT_ICON),
+        16,
+        skill::renderToLayout
+      ));
     }
 
-    return content;
+    return entries;
   }
 }
