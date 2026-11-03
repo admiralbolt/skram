@@ -6,8 +6,7 @@ SkillFarming:
   - Extend increased growth chance to crops that grow upwards (SugarCane + Bamboo).
 
 SkillHusbandry:
-  - That boy needs some MIIILK.
-  - Bees? Not the bees!
+  - Bred entities increased stats?
 
 SkillDigging:
   - Treasure chance?
@@ -36,32 +35,6 @@ Misc Ideas:
  - Perk: Cluster Bomb, chance to duplicate thrown potions?
  - Perk: Twins!!? Chance to spawn two babis.
  - Perk: Lava Sailer? <-- not sure if possible.
-
- 
-Collection Log.
-===============
-
-I think exploration + hunter will be folded into this.
-
-I don't want XP bonuses to be based on in game xp anymore, or total levels.
-It's going to be something entirely separate.
-
-We can probably hook into the existing achivement system here as well, but as
-you do actions, collect items, or break blocks relevant to a skill, it should
-increase your collection log completion amount and give more bonus XP to that
-skill.
-
-For some skills this will be relatively simple. In the case of like Mining,
-probably just owning all the pickaxes, and breaking all stone related blocks.
-Based on the existing XP_MAP that's already defined.
-
-For a skill like Husbandry, there are ton of unique interactions that would need
-to be tracked.
-
-It probably makes the most sense to implement custom achievements. If we can
-reuse the checking criteria, it would make my life much easier, though still
-a shitton of work.
-
 
 MAGIC
 =====
@@ -241,9 +214,3 @@ This is a maybe skill. Two issues:
 Mega Chests -> You know 'em and you love 'em.
 Backpack -> You know 'em and you love 'em.
 Compactor? -> Turns cobblestone into coal, turns coal into diamonds?
-
-
-
-
-
-

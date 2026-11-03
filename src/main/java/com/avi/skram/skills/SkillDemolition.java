@@ -14,8 +14,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 public class SkillDemolition extends Skill {
 
@@ -64,6 +66,23 @@ public class SkillDemolition extends Skill {
     if (!demolition.enabledAbilities[BLAST_RESISTANCE_INDEX]) return;
 
     event.setNewDamage((float) (event.getNewDamage() * demolition.getBlastResistance()));
+  }
+
+  public static void handleKill(LivingDeathEvent event) {
+    Player player = null;
+    if (event.getSource().getEntity() instanceof Player) {
+      player = (Player) event.getSource().getEntity();
+    } else if (event.getSource().getDirectEntity() instanceof Player) {
+      player = (Player) event.getSource().getDirectEntity();
+    } else {
+      return;
+    }
+
+    if (player.level().isClientSide()) return;
+    if (!(event.getEntity() instanceof Creeper)) return;
+
+    SkillDemolition demolition = player.getData(Skills.DEMOLITION);
+    demolition.addXp(player, 20);
   }
 
   // Encourage the players to blow up entities :)

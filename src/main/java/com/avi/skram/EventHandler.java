@@ -214,7 +214,13 @@ public class EventHandler {
   public static void ON_PLAYER_RIGHT_CLICK_BLOCK(PlayerInteractEvent.RightClickBlock event) {
     SkillDigging.handleRightClick(event);
     SkillFarming.handleRightClick(event);
+    SkillHusbandry.handleBlockInteract(event);
     SkillWoodcutting.handleRightClick(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_PLAYER_ENTITY_INTERACT(PlayerInteractEvent.EntityInteract event) {
+    SkillHusbandry.handleEntityInteract(event);
   }
 
   @SubscribeEvent
@@ -264,6 +270,7 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_LIVING_DEATH(LivingDeathEvent event) {
+    SkillDemolition.handleKill(event);
     SkillHusbandry.handleAnimalKilled(event);
   }
 

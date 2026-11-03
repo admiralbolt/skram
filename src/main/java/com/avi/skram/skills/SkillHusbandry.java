@@ -5,17 +5,28 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.cow.Cow;
+import net.minecraft.world.entity.animal.cow.MushroomCow;
+import net.minecraft.world.entity.animal.goat.Goat;
+import net.minecraft.world.entity.animal.sheep.Sheep;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.BeehiveBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.entity.living.AnimalTameEvent;
 import net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +72,7 @@ public class SkillHusbandry extends Skill {
       player.level().addFreshEntity(orb);
     }
 
-    husbandry.addXp(player, 120);
+    husbandry.addXp(player, 100);
   }
 
   public static void applyFortune(LivingDropsEvent event) {
@@ -118,6 +129,49 @@ public class SkillHusbandry extends Skill {
 
     SkillHusbandry husbandry = player.getData(Skills.HUSBANDRY);
     husbandry.addXp(player, 150);
+  }
+
+  public static void handleEntityInteract(PlayerInteractEvent.EntityInteract event) {
+    if (event.getLevel().isClientSide()) return;
+    // We can get milk from cows, mooshrooms, and goats.
+    Entity entity = event.getTarget();
+    if (entity instanceof Cow || entity instanceof MushroomCow || entity instanceof Goat) {
+      // We can only get milk when using a bucket.
+      if (event.getItemStack().getItem() != Items.BUCKET) return;
+
+      Player player = event.getEntity();
+      SkillHusbandry husbandry = player.getData(Skills.HUSBANDRY);
+      husbandry.addXp(player, 15);
+      return;
+    }
+
+    // Shear dem sheepsies.
+    if (entity instanceof Sheep sheep) {
+      if (event.getItemStack().getItem() != Items.SHEARS) return;
+      if (!sheep.readyForShearing()) return;
+
+      Player player = event.getEntity();
+      SkillHusbandry husbandry = player.getData(Skills.HUSBANDRY);
+      husbandry.addXp(player, 5);
+    }
+
+  }
+
+  public static void handleBlockInteract(PlayerInteractEvent.RightClickBlock event) {
+    if (!event.isCanceled() && event.getLevel().isClientSide()) return;
+
+    ItemStack usedItem = event.getItemStack();
+    if (usedItem.getItem() != Items.GLASS_BOTTLE) return;
+
+    BlockPos pos = event.getPos();
+    BlockState state = event.getLevel().getBlockState(pos);
+    if (!state.is(BlockTags.BEEHIVES)) return;
+
+    if (state.getValue(BeehiveBlock.HONEY_LEVEL) < 5) return;
+
+    Player player = event.getEntity();
+    SkillHusbandry husbandry = player.getData(Skills.HUSBANDRY);
+    husbandry.addXp(player, 40);
   }
 
   @Override
