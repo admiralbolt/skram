@@ -18,7 +18,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.gui.widget.ResizableTextureImageWidget;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 
@@ -72,21 +71,14 @@ public class SkramScreen extends Screen {
     LinearLayout index = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
     index.spacing(2).defaultCellSetting().paddingTop(4);
     for (TabEntry entry : entries) {
-      LinearLayout row = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
-      row.spacing(3).defaultCellSetting().alignVerticallyMiddle();
-      if (entry.icon() != null) {
-        row.addChild(new ResizableTextureImageWidget(
-          0, 0, 16, 16, entry.icon(), entry.iconTextureSize(), entry.iconTextureSize()
-        ));
-      }
-
-      Component label = entry.key().equals(selectedEntryKey)
-        ? Component.literal("> ").append(entry.label())
-        : entry.label();
-      row.addChild(Button.builder(label, button -> this.selectEntry(entry.key()))
-        .size(112, 20)
-        .build());
-      index.addChild(row);
+      index.addChild(new LayoutButton(
+        entry.indexWidth(),
+        entry.indexHeight(),
+        entry.indexContent(),
+        entry.key().equals(selectedEntryKey),
+        () -> this.selectEntry(entry.key()),
+        Component.literal(entry.key())
+      ));
     }
 
     this.indexContent = new ScrollableLayout(this.minecraft, index, 200);
