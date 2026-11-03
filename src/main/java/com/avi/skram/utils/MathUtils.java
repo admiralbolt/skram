@@ -1,8 +1,11 @@
 package com.avi.skram.utils;
 
 import java.awt.*;
+import java.util.Random;
 
 public class MathUtils {
+
+  public static final Random RANDOM = new Random();
 
   public static double linearRescale(double currentValue, double min, double max, double newMin, double newMax) {
     double currentRescale = (currentValue - min) / (max - min);

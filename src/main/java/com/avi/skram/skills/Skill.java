@@ -1,6 +1,7 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.network.SkillPacket;
+import com.avi.skram.perks.Perks;
 import com.avi.skram.ui.GenericMessageToast;
 import com.avi.skram.ui.ToastUtils;
 import com.avi.skram.ui.XPGainGui;
@@ -141,7 +142,14 @@ public abstract class Skill implements ValueIOSerializable {
   public void addXp(Player player, double xp, boolean syncToServer) {
     if (xp <= 0) return;
 
-    this.xp += this.xpMultiplier * xp;
+    double gainedXp = this.xpMultiplier * xp;
+    this.xp += gainedXp;
+
+    // Whenever we gain xp, we want to give a chance of discovering a relevant perk.
+    if (Math.random() < (gainedXp / 100)) {
+      Perks.discoverRandomPerk(player, this, syncToServer);
+    }
+
     boolean leveledUp = false;
     while (this.xp > Skill.getTotalXpForLevel(this.level + 1)) {
       leveledUp = true;

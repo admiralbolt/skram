@@ -1,9 +1,16 @@
 package com.avi.skram.perks;
 
 import com.avi.skram.Skram;
+import com.avi.skram.network.PerkPacket;
+import com.avi.skram.skills.Skill;
+import com.avi.skram.utils.MathUtils;
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +23,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkHeartOfTheForge>> HEART_OF_THE_FORGE;
 
   public static Map<String, Supplier<List<ItemStack>>> PERK_RESEARCH_COST_BY_NAME;
+  public static Map<String, List<Supplier>> SKILLS_TO_PERKS;
 
   public static void register() {
     PERKS_BY_NAME = new HashMap<>();
@@ -27,11 +35,37 @@ public class Perks {
         .build()
     );
     PERKS_BY_NAME.put(PerkHeartOfTheForge.NAME, HEART_OF_THE_FORGE);
+    PerkHeartOfTheForge.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(HEART_OF_THE_FORGE));
   }
 
   public static void setupPerkResearchCosts() {
     PERK_RESEARCH_COST_BY_NAME = new HashMap<>();
 
     PERK_RESEARCH_COST_BY_NAME.put(PerkHeartOfTheForge.NAME, PerkHeartOfTheForge::getResearchCost);
+  }
+
+  public static void discoverRandomPerk(Player player, Skill skill, boolean syncToServer) {
+    List<Pair<Perk, Supplier>> perks = new ArrayList<>();
+    for (Supplier perkSupplier : SKILLS_TO_PERKS.get(skill.name)) {
+      Perk perk = (Perk) player.getData(perkSupplier);
+      if (perk.discovered) continue;
+
+      perks.add(Pair.of(perk, perkSupplier));
+    }
+
+    if (perks.isEmpty()) return;
+
+    // Otherwise, randomly choose one to discover.
+    Pair<Perk, Supplier> toDiscover = perks.get(MathUtils.RANDOM.nextInt(perks.size()));
+    Perk perkToDiscover = toDiscover.getFirst();
+    ;
+    Supplier supplier = toDiscover.getSecond();
+    if (syncToServer) {
+      ClientPacketDistributor.sendToServer(new PerkPacket(perkToDiscover.name, true, false, true));
+    } else {
+      // This should sync back to the client automatically.
+      perkToDiscover.discovered = true;
+      player.setData(supplier, perkToDiscover);
+    }
   }
 }

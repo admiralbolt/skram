@@ -1,10 +1,12 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
+import com.avi.skram.perks.Perks;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.attachment.AttachmentType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -43,6 +45,7 @@ public class Skills {
 
   public static void register() {
     SKILLS_BY_NAME = new HashMap<>();
+    Perks.SKILLS_TO_PERKS = new HashMap<>();
 
     ACROBATICS = Skram.ATTACHMENT_TYPES.register(
       SkillAcrobatics.NAME, () -> AttachmentType.serializable(() -> new SkillAcrobatics())
@@ -51,6 +54,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillAcrobatics.NAME, ACROBATICS);
+    Perks.SKILLS_TO_PERKS.put(SkillAcrobatics.NAME, new ArrayList<>());
 
     ATHLETICS = Skram.ATTACHMENT_TYPES.register(
       SkillAthletics.NAME, () -> AttachmentType.serializable(() -> new SkillAthletics())
@@ -59,6 +63,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillAthletics.NAME, ATHLETICS);
+    Perks.SKILLS_TO_PERKS.put(SkillAthletics.NAME, new ArrayList<>());
 
     BOTANY = Skram.ATTACHMENT_TYPES.register(
       SkillBotany.NAME, () -> AttachmentType.serializable(() -> new SkillBotany())
@@ -67,6 +72,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillBotany.NAME, BOTANY);
+    Perks.SKILLS_TO_PERKS.put(SkillBotany.NAME, new ArrayList<>());
 
     BREWING = Skram.ATTACHMENT_TYPES.register(
       SkillBrewing.NAME, () -> AttachmentType.serializable(() -> new SkillBrewing())
@@ -75,6 +81,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillBrewing.NAME, BREWING);
+    Perks.SKILLS_TO_PERKS.put(SkillBrewing.NAME, new ArrayList<>());
 
     COOKING = Skram.ATTACHMENT_TYPES.register(
       SkillCooking.NAME, () -> AttachmentType.serializable(() -> new SkillCooking())
@@ -83,6 +90,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillCooking.NAME, COOKING);
+    Perks.SKILLS_TO_PERKS.put(SkillCooking.NAME, new ArrayList<>());
 
     DEMOLITION = Skram.ATTACHMENT_TYPES.register(
       SkillDemolition.NAME, () -> AttachmentType.serializable(() -> new SkillDemolition())
@@ -91,6 +99,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillDemolition.NAME, DEMOLITION);
+    Perks.SKILLS_TO_PERKS.put(SkillDemolition.NAME, new ArrayList<>());
 
     DIGGING = Skram.ATTACHMENT_TYPES.register(
       SkillDigging.NAME, () -> AttachmentType.serializable(() -> new SkillDigging())
@@ -99,6 +108,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillDigging.NAME, DIGGING);
+    Perks.SKILLS_TO_PERKS.put(SkillDigging.NAME, new ArrayList<>());
 
     FARMING = Skram.ATTACHMENT_TYPES.register(
       SkillFarming.NAME, () -> AttachmentType.serializable(() -> new SkillFarming())
@@ -107,6 +117,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillFarming.NAME, FARMING);
+    Perks.SKILLS_TO_PERKS.put(SkillFarming.NAME, new ArrayList<>());
 
     FISHING = Skram.ATTACHMENT_TYPES.register(
       SkillFishing.NAME, () -> AttachmentType.serializable(() -> new SkillFishing())
@@ -115,6 +126,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillFishing.NAME, FISHING);
+    Perks.SKILLS_TO_PERKS.put(SkillFishing.NAME, new ArrayList<>());
 
     HEALTH = Skram.ATTACHMENT_TYPES.register(
       SkillHealth.NAME, () -> AttachmentType.serializable(() -> new SkillHealth())
@@ -123,6 +135,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillHealth.NAME, HEALTH);
+    Perks.SKILLS_TO_PERKS.put(SkillHealth.NAME, new ArrayList<>());
 
     HUSBANDRY = Skram.ATTACHMENT_TYPES.register(
       SkillHusbandry.NAME, () -> AttachmentType.serializable(() -> new SkillHusbandry())
@@ -131,6 +144,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillHusbandry.NAME, HUSBANDRY);
+    Perks.SKILLS_TO_PERKS.put(SkillHusbandry.NAME, new ArrayList<>());
 
     MELEE = Skram.ATTACHMENT_TYPES.register(
       SkillMelee.NAME, () -> AttachmentType.serializable(() -> new SkillMelee())
@@ -139,6 +153,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillMelee.NAME, MELEE);
+    Perks.SKILLS_TO_PERKS.put(SkillMelee.NAME, new ArrayList<>());
 
     MERCANTILE = Skram.ATTACHMENT_TYPES.register(
       SkillMercantile.NAME, () -> AttachmentType.serializable(() -> new SkillMercantile())
@@ -147,6 +162,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillMercantile.NAME, MERCANTILE);
+    Perks.SKILLS_TO_PERKS.put(SkillMercantile.NAME, new ArrayList<>());
 
     MINING = Skram.ATTACHMENT_TYPES.register(
       SkillMining.NAME, () -> AttachmentType.serializable(() -> new SkillMining())
@@ -155,6 +171,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillMining.NAME, MINING);
+    Perks.SKILLS_TO_PERKS.put(SkillMining.NAME, new ArrayList<>());
 
     RANGED = Skram.ATTACHMENT_TYPES.register(
       SkillRanged.NAME, () -> AttachmentType.serializable(() -> new SkillRanged())
@@ -163,6 +180,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillRanged.NAME, RANGED);
+    Perks.SKILLS_TO_PERKS.put(SkillRanged.NAME, new ArrayList<>());
 
     SAILING = Skram.ATTACHMENT_TYPES.register(
       SkillSailing.NAME, () -> AttachmentType.serializable(() -> new SkillSailing())
@@ -171,6 +189,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillSailing.NAME, SAILING);
+    Perks.SKILLS_TO_PERKS.put(SkillSailing.NAME, new ArrayList<>());
 
     SMITHING = Skram.ATTACHMENT_TYPES.register(
       SkillSmithing.NAME, () -> AttachmentType.serializable(() -> new SkillSmithing())
@@ -179,6 +198,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillSmithing.NAME, SMITHING);
+    Perks.SKILLS_TO_PERKS.put(SkillSmithing.NAME, new ArrayList<>());
 
     STEALTH = Skram.ATTACHMENT_TYPES.register(
       SkillStealth.NAME, () -> AttachmentType.serializable(() -> new SkillStealth())
@@ -187,6 +207,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillStealth.NAME, STEALTH);
+    Perks.SKILLS_TO_PERKS.put(SkillStealth.NAME, new ArrayList<>());
 
     WOODCUTTING = Skram.ATTACHMENT_TYPES.register(
       SkillWoodcutting.NAME, () -> AttachmentType.serializable(() -> new SkillWoodcutting())
@@ -195,6 +216,7 @@ public class Skills {
         .build()
     );
     SKILLS_BY_NAME.put(SkillWoodcutting.NAME, WOODCUTTING);
+    Perks.SKILLS_TO_PERKS.put(SkillWoodcutting.NAME, new ArrayList<>());
 
     // Using this for other scripts.
     System.out.println("HEY! LISTEN!");
