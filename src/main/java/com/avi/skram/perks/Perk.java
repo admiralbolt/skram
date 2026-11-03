@@ -2,14 +2,14 @@ package com.avi.skram.perks;
 
 import com.avi.skram.skills.Skill;
 import com.avi.skram.skills.Skills;
+import com.avi.skram.Skram;
 import com.avi.skram.network.PerkPacket;
+import com.avi.skram.network.PerkResearchPacket;
 import com.avi.skram.utils.StringUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.components.ItemDisplayWidget;
-import net.minecraft.client.gui.components.MultiLineTextWidget;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.layouts.SpacerElement;
@@ -17,7 +17,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FontDescription;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.client.gui.widget.ResizableTextureImageWidget;
@@ -25,12 +27,17 @@ import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.util.ValueIOSerializable;
 
 import java.nio.charset.Charset;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public abstract class Perk implements ValueIOSerializable {
 
   private static final Identifier PLACEHOLDER_ICON = Identifier.withDefaultNamespace("textures/item/nether_star.png");
+  private static final WidgetSprites RESEARCH_BUTTON_SPRITES = new WidgetSprites(
+    Identifier.fromNamespaceAndPath(Skram.MODID, "research")
+  );
   private static final FontDescription ALT_FONT = new FontDescription.Resource(Identifier.withDefaultNamespace("alt"));
   private static final Style BLURRED_TEXT = Style.EMPTY.withFont(ALT_FONT);
 
@@ -112,6 +119,40 @@ public abstract class Perk implements ValueIOSerializable {
     return true;
   }
 
+  public boolean research(Player player) {
+    if (player.level().isClientSide() || !this.discovered || this.researched || !this.canResearch(player)) {
+      return false;
+    }
+
+    List<ItemStack> researchCost = Perks.PERK_RESEARCH_COST_BY_NAME.get(this.name).get();
+    Inventory inventory = player.getInventory();
+    Map<Integer, Integer> itemsToConsume = new LinkedHashMap<>();
+
+    for (ItemStack cost : researchCost) {
+      int remaining = cost.getCount();
+      for (int slot = 0; slot < inventory.getContainerSize() && remaining > 0; ++slot) {
+        ItemStack item = inventory.getItem(slot);
+        if (item.isEmpty() || !ItemStack.isSameItemSameComponents(item, cost)) continue;
+
+        int available = item.getCount() - itemsToConsume.getOrDefault(slot, 0);
+        int toConsume = Math.min(available, remaining);
+        if (toConsume > 0) {
+          itemsToConsume.merge(slot, toConsume, Integer::sum);
+          remaining -= toConsume;
+        }
+      }
+
+      if (remaining > 0) return false;
+    }
+
+    itemsToConsume.forEach(inventory::removeItem);
+    this.researched = true;
+    this.applyModifiers(player);
+    player.setData(Perks.PERKS_BY_NAME.get(this.name), this);
+    return true;
+  }
+
+  // This method is giant and disgusting and mostly AI generated, but god damn it, it works.
   public Layout renderToLayout(Player player) {
     LinearLayout layout = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
     layout.spacing(2).defaultCellSetting().padding(2);
@@ -130,8 +171,8 @@ public abstract class Perk implements ValueIOSerializable {
         .selected(this.enabled)
         .onValueChange((checkbox, value) -> this.setEnabled(player, value))
         .build());
-      layout.addChild(SpacerElement.height(10));
     }
+    layout.addChild(SpacerElement.height(10));
 
     layout.addChild(textWidget("Required levels:", 180));
     LinearLayout skillRequirement = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
@@ -159,18 +200,26 @@ public abstract class Perk implements ValueIOSerializable {
     }
     layout.addChild(skillRequirement);
 
-    layout.addChild(textWidget("Research materials:", 180));
-    LinearLayout researchMaterials = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
-    researchMaterials.spacing(4).defaultCellSetting().alignVerticallyMiddle();
-    for (var stack : Perks.PERK_RESEARCH_COST_BY_NAME.get(this.name).get()) {
-      if (this.discovered) {
+    if (this.discovered && !this.researched) {
+      LinearLayout researchMaterials = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
+      researchMaterials.spacing(4).defaultCellSetting().alignVerticallyMiddle();
+
+      ImageButton researchButton = new ImageButton(
+        0, 0, 20, 20, RESEARCH_BUTTON_SPRITES,
+        button -> ClientPacketDistributor.sendToServer(new PerkResearchPacket(this.name)),
+        Component.literal("Research This Perk")
+      );
+      researchButton.setTooltip(Tooltip.create(Component.literal("Researching this perk costs the listed resources. Resources must be in your inventory.")));
+      researchMaterials.addChild(researchButton);
+
+      for (var stack : Perks.PERK_RESEARCH_COST_BY_NAME.get(this.name).get()) {
         researchMaterials.addChild(new ItemDisplayWidget(
           Minecraft.getInstance(), 0, 0, 16, 16, stack.getHoverName(), stack, false, true
         ));
+        researchMaterials.addChild(textWidget(String.valueOf(stack.getCount()), 32));
       }
-      researchMaterials.addChild(textWidget(String.valueOf(stack.getCount()), 32));
+      layout.addChild(researchMaterials);
     }
-    layout.addChild(researchMaterials);
 
     return layout;
   }

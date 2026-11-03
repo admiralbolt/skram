@@ -29,12 +29,18 @@ public class PerkSyncHandler<T extends Perk> implements AttachmentSyncHandler<T>
     T newValue = codec.decode(buf);
     if (previousValue == null) return newValue;
 
+    Player player = (Player) holder;
+
     if (newValue.discovered != previousValue.discovered) {
       System.out.println("Discovered perk...");
     }
 
     if (newValue.researched != previousValue.researched) {
-      System.out.println("Researched perk...");
+      newValue.applyModifiers(player);
+    }
+
+    if (newValue.enabled != previousValue.enabled) {
+      newValue.applyModifiers(player);
     }
 
     return newValue;

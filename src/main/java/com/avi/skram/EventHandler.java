@@ -6,6 +6,7 @@ import com.avi.skram.blocks.PlayerOwnedData;
 import com.avi.skram.commands.SkramCommands;
 import com.avi.skram.network.ClientPayloadHandler;
 import com.avi.skram.network.PerkPacket;
+import com.avi.skram.network.PerkResearchPacket;
 import com.avi.skram.network.ServerPayloadHandler;
 import com.avi.skram.network.SkillPacket;
 import com.avi.skram.skills.*;
@@ -315,12 +316,18 @@ public class EventHandler {
       PerkPacket.STREAM_CODEC,
       ServerPayloadHandler::handlePerkPacket
     );
+    registrar.playBidirectional(
+      PerkResearchPacket.TYPE,
+      PerkResearchPacket.STREAM_CODEC,
+      ServerPayloadHandler::handlePerkResearchPacket
+    );
   }
 
   @SubscribeEvent
   public static void REGISTER_CLIENT_PAYLOAD_HANDLERS(RegisterClientPayloadHandlersEvent event) {
     event.register(SkillPacket.TYPE, ClientPayloadHandler::handleSkillPacket);
     event.register(PerkPacket.TYPE, ClientPayloadHandler::handlePerkPacket);
+    event.register(PerkResearchPacket.TYPE, ClientPayloadHandler::handlePerkResearchPacket);
   }
 
   public static final Identifier CUSTOM_LAYER = Identifier.fromNamespaceAndPath(Skram.MODID, "asdf");

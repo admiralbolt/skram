@@ -37,4 +37,17 @@ public class ServerPayloadHandler {
     }
   }
 
+  public static void handlePerkResearchPacket(final PerkResearchPacket packet, final IPayloadContext context) {
+    context.enqueueWork(() -> {
+      var perkAttachment = Perks.PERKS_BY_NAME.get(packet.name());
+      if (perkAttachment == null) return;
+
+      Player player = context.player();
+      Perk perk = (Perk) player.getData(perkAttachment);
+      if (perk.research(player)) {
+        context.reply(packet);
+      }
+    });
+  }
+
 }
