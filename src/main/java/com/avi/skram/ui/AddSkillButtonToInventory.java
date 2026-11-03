@@ -29,7 +29,7 @@ public class AddSkillButtonToInventory {
     RECIPE_BOOK_OPEN = getRecipeBookOpen(inventoryScreen);
 
     Button customButton = Button.builder(Component.literal("Skram"), button -> {
-        Minecraft.getInstance().setScreenAndShow(new SkillScreen());
+        Minecraft.getInstance().setScreenAndShow(new SkramScreen());
       })
       .pos(inventoryScreen.getLeftPos() + 128, inventoryScreen.getTopPos() + 62)
       .size(40, 20)
