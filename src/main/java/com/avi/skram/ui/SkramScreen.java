@@ -109,7 +109,7 @@ public class SkramScreen extends Screen {
     mainContent.defaultCellSetting().alignHorizontallyLeft();
     mainContent.addChild(this.indexContent, 0, 0);
     mainContent.addChild(this.detailsContent, 0, 1);
-    layout.addToContents(mainContent);
+    layout.addToContents(mainContent, settings -> settings.alignHorizontallyLeft().alignVerticallyTop());
 
     layout.arrangeElements();
     layout.visitWidgets(this::addRenderableWidget);

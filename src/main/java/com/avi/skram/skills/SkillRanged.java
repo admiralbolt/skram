@@ -39,7 +39,7 @@ public class SkillRanged extends Skill {
   }
 
   public double getDamageBoost() {
-    return 0.01f * this.level;
+    return 0.01 * this.level;
   }
 
   public double getDrawSpeed() {
