@@ -242,6 +242,11 @@ public class EventHandler {
   }
 
   @SubscribeEvent
+  public static void ON_PLAYER_USE_ITEM_FINISH(LivingEntityUseItemEvent.Finish event) {
+    PerkGlutton.handleEat(event);
+  }
+
+  @SubscribeEvent
   public static void ON_PLAYER_SNEAKING(LivingEvent.LivingVisibilityEvent event) {
     SkillStealth.applyVisibility(event);
   }
