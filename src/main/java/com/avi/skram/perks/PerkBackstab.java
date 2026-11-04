@@ -8,12 +8,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 import java.util.List;
 import java.util.Map;
@@ -38,6 +38,23 @@ public class PerkBackstab extends Perk {
     );
   }
 
-  public PerkBackstab() { super(NAME, DESCRIPTION, REQUIRED_SKILLS); }
-  public PerkBackstab(ByteBuf buffer) { super(buffer, DESCRIPTION, REQUIRED_SKILLS); }
+  public PerkBackstab() {
+    super(NAME, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public PerkBackstab(ByteBuf buffer) {
+    super(buffer, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public static void handleDamageEvent(LivingDamageEvent.Pre event) {
+    if (!SkillStealth.isSneakAttack(event)) return;
+    if (!(event.getSource().getEntity() instanceof Player player)) return;
+
+    PerkBackstab perk = player.getData(Perks.BACKSTAB);
+    if (!perk.isFullyEnabled()) return;
+
+    event.setNewDamage(event.getNewDamage() * 1.5f);
+  }
+
+
 }

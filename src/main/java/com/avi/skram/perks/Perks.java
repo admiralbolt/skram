@@ -32,7 +32,6 @@ public class Perks {
   public static Supplier<AttachmentType<PerkSpinSlash>> SPIN_SLASH;
   public static Supplier<AttachmentType<PerkGrenadier>> GRENADIER;
   public static Supplier<AttachmentType<PerkGlutton>> GLUTTON;
-  public static Supplier<AttachmentType<PerkBlastMining>> BLAST_MINING;
   public static Supplier<AttachmentType<PerkDefuser>> DEFUSER;
   public static Supplier<AttachmentType<PerkVitalicBreathing>> VITALIC_BREATHING;
   public static Supplier<AttachmentType<PerkBatman>> BATMAN;
@@ -141,16 +140,6 @@ public class Perks {
     PERKS_BY_NAME.put(PerkGlutton.NAME, GLUTTON);
     PERK_RESEARCH_COST_BY_NAME.put(PerkGlutton.NAME, PerkGlutton::getResearchCost);
     PerkGlutton.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(GLUTTON));
-
-    BLAST_MINING = Skram.ATTACHMENT_TYPES.register(
-      PerkBlastMining.NAME, () -> AttachmentType.serializable(() -> new PerkBlastMining())
-        .sync(new PerkSyncHandler<>(PerkBlastMining.STREAM_CODEC))
-        .copyOnDeath()
-        .build()
-    );
-    PERKS_BY_NAME.put(PerkBlastMining.NAME, BLAST_MINING);
-    PERK_RESEARCH_COST_BY_NAME.put(PerkBlastMining.NAME, PerkBlastMining::getResearchCost);
-    PerkBlastMining.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(BLAST_MINING));
 
     DEFUSER = Skram.ATTACHMENT_TYPES.register(
       PerkDefuser.NAME, () -> AttachmentType.serializable(() -> new PerkDefuser())

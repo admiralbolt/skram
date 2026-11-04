@@ -91,7 +91,7 @@ public class SkillMelee extends Skill {
 
     SkillMelee melee = player.getData(Skills.MELEE);
     if (melee.enabledAbilities[DAMAGE_BOOST_INDEX]) {
-      event.setNewDamage(event.getOriginalDamage() * (float) (1 + melee.getDamageBoost()));
+      event.setNewDamage(event.getNewDamage() * (float) (1 + melee.getDamageBoost()));
     }
 
     LivingEntity targetEntity = event.getEntity();

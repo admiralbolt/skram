@@ -72,7 +72,37 @@ public class SkillStealth extends Skill {
     }
   }
 
+  public static boolean isSneakAttack(LivingDamageEvent.Pre event) {
+    Player player = null;
+    if (event.getSource().getEntity() instanceof Player) {
+      player = (Player) event.getSource().getEntity();
+    } else if (event.getSource().getDirectEntity() instanceof Player) {
+      player = (Player) event.getSource().getDirectEntity();
+    } else {
+      return false;
+    }
+
+    // Check to see if the target was unaware of us. Only Mobs have targeting information.
+    if (!(event.getEntity() instanceof Mob mob)) return false;
+    // No stealth XP for friendly mobs.
+    if (mob.getType().getCategory().isFriendly()) return false;
+    if (mob.getTarget() != null && mob.getTarget().equals(player)) return false;
+
+    // Get the IntSet "seen" from mob sensing.
+    try {
+      IntSet seen = (IntSet) ReflectionUtils.getFieldValue(mob.getSensing(), "seen");
+      if (seen.contains(player.getId())) return false;
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      // Die.
+      return false;
+    }
+
+    return true;
+  }
+
   public static void handleDamageEvent(LivingDamageEvent.Pre event) {
+    if (!isSneakAttack(event)) return;
+
     Player player = null;
     if (event.getSource().getEntity() instanceof Player) {
       player = (Player) event.getSource().getEntity();
@@ -82,25 +112,10 @@ public class SkillStealth extends Skill {
       return;
     }
 
-    // Check to see if the target was unaware of us. Only Mobs have targeting information.
-    if (!(event.getEntity() instanceof Mob mob)) return;
-    // No stealth XP for friendly mobs.
-    if (mob.getType().getCategory().isFriendly()) return;
-    if (mob.getTarget() != null && mob.getTarget().equals(player)) return;
-
-    // Get the IntSet "seen" from mob sensing.
-    try {
-      IntSet seen = (IntSet) ReflectionUtils.getFieldValue(mob.getSensing(), "seen");
-      if (seen.contains(player.getId())) return;
-    } catch (NoSuchFieldException | IllegalAccessException e) {
-      // Die.
-      return;
-    }
-
     SkillStealth stealth = player.getData(Skills.STEALTH);
     // Modify the XP gained based on the distance between the player and the mob they hit.
     // Nerfing stealth archer even in pre-release.
-    float distanceBetween = mob.distanceTo(player);
+    float distanceBetween = event.getEntity().distanceTo(player);
     double xpMult = 24 / Math.max(1, distanceBetween);
 
     if (event.getSource().is(DamageTypes.PLAYER_EXPLOSION)) {

@@ -53,7 +53,7 @@ public class SkillRanged extends Skill {
 
     SkillRanged ranged = player.getData(Skills.RANGED);
     if (ranged.enabledAbilities[DAMAGE_BOOST_INDEX]) {
-      event.setNewDamage(event.getOriginalDamage() * (float) (1 + ranged.getDamageBoost()));
+      event.setNewDamage(event.getNewDamage() * (float) (1 + ranged.getDamageBoost()));
     }
 
     LivingEntity targetEntity = event.getEntity();

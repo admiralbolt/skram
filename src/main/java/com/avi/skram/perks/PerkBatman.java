@@ -6,8 +6,11 @@ import com.avi.skram.skills.SkillFishing;
 import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.List;
 import java.util.Map;
@@ -29,6 +32,24 @@ public class PerkBatman extends Perk {
     );
   }
 
-  public PerkBatman() { super(NAME, DESCRIPTION, REQUIRED_SKILLS); }
-  public PerkBatman(ByteBuf buffer) { super(buffer, DESCRIPTION, REQUIRED_SKILLS); }
+  public PerkBatman() {
+    super(NAME, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public PerkBatman(ByteBuf buffer) {
+    super(buffer, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public static void handleBatman(PlayerInteractEvent.RightClickItem event) {
+    Player player = event.getEntity();
+    if (player.fishing == null) return;
+
+    PerkBatman perk = player.getData(Perks.BATMAN);
+    if (!perk.isFullyEnabled()) return;
+    if (!player.fishing.onGround()) return;
+
+    Vec3 movement = player.fishing.position().subtract(player.position()).multiply(1.0, 0.1, 1.0);
+
+    player.addDeltaMovement(movement);
+  }
 }
