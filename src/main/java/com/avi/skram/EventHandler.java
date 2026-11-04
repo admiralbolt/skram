@@ -283,6 +283,11 @@ public class EventHandler {
   }
 
   @SubscribeEvent
+  public static void ON_LIVING_XP_DROP(LivingExperienceDropEvent event) {
+    PerkSlayer.addMoreXP(event);
+  }
+
+  @SubscribeEvent
   public static void ON_LIVING_DEATH(LivingDeathEvent event) {
     SkillDemolition.handleKill(event);
     SkillHusbandry.handleAnimalKilled(event);
@@ -297,6 +302,7 @@ public class EventHandler {
   public static void ON_ENTITY_HURT(LivingDamageEvent.Pre event) {
     PerkBackstab.handleDamageEvent(event);
     PerkPugilist.handleDamageEvent(event);
+    PerkSniper.handleDamageEvent(event);
 
     SkillDemolition.applyBlastResistance(event);
     SkillDemolition.handleDamageEvent(event);
