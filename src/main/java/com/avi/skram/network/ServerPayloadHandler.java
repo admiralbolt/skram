@@ -1,12 +1,19 @@
 package com.avi.skram.network;
 
 import com.avi.skram.perks.Perk;
+import com.avi.skram.perks.PerkFlyingDutchman;
 import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.Skill;
 import com.avi.skram.skills.Skills;
+import com.avi.skram.utils.ReflectionUtils;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 public class ServerPayloadHandler {
@@ -49,6 +56,28 @@ public class ServerPayloadHandler {
         context.reply(packet);
       }
     });
+  }
+
+  public static void handleBoatJumpPacket(final BoatJumpPacket packet, final IPayloadContext context) {
+    Player player = context.player();
+    Entity entity = player.getControlledVehicle();
+    PerkFlyingDutchman perk = player.getData(Perks.FLYING_DUTCHMAN);
+
+    if (!perk.isFullyEnabled()) return;
+    if (!(entity instanceof AbstractBoat boat)) return;
+
+    AbstractBoat.Status status = null;
+    // Reflection strikes again.
+    try {
+      status = (AbstractBoat.Status) ReflectionUtils.invokeMethod(boat, "getStatus");
+    } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+      System.out.println("no status for you.");
+    }
+
+    if (status == null || status == AbstractBoat.Status.IN_AIR) return;
+
+    Vec3 baseDelta = boat.getKnownMovement();
+    boat.setDeltaMovement(baseDelta.x, player.getAttributeValue(Attributes.JUMP_STRENGTH) * 1.5, baseDelta.z);
   }
 
 }

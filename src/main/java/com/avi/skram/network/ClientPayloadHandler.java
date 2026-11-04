@@ -29,4 +29,8 @@ public class ClientPayloadHandler {
       }
     });
   }
+
+  public static void handleBoatJumpPacket(final BoatJumpPacket packet, final IPayloadContext context) {
+    return;
+  }
 }

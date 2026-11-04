@@ -1,5 +1,7 @@
 package com.avi.skram.patches;
 
+import com.avi.skram.perks.PerkFlyingDutchman;
+import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.SkillSailing;
 import com.avi.skram.skills.Skills;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -20,6 +22,9 @@ public class AbstractBoatMixin {
 
   @Shadow
   private boolean inputUp;
+
+  @Shadow
+  private AbstractBoat.Status status;
 
   @Inject(
     method = {"controlBoat()V"},
@@ -67,6 +72,31 @@ public class AbstractBoatMixin {
     double speed = boat.getDeltaMovement().length();
     // Make sure we sync to the server, as this is called on the client side.
     sailing.addXp(player, 6 * speed, true);
+  }
+
+  @Inject(
+    method = {"floatBoat()V"},
+    at = {@At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/boat/AbstractBoat;setDeltaMovement(DDD)V", shift = At.Shift.BEFORE)}
+  )
+  private void captainOfLegendAirDrift(CallbackInfo ci, @Local(name = "invFriction") LocalFloatRef invFriction) {
+    if (this.status != AbstractBoat.Status.IN_AIR) return;
+
+    AbstractBoat boat = (AbstractBoat) (Object) this;
+    List<Entity> passengers = boat.getPassengers();
+    Player player = null;
+    for (Entity entity : passengers) {
+      if (entity instanceof Player) {
+        player = (Player) entity;
+        break;
+      }
+    }
+
+    if (player == null) return;
+
+    PerkFlyingDutchman perk = player.getData(Perks.FLYING_DUTCHMAN);
+    if (!perk.isFullyEnabled()) return;
+
+
   }
 
 

@@ -4,11 +4,7 @@ import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
 import com.avi.skram.commands.SkramCommands;
-import com.avi.skram.network.ClientPayloadHandler;
-import com.avi.skram.network.PerkPacket;
-import com.avi.skram.network.PerkResearchPacket;
-import com.avi.skram.network.ServerPayloadHandler;
-import com.avi.skram.network.SkillPacket;
+import com.avi.skram.network.*;
 import com.avi.skram.perks.*;
 import com.avi.skram.skills.*;
 import com.avi.skram.ui.AddSkillButtonToInventory;
@@ -339,6 +335,11 @@ public class EventHandler {
       PerkResearchPacket.TYPE,
       PerkResearchPacket.STREAM_CODEC,
       ServerPayloadHandler::handlePerkResearchPacket
+    );
+    registrar.playToServer(
+      BoatJumpPacket.TYPE,
+      BoatJumpPacket.STREAM_CODEC,
+      ServerPayloadHandler::handleBoatJumpPacket
     );
   }
 

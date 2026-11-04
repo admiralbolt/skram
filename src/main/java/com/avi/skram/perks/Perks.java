@@ -30,6 +30,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkMasterBlacksmith>> MASTER_BLACKSMITH;
   public static Supplier<AttachmentType<PerkJuggernaut>> JUGGERNAUT;
   public static Supplier<AttachmentType<PerkSpinSlash>> SPIN_SLASH;
+  public static Supplier<AttachmentType<PerkFlyingDutchman>> FLYING_DUTCHMAN;
   public static Supplier<AttachmentType<PerkGrenadier>> GRENADIER;
   public static Supplier<AttachmentType<PerkGlutton>> GLUTTON;
   public static Supplier<AttachmentType<PerkDefuser>> DEFUSER;
@@ -40,7 +41,6 @@ public class Perks {
   public static Supplier<AttachmentType<PerkThievery>> THIEVERY;
   public static Supplier<AttachmentType<PerkSniper>> SNIPER;
   public static Supplier<AttachmentType<PerkPreciseSmasher>> PRECISE_SMASHER;
-  public static Supplier<AttachmentType<PerkCaptainOfLegend>> CAPTAIN_OF_LEGEND;
   public static Supplier<AttachmentType<PerkSlayer>> SLAYER;
   public static Supplier<AttachmentType<PerkSwiftStrafer>> SWIFT_STRAFER;
   public static Supplier<AttachmentType<PerkHamstring>> HAMSTRING;
@@ -151,6 +151,16 @@ public class Perks {
     PERK_RESEARCH_COST_BY_NAME.put(PerkDefuser.NAME, PerkDefuser::getResearchCost);
     PerkDefuser.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(DEFUSER));
 
+    FLYING_DUTCHMAN = Skram.ATTACHMENT_TYPES.register(
+      PerkFlyingDutchman.NAME, () -> AttachmentType.serializable(() -> new PerkFlyingDutchman())
+        .sync(new PerkSyncHandler<>(PerkFlyingDutchman.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkFlyingDutchman.NAME, FLYING_DUTCHMAN);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkFlyingDutchman.NAME, PerkFlyingDutchman::getResearchCost);
+    PerkFlyingDutchman.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(FLYING_DUTCHMAN));
+
     VITALIC_BREATHING = Skram.ATTACHMENT_TYPES.register(
       PerkVitalicBreathing.NAME, () -> AttachmentType.serializable(() -> new PerkVitalicBreathing())
         .sync(new PerkSyncHandler<>(PerkVitalicBreathing.STREAM_CODEC))
@@ -220,16 +230,6 @@ public class Perks {
     PERKS_BY_NAME.put(PerkPreciseSmasher.NAME, PRECISE_SMASHER);
     PERK_RESEARCH_COST_BY_NAME.put(PerkPreciseSmasher.NAME, PerkPreciseSmasher::getResearchCost);
     PerkPreciseSmasher.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(PRECISE_SMASHER));
-
-    CAPTAIN_OF_LEGEND = Skram.ATTACHMENT_TYPES.register(
-      PerkCaptainOfLegend.NAME, () -> AttachmentType.serializable(() -> new PerkCaptainOfLegend())
-        .sync(new PerkSyncHandler<>(PerkCaptainOfLegend.STREAM_CODEC))
-        .copyOnDeath()
-        .build()
-    );
-    PERKS_BY_NAME.put(PerkCaptainOfLegend.NAME, CAPTAIN_OF_LEGEND);
-    PERK_RESEARCH_COST_BY_NAME.put(PerkCaptainOfLegend.NAME, PerkCaptainOfLegend::getResearchCost);
-    PerkCaptainOfLegend.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(CAPTAIN_OF_LEGEND));
 
     SLAYER = Skram.ATTACHMENT_TYPES.register(
       PerkSlayer.NAME, () -> AttachmentType.serializable(() -> new PerkSlayer())
