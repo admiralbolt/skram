@@ -320,6 +320,7 @@ public class EventHandler {
     Perks.applyEntityModifier(event);
     PerkHamstring.handleDamageEvent(event);
     PerkJuggernaut.handleDamageEvent(event);
+    PerkVitalicBreathing.handleDamageEvent(event);
   }
 
   @SubscribeEvent
