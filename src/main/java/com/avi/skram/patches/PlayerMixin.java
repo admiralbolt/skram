@@ -1,5 +1,6 @@
 package com.avi.skram.patches;
 
+import com.avi.skram.perks.PerkExpertEnchanter;
 import com.avi.skram.perks.PerkSpinSlash;
 import com.avi.skram.perks.Perks;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -11,6 +12,7 @@ import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -47,6 +49,18 @@ public class PlayerMixin {
       0,
       (sweepHitBox.getZsize() * (PerkSpinSlash.INCREASE)) / 2
     );
+  }
+
+  @ModifyArg(
+    method = {"onEnchantmentPerformed(Lnet/minecraft/world/item/ItemStack;I)V"},
+    at = {@At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;giveExperienceLevels(I)V")},
+    index = 0
+  )
+  private int overrideEnchantmentCost(int amount) {
+    Player player = (Player) (Object) this;
+    PerkExpertEnchanter perk = player.getData(Perks.EXPERT_ENCHANTER);
+
+    return perk.isFullyEnabled() ? 0 : amount;
   }
 
 }

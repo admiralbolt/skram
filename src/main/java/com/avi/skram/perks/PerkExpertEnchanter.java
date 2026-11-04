@@ -6,13 +6,15 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.event.enchanting.EnchantedBlockLootEvent;
+import net.neoforged.neoforge.event.enchanting.EnchantmentLevelSetEvent;
 
 import java.util.List;
 import java.util.Map;
 
 public class PerkExpertEnchanter extends Perk {
   public static final String NAME = "expert_enchanter";
-  public static final String DESCRIPTION = "Whenever you enchant an item, you have a 25% chance to pay no XP.";
+  public static final String DESCRIPTION = "Enchanting no longer costs XP.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
     .put(SkillMagic.NAME, 40)
     .build();
@@ -25,6 +27,11 @@ public class PerkExpertEnchanter extends Perk {
     );
   }
 
-  public PerkExpertEnchanter() { super(NAME, DESCRIPTION, REQUIRED_SKILLS); }
-  public PerkExpertEnchanter(ByteBuf buffer) { super(buffer, DESCRIPTION, REQUIRED_SKILLS); }
+  public PerkExpertEnchanter() {
+    super(NAME, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public PerkExpertEnchanter(ByteBuf buffer) {
+    super(buffer, DESCRIPTION, REQUIRED_SKILLS);
+  }
 }

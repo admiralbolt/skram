@@ -23,7 +23,7 @@ import java.util.Optional;
 
 public class PerkEggSnatcher extends Perk {
   public static final String NAME = "egg_snatcher";
-  public static final String DESCRIPTION = "ANY entity killed has a 5% chance of dropping their spawn egg.";
+  public static final String DESCRIPTION = "ANY entity killed has a 6% chance of dropping their spawn egg.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
     .put(SkillMelee.NAME, 40)
     .put(SkillRanged.NAME, 40)
@@ -64,7 +64,7 @@ public class PerkEggSnatcher extends Perk {
 
     PerkEggSnatcher perkEggSnatcher = player.getData(Perks.EGG_SNATCHER);
     if (!perkEggSnatcher.isFullyEnabled()) return;
-    if (Math.random() > 0.9) return;
+    if (Math.random() > 0.06) return;
 
     Optional<Holder<Item>> holder = SpawnEggItem.byId(event.getEntity().getType());
     if (holder.isEmpty()) return;
