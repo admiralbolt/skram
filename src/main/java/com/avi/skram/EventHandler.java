@@ -296,6 +296,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_ENTITY_HURT(LivingDamageEvent.Pre event) {
     PerkBackstab.handleDamageEvent(event);
+    PerkPugilist.handleDamageEvent(event);
 
     SkillDemolition.applyBlastResistance(event);
     SkillDemolition.handleDamageEvent(event);
