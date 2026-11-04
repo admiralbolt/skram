@@ -112,7 +112,7 @@ Thievery:
   Cost: ???
 
 Sniper:
-  Effect: Deal up to +25% damage depending on how far away you are from the target.
+  Effect: Deal up to +50% damage depending on how far away you are from the target.
   Required Levels: Ranged 30
   Cost: ???
 
@@ -175,8 +175,10 @@ Debonair:
   Required Levels: Mercantile 40, Botany 30
   Cost: ???
 
-
-
+Egg Snatcher:
+  Effect: ANY entity killed has a 5% chance of dropping their spawn egg.
+  Required Levels: Melee 40, Ranged 40, Husbandry 40, Stealth 30
+  Cost: ???
 
 
 Construction

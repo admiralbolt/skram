@@ -242,7 +242,7 @@ public abstract class Perk implements ValueIOSerializable {
         .size(100, 20)
         .tooltip(Tooltip.create(Component.literal("Researching this perk costs the listed resources. Resources must be in your inventory.")))
         .build();
-      researchButton.active = hasAllResearchMaterials;
+      researchButton.active = hasAllResearchMaterials && this.canResearch(player);
       layout.addChild(researchButton);
     }
 

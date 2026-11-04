@@ -30,6 +30,29 @@ public class Perks {
   public static Supplier<AttachmentType<PerkMasterBlacksmith>> MASTER_BLACKSMITH;
   public static Supplier<AttachmentType<PerkJuggernaut>> JUGGERNAUT;
   public static Supplier<AttachmentType<PerkSpinSlash>> SPIN_SLASH;
+  public static Supplier<AttachmentType<PerkGrenadier>> GRENADIER;
+  public static Supplier<AttachmentType<PerkGlutton>> GLUTTON;
+  public static Supplier<AttachmentType<PerkBlastMining>> BLAST_MINING;
+  public static Supplier<AttachmentType<PerkDefuser>> DEFUSER;
+  public static Supplier<AttachmentType<PerkVitalicBreathing>> VITALIC_BREATHING;
+  public static Supplier<AttachmentType<PerkBatman>> BATMAN;
+  public static Supplier<AttachmentType<PerkBountifulCatch>> BOUNTIFUL_CATCH;
+  public static Supplier<AttachmentType<PerkBackstab>> BACKSTAB;
+  public static Supplier<AttachmentType<PerkThievery>> THIEVERY;
+  public static Supplier<AttachmentType<PerkSniper>> SNIPER;
+  public static Supplier<AttachmentType<PerkPreciseSmasher>> PRECISE_SMASHER;
+  public static Supplier<AttachmentType<PerkCaptainOfLegend>> CAPTAIN_OF_LEGEND;
+  public static Supplier<AttachmentType<PerkSlayer>> SLAYER;
+  public static Supplier<AttachmentType<PerkSwiftStrafer>> SWIFT_STRAFER;
+  public static Supplier<AttachmentType<PerkHamstring>> HAMSTRING;
+  public static Supplier<AttachmentType<PerkPugilist>> PUGILIST;
+  public static Supplier<AttachmentType<PerkSpeedEater>> SPEED_EATER;
+  public static Supplier<AttachmentType<PerkGemini>> GEMINI;
+  public static Supplier<AttachmentType<PerkVampirism>> VAMPIRISM;
+  public static Supplier<AttachmentType<PerkExpertEnchanter>> EXPERT_ENCHANTER;
+  public static Supplier<AttachmentType<PerkClusterBomb>> CLUSTER_BOMB;
+  public static Supplier<AttachmentType<PerkDebonair>> DEBONAIR;
+  public static Supplier<AttachmentType<PerkEggSnatcher>> EGG_SNATCHER;
 
   public static Map<String, Supplier<List<ItemStack>>> PERK_RESEARCH_COST_BY_NAME;
   public static Map<String, List<Supplier>> SKILLS_TO_PERKS;
@@ -98,6 +121,236 @@ public class Perks {
     PERKS_BY_NAME.put(PerkSpinSlash.NAME, SPIN_SLASH);
     PERK_RESEARCH_COST_BY_NAME.put(PerkSpinSlash.NAME, PerkSpinSlash::getResearchCost);
     PerkSpinSlash.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(SPIN_SLASH));
+
+    GRENADIER = Skram.ATTACHMENT_TYPES.register(
+      PerkGrenadier.NAME, () -> AttachmentType.serializable(() -> new PerkGrenadier())
+        .sync(new PerkSyncHandler<>(PerkGrenadier.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkGrenadier.NAME, GRENADIER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkGrenadier.NAME, PerkGrenadier::getResearchCost);
+    PerkGrenadier.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(GRENADIER));
+
+    GLUTTON = Skram.ATTACHMENT_TYPES.register(
+      PerkGlutton.NAME, () -> AttachmentType.serializable(() -> new PerkGlutton())
+        .sync(new PerkSyncHandler<>(PerkGlutton.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkGlutton.NAME, GLUTTON);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkGlutton.NAME, PerkGlutton::getResearchCost);
+    PerkGlutton.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(GLUTTON));
+
+    BLAST_MINING = Skram.ATTACHMENT_TYPES.register(
+      PerkBlastMining.NAME, () -> AttachmentType.serializable(() -> new PerkBlastMining())
+        .sync(new PerkSyncHandler<>(PerkBlastMining.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkBlastMining.NAME, BLAST_MINING);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkBlastMining.NAME, PerkBlastMining::getResearchCost);
+    PerkBlastMining.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(BLAST_MINING));
+
+    DEFUSER = Skram.ATTACHMENT_TYPES.register(
+      PerkDefuser.NAME, () -> AttachmentType.serializable(() -> new PerkDefuser())
+        .sync(new PerkSyncHandler<>(PerkDefuser.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkDefuser.NAME, DEFUSER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkDefuser.NAME, PerkDefuser::getResearchCost);
+    PerkDefuser.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(DEFUSER));
+
+    VITALIC_BREATHING = Skram.ATTACHMENT_TYPES.register(
+      PerkVitalicBreathing.NAME, () -> AttachmentType.serializable(() -> new PerkVitalicBreathing())
+        .sync(new PerkSyncHandler<>(PerkVitalicBreathing.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkVitalicBreathing.NAME, VITALIC_BREATHING);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkVitalicBreathing.NAME, PerkVitalicBreathing::getResearchCost);
+    PerkVitalicBreathing.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(VITALIC_BREATHING));
+
+    BATMAN = Skram.ATTACHMENT_TYPES.register(
+      PerkBatman.NAME, () -> AttachmentType.serializable(() -> new PerkBatman())
+        .sync(new PerkSyncHandler<>(PerkBatman.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkBatman.NAME, BATMAN);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkBatman.NAME, PerkBatman::getResearchCost);
+    PerkBatman.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(BATMAN));
+
+    BOUNTIFUL_CATCH = Skram.ATTACHMENT_TYPES.register(
+      PerkBountifulCatch.NAME, () -> AttachmentType.serializable(() -> new PerkBountifulCatch())
+        .sync(new PerkSyncHandler<>(PerkBountifulCatch.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkBountifulCatch.NAME, BOUNTIFUL_CATCH);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkBountifulCatch.NAME, PerkBountifulCatch::getResearchCost);
+    PerkBountifulCatch.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(BOUNTIFUL_CATCH));
+
+    BACKSTAB = Skram.ATTACHMENT_TYPES.register(
+      PerkBackstab.NAME, () -> AttachmentType.serializable(() -> new PerkBackstab())
+        .sync(new PerkSyncHandler<>(PerkBackstab.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkBackstab.NAME, BACKSTAB);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkBackstab.NAME, PerkBackstab::getResearchCost);
+    PerkBackstab.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(BACKSTAB));
+
+    THIEVERY = Skram.ATTACHMENT_TYPES.register(
+      PerkThievery.NAME, () -> AttachmentType.serializable(() -> new PerkThievery())
+        .sync(new PerkSyncHandler<>(PerkThievery.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkThievery.NAME, THIEVERY);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkThievery.NAME, PerkThievery::getResearchCost);
+    PerkThievery.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(THIEVERY));
+
+    SNIPER = Skram.ATTACHMENT_TYPES.register(
+      PerkSniper.NAME, () -> AttachmentType.serializable(() -> new PerkSniper())
+        .sync(new PerkSyncHandler<>(PerkSniper.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkSniper.NAME, SNIPER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkSniper.NAME, PerkSniper::getResearchCost);
+    PerkSniper.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(SNIPER));
+
+    PRECISE_SMASHER = Skram.ATTACHMENT_TYPES.register(
+      PerkPreciseSmasher.NAME, () -> AttachmentType.serializable(() -> new PerkPreciseSmasher())
+        .sync(new PerkSyncHandler<>(PerkPreciseSmasher.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkPreciseSmasher.NAME, PRECISE_SMASHER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkPreciseSmasher.NAME, PerkPreciseSmasher::getResearchCost);
+    PerkPreciseSmasher.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(PRECISE_SMASHER));
+
+    CAPTAIN_OF_LEGEND = Skram.ATTACHMENT_TYPES.register(
+      PerkCaptainOfLegend.NAME, () -> AttachmentType.serializable(() -> new PerkCaptainOfLegend())
+        .sync(new PerkSyncHandler<>(PerkCaptainOfLegend.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkCaptainOfLegend.NAME, CAPTAIN_OF_LEGEND);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkCaptainOfLegend.NAME, PerkCaptainOfLegend::getResearchCost);
+    PerkCaptainOfLegend.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(CAPTAIN_OF_LEGEND));
+
+    SLAYER = Skram.ATTACHMENT_TYPES.register(
+      PerkSlayer.NAME, () -> AttachmentType.serializable(() -> new PerkSlayer())
+        .sync(new PerkSyncHandler<>(PerkSlayer.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkSlayer.NAME, SLAYER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkSlayer.NAME, PerkSlayer::getResearchCost);
+    PerkSlayer.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(SLAYER));
+
+    SWIFT_STRAFER = Skram.ATTACHMENT_TYPES.register(
+      PerkSwiftStrafer.NAME, () -> AttachmentType.serializable(() -> new PerkSwiftStrafer())
+        .sync(new PerkSyncHandler<>(PerkSwiftStrafer.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkSwiftStrafer.NAME, SWIFT_STRAFER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkSwiftStrafer.NAME, PerkSwiftStrafer::getResearchCost);
+    PerkSwiftStrafer.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(SWIFT_STRAFER));
+
+    HAMSTRING = Skram.ATTACHMENT_TYPES.register(
+      PerkHamstring.NAME, () -> AttachmentType.serializable(() -> new PerkHamstring())
+        .sync(new PerkSyncHandler<>(PerkHamstring.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkHamstring.NAME, HAMSTRING);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkHamstring.NAME, PerkHamstring::getResearchCost);
+    PerkHamstring.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(HAMSTRING));
+
+    PUGILIST = Skram.ATTACHMENT_TYPES.register(
+      PerkPugilist.NAME, () -> AttachmentType.serializable(() -> new PerkPugilist())
+        .sync(new PerkSyncHandler<>(PerkPugilist.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkPugilist.NAME, PUGILIST);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkPugilist.NAME, PerkPugilist::getResearchCost);
+    PerkPugilist.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(PUGILIST));
+
+    SPEED_EATER = Skram.ATTACHMENT_TYPES.register(
+      PerkSpeedEater.NAME, () -> AttachmentType.serializable(() -> new PerkSpeedEater())
+        .sync(new PerkSyncHandler<>(PerkSpeedEater.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkSpeedEater.NAME, SPEED_EATER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkSpeedEater.NAME, PerkSpeedEater::getResearchCost);
+    PerkSpeedEater.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(SPEED_EATER));
+
+    GEMINI = Skram.ATTACHMENT_TYPES.register(
+      PerkGemini.NAME, () -> AttachmentType.serializable(() -> new PerkGemini())
+        .sync(new PerkSyncHandler<>(PerkGemini.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkGemini.NAME, GEMINI);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkGemini.NAME, PerkGemini::getResearchCost);
+    PerkGemini.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(GEMINI));
+
+    VAMPIRISM = Skram.ATTACHMENT_TYPES.register(
+      PerkVampirism.NAME, () -> AttachmentType.serializable(() -> new PerkVampirism())
+        .sync(new PerkSyncHandler<>(PerkVampirism.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkVampirism.NAME, VAMPIRISM);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkVampirism.NAME, PerkVampirism::getResearchCost);
+    PerkVampirism.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(VAMPIRISM));
+
+    EXPERT_ENCHANTER = Skram.ATTACHMENT_TYPES.register(
+      PerkExpertEnchanter.NAME, () -> AttachmentType.serializable(() -> new PerkExpertEnchanter())
+        .sync(new PerkSyncHandler<>(PerkExpertEnchanter.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkExpertEnchanter.NAME, EXPERT_ENCHANTER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkExpertEnchanter.NAME, PerkExpertEnchanter::getResearchCost);
+    PerkExpertEnchanter.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(EXPERT_ENCHANTER));
+
+    CLUSTER_BOMB = Skram.ATTACHMENT_TYPES.register(
+      PerkClusterBomb.NAME, () -> AttachmentType.serializable(() -> new PerkClusterBomb())
+        .sync(new PerkSyncHandler<>(PerkClusterBomb.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkClusterBomb.NAME, CLUSTER_BOMB);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkClusterBomb.NAME, PerkClusterBomb::getResearchCost);
+    PerkClusterBomb.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(CLUSTER_BOMB));
+
+    DEBONAIR = Skram.ATTACHMENT_TYPES.register(
+      PerkDebonair.NAME, () -> AttachmentType.serializable(() -> new PerkDebonair())
+        .sync(new PerkSyncHandler<>(PerkDebonair.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkDebonair.NAME, DEBONAIR);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkDebonair.NAME, PerkDebonair::getResearchCost);
+    PerkDebonair.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(DEBONAIR));
+
+    EGG_SNATCHER = Skram.ATTACHMENT_TYPES.register(
+      PerkEggSnatcher.NAME, () -> AttachmentType.serializable(() -> new PerkEggSnatcher())
+        .sync(new PerkSyncHandler<>(PerkEggSnatcher.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkEggSnatcher.NAME, EGG_SNATCHER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkEggSnatcher.NAME, PerkEggSnatcher::getResearchCost);
+    PerkEggSnatcher.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(EGG_SNATCHER));
   }
 
   public static void discoverRandomPerk(Player player, Skill skill, boolean syncToServer) {
