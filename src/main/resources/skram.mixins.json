@@ -7,6 +7,7 @@
     "AbstractFurnaceBlockEntityMixin",
     "BrewingStandBlockEntityMixin",
     "CraftingMenuMixin",
+    "CreeperMixin",
     "EquippableMixin",
     "FishingHookMixin",
     "FurnaceBlockEntityMixin",

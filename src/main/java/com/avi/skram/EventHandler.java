@@ -33,7 +33,6 @@ import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
-import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.neoforge.event.level.block.CropGrowEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -302,6 +301,7 @@ public class EventHandler {
     // Make sure that SkillHealth.handleDamageEvent() is called last, so that damage values get updated by skills.
     SkillHealth.handleDamageEvent(event);
 
+    Perks.applyEntityModifier(event);
     PerkJuggernaut.handleDamageEvent(event);
   }
 

@@ -1,6 +1,8 @@
 package com.avi.skram.perks;
 
 import com.avi.skram.Skram;
+import com.avi.skram.attachments.MiscAttachments;
+import com.avi.skram.attachments.SkramEntityModifier;
 import com.avi.skram.network.PerkPacket;
 import com.avi.skram.skills.Skill;
 import com.avi.skram.ui.GenericMessageToast;
@@ -9,10 +11,13 @@ import com.avi.skram.utils.MathUtils;
 import com.avi.skram.utils.StringUtils;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.ai.goal.SwellGoal;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -372,5 +377,29 @@ public class Perks {
       // This should sync back to the client automatically.
       player.setData(supplier, perkToDiscover);
     }
+  }
+
+  // We are doing this here in case we ever need to attach multiple entity modifier values.
+  // Probably mildly overengineered, but eh.
+  public static void applyEntityModifier(LivingDamageEvent.Pre event) {
+    Player player = null;
+    if (event.getSource().getEntity() instanceof Player) {
+      player = (Player) event.getSource().getEntity();
+    } else if (event.getSource().getDirectEntity() instanceof Player) {
+      player = (Player) event.getSource().getDirectEntity();
+    } else {
+      return;
+    }
+
+    if (player == null) return;
+
+    SkramEntityModifier modifier = new SkramEntityModifier();
+
+    PerkDefuser perk = player.getData(Perks.DEFUSER);
+    if (perk.isFullyEnabled() && (event.getEntity() instanceof Creeper)) {
+      modifier.canExplode = false;
+    }
+
+    event.getEntity().setData(MiscAttachments.SKRAM_ENTITY_MODIFIER, modifier);
   }
 }
