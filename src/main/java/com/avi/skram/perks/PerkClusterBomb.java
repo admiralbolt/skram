@@ -9,6 +9,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.AbstractThrownPotion;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownLingeringPotion;
@@ -57,12 +58,20 @@ public class PerkClusterBomb extends Perk {
 
   public static void handleItemRightClick(PlayerInteractEvent.RightClickItem event) {
     if (event.getLevel().isClientSide()) return;
+
+    Player player = event.getEntity();
+    PerkClusterBomb perk = player.getData(Perks.CLUSTER_BOMB);
+    if (!perk.isFullyEnabled()) return;
+
     Item item = event.getItemStack().getItem();
     if (!(item instanceof ThrowablePotionItem)) return;
 
+    PerkGrenadier grenadier = player.getData(Perks.GRENADIER);
+    float powerMult = (grenadier.isFullyEnabled()) ? 2.0F : 1.0F;
+
     Projectile.ProjectileFactory<?> factory = (item instanceof LingeringPotionItem) ? PerkClusterBomb::createLingeringPotion : PerkClusterBomb::createSplashPotion;
 
-    Projectile.spawnProjectileFromRotation(factory, (ServerLevel) event.getLevel(), event.getItemStack(), event.getEntity(), -20.0F, 0.57F + (float) (0.05F * Math.random()), 2.0F);
-    Projectile.spawnProjectileFromRotation(factory, (ServerLevel) event.getLevel(), event.getItemStack(), event.getEntity(), -20.0F, 0.43F + (float) (0.05F * Math.random()), 2.0F);
+    Projectile.spawnProjectileFromRotation(factory, (ServerLevel) event.getLevel(), event.getItemStack(), event.getEntity(), -20.0F, powerMult * (0.57F + (float) (0.05F * Math.random())), 2.0F);
+    Projectile.spawnProjectileFromRotation(factory, (ServerLevel) event.getLevel(), event.getItemStack(), event.getEntity(), -20.0F, powerMult * (0.4F + (float) (0.05F * Math.random())), 2.0F);
   }
 }

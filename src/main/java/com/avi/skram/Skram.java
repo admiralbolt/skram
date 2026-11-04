@@ -3,6 +3,7 @@ package com.avi.skram;
 import com.avi.skram.advancements.ArbitraryStringTrigger;
 import com.avi.skram.advancements.BreakBlockTrigger;
 import com.avi.skram.advancements.ItemSmeltedTrigger;
+import com.avi.skram.attachments.MiscAttachments;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.item.SkramItems;
 import com.avi.skram.perks.Perks;
@@ -97,6 +98,7 @@ public class Skram {
     BlockData.register();
     Skills.register();
     Perks.register();
+    MiscAttachments.register();
     ATTACHMENT_TYPES.register(modEventBus);
     TRIGGER_TYPES.register(modEventBus);
 

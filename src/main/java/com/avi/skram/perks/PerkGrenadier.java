@@ -5,15 +5,18 @@ import com.avi.skram.skills.SkillRanged;
 import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.*;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.List;
 import java.util.Map;
 
 public class PerkGrenadier extends Perk {
   public static final String NAME = "grenadier";
-  public static final String DESCRIPTION = "Double the range and radius of thrown potions.";
+  public static final String DESCRIPTION = "Double the range and splash radius of thrown potions.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
     .put(SkillRanged.NAME, 20)
     .put(SkillBrewing.NAME, 40)
@@ -27,6 +30,11 @@ public class PerkGrenadier extends Perk {
     );
   }
 
-  public PerkGrenadier() { super(NAME, DESCRIPTION, REQUIRED_SKILLS); }
-  public PerkGrenadier(ByteBuf buffer) { super(buffer, DESCRIPTION, REQUIRED_SKILLS); }
+  public PerkGrenadier() {
+    super(NAME, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public PerkGrenadier(ByteBuf buffer) {
+    super(buffer, DESCRIPTION, REQUIRED_SKILLS);
+  }
 }
