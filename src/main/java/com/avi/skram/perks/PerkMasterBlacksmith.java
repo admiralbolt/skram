@@ -1,6 +1,5 @@
 package com.avi.skram.perks;
 
-import com.avi.skram.skills.SkillFarming;
 import com.avi.skram.skills.SkillSmithing;
 import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;

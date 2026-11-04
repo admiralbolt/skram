@@ -28,6 +28,12 @@ public class PerkPreciseSmasher extends Perk {
     );
   }
 
-  public PerkPreciseSmasher() { super(NAME, DESCRIPTION, REQUIRED_SKILLS); }
-  public PerkPreciseSmasher(ByteBuf buffer) { super(buffer, DESCRIPTION, REQUIRED_SKILLS); }
+  public PerkPreciseSmasher() {
+    super(NAME, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public PerkPreciseSmasher(ByteBuf buffer) {
+    super(buffer, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
 }

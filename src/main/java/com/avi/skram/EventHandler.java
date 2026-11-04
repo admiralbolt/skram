@@ -93,19 +93,17 @@ public class EventHandler {
       SkillFarming.gainXp(event);
       SkillMining.gainXp(event);
       SkillWoodcutting.gainXp(event);
+      // Trigger the break block criteria!
+      Skram.BREAK_BLOCK_TRIGGER.get().trigger((ServerPlayer) event.getPlayer(), event.getState());
     } else if (SkillFarming.isPlantFullyGrown(event.getState())) {
       SkillFarming.gainXp(event);
+      // Trigger the break block criteria!
+      Skram.BREAK_BLOCK_TRIGGER.get().trigger((ServerPlayer) event.getPlayer(), event.getState());
     }
 
     // Remove the block from our map.
     pob.playerOwnedBlocks.remove(event.getPos());
     chunk.markUnsaved();
-
-    // NOTE: THIS NEEDS TO BE MOVED TO THE PlayerOwnedBlocks CHECK ABOVE.
-    // It's currently here for testing purposes.
-
-    // Trigger the break block criteria!
-    Skram.BREAK_BLOCK_TRIGGER.get().trigger((ServerPlayer) event.getPlayer(), event.getState());
   }
 
   @SubscribeEvent
