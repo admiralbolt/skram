@@ -16,7 +16,7 @@ public class PerkExpertEnchanter extends Perk {
   public static final String NAME = "expert_enchanter";
   public static final String DESCRIPTION = "Enchanting no longer costs XP.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillMagic.NAME, 40)
+    .put(SkillMagic.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkExpertEnchanter> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkExpertEnchanter::new);
 

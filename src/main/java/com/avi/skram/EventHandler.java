@@ -270,6 +270,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_BABY_SPAWNED(BabyEntitySpawnEvent event) {
     SkillHusbandry.handleBreedEvent(event);
+    PerkGemini.handleBreedEvent(event);
   }
 
   @SubscribeEvent
