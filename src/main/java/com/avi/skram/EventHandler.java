@@ -237,6 +237,8 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_USE_ITEM_TICK(LivingEntityUseItemEvent.Tick event) {
     SkillRanged.applyDrawSpeed(event);
+
+    PerkSpeedEater.handleEating(event);
   }
 
   @SubscribeEvent

@@ -52,8 +52,8 @@ public class PerkGlutton extends Perk {
     PerkGlutton perk = player.getData(Perks.GLUTTON);
     if (!perk.isFullyEnabled()) return;
 
-    double durationMultiplier = (food.nutrition() + food.saturation()) / 10.0;
-    double hungerMultiplier = Math.max(1.0, (food.nutrition() + food.saturation()) / 10.0);
+    double durationMultiplier = Math.max(0.3, (food.nutrition() + food.saturation()) / 10.0);
+    double hungerMultiplier = Math.max(1.0, (food.nutrition() + food.saturation()) / 15.0);
 
     player.addEffect(new MobEffectInstance(MobEffects.HUNGER, (int) (120 * durationMultiplier), (int) (hungerMultiplier * 50), false, true));
     player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, (int) (80 * durationMultiplier), 1, false, true));
