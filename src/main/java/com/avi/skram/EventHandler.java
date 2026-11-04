@@ -222,6 +222,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_RIGHT_CLICK_ITEM(PlayerInteractEvent.RightClickItem event) {
     PerkBatman.handleBatman(event);
+    PerkClusterBomb.handleItemRightClick(event);
   }
 
   @SubscribeEvent

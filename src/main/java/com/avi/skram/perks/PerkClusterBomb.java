@@ -7,8 +7,14 @@ import com.avi.skram.skills.SkillRanged;
 import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.AbstractThrownPotion;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownLingeringPotion;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownSplashPotion;
+import net.minecraft.world.item.*;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.List;
 import java.util.Map;
@@ -33,6 +39,30 @@ public class PerkClusterBomb extends Perk {
     );
   }
 
-  public PerkClusterBomb() { super(NAME, DESCRIPTION, REQUIRED_SKILLS); }
-  public PerkClusterBomb(ByteBuf buffer) { super(buffer, DESCRIPTION, REQUIRED_SKILLS); }
+  public PerkClusterBomb() {
+    super(NAME, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public PerkClusterBomb(ByteBuf buffer) {
+    super(buffer, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public static AbstractThrownPotion createSplashPotion(ServerLevel level, LivingEntity owner, ItemStack itemStack) {
+    return new ThrownSplashPotion(level, owner, itemStack);
+  }
+
+  public static AbstractThrownPotion createLingeringPotion(ServerLevel level, LivingEntity owner, ItemStack itemStack) {
+    return new ThrownLingeringPotion(level, owner, itemStack);
+  }
+
+  public static void handleItemRightClick(PlayerInteractEvent.RightClickItem event) {
+    if (event.getLevel().isClientSide()) return;
+    Item item = event.getItemStack().getItem();
+    if (!(item instanceof ThrowablePotionItem)) return;
+
+    Projectile.ProjectileFactory<?> factory = (item instanceof LingeringPotionItem) ? PerkClusterBomb::createLingeringPotion : PerkClusterBomb::createSplashPotion;
+
+    Projectile.spawnProjectileFromRotation(factory, (ServerLevel) event.getLevel(), event.getItemStack(), event.getEntity(), -20.0F, 0.57F + (float) (0.05F * Math.random()), 2.0F);
+    Projectile.spawnProjectileFromRotation(factory, (ServerLevel) event.getLevel(), event.getItemStack(), event.getEntity(), -20.0F, 0.43F + (float) (0.05F * Math.random()), 2.0F);
+  }
 }
