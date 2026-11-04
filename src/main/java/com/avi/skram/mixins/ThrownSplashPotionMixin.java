@@ -1,11 +1,8 @@
-package com.avi.skram.patches;
+package com.avi.skram.mixins;
 
 import com.avi.skram.attachments.MiscAttachments;
 import com.avi.skram.attachments.PlayerProjectileModifier;
-import com.llamalad7.mixinextras.expression.Definition;
-import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownSplashPotion;
 import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;

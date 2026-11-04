@@ -10,6 +10,7 @@ import com.avi.skram.skills.*;
 import com.avi.skram.ui.AddSkillButtonToInventory;
 import com.avi.skram.ui.SkramScreen;
 import com.avi.skram.ui.XPGainGui;
+import com.avi.skram.utils.ReflectionUtils;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -18,6 +19,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
@@ -36,8 +38,11 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.neoforge.event.level.block.CropGrowEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.neoforged.neoforge.registries.RegisterEvent;
 
 @EventBusSubscriber(modid = Skram.MODID)
 public class EventHandler {
@@ -400,6 +405,16 @@ public class EventHandler {
   @SubscribeEvent
   public static void registerCommands(RegisterCommandsEvent event) {
     SkramCommands.register(event);
+  }
+
+  public static void overwriteVanilla() {
+    // Check if the current registry being processed is the FluidType registry
+    FluidType lavaType = Fluids.LAVA.getFluidType();
+    try {
+      ReflectionUtils.setFieldValue(lavaType, "supportsBoating", true);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      System.out.println("LAVA_BOATING FAILURE: " + e);
+    }
   }
 
 }

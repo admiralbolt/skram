@@ -1,4 +1,4 @@
-package com.avi.skram.patches;
+package com.avi.skram.mixins;
 
 import com.avi.skram.Skram;
 import com.avi.skram.blocks.BlockData;

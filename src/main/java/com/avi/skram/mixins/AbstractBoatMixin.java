@@ -1,11 +1,11 @@
-package com.avi.skram.patches;
+package com.avi.skram.mixins;
 
-import com.avi.skram.perks.PerkFlyingDutchman;
-import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.SkillSailing;
 import com.avi.skram.skills.Skills;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
@@ -22,6 +22,9 @@ public class AbstractBoatMixin {
 
   @Shadow
   private boolean inputUp;
+
+  @Shadow
+  private double waterLevel;
 
   @Shadow
   private AbstractBoat.Status status;
@@ -76,27 +79,15 @@ public class AbstractBoatMixin {
 
   @Inject(
     method = {"floatBoat()V"},
-    at = {@At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/boat/AbstractBoat;setDeltaMovement(DDD)V", shift = At.Shift.BEFORE)}
+    at = {@At(value = "HEAD")}
   )
-  private void captainOfLegendAirDrift(CallbackInfo ci, @Local(name = "invFriction") LocalFloatRef invFriction) {
-    if (this.status != AbstractBoat.Status.IN_AIR) return;
-
+  private void floatInLava(CallbackInfo ci) {
     AbstractBoat boat = (AbstractBoat) (Object) this;
-    List<Entity> passengers = boat.getPassengers();
-    Player player = null;
-    for (Entity entity : passengers) {
-      if (entity instanceof Player) {
-        player = (Player) entity;
-        break;
-      }
+
+    BlockPos base = BlockPos.containing(boat.getX(), boat.getY(), boat.getZ());
+    if (boat.level().getFluidState(base).is(FluidTags.LAVA) || boat.level().getFluidState(base.below()).is(FluidTags.LAVA)) {
+      this.waterLevel += 0.2;
     }
-
-    if (player == null) return;
-
-    PerkFlyingDutchman perk = player.getData(Perks.FLYING_DUTCHMAN);
-    if (!perk.isFullyEnabled()) return;
-
-
   }
 
 

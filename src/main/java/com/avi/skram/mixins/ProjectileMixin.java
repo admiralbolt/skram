@@ -1,4 +1,4 @@
-package com.avi.skram.patches;
+package com.avi.skram.mixins;
 
 import com.avi.skram.attachments.MiscAttachments;
 import com.avi.skram.attachments.PlayerProjectileModifier;

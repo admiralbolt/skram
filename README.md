@@ -77,5 +77,30 @@ This is a maybe skill. Two issues:
 
 Mega Chests -> You know 'em and you love 'em.
 Backpack -> You know 'em and you love 'em.
-Research Station -> For unlocking perks.
 Compactor? -> Turns cobblestone into coal, turns coal into diamonds?
+
+
+Perk by skill count
+==================
+
+
+acrobatics: 2
+athletics: 6
+botany: 2
+brewing: 2
+cooking: 2
+demolition: 2
+digging: 2
+farming: 2
+fishing: 3
+health: 4
+husbandry: 3
+magic: 3
+melee: 8
+mercantile: 2
+mining: 2
+ranged: 7
+sailing: 1
+smithing: 2
+stealth: 4
+woodcutting: 1

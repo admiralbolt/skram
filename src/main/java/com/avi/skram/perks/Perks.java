@@ -57,6 +57,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkThievery>> THIEVERY;
   public static Supplier<AttachmentType<PerkVampirism>> VAMPIRISM;
   public static Supplier<AttachmentType<PerkVitalicBreathing>> VITALIC_BREATHING;
+  public static Supplier<AttachmentType<PerkVolcanicSailor>> VOLCANIC_SAILOR;
 
   public static Map<String, Supplier<List<ItemStack>>> PERK_RESEARCH_COST_BY_NAME;
   public static Map<String, List<Supplier>> SKILLS_TO_PERKS;
@@ -345,6 +346,23 @@ public class Perks {
     PERKS_BY_NAME.put(PerkVitalicBreathing.NAME, VITALIC_BREATHING);
     PERK_RESEARCH_COST_BY_NAME.put(PerkVitalicBreathing.NAME, PerkVitalicBreathing::getResearchCost);
     PerkVitalicBreathing.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(VITALIC_BREATHING));
+
+    VOLCANIC_SAILOR = Skram.ATTACHMENT_TYPES.register(
+      PerkVolcanicSailor.NAME, () -> AttachmentType.serializable(() -> new PerkVolcanicSailor())
+        .sync(new PerkSyncHandler<>(PerkVolcanicSailor.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkVolcanicSailor.NAME, VOLCANIC_SAILOR);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkVolcanicSailor.NAME, PerkVolcanicSailor::getResearchCost);
+    PerkVolcanicSailor.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(VOLCANIC_SAILOR));
+
+
+    // Logging purposes.
+    System.out.println("SKILLS_TO_PERKS");
+    for (String skillName : SKILLS_TO_PERKS.keySet().stream().sorted().toList()) {
+      System.out.println(skillName + ": " + SKILLS_TO_PERKS.get(skillName).size());
+    }
   }
 
   public static void discoverRandomPerk(Player player, Skill skill, boolean syncToServer) {
