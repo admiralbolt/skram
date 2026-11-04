@@ -6,12 +6,20 @@ import com.avi.skram.skills.SkillRanged;
 import com.avi.skram.skills.SkillStealth;
 import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.core.Holder;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SpawnEggItem;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class PerkEggSnatcher extends Perk {
   public static final String NAME = "egg_snatcher";
@@ -34,6 +42,35 @@ public class PerkEggSnatcher extends Perk {
     );
   }
 
-  public PerkEggSnatcher() { super(NAME, DESCRIPTION, REQUIRED_SKILLS); }
-  public PerkEggSnatcher(ByteBuf buffer) { super(buffer, DESCRIPTION, REQUIRED_SKILLS); }
+  public PerkEggSnatcher() {
+    super(NAME, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public PerkEggSnatcher(ByteBuf buffer) {
+    super(buffer, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public static void harvestEggs(LivingDropsEvent event) {
+    Player player = null;
+    if (event.getSource().getEntity() instanceof Player) {
+      player = (Player) event.getSource().getEntity();
+    } else if (event.getSource().getDirectEntity() instanceof Player) {
+      player = (Player) event.getSource().getDirectEntity();
+    } else {
+      return;
+    }
+
+    if (player.level().isClientSide()) return;
+
+    PerkEggSnatcher perkEggSnatcher = player.getData(Perks.EGG_SNATCHER);
+    if (!perkEggSnatcher.isFullyEnabled()) return;
+    if (Math.random() > 0.9) return;
+
+    Optional<Holder<Item>> holder = SpawnEggItem.byId(event.getEntity().getType());
+    if (holder.isEmpty()) return;
+
+    ItemStack stack = new ItemStack(holder.get().value());
+    event.getDrops().add(new ItemEntity(event.getEntity().level(), event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(), stack));
+  }
+
 }

@@ -29,6 +29,12 @@ public class PerkSlayer extends Perk {
     );
   }
 
-  public PerkSlayer() { super(NAME, DESCRIPTION, REQUIRED_SKILLS); }
-  public PerkSlayer(ByteBuf buffer) { super(buffer, DESCRIPTION, REQUIRED_SKILLS); }
+  public PerkSlayer() {
+    super(NAME, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public PerkSlayer(ByteBuf buffer) {
+    super(buffer, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
 }

@@ -275,6 +275,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_LIVING_DROPS(LivingDropsEvent event) {
     SkillHusbandry.applyFortune(event);
+    PerkEggSnatcher.harvestEggs(event);
   }
 
   @SubscribeEvent
