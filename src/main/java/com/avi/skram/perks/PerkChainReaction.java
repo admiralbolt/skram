@@ -25,7 +25,7 @@ import java.util.Map;
 public class PerkChainReaction extends Perk {
 
   public static final String NAME = "chain_reaction";
-  public static final String DESCRIPTION = "Whenever one of your crops grows, it has a 40% chance to randomly tick again.";
+  public static final String DESCRIPTION = "Whenever one of your crops grows, it has a 80% chance to randomly tick again.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
     .put(SkillFarming.NAME, 40)
     .build();
@@ -66,7 +66,7 @@ public class PerkChainReaction extends Perk {
     PerkChainReaction chainReaction = owner.getData(Perks.CHAIN_REACTION);
     if (!chainReaction.isFullyEnabled()) return;
     if (SkillFarming.isPlantFullyGrown(state)) return;
-    if (Math.random() > 0.4) return;
+    if (Math.random() > 0.8) return;
 
     try {
       ReflectionUtils.invokeMethod(state.getBlock(), "randomTick", state, level, pos, MathUtils.RANDOM);

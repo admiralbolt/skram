@@ -228,6 +228,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_ENTITY_INTERACT(PlayerInteractEvent.EntityInteract event) {
     SkillHusbandry.handleEntityInteract(event);
+    PerkDebonair.handleEntityInteract(event);
   }
 
   @SubscribeEvent
