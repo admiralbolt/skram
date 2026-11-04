@@ -27,6 +27,13 @@ public class PerkSwiftStrafer extends Perk {
     );
   }
 
-  public PerkSwiftStrafer() { super(NAME, DESCRIPTION, REQUIRED_SKILLS); }
-  public PerkSwiftStrafer(ByteBuf buffer) { super(buffer, DESCRIPTION, REQUIRED_SKILLS); }
+  public PerkSwiftStrafer() {
+    super(NAME, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+  public PerkSwiftStrafer(ByteBuf buffer) {
+    super(buffer, DESCRIPTION, REQUIRED_SKILLS);
+  }
+
+
 }
