@@ -294,6 +294,7 @@ public class EventHandler {
   public static void ON_LIVING_DEATH(LivingDeathEvent event) {
     SkillDemolition.handleKill(event);
     SkillHusbandry.handleAnimalKilled(event);
+    PerkVampirism.handleKill(event);
   }
 
   @SubscribeEvent
