@@ -309,6 +309,7 @@ public class EventHandler {
     SkillHealth.handleDamageEvent(event);
 
     Perks.applyEntityModifier(event);
+    PerkHamstring.handleDamageEvent(event);
     PerkJuggernaut.handleDamageEvent(event);
   }
 
