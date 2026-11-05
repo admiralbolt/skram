@@ -5,6 +5,7 @@ import com.avi.skram.magic.spells.Spell;
 import com.avi.skram.magic.spells.Spells;
 import com.avi.skram.ui.SpellUI;
 import net.minecraft.core.Holder;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;

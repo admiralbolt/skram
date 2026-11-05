@@ -19,5 +19,12 @@
         "name": "skram:spell_heal"
       }
     ]
+  },
+  "spell_interrupted": {
+    "sounds": [
+      {
+        "name": "skram:spell_interrupted"
+      }
+    ]
   }
 }

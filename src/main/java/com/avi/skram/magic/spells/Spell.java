@@ -32,7 +32,7 @@ public abstract class Spell {
   }
 
   public void finishCast(Player player) {
-    player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.spellSound.value(), SoundSource.PLAYERS, 0.5f, 1.0f);
+    player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.spellSound.value(), SoundSource.PLAYERS, 0.4f, 1.0f);
   }
 
 }

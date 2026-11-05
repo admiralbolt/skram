@@ -23,4 +23,8 @@ public class SkramSounds {
     "spell_heal", SoundEvent::createVariableRangeEvent
   );
 
+  public static final Holder<SoundEvent> SPELL_INTERRUPTED = SOUND_EVENTS.register(
+    "spell_interrupted", SoundEvent::createVariableRangeEvent
+  );
+
 }
