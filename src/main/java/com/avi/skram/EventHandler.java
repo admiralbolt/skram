@@ -210,11 +210,13 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_ATTACK_ENTITY(AttackEntityEvent event) {
+    SkramMagic.cancelSpell(event);
     SkillMelee.handleAttackEvent(event);
   }
 
   @SubscribeEvent
   public static void ON_PLAYER_LEFT_CLICK_BLOCK(PlayerInteractEvent.LeftClickBlock event) {
+    SkramMagic.cancelSpell(event);
     SkillDigging.handleLeftClick(event);
     SkillMining.handleLeftClick(event);
     SkillWoodcutting.handleLeftClick(event);
@@ -222,6 +224,7 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_RIGHT_CLICK_BLOCK(PlayerInteractEvent.RightClickBlock event) {
+    SkramMagic.cancelSpell(event);
     SkillDigging.handleRightClick(event);
     SkillFarming.handleRightClick(event);
     SkillHusbandry.handleBlockInteract(event);
@@ -230,12 +233,14 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_RIGHT_CLICK_ITEM(PlayerInteractEvent.RightClickItem event) {
+    SkramMagic.cancelSpell(event);
     PerkBatman.handleBatman(event);
     PerkClusterBomb.handleItemRightClick(event);
   }
 
   @SubscribeEvent
   public static void ON_PLAYER_ENTITY_INTERACT(PlayerInteractEvent.EntityInteract event) {
+    SkramMagic.cancelSpell(event);
     SkillHusbandry.handleEntityInteract(event);
     PerkDebonair.handleEntityInteract(event);
     PerkThievery.handleEntityInteract(event);

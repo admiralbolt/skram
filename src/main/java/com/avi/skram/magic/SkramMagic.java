@@ -9,6 +9,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.function.Supplier;
@@ -59,7 +61,16 @@ public class SkramMagic {
     // If we are currently casting, decrease the timer.
     if (castingInfo.isCasting) {
       castingInfo.castingTimer--;
-      if (castingInfo.castingTimer <= 0) {
+
+      if (castingInfo.cancel) {
+        // If we got the cancel signal from somewhere, cancel the spell.
+        // We refund mana based on time left.
+        castingInfo.isCasting = false;
+        double refund = (castingInfo.castingTimer / Spells.SPELLS_BY_NAME.get(castingInfo.spellName).manaCost) / 1.2;
+        castingInfo.castingTimer = 0;
+        castingInfo.currentMana += refund;
+        castingInfo.spellName = "";
+      } else if (castingInfo.castingTimer <= 0) {
         // Reset our values, and cast our spell.
         castingInfo.isCasting = false;
         castingInfo.castingTimer = 0;
@@ -68,6 +79,24 @@ public class SkramMagic {
       }
     }
 
+    player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
+  }
+
+  public static void cancelSpell(AttackEntityEvent event) {
+    Player player = event.getEntity();
+    if (player.level().isClientSide()) return;
+
+    SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
+    castingInfo.cancel = true;
+    player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
+  }
+
+  public static void cancelSpell(PlayerInteractEvent event) {
+    Player player = event.getEntity();
+    if (player.level().isClientSide()) return;
+
+    SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
+    castingInfo.cancel = true;
     player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
   }
 
