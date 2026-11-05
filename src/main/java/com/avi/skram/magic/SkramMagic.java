@@ -1,6 +1,7 @@
 package com.avi.skram.magic;
 
 import com.avi.skram.Skram;
+import com.avi.skram.magic.spells.Spell;
 import com.avi.skram.magic.spells.Spells;
 import com.avi.skram.ui.SpellUI;
 import net.minecraft.core.Holder;
@@ -56,17 +57,24 @@ public class SkramMagic {
     if (maxManaInstance == null || manaRegenInstance == null) return;
 
     SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
+    Spell spell = Spells.SPELLS_BY_NAME.get(castingInfo.spellName);
+
     // First, we increase our mana based on our mana regen value.
     castingInfo.currentMana = Math.min(maxManaInstance.getValue(), castingInfo.currentMana + manaRegenInstance.getValue());
 
     // If we are currently casting, decrease the timer.
     if (castingInfo.isCasting) {
+      // Wait a tick before consuming startCasting().
+      if (castingInfo.startCasting && (spell.castingTimeTicks - castingInfo.castingTimer) >= 1) {
+        castingInfo.startCasting = false;
+      }
       castingInfo.castingTimer--;
 
       if (castingInfo.cancel) {
         // If we got the cancel signal from somewhere, cancel the spell.
         // We refund mana based on time left.
-        double refund = ((double) castingInfo.castingTimer / Spells.SPELLS_BY_NAME.get(castingInfo.spellName).castingTimeTicks) * Spells.SPELLS_BY_NAME.get(castingInfo.spellName).manaCost * 0.8;
+        double refund = ((double) castingInfo.castingTimer / spell.castingTimeTicks) * spell.manaCost * 0.8;
+        castingInfo.startCasting = false;
         castingInfo.isCasting = false;
         castingInfo.castingTimer = 0;
         castingInfo.currentMana += refund;
@@ -78,7 +86,7 @@ public class SkramMagic {
         castingInfo.castingTimer = 0;
 
         if (!player.level().isClientSide()) {
-          Spells.SPELLS_BY_NAME.get(castingInfo.spellName).finishCast(player);
+          spell.finishCast(player);
         }
       }
     }
@@ -98,6 +106,8 @@ public class SkramMagic {
     player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
   }
 
+  public static SpellCastSoundHandler HANDLER = null;
+
   public static void handleTickPost(PlayerTickEvent.Post event) {
     Player player = event.getEntity();
     if (!player.level().isClientSide()) return;
@@ -110,6 +120,21 @@ public class SkramMagic {
     SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
 
     SpellUI.update(castingInfo, maxManaInstance.getValue());
+
+    if (HANDLER == null) {
+      HANDLER = new SpellCastSoundHandler(player);
+    }
+
+    // If we started casting, create a looping casting sound instance.
+    // TODO: Check if this works in multiplayer context.
+    // I think this works because this is only called on the client side.
+    if (castingInfo.startCasting) {
+      HANDLER.startCasting(castingInfo.castingTimer);
+    } else if (!castingInfo.isCasting) {
+      HANDLER.stopCasting();
+    }
+
+    HANDLER.tick();
   }
 
   public static void cancelSpell(AttackEntityEvent event) {

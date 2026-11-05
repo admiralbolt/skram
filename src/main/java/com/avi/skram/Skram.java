@@ -4,6 +4,7 @@ import com.avi.skram.advancements.ArbitraryStringTrigger;
 import com.avi.skram.advancements.BreakBlockTrigger;
 import com.avi.skram.advancements.ItemSmeltedTrigger;
 import com.avi.skram.attachments.MiscAttachments;
+import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.item.SkramItems;
 import com.avi.skram.magic.SkramMagic;
@@ -106,6 +107,7 @@ public class Skram {
     ATTACHMENT_TYPES.register(modEventBus);
     ATTRIBUTES.register(modEventBus);
     TRIGGER_TYPES.register(modEventBus);
+    SkramSounds.SOUND_EVENTS.register(modEventBus);
 
     // Register ourselves for server and other game events we are interested in.
     // Note that this is necessary if and only if we want *this* class (skram) to respond directly to events.

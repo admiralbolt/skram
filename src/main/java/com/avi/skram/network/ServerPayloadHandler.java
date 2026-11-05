@@ -1,5 +1,6 @@
 package com.avi.skram.network;
 
+import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.magic.SpellCastingInfo;
 import com.avi.skram.magic.spells.Spell;
@@ -10,6 +11,8 @@ import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.Skill;
 import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.ReflectionUtils;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -100,6 +103,7 @@ public class ServerPayloadHandler {
         castingInfo.isCasting = true;
         castingInfo.castingTimer = spell.castingTimeTicks;
         castingInfo.spellName = castingInfo.equippedSpellName;
+        castingInfo.startCasting = true;
       } else {
         // Otherwise, mark that we failed to cast a spell.
         castingInfo.failedCasting = true;

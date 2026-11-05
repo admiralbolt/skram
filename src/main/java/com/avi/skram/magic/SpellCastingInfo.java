@@ -22,6 +22,7 @@ public class SpellCastingInfo implements ValueIOSerializable {
   public boolean cancel = false;
   public String equippedSpellName = SpellMinorHeal.NAME;
   public boolean failedCasting = false;
+  public boolean startCasting = false;
 
   public SpellCastingInfo() {
 
@@ -35,6 +36,7 @@ public class SpellCastingInfo implements ValueIOSerializable {
     this.cancel = buffer.readBoolean();
     this.equippedSpellName = buffer.readString(buffer.readInt(), Charset.defaultCharset());
     this.failedCasting = buffer.readBoolean();
+    this.startCasting = buffer.readBoolean();
   }
 
   public void encode(ByteBuf buffer) {
@@ -47,6 +49,7 @@ public class SpellCastingInfo implements ValueIOSerializable {
     buffer.writeInt(this.equippedSpellName.length());
     buffer.writeCharSequence(this.equippedSpellName, Charset.defaultCharset());
     buffer.writeBoolean(this.failedCasting);
+    buffer.writeBoolean(this.startCasting);
   }
 
   @Override
@@ -58,6 +61,7 @@ public class SpellCastingInfo implements ValueIOSerializable {
     output.putBoolean("cancel", this.cancel);
     output.putString("equippedSpellName", this.equippedSpellName);
     output.putBoolean("failedCasting", this.failedCasting);
+    output.putBoolean("startCasting", this.startCasting);
   }
 
   @Override
@@ -69,6 +73,7 @@ public class SpellCastingInfo implements ValueIOSerializable {
     this.cancel = input.getBooleanOr("cancel", false);
     this.equippedSpellName = input.getStringOr("equippedSpellName", SpellMinorHeal.NAME);
     this.failedCasting = input.getBooleanOr("failedCasting", false);
+    this.startCasting = input.getBooleanOr("startCasting", false);
   }
 
 }

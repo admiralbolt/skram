@@ -1,0 +1,23 @@
+{
+  "spell_cast_start": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_start"
+      }
+    ]
+  },
+  "spell_cast_loop": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_loop"
+      }
+    ]
+  },
+  "spell_heal": {
+    "sounds": [
+      {
+        "name": "skram:spell_heal"
+      }
+    ]
+  }
+}
