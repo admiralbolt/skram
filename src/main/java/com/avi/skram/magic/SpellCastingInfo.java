@@ -1,5 +1,7 @@
 package com.avi.skram.magic;
 
+import com.avi.skram.magic.spells.SpellMinorHeal;
+import com.avi.skram.magic.spells.Spells;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.level.storage.ValueInput;
@@ -16,8 +18,9 @@ public class SpellCastingInfo implements ValueIOSerializable {
   public double currentMana = SkramMagic.DEFAULT_MAX_MANA;
   public boolean isCasting = false;
   public int castingTimer = 0;
-  public String spellName = "";
+  public String spellName = SpellMinorHeal.NAME;
   public boolean cancel = false;
+  public String equippedSpellName = SpellMinorHeal.NAME;
 
   public SpellCastingInfo() {
 
@@ -29,6 +32,7 @@ public class SpellCastingInfo implements ValueIOSerializable {
     this.castingTimer = buffer.readInt();
     this.spellName = buffer.readString(buffer.readInt(), Charset.defaultCharset());
     this.cancel = buffer.readBoolean();
+    this.equippedSpellName = buffer.readString(buffer.readInt(), Charset.defaultCharset());
   }
 
   public void encode(ByteBuf buffer) {
@@ -38,6 +42,7 @@ public class SpellCastingInfo implements ValueIOSerializable {
     buffer.writeInt(this.spellName.length());
     buffer.writeCharSequence(this.spellName, Charset.defaultCharset());
     buffer.writeBoolean(this.cancel);
+    buffer.writeCharSequence(this.equippedSpellName, Charset.defaultCharset());
   }
 
   @Override
@@ -47,6 +52,7 @@ public class SpellCastingInfo implements ValueIOSerializable {
     output.putInt("castingTimer", this.castingTimer);
     output.putString("spellName", this.spellName);
     output.putBoolean("cancel", this.cancel);
+    output.putString("equippedSpellName", this.equippedSpellName);
   }
 
   @Override
@@ -54,8 +60,9 @@ public class SpellCastingInfo implements ValueIOSerializable {
     this.currentMana = input.getDoubleOr("currentMana", SkramMagic.DEFAULT_MAX_MANA);
     this.isCasting = input.getBooleanOr("isCasting", false);
     this.castingTimer = input.getIntOr("castingTimer", 0);
-    this.spellName = input.getStringOr("spellName", "");
+    this.spellName = input.getStringOr("spellName", SpellMinorHeal.NAME);
     this.cancel = input.getBooleanOr("cancel", false);
+    this.equippedSpellName = input.getStringOr("equippedSpellName", SpellMinorHeal.NAME);
   }
 
 }

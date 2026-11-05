@@ -94,7 +94,7 @@ public class ServerPayloadHandler {
     castingInfo.currentMana -= spell.manaCost;
     castingInfo.isCasting = true;
     castingInfo.castingTimer = spell.castingTimeTicks;
-    castingInfo.spellName = spell.name;
+    castingInfo.spellName = castingInfo.equippedSpellName;
     player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
   }
 
