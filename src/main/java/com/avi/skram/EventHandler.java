@@ -4,6 +4,9 @@ import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
 import com.avi.skram.commands.SkramCommands;
+import com.avi.skram.magic.SkramMagic;
+import com.avi.skram.magic.spells.SpellMinorHeal;
+import com.avi.skram.magic.spells.Spells;
 import com.avi.skram.network.*;
 import com.avi.skram.perks.*;
 import com.avi.skram.skills.*;
@@ -16,6 +19,8 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.chunk.ChunkAccess;
@@ -27,10 +32,13 @@ import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.event.AnvilUpdateEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
@@ -41,14 +49,13 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import net.neoforged.neoforge.registries.RegisterEvent;
 
 @EventBusSubscriber(modid = Skram.MODID)
 public class EventHandler {
 
   public static final KeyMapping.Category SKRAM_CATEGORY = new KeyMapping.Category(Identifier.fromNamespaceAndPath(Skram.MODID, "skram"));
   public static final Lazy<KeyMapping> OPEN_SKILLS_UI = Lazy.of(() -> new KeyMapping("key.skram.open_skills_ui", InputConstants.Type.KEYBOARD, InputConstants.KEY_R, SKRAM_CATEGORY));
+  public static final Lazy<KeyMapping> CAST_SPELL = Lazy.of(() -> new KeyMapping("key.skram.cast_spell", InputConstants.Type.KEYBOARD, InputConstants.KEY_C, SKRAM_CATEGORY));
 
   @SubscribeEvent
   public static void ON_PLAYER_PLACED_BLOCK(BlockEvent.EntityPlaceEvent event) {
@@ -346,6 +353,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_TICK(PlayerTickEvent.Pre event) {
     SkillAthletics.handleTick(event);
+    SkramMagic.handleTick(event);
   }
 
   @SubscribeEvent
@@ -370,6 +378,11 @@ public class EventHandler {
       BoatJumpPacket.TYPE,
       BoatJumpPacket.STREAM_CODEC,
       ServerPayloadHandler::handleBoatJumpPacket
+    );
+    registrar.playToServer(
+      SpellCastPacket.TYPE,
+      SpellCastPacket.STREAM_CODEC,
+      ServerPayloadHandler::handleSpellCastPacket
     );
   }
 
@@ -405,11 +418,24 @@ public class EventHandler {
         Minecraft.getInstance().setScreenAndShow(new SkramScreen());
       }
     }
+
+    while (CAST_SPELL.get().consumeClick()) {
+      if (Spells.MINOR_HEAL.canCast(Minecraft.getInstance().player)) {
+        // Need to send a packet to handle the cast.
+        ClientPacketDistributor.sendToServer(new SpellCastPacket(SpellMinorHeal.NAME));
+      }
+    }
   }
 
   @SubscribeEvent
   public static void registerCommands(RegisterCommandsEvent event) {
     SkramCommands.register(event);
+  }
+
+  @SubscribeEvent
+  public static void registerCustomAttributes(EntityAttributeModificationEvent event) {
+    event.add(EntityTypes.PLAYER, SkramMagic.MAX_MANA);
+    event.add(EntityTypes.PLAYER, SkramMagic.MANA_REGENERATION);
   }
 
   public static void overwriteVanilla() {
@@ -421,5 +447,7 @@ public class EventHandler {
       System.out.println("LAVA_BOATING FAILURE: " + e);
     }
   }
+
+
 
 }

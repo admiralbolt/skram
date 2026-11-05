@@ -1,5 +1,7 @@
 package com.avi.skram.skills;
 
+import com.avi.skram.Skram;
+import com.avi.skram.magic.SkramMagic;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Checkbox;
@@ -7,12 +9,19 @@ import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 
 public class SkillMagic extends Skill {
 
   public static final String NAME = "magic";
   public static final StreamCodec<ByteBuf, SkillMagic> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillMagic::new);
+
+  public static final Identifier MANA_CAPACITY_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "magic_mana_capacity_boost");
+  public static final Identifier MANA_REGENERATION_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "magic_mana_regeneration_boost");
 
   public static final int MANA_REGEN_INDEX = 0;
   public static final int MANA_CAPACITY_INDEX = 1;
@@ -34,15 +43,42 @@ public class SkillMagic extends Skill {
   }
 
   public double getManaRegen() {
-    return 0.1 * this.level;
+    return 0.05 * this.level;
   }
 
-  public int getManaCapacity() {
-    return 10 * this.level;
+  public double getManaCapacity() {
+    return 20 * this.level;
   }
 
   public double getSpellPower() {
     return 0.01 * this.level;
+  }
+
+  @Override
+  public void applyModifiers(Player player) {
+    AttributeMap attributes = player.getAttributes();
+
+    AttributeInstance capacityBoost = attributes.getInstance(SkramMagic.MAX_MANA);
+    if (capacityBoost != null) {
+      if (this.enabledAbilities[MANA_CAPACITY_INDEX]) {
+        capacityBoost.addOrReplacePermanentModifier(new AttributeModifier(
+          MANA_CAPACITY_BOOST, this.getManaCapacity(), AttributeModifier.Operation.ADD_VALUE
+        ));
+      } else {
+        capacityBoost.removeModifier(MANA_CAPACITY_BOOST);
+      }
+    }
+
+    AttributeInstance regenerationBoost = attributes.getInstance(SkramMagic.MANA_REGENERATION);
+    if (regenerationBoost != null) {
+      if (this.enabledAbilities[MANA_REGEN_INDEX]) {
+        regenerationBoost.addOrReplacePermanentModifier(new AttributeModifier(
+          MANA_REGENERATION_BOOST, this.getManaRegen(), AttributeModifier.Operation.ADD_VALUE
+        ));
+      } else {
+        regenerationBoost.removeModifier(MANA_REGENERATION_BOOST);
+      }
+    }
   }
 
   @Override
@@ -51,7 +87,7 @@ public class SkillMagic extends Skill {
     vertical.spacing(1).defaultCellSetting().paddingBottom(2);
 
     vertical.addChild(Checkbox.builder(
-        Component.literal("Mana Regen: +" + this.getManaRegen()),
+        Component.literal("Mana Regen: +" + String.format("%.2f", this.getManaRegen())),
         Minecraft.getInstance().font
       )
       .selected(this.enabledAbilities[MANA_REGEN_INDEX])

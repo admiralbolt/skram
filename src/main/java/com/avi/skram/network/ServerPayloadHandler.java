@@ -1,5 +1,9 @@
 package com.avi.skram.network;
 
+import com.avi.skram.magic.SkramMagic;
+import com.avi.skram.magic.SpellCastingInfo;
+import com.avi.skram.magic.spells.Spell;
+import com.avi.skram.magic.spells.Spells;
 import com.avi.skram.perks.Perk;
 import com.avi.skram.perks.PerkFlyingDutchman;
 import com.avi.skram.perks.Perks;
@@ -78,6 +82,20 @@ public class ServerPayloadHandler {
 
     Vec3 baseDelta = boat.getKnownMovement();
     boat.setDeltaMovement(baseDelta.x, player.getAttributeValue(Attributes.JUMP_STRENGTH) * 1.5, baseDelta.z);
+  }
+
+  public static void handleSpellCastPacket(final SpellCastPacket packet, final IPayloadContext context) {
+    Player player = context.player();
+
+    Spell spell = Spells.SPELLS_BY_NAME.get(packet.name());
+    if (spell == null) return;
+
+    SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
+    castingInfo.currentMana -= spell.manaCost;
+    castingInfo.isCasting = true;
+    castingInfo.castingTimer = spell.castingTimeTicks;
+    castingInfo.spellName = spell.name;
+    player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
   }
 
 }

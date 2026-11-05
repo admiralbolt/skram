@@ -50,6 +50,7 @@ public class SkillAcrobatics extends Skill {
     return 0.5 * (double) this.level / 5;
   }
 
+  @Override
   public void applyModifiers(Player player) {
     AttributeMap attributes = player.getAttributes();
 

@@ -6,6 +6,7 @@ import com.avi.skram.advancements.ItemSmeltedTrigger;
 import com.avi.skram.attachments.MiscAttachments;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.item.SkramItems;
+import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.Skills;
 import com.mojang.logging.LogUtils;
@@ -13,6 +14,7 @@ import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -51,6 +53,7 @@ public class Skram {
   public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
   public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
+  public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, MODID);
 
   // Creates a new Block with the id "skram:example_block", combining the namespace and path
   public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", p -> p.mapColor(MapColor.STONE));
@@ -99,7 +102,9 @@ public class Skram {
     Skills.register();
     Perks.register();
     MiscAttachments.register();
+    SkramMagic.register();
     ATTACHMENT_TYPES.register(modEventBus);
+    ATTRIBUTES.register(modEventBus);
     TRIGGER_TYPES.register(modEventBus);
 
     // Register ourselves for server and other game events we are interested in.
