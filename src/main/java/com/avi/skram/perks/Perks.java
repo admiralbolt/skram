@@ -51,6 +51,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkPugilist>> PUGILIST;
   public static Supplier<AttachmentType<PerkSlayer>> SLAYER;
   public static Supplier<AttachmentType<PerkSniper>> SNIPER;
+  public static Supplier<AttachmentType<PerkSpaceJump>> SPACE_JUMP;
   public static Supplier<AttachmentType<PerkSpeedEater>> SPEED_EATER;
   public static Supplier<AttachmentType<PerkSpinSlash>> SPIN_SLASH;
   public static Supplier<AttachmentType<PerkSwiftStrafer>> SWIFT_STRAFER;
@@ -286,6 +287,16 @@ public class Perks {
     PERKS_BY_NAME.put(PerkSniper.NAME, SNIPER);
     PERK_RESEARCH_COST_BY_NAME.put(PerkSniper.NAME, PerkSniper::getResearchCost);
     PerkSniper.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(SNIPER));
+
+    SPACE_JUMP = Skram.ATTACHMENT_TYPES.register(
+      PerkSpaceJump.NAME, () -> AttachmentType.serializable(() -> new PerkSpaceJump())
+        .sync(new PerkSyncHandler<>(PerkSpaceJump.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkSpaceJump.NAME, SPACE_JUMP);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkSpaceJump.NAME, PerkSpaceJump::getResearchCost);
+    PerkSpaceJump.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(SPACE_JUMP));
 
     SPEED_EATER = Skram.ATTACHMENT_TYPES.register(
       PerkSpeedEater.NAME, () -> AttachmentType.serializable(() -> new PerkSpeedEater())

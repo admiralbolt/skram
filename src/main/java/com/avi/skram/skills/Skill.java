@@ -179,8 +179,9 @@ public abstract class Skill implements ValueIOSerializable {
         Skills.SKILL_ICONS.getOrDefault(this.name, Skills.DEFAULT_ICON),
         StringUtils.capitalize(this.name) + " leveled up to Lvl " + this.level + "."
       ));
-      // If we are on the server side, we need to send a packet to the client to display the toast.
     }
+
+    this.applyModifiers(player);
   }
 
   public void applyModifiers(Player player) {

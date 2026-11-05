@@ -15,6 +15,7 @@
     "IItemStackExtensionMixin",
     "InventoryMenuMixin",
     "ItemMixin",
+    "LivingEntityMixin",
     "PlayerMixin",
     "PrimedTntMixin",
     "ProjectileMixin",

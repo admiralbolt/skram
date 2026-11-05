@@ -76,12 +76,6 @@ public class SkillAcrobatics extends Skill {
     }
   }
 
-  @Override
-  public void onLevelChange(Player player) {
-    super.onLevelChange(player);
-    this.applyModifiers(player);
-  }
-
   public static void handleJump(LivingEvent.LivingJumpEvent event) {
     if (!(event.getEntity() instanceof Player player)) return;
     if (player.level().isClientSide()) return;

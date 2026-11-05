@@ -61,12 +61,6 @@ public class SkillHealth extends Skill {
     }
   }
 
-  @Override
-  public void onLevelChange(Player player) {
-    super.onLevelChange(player);
-    this.applyModifiers(player);
-  }
-
   public static void handleDamageEvent(LivingDamageEvent.Pre event) {
     Player player = null;
     if (event.getSource().getEntity() instanceof Player) {

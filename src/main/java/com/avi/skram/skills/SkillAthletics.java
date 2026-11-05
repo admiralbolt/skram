@@ -91,12 +91,6 @@ public class SkillAthletics extends Skill {
     }
   }
 
-  @Override
-  public void onLevelChange(Player player) {
-    super.onLevelChange(player);
-    this.applyModifiers(player);
-  }
-
   public static void handleTick(PlayerTickEvent.Pre event) {
     Player player = event.getEntity();
     if (!player.level().isClientSide()) return;
