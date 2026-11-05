@@ -11,7 +11,7 @@ import com.avi.skram.network.*;
 import com.avi.skram.perks.*;
 import com.avi.skram.skills.*;
 import com.avi.skram.ui.AddSkillButtonToInventory;
-import com.avi.skram.ui.ManaBar;
+import com.avi.skram.ui.SpellUI;
 import com.avi.skram.ui.SkramScreen;
 import com.avi.skram.ui.XPGainGui;
 import com.avi.skram.utils.ReflectionUtils;
@@ -21,7 +21,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.chunk.ChunkAccess;
@@ -38,7 +37,6 @@ import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlers
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.event.AnvilUpdateEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
@@ -416,8 +414,8 @@ public class EventHandler {
 
     event.registerAbove(
       VanillaGuiLayers.HOTBAR,
-      ManaBar.SPELl_UI,
-      ManaBar.layer
+      SpellUI.SPELl_UI,
+      SpellUI.layer
     );
 
   }
@@ -438,10 +436,8 @@ public class EventHandler {
     }
 
     while (CAST_SPELL.get().consumeClick()) {
-      if (Spells.MINOR_HEAL.canCast(Minecraft.getInstance().player)) {
-        // Need to send a packet to handle the cast.
-        ClientPacketDistributor.sendToServer(new SpellCastPacket(SpellMinorHeal.NAME));
-      }
+      // Need to send a packet to handle the cast.
+      ClientPacketDistributor.sendToServer(new SpellCastPacket(SpellMinorHeal.NAME));
     }
   }
 

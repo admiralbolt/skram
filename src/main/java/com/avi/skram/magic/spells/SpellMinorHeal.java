@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 public class SpellMinorHeal extends Spell {
 
   public static String NAME = "minor_heal";
-  public static int COST = 300;
+  public static int COST = 400;
   public static int CASTING_TICKS = 40;
 
   public static double BASE_HEAL = 3.0;

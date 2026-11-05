@@ -2,7 +2,7 @@ package com.avi.skram.magic;
 
 import com.avi.skram.Skram;
 import com.avi.skram.magic.spells.Spells;
-import com.avi.skram.ui.ManaBar;
+import com.avi.skram.ui.SpellUI;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 
 public class SkramMagic {
 
-  public static double DEFAULT_MAX_MANA = 1000.0;
+  public static double DEFAULT_MAX_MANA = 2000.0;
   public static double DEFAULT_MANA_REGENERATION = 2.0;
 
   public static final Holder<Attribute> MAX_MANA = Skram.ATTRIBUTES.register("max_mana", () -> new RangedAttribute(
@@ -66,8 +66,8 @@ public class SkramMagic {
       if (castingInfo.cancel) {
         // If we got the cancel signal from somewhere, cancel the spell.
         // We refund mana based on time left.
-        castingInfo.isCasting = false;
         double refund = ((double) castingInfo.castingTimer / Spells.SPELLS_BY_NAME.get(castingInfo.spellName).castingTimeTicks) * Spells.SPELLS_BY_NAME.get(castingInfo.spellName).manaCost * 0.8;
+        castingInfo.isCasting = false;
         castingInfo.castingTimer = 0;
         castingInfo.currentMana += refund;
         castingInfo.spellName = "";
@@ -79,6 +79,18 @@ public class SkramMagic {
 
         if (!player.level().isClientSide()) {
           Spells.SPELLS_BY_NAME.get(castingInfo.spellName).finishCast(player);
+        }
+      }
+    }
+
+    // If we failed casting.
+    if (castingInfo.failedCasting) {
+      if (castingInfo.isCasting) {
+        castingInfo.failedCasting = false;
+      } else {
+        castingInfo.castingTimer--;
+        if (castingInfo.castingTimer <= 0) {
+          castingInfo.failedCasting = false;
         }
       }
     }
@@ -97,7 +109,7 @@ public class SkramMagic {
 
     SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
 
-    ManaBar.updateMana(castingInfo.currentMana, maxManaInstance.getValue());
+    SpellUI.update(castingInfo, maxManaInstance.getValue());
   }
 
   public static void cancelSpell(AttackEntityEvent event) {
