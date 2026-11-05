@@ -10,7 +10,7 @@ public class SpellMinorHeal extends Spell {
   public static int COST = 300;
   public static int CASTING_TICKS = 40;
 
-  public static double BASE_HEAL = 2.0;
+  public static double BASE_HEAL = 3.0;
 
   public SpellMinorHeal() {
     super(NAME, COST, CASTING_TICKS);

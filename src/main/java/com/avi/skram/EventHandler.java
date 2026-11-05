@@ -11,6 +11,7 @@ import com.avi.skram.network.*;
 import com.avi.skram.perks.*;
 import com.avi.skram.skills.*;
 import com.avi.skram.ui.AddSkillButtonToInventory;
+import com.avi.skram.ui.ManaBar;
 import com.avi.skram.ui.SkramScreen;
 import com.avi.skram.ui.XPGainGui;
 import com.avi.skram.utils.ReflectionUtils;
@@ -362,6 +363,11 @@ public class EventHandler {
   }
 
   @SubscribeEvent
+  public static void ON_TICK_POST(PlayerTickEvent.Post event) {
+    SkramMagic.handleTickPost(event);
+  }
+
+  @SubscribeEvent
   public static void REGISTER_SERVER_PAYLOAD_HANDLERS(RegisterPayloadHandlersEvent event) {
     final PayloadRegistrar registrar = event.registrar("1");
     registrar.playBidirectional(
@@ -407,6 +413,13 @@ public class EventHandler {
       CUSTOM_LAYER,
       XPGainGui.layer
     );
+
+    event.registerAbove(
+      VanillaGuiLayers.HOTBAR,
+      ManaBar.SPELl_UI,
+      ManaBar.layer
+    );
+
   }
 
   @SubscribeEvent

@@ -42,6 +42,7 @@ public class SpellCastingInfo implements ValueIOSerializable {
     buffer.writeInt(this.spellName.length());
     buffer.writeCharSequence(this.spellName, Charset.defaultCharset());
     buffer.writeBoolean(this.cancel);
+    buffer.writeInt(this.equippedSpellName.length());
     buffer.writeCharSequence(this.equippedSpellName, Charset.defaultCharset());
   }
 
