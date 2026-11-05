@@ -38,7 +38,7 @@ public class SpellCastSoundHandler {
     if (failedCastTimer > 0) return;
 
     this.failedCastTimer = FAILED_CAST_DELAY_TICKS;
-    this.player.playSound(SkramSounds.SPELL_CAST_FAILED.value(), 0.3F, 1.0F);
+    this.player.playSound(SkramSounds.SPELL_CAST_FAILED.value(), 0.2F, 1.0F);
   }
 
   public void startCasting(int totalTicks) {

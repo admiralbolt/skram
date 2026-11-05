@@ -28,14 +28,14 @@ public class SkramMagic {
     DEFAULT_MAX_MANA,
     0,
     DEFAULT_MAX_MANA * 1000
-  ));
+  ).setSyncable(true));
 
   public static final Holder<Attribute> MANA_REGENERATION = Skram.ATTRIBUTES.register("mana_regeneration", () -> new RangedAttribute(
     "attributes.skram.mana_regeneration",
     DEFAULT_MANA_REGENERATION,
     -1000,
     1000
-  ));
+  ).setSyncable(true));
 
   public static Supplier<AttachmentType<SpellCastingInfo>> SPELL_CASTING_INFO;
 
@@ -123,7 +123,6 @@ public class SkramMagic {
     if (maxManaInstance == null || manaRegenInstance == null) return;
 
     SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
-
     SpellUI.update(castingInfo, maxManaInstance.getValue());
 
     if (HANDLER == null) {
