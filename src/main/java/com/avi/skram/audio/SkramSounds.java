@@ -19,6 +19,10 @@ public class SkramSounds {
     "spell_cast_loop", SoundEvent::createVariableRangeEvent
   );
 
+  public static final Holder<SoundEvent> SPELL_CAST_FAILED = SOUND_EVENTS.register(
+    "spell_cast_failed", SoundEvent::createVariableRangeEvent
+  );
+
   public static final Holder<SoundEvent> SPELL_HEAL = SOUND_EVENTS.register(
     "spell_heal", SoundEvent::createVariableRangeEvent
   );

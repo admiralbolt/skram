@@ -13,6 +13,13 @@
       }
     ]
   },
+  "spell_cast_failed": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_failed"
+      }
+    ]
+  },
   "spell_heal": {
     "sounds": [
       {

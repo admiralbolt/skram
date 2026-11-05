@@ -23,6 +23,9 @@ public class SpellCastSoundHandler {
   public int totalLoopTime = 0;
   public int loopingTimer = 0;
 
+  public static int FAILED_CAST_DELAY_TICKS = 20;
+  public int failedCastTimer = 0;
+
 
   public DynamicSoundInstance startCast;
   public DynamicSoundInstance castLoop;
@@ -31,7 +34,16 @@ public class SpellCastSoundHandler {
     this.player = player;
   }
 
+  public void failedCasting() {
+    if (failedCastTimer > 0) return;
+
+    this.failedCastTimer = FAILED_CAST_DELAY_TICKS;
+    this.player.playSound(SkramSounds.SPELL_CAST_FAILED.value(), 0.3F, 1.0F);
+  }
+
   public void startCasting(int totalTicks) {
+    if (this.isCasting) return;
+
     this.isCasting = true;
     this.startCastTimer = START_CAST_TICKS;
     this.totalLoopTime = totalTicks - START_CAST_TICKS;
@@ -62,6 +74,8 @@ public class SpellCastSoundHandler {
   }
 
   public void tick() {
+    this.failedCastTimer--;
+
     if (!this.isCasting) return;
 
     if (this.startCast != null && this.startCastTimer > 0) {

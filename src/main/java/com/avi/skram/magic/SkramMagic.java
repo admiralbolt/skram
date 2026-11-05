@@ -65,6 +65,11 @@ public class SkramMagic {
 
     // If we are currently casting, decrease the timer.
     if (castingInfo.isCasting) {
+      // Reset cancel status if we've just started casting.
+      if (castingInfo.startCasting) {
+        castingInfo.cancel = false;
+      }
+
       // Wait a tick before consuming startCasting().
       if (castingInfo.startCasting && (spell.castingTimeTicks - castingInfo.castingTimer) >= 1) {
         castingInfo.startCasting = false;
@@ -75,7 +80,6 @@ public class SkramMagic {
         // If we got the cancel signal from somewhere, cancel the spell.
         // We refund mana based on time left.
         double refund = ((double) castingInfo.castingTimer / spell.castingTimeTicks) * spell.manaCost * 0.8;
-        castingInfo.startCasting = false;
         castingInfo.isCasting = false;
         castingInfo.castingTimer = 0;
         castingInfo.currentMana += refund;
@@ -129,7 +133,9 @@ public class SkramMagic {
     // If we started casting, create a looping casting sound instance.
     // TODO: Check if this works in multiplayer context.
     // I think this works because this is only called on the client side.
-    if (castingInfo.startCasting) {
+    if (castingInfo.failedCasting) {
+      HANDLER.failedCasting();
+    } else  if (castingInfo.startCasting) {
       HANDLER.startCasting(castingInfo.castingTimer);
     } else if (!castingInfo.isCasting) {
       HANDLER.stopCasting();
