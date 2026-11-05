@@ -285,6 +285,11 @@ public class EventHandler {
   }
 
   @SubscribeEvent
+  public static void ON_LIVING_HEAL(LivingHealEvent event) {
+    SkillHealth.handleHealEvent(event);
+  }
+
+  @SubscribeEvent
   public static void ON_LIVING_DROPS(LivingDropsEvent event) {
     SkillHusbandry.applyFortune(event);
     PerkEggSnatcher.harvestEggs(event);

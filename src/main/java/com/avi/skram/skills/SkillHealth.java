@@ -17,6 +17,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 
 public class SkillHealth extends Skill {
@@ -26,10 +27,11 @@ public class SkillHealth extends Skill {
 
   public static final Identifier BONUS_HEALTH = Identifier.fromNamespaceAndPath(Skram.MODID, "health_bonus");
   public static final int BONUS_HEALTH_INDEX = 0;
+  public static final int BONUS_HEALING_INDEX = 1;
 
   public SkillHealth() {
     super(NAME, 1, 0);
-    this.enabledAbilities = new boolean[]{true};
+    this.enabledAbilities = new boolean[]{true, true};
   }
 
   public SkillHealth(ByteBuf buffer) {
@@ -43,7 +45,11 @@ public class SkillHealth extends Skill {
   }
 
   public int getBonusHealth() {
-    return (this.level / 5);
+    return (this.level / 3);
+  }
+
+  public double getBonusHealing() {
+    return 1 - 100.0 / (100 + this.level);
   }
 
   @Override
@@ -93,6 +99,20 @@ public class SkillHealth extends Skill {
     health.addXp(player, event.getBlockedDamage() * 10);
   }
 
+  public static void handleHealEvent(LivingHealEvent event) {
+    if (!(event.getEntity() instanceof Player player)) return;
+    if (player.level().isClientSide()) return;
+
+    SkillHealth health = player.getData(Skills.HEALTH);
+
+    if (health.enabledAbilities[BONUS_HEALING_INDEX]) {
+      event.setAmount(event.getAmount() * (float) (1 + health.getBonusHealing()));
+    }
+
+    // Gain a little XP.
+    health.addXp(player, event.getAmount());
+  }
+
   @Override
   public Layout renderSkillAbilities() {
     LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
@@ -105,6 +125,16 @@ public class SkillHealth extends Skill {
         )
         .selected(this.enabledAbilities[BONUS_HEALTH_INDEX])
         .onValueChange((checkbox, value) -> this.toggleEnabled(BONUS_HEALTH_INDEX))
+        .build()
+    );
+
+    vertical.addChild(
+      Checkbox.builder(
+          Component.literal("Bonus Healing: +" + (int) (100 * this.getBonusHealing()) + "%."),
+          Minecraft.getInstance().font
+        )
+        .selected(this.enabledAbilities[BONUS_HEALING_INDEX])
+        .onValueChange((checkbox, value) -> this.toggleEnabled(BONUS_HEALING_INDEX))
         .build()
     );
 

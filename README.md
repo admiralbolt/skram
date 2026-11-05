@@ -77,14 +77,19 @@ This is a maybe skill. Two issues:
 
 Mega Chests -> You know 'em and you love 'em.
 Backpack -> You know 'em and you love 'em.
-Compactor? -> Turns cobblestone into coal, turns coal into diamonds?
+Compactor? -> ?
+
+Skill combos:
+  Compactor -> Mining + Construction: Turns cobblestone into coal, turns coal into diamonds
+  King of Red Lions -> Sailing + Construction: Boat go fast.
+
 
 
 Perk by skill count
 ==================
 
 
-acrobatics: 2
+acrobatics: 3
 athletics: 6
 botany: 2
 brewing: 2
@@ -93,14 +98,14 @@ demolition: 2
 digging: 2
 farming: 2
 fishing: 3
-health: 4
+health: 5
 husbandry: 3
 magic: 3
 melee: 8
 mercantile: 2
 mining: 2
 ranged: 7
-sailing: 1
-smithing: 2
+sailing: 2
+smithing: 3
 stealth: 4
 woodcutting: 1

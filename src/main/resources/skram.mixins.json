@@ -11,6 +11,7 @@
     "EntityMixin",
     "EquippableMixin",
     "FishingHookMixin",
+    "FoodDataMixin",
     "FurnaceBlockEntityMixin",
     "IItemStackExtensionMixin",
     "InventoryMenuMixin",

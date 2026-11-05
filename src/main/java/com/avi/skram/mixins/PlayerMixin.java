@@ -63,4 +63,15 @@ public class PlayerMixin {
     return perk.isFullyEnabled() ? 0 : amount;
   }
 
+  @ModifyArg(
+    method = {"causeFoodExhaustion(F)V"},
+    at = {@At(value = "INVOKE", target = "Lnet/minecraft/world/food/FoodData;addExhaustion(F)V")},
+    index = 0
+  )
+  private float overrideFoodExhaustion(float amount) {
+    return amount * 1.5f;
+  }
+
+
+
 }
