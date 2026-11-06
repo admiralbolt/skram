@@ -49,6 +49,8 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
+import java.util.function.Supplier;
+
 @EventBusSubscriber(modid = Skram.MODID)
 public class EventHandler {
 
@@ -162,44 +164,29 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_JOIN_WORLD(PlayerEvent.PlayerLoggedInEvent event) {
-    SkillAcrobatics acrobatics = event.getEntity().getData(Skills.ACROBATICS);
-    acrobatics.applyModifiers(event.getEntity());
-    SkillAthletics athletics = event.getEntity().getData(Skills.ATHLETICS);
-    athletics.applyModifiers(event.getEntity());
-    SkillDemolition demolition = event.getEntity().getData(Skills.DEMOLITION);
-    demolition.applyModifiers(event.getEntity());
-    SkillHealth health = event.getEntity().getData(Skills.HEALTH);
-    health.applyModifiers(event.getEntity());
-    SkillStealth stealth = event.getEntity().getData(Skills.STEALTH);
-    stealth.applyModifiers(event.getEntity());
+    // Loop through all skills and apply modifiers.
+    for (Supplier skillSupplier : Skills.SKILLS_BY_NAME.values()) {
+      Skill skill = (Skill) event.getEntity().getData(skillSupplier);
+      skill.applyModifiers(event.getEntity());
+    }
   }
 
   @SubscribeEvent
   public static void ON_PLAYER_RESPAWN(PlayerEvent.PlayerRespawnEvent event) {
-    SkillAcrobatics acrobatics = event.getEntity().getData(Skills.ACROBATICS);
-    acrobatics.applyModifiers(event.getEntity());
-    SkillAthletics athletics = event.getEntity().getData(Skills.ATHLETICS);
-    athletics.applyModifiers(event.getEntity());
-    SkillDemolition demolition = event.getEntity().getData(Skills.DEMOLITION);
-    demolition.applyModifiers(event.getEntity());
-    SkillHealth health = event.getEntity().getData(Skills.HEALTH);
-    health.applyModifiers(event.getEntity());
-    SkillStealth stealth = event.getEntity().getData(Skills.STEALTH);
-    stealth.applyModifiers(event.getEntity());
+    // Loop through all skills and apply modifiers.
+    for (Supplier skillSupplier : Skills.SKILLS_BY_NAME.values()) {
+      Skill skill = (Skill) event.getEntity().getData(skillSupplier);
+      skill.applyModifiers(event.getEntity());
+    }
   }
 
   @SubscribeEvent
   public static void ON_PLAYER_CHANGE_DIMENSION(PlayerEvent.PlayerChangedDimensionEvent event) {
-    SkillAcrobatics acrobatics = event.getEntity().getData(Skills.ACROBATICS);
-    acrobatics.applyModifiers(event.getEntity());
-    SkillAthletics athletics = event.getEntity().getData(Skills.ATHLETICS);
-    athletics.applyModifiers(event.getEntity());
-    SkillDemolition demolition = event.getEntity().getData(Skills.DEMOLITION);
-    demolition.applyModifiers(event.getEntity());
-    SkillHealth health = event.getEntity().getData(Skills.HEALTH);
-    health.applyModifiers(event.getEntity());
-    SkillStealth stealth = event.getEntity().getData(Skills.STEALTH);
-    stealth.applyModifiers(event.getEntity());
+    // Loop through all skills and apply modifiers.
+    for (Supplier skillSupplier : Skills.SKILLS_BY_NAME.values()) {
+      Skill skill = (Skill) event.getEntity().getData(skillSupplier);
+      skill.applyModifiers(event.getEntity());
+    }
   }
 
   @SubscribeEvent
@@ -337,6 +324,8 @@ public class EventHandler {
 
     // Make sure that SkillHealth.handleDamageEvent() is called last, so that damage values get updated by skills.
     SkillHealth.handleDamageEvent(event);
+
+    SkramMagic.cancelSpell(event);
 
     Perks.applyEntityModifier(event);
     PerkHamstring.handleDamageEvent(event);

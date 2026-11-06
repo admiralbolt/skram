@@ -8,13 +8,14 @@ import net.minecraft.world.entity.player.Player;
 public class SpellMinorHeal extends Spell {
 
   public static String NAME = "minor_heal";
+  public static int REQUIRED_MAGIC_LEVEL = 1;
   public static int COST = 100;
   public static int CASTING_TICKS = 40;
 
   public static double BASE_HEAL = 3.0;
 
   public SpellMinorHeal() {
-    super(NAME, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
   }
 
   @Override

@@ -8,15 +8,8 @@ SkillFarming:
 SkillHusbandry:
   - Bred entities increased stats?
 
-SkillDigging:
-  - Treasure chance?
-
 SkillWoodcutting:
   - Additional shavings? Planks and/or sticks.
-
-SkillHealth:
-  - Healing bonus?
-  - Health regeneration?
 
 
 Misc Ideas:
@@ -24,7 +17,7 @@ Misc Ideas:
  - Artifacts? They are fun.
  - Elites -- one or more attributes that mobs can spawn in with to increase difficulty.
  - Overall difficulty adjustments: All entities should have more health and damage, disable base regen?
- - Loot duplication perk for melee/range?
+ - Music Discs!
 
 
 MAGIC
@@ -56,37 +49,44 @@ Spell Ideas:
 * Feather Fall
 * Create Water
 * Create Lava?
-* Low/High Alchemy?
+* Low/High Alchemy? (Will only work with EMC)
 * Superheat Ore
 * Control Weather
 * Home Teleport
 * Divine Enemy
+* Conjure Supplies (Torches, bread, water bottle)
 
 
 Construction
 ============
 
-This is a maybe skill. Two issues:
+Alternatively, what if we just take the blueprints / unlocking recipes part
+of this, but don't keep the actual skill itself? I think neither.
 
-1. For XP to work I would need some kind of EMC-like value in order to give
-   proper XP when crafting items. Otherwise if it's just raw crafting events
-   the wrong things will be overly rewarded.
-2. I don't know if there are enough ideas of useful building blocks to make
-   it worth it.
+What I actually want is:
 
+Mega Chests
+Giga Chests
+Waystones
 
-Mega Chests -> You know 'em and you love 'em.
-Backpack -> You know 'em and you love 'em.
-Compactor? -> ?
+Mega + Giga chests I can make myself.
 
-Skill combos:
-  Compactor -> Mining + Construction: Turns cobblestone into coal, turns coal into diamonds
-  King of Red Lions -> Sailing + Construction: Boat go fast.
+Waystones can hopefully be imported + integrated. Yar: https://mods.twelveiterations.com/minecraft/waystones/26.1/guides/api
+
+https://github.com/TwelveIterations/Waystones/tree/26.2/common/src/main/java/net/blay09/mods/waystones/api
 
 
 
-Perk by skill count
+Perks
 ==================
+
+Fae-kind: Botany + Farming + Woodcutting => xp from plants?
+Iron Gut: Brewing + Cooking + Health => Immunity to poison
+Pirate: Sailing + Stealth + ??? => ???
+Stalwart Spellcaster: Magic + health => taking damage no longer interrupts casting.
+
+
+
 
 
 acrobatics: 3

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -38,11 +39,19 @@ public class SkramMagic {
   ).setSyncable(true));
 
   public static Supplier<AttachmentType<SpellCastingInfo>> SPELL_CASTING_INFO;
+  public static Supplier<AttachmentType<Spellbook>> SPELLBOOK;
 
   public static void register() {
     SPELL_CASTING_INFO = Skram.ATTACHMENT_TYPES.register(
       SpellCastingInfo.NAME, () -> AttachmentType.serializable(() -> new SpellCastingInfo())
         .sync(SpellCastingInfo.STREAM_CODEC)
+        .copyOnDeath()
+        .build()
+    );
+
+    SPELLBOOK = Skram.ATTACHMENT_TYPES.register(
+      Spellbook.NAME, () -> AttachmentType.serializable(() -> new Spellbook())
+        .sync(Spellbook.STREAM_CODEC)
         .copyOnDeath()
         .build()
     );
@@ -154,6 +163,15 @@ public class SkramMagic {
 
   public static void cancelSpell(PlayerInteractEvent event) {
     Player player = event.getEntity();
+    if (player.level().isClientSide()) return;
+
+    SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
+    castingInfo.cancel = true;
+    player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
+  }
+
+  public static void cancelSpell(LivingDamageEvent.Pre event) {
+    if (!(event.getEntity() instanceof Player player)) return;
     if (player.level().isClientSide()) return;
 
     SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
