@@ -382,6 +382,11 @@ public class EventHandler {
       SpellCastPacket.STREAM_CODEC,
       ServerPayloadHandler::handleSpellCastPacket
     );
+    registrar.playToServer(
+      SpellEquipPacket.TYPE,
+      SpellEquipPacket.STREAM_CODEC,
+      ServerPayloadHandler::handleSpellEquipPacket
+    );
   }
 
   @SubscribeEvent

@@ -3,6 +3,7 @@ package com.avi.skram.network;
 import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.magic.SpellCastingInfo;
+import com.avi.skram.magic.Spellbook;
 import com.avi.skram.magic.spells.Spell;
 import com.avi.skram.magic.spells.Spells;
 import com.avi.skram.perks.Perk;
@@ -113,6 +114,20 @@ public class ServerPayloadHandler {
     }
 
     player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
+  }
+
+  public static void handleSpellEquipPacket(final SpellEquipPacket packet, final IPayloadContext context) {
+    context.enqueueWork(() -> {
+      Player player = context.player();
+      if (!Spells.SPELLS_BY_NAME.containsKey(packet.name())) return;
+
+      Spellbook spellbook = player.getData(SkramMagic.SPELLBOOK);
+      if (!spellbook.knownSpells.contains(packet.name())) return;
+
+      SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
+      castingInfo.equippedSpellName = packet.name();
+      player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
+    });
   }
 
 }

@@ -47,7 +47,7 @@ public class SkillMagic extends Skill {
   }
 
   public double getManaCapacity() {
-    return 20 * this.level;
+    return 50 * this.level;
   }
 
   public double getSpellPower() {

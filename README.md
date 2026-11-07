@@ -42,11 +42,8 @@ Spell Ideas:
 * Lightning
 * Dimension Door
 * Fertile Soil
-* Icarian Flight
 * Planar Shift
 * Slow (enemy)
-* Haste (self)
-* Feather Fall
 * Create Water
 * Create Lava?
 * Low/High Alchemy? (Will only work with EMC)
@@ -84,9 +81,6 @@ Fae-kind: Botany + Farming + Woodcutting => xp from plants?
 Iron Gut: Brewing + Cooking + Health => Immunity to poison
 Pirate: Sailing + Stealth + ??? => ???
 Stalwart Spellcaster: Magic + health => taking damage no longer interrupts casting.
-
-
-
 
 
 acrobatics: 3
