@@ -40,6 +40,8 @@ public abstract class Spell {
 
   public void finishCast(Player player) {
     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.spellSound.value(), SoundSource.PLAYERS, 0.35f, 1.0f);
+    SkillMagic magic = player.getData(Skills.MAGIC);
+    magic.addXp(player, 10 + ((double) this.requiredMagicLevel / 3) + ((double) this.manaCost / 5));
   }
 
   // This is done via a method call that way we can correctly apply modifiers from the player.

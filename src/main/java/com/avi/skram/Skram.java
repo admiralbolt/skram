@@ -68,21 +68,14 @@ public class Skram {
   public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES =
     DeferredRegister.create(Registries.TRIGGER_TYPE, Skram.MODID);
 
+  public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Skram.MODID);
+
   public static final Supplier<BreakBlockTrigger> BREAK_BLOCK_TRIGGER =
     TRIGGER_TYPES.register("break_block", BreakBlockTrigger::new);
   public static final Supplier<ItemSmeltedTrigger> ITEM_SMELTED_TRIGGER =
     TRIGGER_TYPES.register("item_smelted", ItemSmeltedTrigger::new);
   public static final Supplier<ArbitraryStringTrigger> ARBITRARY_STRING_TRIGGER =
     TRIGGER_TYPES.register("arbitrary_string_trigger", ArbitraryStringTrigger::new);
-
-  // Creates a creative tab with the id "skram:example_tab" for the example item, that is placed after the combat tab
-  public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
-    .title(Component.translatable("itemGroup.skram")) //The language key for the title of your CreativeModeTab
-    .withTabsBefore(CreativeModeTabs.COMBAT)
-    .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
-    .displayItems((parameters, output) -> {
-      output.accept(EXAMPLE_ITEM.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
-    }).build());
 
   // The constructor for the mod class is the first code that is run when your mod is loaded.
   // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
@@ -92,6 +85,8 @@ public class Skram {
 
     // Register the Deferred Register to the mod event bus so blocks get registered
     BLOCKS.register(modEventBus);
+
+    DATA_COMPONENTS.register(modEventBus);
 
     SkramItems.register();
     // Register the Deferred Register to the mod event bus so items get registered

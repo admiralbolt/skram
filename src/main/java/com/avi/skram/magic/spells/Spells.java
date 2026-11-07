@@ -1,7 +1,9 @@
 package com.avi.skram.magic.spells;
 
+import com.avi.skram.utils.MathUtils;
 import com.google.common.collect.ImmutableMap;
 
+import java.util.List;
 import java.util.Map;
 
 public class Spells {
@@ -19,5 +21,11 @@ public class Spells {
     .put(SpellMinorHeal.NAME, MINOR_HEAL)
     .put(SpellMuscleBurst.NAME, MUSCLE_BURST)
     .build();
+
+  public static List<String> ALL_SPELLS = SPELLS_BY_NAME.keySet().stream().sorted().toList();
+
+  public static String getRandomSpellName() {
+    return ALL_SPELLS.get(MathUtils.RANDOM.nextInt(ALL_SPELLS.size()));
+  }
 
 }

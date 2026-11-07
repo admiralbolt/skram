@@ -1,11 +1,23 @@
 package com.avi.skram.item;
 
 import com.avi.skram.Skram;
+import com.avi.skram.attachments.MiscAttachments;
+import com.avi.skram.magic.spells.Spells;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
+
+import java.util.function.Supplier;
 
 public class SkramItems {
 
+  // All of these are icons used for UI stuff, and not real items.
   public static DeferredItem<Item> AWESOME_SNAKE;
   public static DeferredItem<Item> BADLANDS;
   public static DeferredItem<Item> BAMBOO_JUNGLE;
@@ -75,7 +87,33 @@ public class SkramItems {
   public static DeferredItem<Item> WINDSWEPT_SAVANNA;
   public static DeferredItem<Item> WOODED_BADLANDS;
 
+  public static final Supplier<DataComponentType<SpellNameDataComponent>> SPELL_NAME_DATA_COMPONENT = Skram.DATA_COMPONENTS.registerComponentType(
+    "spell_name", builder -> builder.persistent(SpellNameDataComponent.CODEC)
+  );
+
+  public static DeferredItem<Item> SPELL_SCROLL;
+
+  public static final Supplier<CreativeModeTab> SKRAM_TAB = Skram.CREATIVE_MODE_TABS.register("skram", () -> CreativeModeTab.builder()
+    .title(Component.literal("Skram!"))
+    .icon(() -> new ItemStack(AWESOME_SNAKE.get()))
+    .displayItems((params, output) -> {
+      output.accept(AWESOME_SNAKE.get());
+      output.accept(SPELL_SCROLL.get());
+    })
+    .build()
+  );
+
   public static void register() {
+    SPELL_SCROLL = Skram.ITEMS.register(SpellScroll.NAME,
+      registryName -> new SpellScroll(
+        new Item.Properties()
+          .setId(ResourceKey.create(Registries.ITEM, registryName))
+          .delayedComponent(SPELL_NAME_DATA_COMPONENT.get(), context -> new SpellNameDataComponent(Spells.getRandomSpellName()))
+          .rarity(Rarity.EPIC)
+      )
+    );
+
+    // All of these registrations are not "real" items, they are just icons used for the UI.
     AWESOME_SNAKE = Skram.ITEMS.registerSimpleItem("awesome_snake");
     BADLANDS = Skram.ITEMS.registerSimpleItem("badlands");
     BAMBOO_JUNGLE = Skram.ITEMS.registerSimpleItem("bamboo_jungle");
