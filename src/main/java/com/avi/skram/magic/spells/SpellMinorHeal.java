@@ -24,4 +24,10 @@ public class SpellMinorHeal extends Spell {
     SkillMagic magic = player.getData(Skills.MAGIC);
     player.heal((float) (BASE_HEAL * (1 + magic.getSpellPower())));
   }
+
+  @Override
+  public String getDescription(Player player) {
+    SkillMagic magic = player.getData(Skills.MAGIC);
+    return String.format("Heal yourself for %.1f hearts.", (float) (BASE_HEAL * (1 + magic.getSpellPower())));
+  }
 }

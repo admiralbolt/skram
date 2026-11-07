@@ -24,4 +24,9 @@ public class SpellConjureSupplies extends Spell {
     player.getInventory().add(new ItemStack(Items.BREAD, 2));
     player.getInventory().add(new ItemStack(Items.POTION, 1));
   }
+
+  @Override
+  public String getDescription(Player player) {
+    return "Conjures some basic supplies: 3x Torch, 2x Bread, 1x Water Bottle.";
+  }
 }

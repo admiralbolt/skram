@@ -1,6 +1,9 @@
 package com.avi.skram.magic.spells;
 
 import com.avi.skram.audio.SkramSounds;
+import com.avi.skram.skills.SkillMagic;
+import com.avi.skram.skills.Skills;
+import com.avi.skram.utils.MathUtils;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -12,7 +15,7 @@ public class SpellFeatherFall extends Spell {
   public static int COST = 800;
   public static int CASTING_TICKS = 6;
 
-  public static int DURATION_TICKS = 200;
+  public static int DURATION_TICKS = 140;
   public static int AMPLIFIER = 2;
 
   public SpellFeatherFall() {
@@ -23,6 +26,14 @@ public class SpellFeatherFall extends Spell {
   public void finishCast(Player player) {
     super.finishCast(player);
 
-    player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, DURATION_TICKS, AMPLIFIER, false, true));
+    SkillMagic magic = player.getData(Skills.MAGIC);
+    player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, (int) ((1 + magic.getSpellPower()) * DURATION_TICKS), AMPLIFIER, false, true));
+  }
+
+  @Override
+  public String getDescription(Player player) {
+    SkillMagic magic = player.getData(Skills.MAGIC);
+
+    return "Quickly applies slow fall to yourself. Applies slow fall Lvl. " + (AMPLIFIER + 1) + " for " + MathUtils.formatTicks((int) ((1 + magic.getSpellPower()) * DURATION_TICKS)) + ".";
   }
 }

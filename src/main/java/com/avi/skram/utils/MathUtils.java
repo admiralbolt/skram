@@ -24,4 +24,8 @@ public class MathUtils {
     return flat + ((Math.random() < (chance - flat)) ? 1 : 0);
   }
 
+  public static String formatTicks(int ticks) {
+    return String.format("%.1f seconds", ((double) ticks) / 20);
+  }
+
 }

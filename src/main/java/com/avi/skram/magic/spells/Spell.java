@@ -42,4 +42,7 @@ public abstract class Spell {
     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.spellSound.value(), SoundSource.PLAYERS, 0.35f, 1.0f);
   }
 
+  // This is done via a method call that way we can correctly apply modifiers from the player.
+  public abstract String getDescription(Player player);
+
 }

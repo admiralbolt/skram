@@ -1,6 +1,9 @@
 package com.avi.skram.magic.spells;
 
 import com.avi.skram.audio.SkramSounds;
+import com.avi.skram.skills.SkillMagic;
+import com.avi.skram.skills.Skills;
+import com.avi.skram.utils.MathUtils;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -23,6 +26,14 @@ public class SpellIcarianFlight extends Spell {
   public void finishCast(Player player) {
     super.finishCast(player);
 
-    player.addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST, DURATION_TICKS, AMPLIFIER, false, true));
+    SkillMagic magic = player.getData(Skills.MAGIC);
+    player.addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST, DURATION_TICKS, (int) ((1 + magic.getSpellPower()) * AMPLIFIER), false, true));
+  }
+
+  @Override
+  public String getDescription(Player player) {
+    SkillMagic magic = player.getData(Skills.MAGIC);
+
+    return "Soar to new heights. Applies Jump Boost Lvl. " + (1 + (int) ((1 + magic.getSpellPower()) * AMPLIFIER)) + " for " + MathUtils.formatTicks(DURATION_TICKS) + ".";
   }
 }
