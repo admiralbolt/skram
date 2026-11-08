@@ -62,6 +62,6 @@ public class SpellScroll extends Item {
       }
     }
 
-    return InteractionResult.FAIL;
+    return InteractionResult.SUCCESS;
   }
 }

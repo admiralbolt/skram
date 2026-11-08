@@ -113,6 +113,8 @@ public class SkramItems {
       registryName -> new SpellScroll(
         new Item.Properties()
           .setId(ResourceKey.create(Registries.ITEM, registryName))
+          .stacksTo(1)
+          .durability(1)
           .rarity(Rarity.EPIC)
       )
     );

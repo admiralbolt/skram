@@ -43,7 +43,7 @@ public class SkillMagic extends Skill {
   }
 
   public double getManaRegen() {
-    return 0.03 * this.level;
+    return 0.02 * this.level;
   }
 
   public double getManaCapacity() {

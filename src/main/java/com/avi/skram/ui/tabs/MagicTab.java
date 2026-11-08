@@ -31,10 +31,6 @@ public final class MagicTab {
     .withFont(new FontDescription.Resource(Identifier.withDefaultNamespace("alt")))
     .withColor(ChatFormatting.GRAY);
 
-  private static final Style UNEQUIPPED_SPELL_STYLE = Style.EMPTY
-    .withFont(new FontDescription.Resource(Identifier.withDefaultNamespace("default")))
-    .withColor(ChatFormatting.GRAY);
-
   private MagicTab() {
   }
 
@@ -52,7 +48,7 @@ public final class MagicTab {
       indexContent.spacing(4).defaultCellSetting().alignVerticallyMiddle();
       indexContent.addChild(new ResizableTextureImageWidget(0, 0, 16, 16, spell.spellIcon, 16, 16));
       indexContent.addChild(new MultiLineTextWidget(
-        spellIndexComponent(spellName, unlocked, spell.name.equals(castingInfo.equippedSpellName)),
+        spellIndexComponent(spellName, unlocked),
         Minecraft.getInstance().font
       ));
 
@@ -88,7 +84,6 @@ public final class MagicTab {
     summary.addChild(summaryText);
     layout.addChild(summary);
 
-
     if (unlocked) {
       Button equipButton = Button.builder(
         Component.literal(equipped ? "Equipped" : "Equip"),
@@ -112,21 +107,21 @@ public final class MagicTab {
     return widget;
   }
 
-  private static Component spellIndexComponent(String spellName, boolean unlocked, boolean equipped) {
+  private static Component spellIndexComponent(String spellName, boolean unlocked) {
     String displayName = StringUtils.snakeToTitle(spellName);
 
-    if (equipped) return Component.literal(displayName);
-    if (unlocked) return Component.literal(displayName).withStyle(UNEQUIPPED_SPELL_STYLE);
+    if (unlocked) return Component.literal(displayName);
+
     return Component.literal(displayName).withStyle(LOCKED_SPELL_STYLE);
   }
 
   private static Component spellNameComponent(String spellName, boolean unlocked) {
     String displayName = StringUtils.snakeToTitle(spellName);
-    return (unlocked) ? Component.literal(displayName).withStyle(UNEQUIPPED_SPELL_STYLE) : Component.literal(displayName).withStyle(LOCKED_SPELL_STYLE);
+    return (unlocked) ? Component.literal(displayName) : Component.literal(displayName).withStyle(LOCKED_SPELL_STYLE);
   }
 
   private static Component spellInfoComponent(String text, boolean unlocked) {
-    return (unlocked) ? Component.literal(text).withStyle(UNEQUIPPED_SPELL_STYLE) : Component.literal(text).withStyle(LOCKED_SPELL_STYLE);
+    return (unlocked) ? Component.literal(text) : Component.literal(text).withStyle(LOCKED_SPELL_STYLE);
   }
 
 }
