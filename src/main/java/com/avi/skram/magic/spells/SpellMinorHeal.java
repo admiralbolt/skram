@@ -4,6 +4,7 @@ import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.skills.SkillMagic;
 import com.avi.skram.skills.Skills;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 public class SpellMinorHeal extends Spell {
 
@@ -19,8 +20,8 @@ public class SpellMinorHeal extends Spell {
   }
 
   @Override
-  public void finishCast(Player player) {
-    super.finishCast(player);
+  public void doEffect(Player player, Vec3 targetBlock) {
+    super.doEffect(player, targetBlock);
     SkillMagic magic = player.getData(Skills.MAGIC);
     player.heal((float) (BASE_HEAL * (1 + magic.getSpellPower())));
   }

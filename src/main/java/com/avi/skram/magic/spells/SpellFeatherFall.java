@@ -7,6 +7,7 @@ import com.avi.skram.utils.MathUtils;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 public class SpellFeatherFall extends Spell {
 
@@ -23,8 +24,8 @@ public class SpellFeatherFall extends Spell {
   }
 
   @Override
-  public void finishCast(Player player) {
-    super.finishCast(player);
+  public void doEffect(Player player, Vec3 targetBlock) {
+    super.doEffect(player, targetBlock);
 
     SkillMagic magic = player.getData(Skills.MAGIC);
     player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, (int) ((1 + magic.getSpellPower()) * DURATION_TICKS), AMPLIFIER, false, true));

@@ -90,31 +90,11 @@ public class ServerPayloadHandler {
 
   public static void handleSpellCastPacket(final SpellCastPacket packet, final IPayloadContext context) {
     Player player = context.player();
+    Spell spell = Spells.SPELLS_BY_NAME.get(packet.name());
 
-    // First, we check to see if we are currently casting a spell. If so, we simply cancel the cast.
-    SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
-    Spell spell = Spells.SPELLS_BY_NAME.get(castingInfo.equippedSpellName);
     if (spell == null) return;
 
-    if (castingInfo.isCasting) {
-      castingInfo.cancel = true;
-    } else {
-      if (spell.canCast(player)) {
-        // If we can cast it, do so!
-        castingInfo.currentMana -= spell.manaCost;
-        castingInfo.isCasting = true;
-        castingInfo.castingTimer = spell.castingTimeTicks;
-        castingInfo.spellName = castingInfo.equippedSpellName;
-        castingInfo.startCasting = true;
-      } else {
-        // Otherwise, mark that we failed to cast a spell.
-        castingInfo.failedCasting = true;
-        // Rather than using a separate var to track failed casting, we reuse the same timer.
-        castingInfo.castingTimer = 20;
-      }
-    }
-
-    player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
+    spell.doEffect(player, packet.targetBlock());
   }
 
   public static void handleSpellEquipPacket(final SpellEquipPacket packet, final IPayloadContext context) {

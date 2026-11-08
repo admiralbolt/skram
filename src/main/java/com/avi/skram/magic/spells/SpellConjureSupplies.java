@@ -4,6 +4,7 @@ import com.avi.skram.audio.SkramSounds;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.Vec3;
 
 public class SpellConjureSupplies extends Spell {
 
@@ -17,8 +18,8 @@ public class SpellConjureSupplies extends Spell {
   }
 
   @Override
-  public void finishCast(Player player) {
-    super.finishCast(player);
+  public void doEffect(Player player, Vec3 targetBlock) {
+    super.doEffect(player, targetBlock);
 
     player.getInventory().add(new ItemStack(Items.TORCH, 3));
     player.getInventory().add(new ItemStack(Items.BREAD, 2));

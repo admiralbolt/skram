@@ -7,6 +7,7 @@ import com.avi.skram.utils.MathUtils;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 public class SpellMuscleBurst extends Spell {
 
@@ -23,8 +24,8 @@ public class SpellMuscleBurst extends Spell {
   }
 
   @Override
-  public void finishCast(Player player) {
-    super.finishCast(player);
+  public void doEffect(Player player, Vec3 targetBlock) {
+    super.doEffect(player, targetBlock);
 
     player.addEffect(new MobEffectInstance(MobEffects.HASTE, DURATION_TICKS, AMPLIFIER, false, true));
     player.addEffect(new MobEffectInstance(MobEffects.SPEED, DURATION_TICKS, AMPLIFIER, false, true));
