@@ -11,6 +11,7 @@ import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.Skills;
 import com.mojang.logging.LogUtils;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -32,6 +33,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.*;
@@ -56,6 +58,9 @@ public class Skram {
   public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
   public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, MODID);
 
+  public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIER_SERIALIZERS =
+    DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Skram.MODID);
+
   // Creates a new Block with the id "skram:example_block", combining the namespace and path
   public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", p -> p.mapColor(MapColor.STONE));
   // Creates a new BlockItem with the id "skram:example_block", combining the namespace and path
@@ -76,6 +81,7 @@ public class Skram {
     TRIGGER_TYPES.register("item_smelted", ItemSmeltedTrigger::new);
   public static final Supplier<ArbitraryStringTrigger> ARBITRARY_STRING_TRIGGER =
     TRIGGER_TYPES.register("arbitrary_string_trigger", ArbitraryStringTrigger::new);
+
 
   // The constructor for the mod class is the first code that is run when your mod is loaded.
   // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
@@ -103,6 +109,7 @@ public class Skram {
     ATTRIBUTES.register(modEventBus);
     TRIGGER_TYPES.register(modEventBus);
     SkramSounds.SOUND_EVENTS.register(modEventBus);
+    GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
 
     // Register ourselves for server and other game events we are interested in.
     // Note that this is necessary if and only if we want *this* class (skram) to respond directly to events.
