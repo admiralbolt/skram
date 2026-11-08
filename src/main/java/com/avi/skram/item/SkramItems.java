@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class SkramItems {
@@ -98,7 +99,11 @@ public class SkramItems {
     .icon(() -> new ItemStack(AWESOME_SNAKE.get()))
     .displayItems((params, output) -> {
       output.accept(AWESOME_SNAKE.get());
-      output.accept(SPELL_SCROLL.get());
+      for (String spellName : Spells.ALL_SPELLS) {
+        ItemStack stack = new ItemStack(SPELL_SCROLL.get());
+        stack.set(SPELL_NAME_DATA_COMPONENT.get(), new SpellNameDataComponent(spellName));
+        output.accept(stack);
+      }
     })
     .build()
   );
@@ -108,7 +113,6 @@ public class SkramItems {
       registryName -> new SpellScroll(
         new Item.Properties()
           .setId(ResourceKey.create(Registries.ITEM, registryName))
-          .delayedComponent(SPELL_NAME_DATA_COMPONENT.get(), context -> new SpellNameDataComponent(Spells.getRandomSpellName()))
           .rarity(Rarity.EPIC)
       )
     );

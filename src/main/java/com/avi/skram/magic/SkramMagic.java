@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 public class SkramMagic {
 
   public static double DEFAULT_MAX_MANA = 2000.0;
-  public static double DEFAULT_MANA_REGENERATION = 2.0;
+  public static double DEFAULT_MANA_REGENERATION = 1.5;
 
   public static final Holder<Attribute> MAX_MANA = Skram.ATTRIBUTES.register("max_mana", () -> new RangedAttribute(
     "attributes.skram.max_mana",

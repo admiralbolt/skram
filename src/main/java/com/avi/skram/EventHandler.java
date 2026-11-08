@@ -431,7 +431,7 @@ public class EventHandler {
 
     while (CAST_SPELL.get().consumeClick()) {
       // Need to send a packet to handle the cast.
-      ClientPacketDistributor.sendToServer(new SpellCastPacket(SpellMinorHeal.NAME));
+      ClientPacketDistributor.sendToServer(new SpellCastPacket("a"));
     }
   }
 
