@@ -37,7 +37,6 @@ Giving +X% efficacy to all spells might not quite work but eh.
 Probably start with one unlocked by default: Heal!
 
 Spell Ideas:
-* Heal
 * Fireball
 * Lightning
 * Dimension Door
@@ -64,6 +63,8 @@ What I actually want is:
 
 Mega Chests
 Giga Chests
+BIIIG Bundle
+
 Waystones
 
 Mega + Giga chests I can make myself.
@@ -77,7 +78,7 @@ https://github.com/TwelveIterations/Waystones/tree/26.2/common/src/main/java/net
 Perks
 ==================
 
-Fae-kind: Botany + Farming + Woodcutting => xp from plants?
+Photosynthesis: Botany + Farming + Woodcutting => Heal slowly while in sunlight.
 Iron Gut: Brewing + Cooking + Health => Immunity to poison
 Pirate: Sailing + Stealth + ??? => ???
 Stalwart Spellcaster: Magic + health => taking damage no longer interrupts casting.

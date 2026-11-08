@@ -9,7 +9,7 @@ public class SpellMinorHeal extends Spell {
 
   public static String NAME = "minor_heal";
   public static int REQUIRED_MAGIC_LEVEL = 1;
-  public static int COST = 100;
+  public static int COST = 600;
   public static int CASTING_TICKS = 40;
 
   public static double BASE_HEAL = 3.0;

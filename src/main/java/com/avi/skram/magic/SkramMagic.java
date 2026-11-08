@@ -99,9 +99,7 @@ public class SkramMagic {
         castingInfo.isCasting = false;
         castingInfo.castingTimer = 0;
 
-        if (!player.level().isClientSide()) {
-          spell.finishCast(player);
-        }
+        spell.finishCast(player);
       }
     }
 

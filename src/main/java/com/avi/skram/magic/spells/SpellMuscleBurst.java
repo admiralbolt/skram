@@ -12,7 +12,7 @@ public class SpellMuscleBurst extends Spell {
 
   public static String NAME = "muscle_burst";
   public static int REQUIRED_MAGIC_LEVEL = 6;
-  public static int COST = 900;
+  public static int COST = 1000;
   public static int CASTING_TICKS = 20;
 
   public static int DURATION_TICKS = 240;

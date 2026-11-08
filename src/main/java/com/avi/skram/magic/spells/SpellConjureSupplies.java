@@ -9,7 +9,7 @@ public class SpellConjureSupplies extends Spell {
 
   public static String NAME = "conjure_supplies";
   public static int REQUIRED_MAGIC_LEVEL = 11;
-  public static int COST = 1300;
+  public static int COST = 1600;
   public static int CASTING_TICKS = 120;
 
   public SpellConjureSupplies() {

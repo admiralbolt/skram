@@ -12,7 +12,7 @@ public class SpellFeatherFall extends Spell {
 
   public static String NAME = "feather_fall";
   public static int REQUIRED_MAGIC_LEVEL = 9;
-  public static int COST = 800;
+  public static int COST = 1000;
   public static int CASTING_TICKS = 6;
 
   public static int DURATION_TICKS = 140;
