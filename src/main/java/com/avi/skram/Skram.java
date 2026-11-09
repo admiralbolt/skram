@@ -6,6 +6,7 @@ import com.avi.skram.advancements.ItemSmeltedTrigger;
 import com.avi.skram.attachments.MiscAttachments;
 import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.blocks.BlockData;
+import com.avi.skram.effect.SkramEffects;
 import com.avi.skram.entity.SkramEntities;
 import com.avi.skram.item.SkramItems;
 import com.avi.skram.magic.SkramMagic;
@@ -16,6 +17,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -62,6 +64,7 @@ public class Skram {
   public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, MODID);
   public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
   public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, MODID);
+  public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, MODID);
 
   public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIER_SERIALIZERS =
     DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Skram.MODID);
@@ -113,6 +116,9 @@ public class Skram {
     ATTACHMENT_TYPES.register(modEventBus);
     ATTRIBUTES.register(modEventBus);
     TRIGGER_TYPES.register(modEventBus);
+
+    SkramEffects.register();
+    EFFECTS.register(modEventBus);
 
     SkramEntities.register();
     ENTITY_TYPES.register(modEventBus);

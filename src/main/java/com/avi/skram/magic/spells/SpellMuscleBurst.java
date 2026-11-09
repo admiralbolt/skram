@@ -29,9 +29,11 @@ public class SpellMuscleBurst extends Spell {
   public void doEffect(Player player, BlockHitResult hitResult) {
     super.doEffect(player, hitResult);
 
-    player.addEffect(new MobEffectInstance(MobEffects.HASTE, DURATION_TICKS, AMPLIFIER, false, true));
-    player.addEffect(new MobEffectInstance(MobEffects.SPEED, DURATION_TICKS, AMPLIFIER, false, true));
-    player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, DURATION_TICKS, AMPLIFIER, false, true));
+    SkillMagic magic = player.getData(Skills.MAGIC);
+    int duration = (int) ((1 + magic.getSpellPower()) * DURATION_TICKS);
+    player.addEffect(new MobEffectInstance(MobEffects.HASTE, duration, AMPLIFIER, false, true));
+    player.addEffect(new MobEffectInstance(MobEffects.SPEED, duration, AMPLIFIER, false, true));
+    player.addEffect(new MobEffectInstance(MobEffects.STRENGTH, duration, AMPLIFIER, false, true));
   }
 
   @Override

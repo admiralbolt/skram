@@ -9,6 +9,7 @@ import java.util.Map;
 public class Spells {
 
   public static Spell BLUE_SKY = new SpellBlueSky();
+  public static Spell BURNING_RUSH = new SpellBurningRush();
   public static Spell CONJURE_SUPPLIES = new SpellConjureSupplies();
   public static Spell CREATE_LAVA = new SpellCreateLava();
   public static Spell CREATE_WATER = new SpellCreateWater();
@@ -25,10 +26,12 @@ public class Spells {
   public static Spell MINOR_HEAL = new SpellMinorHeal();
   public static Spell MUSCLE_BURST = new SpellMuscleBurst();
   public static Spell PLANAR_SHIFT = new SpellPlanarShift();
+  public static Spell RALLY = new SpellRally();
   public static Spell SAP = new SpellSap();
 
   public static Map<String, Spell> SPELLS_BY_NAME = ImmutableMap.<String, Spell>builder()
     .put(SpellBlueSky.NAME, BLUE_SKY)
+    .put(SpellBurningRush.NAME, BURNING_RUSH)
     .put(SpellConjureSupplies.NAME, CONJURE_SUPPLIES)
     .put(SpellCreateLava.NAME, CREATE_LAVA)
     .put(SpellCreateWater.NAME, CREATE_WATER)
@@ -45,6 +48,7 @@ public class Spells {
     .put(SpellMinorHeal.NAME, MINOR_HEAL)
     .put(SpellMuscleBurst.NAME, MUSCLE_BURST)
     .put(SpellPlanarShift.NAME, PLANAR_SHIFT)
+    .put(SpellRally.NAME, RALLY)
     .put(SpellSap.NAME, SAP)
     .build();
 

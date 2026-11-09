@@ -13,7 +13,7 @@ public class SpellMinorHeal extends Spell {
   public static int COST = 600;
   public static int CASTING_TICKS = 40;
 
-  public static double BASE_HEAL = 3.0;
+  public static double BASE_HEAL = 2.0;
 
   public SpellMinorHeal() {
     super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);

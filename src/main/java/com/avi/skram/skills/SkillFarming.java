@@ -59,8 +59,11 @@ public class SkillFarming extends Skill {
     XP_MAP.put(Blocks.MELON, 120);
 
     // Mushrooms.
-    XP_MAP.put(Blocks.BROWN_MUSHROOM, 100);
-    XP_MAP.put(Blocks.RED_MUSHROOM, 100);
+    XP_MAP.put(Blocks.BROWN_MUSHROOM, 40);
+    XP_MAP.put(Blocks.BROWN_MUSHROOM_BLOCK, 60);
+    XP_MAP.put(Blocks.RED_MUSHROOM, 40);
+    XP_MAP.put(Blocks.RED_MUSHROOM_BLOCK, 60);
+
 
     // Both a flower and a crop!
     XP_MAP.put(Blocks.PITCHER_CROP, 50);
