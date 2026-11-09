@@ -7,11 +7,13 @@ import com.avi.skram.network.SpellCastPacket;
 import com.avi.skram.skills.SkillMagic;
 import com.avi.skram.skills.Skills;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
@@ -43,7 +45,7 @@ public abstract class Spell {
     return magic.level >= this.requiredMagicLevel;
   }
 
-  public void doEffect(Player player, Vec3 targetBlock) {
+  public void doEffect(Player player, Vec3 targetBlock, Direction direction) {
     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.spellSound.value(), SoundSource.PLAYERS, 0.35f, 1.0f);
     SkillMagic magic = player.getData(Skills.MAGIC);
     magic.addXp(player, 10 + ((double) this.requiredMagicLevel / 3) + ((double) this.manaCost / 5));
@@ -51,9 +53,14 @@ public abstract class Spell {
 
   public void sendCastPacket(Player player) {
     HitResult hitResult = Minecraft.getInstance().hitResult;
-    Vec3 targetBlock = (hitResult == null) ? Vec3.ZERO : hitResult.getLocation();
+    Vec3 targetBlock = Vec3.ZERO;
+    Direction direction = Direction.UP;
+    if (hitResult instanceof BlockHitResult blockHitResult) {
+      targetBlock = hitResult.getLocation();
+      direction = blockHitResult.getDirection();
+    }
 
-    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, targetBlock));
+    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, targetBlock, direction));
   }
 
   // This is done via a method call that way we can correctly apply modifiers from the player.

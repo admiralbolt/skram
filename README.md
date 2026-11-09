@@ -39,7 +39,6 @@ Probably start with one unlocked by default: Heal!
 Spell Ideas:
 * Fireball
 * Lightning
-* Dimension Door
 * Fertile Soil
 * Planar Shift
 * Slow (enemy)

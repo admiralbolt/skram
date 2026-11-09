@@ -4,6 +4,7 @@ import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.skills.SkillMagic;
 import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.MathUtils;
+import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -24,8 +25,8 @@ public class SpellIcarianFlight extends Spell {
   }
 
   @Override
-  public void doEffect(Player player, Vec3 targetBlock) {
-    super.doEffect(player, targetBlock);
+  public void doEffect(Player player, Vec3 targetBlock, Direction direction) {
+    super.doEffect(player, targetBlock, direction);
 
     SkillMagic magic = player.getData(Skills.MAGIC);
     player.addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST, DURATION_TICKS, (int) ((1 + magic.getSpellPower()) * AMPLIFIER), false, true));

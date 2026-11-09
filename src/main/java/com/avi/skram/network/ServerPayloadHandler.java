@@ -94,7 +94,7 @@ public class ServerPayloadHandler {
 
     if (spell == null) return;
 
-    spell.doEffect(player, packet.targetBlock());
+    spell.doEffect(player, packet.targetBlock(), packet.direction());
   }
 
   public static void handleSpellEquipPacket(final SpellEquipPacket packet, final IPayloadContext context) {
