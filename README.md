@@ -24,11 +24,9 @@ MAGIC
 =====
 
 Spell Ideas:
-* Planar Shift
 * Slow (enemy)
 * Low/High Alchemy? (Will only work with EMC)
 * Superheat Ore
-* Control Weather
 * Locate Town / Structure?
 
 
@@ -43,8 +41,9 @@ What I actually want is:
 Mega Chests
 Giga Chests
 BIIIG Bundle
-
 Waystones
+
+
 
 Mega + Giga chests I can make myself.
 
