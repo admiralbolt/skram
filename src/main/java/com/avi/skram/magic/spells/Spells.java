@@ -28,6 +28,7 @@ public class Spells {
   public static Spell MINOR_HEAL = new SpellMinorHeal();
   public static Spell MUSCLE_BURST = new SpellMuscleBurst();
   public static Spell PLANAR_SHIFT = new SpellPlanarShift();
+  public static Spell PURIFY = new SpellPurify();
   public static Spell RALLY = new SpellRally();
   public static Spell SAP = new SpellSap();
 
@@ -52,6 +53,7 @@ public class Spells {
     .put(SpellMinorHeal.NAME, MINOR_HEAL)
     .put(SpellMuscleBurst.NAME, MUSCLE_BURST)
     .put(SpellPlanarShift.NAME, PLANAR_SHIFT)
+    .put(SpellPurify.NAME, PURIFY)
     .put(SpellRally.NAME, RALLY)
     .put(SpellSap.NAME, SAP)
     .build();
