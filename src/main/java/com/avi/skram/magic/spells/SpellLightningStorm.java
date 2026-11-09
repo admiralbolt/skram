@@ -32,7 +32,6 @@ public class SpellLightningStorm extends Spell {
 
   @Override
   public void sendCastPacket(Player player) {
-    SkillMagic magic = player.getData(Skills.MAGIC);
     HitResult hitResult = MinecraftUtils.rayCast(player, MAX_DISTANCE);
     ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, (hitResult instanceof BlockHitResult blockHitResult) ? blockHitResult : null));
   }

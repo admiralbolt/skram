@@ -24,7 +24,6 @@ MAGIC
 =====
 
 Spell Ideas:
-* Lightning
 * Planar Shift
 * Slow (enemy)
 * Low/High Alchemy? (Will only work with EMC)
