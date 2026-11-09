@@ -7,12 +7,17 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
 import java.util.function.Supplier;
 
+@EventBusSubscriber(modid = Skram.MODID)
 public class SkramEntities {
 
   public static Supplier<EntityType<SkramColoredProjectile>> COLORED_PROJECTILE;
+  public static Supplier<EntityType<Decoy>> DECOY;
 
   public static void register() {
     COLORED_PROJECTILE = Skram.ENTITY_TYPES.register(
@@ -26,6 +31,21 @@ public class SkramEntities {
           Identifier.fromNamespaceAndPath(Skram.MODID, SkramColoredProjectile.NAME)
         ))
     );
+
+    DECOY = Skram.ENTITY_TYPES.register(
+      Decoy.NAME, () -> EntityType.Builder.<Decoy>of(
+        Decoy::new, MobCategory.MISC
+      ).sized(0.9F, 0.9F)
+        .build(ResourceKey.create(
+          Registries.ENTITY_TYPE,
+          Identifier.fromNamespaceAndPath(Skram.MODID, Decoy.NAME)
+        ))
+    );
+  }
+
+  @SubscribeEvent
+  public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
+    event.put(DECOY.get(), Decoy.createAttributes().build());
   }
 
 }

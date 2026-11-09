@@ -12,6 +12,7 @@ public class Spells {
   public static Spell CONJURE_SUPPLIES = new SpellConjureSupplies();
   public static Spell CREATE_LAVA = new SpellCreateLava();
   public static Spell CREATE_WATER = new SpellCreateWater();
+  public static Spell DECOY = new SpellDecoy();
   public static Spell DIMENSION_DOOR = new SpellDimensionDoor();
   public static Spell ERUPTION = new SpellEruption();
   public static Spell FAERIE_FIRE = new SpellFaerieFire();
@@ -31,6 +32,7 @@ public class Spells {
     .put(SpellConjureSupplies.NAME, CONJURE_SUPPLIES)
     .put(SpellCreateLava.NAME, CREATE_LAVA)
     .put(SpellCreateWater.NAME, CREATE_WATER)
+    .put(SpellDecoy.NAME, DECOY)
     .put(SpellDimensionDoor.NAME, DIMENSION_DOOR)
     .put(SpellEruption.NAME, ERUPTION)
     .put(SpellFaerieFire.NAME, FAERIE_FIRE)
