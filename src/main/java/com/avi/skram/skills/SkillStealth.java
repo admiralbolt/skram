@@ -103,7 +103,7 @@ public class SkillStealth extends Skill {
     return true;
   }
 
-  public static void handleDamageEvent(LivingDamageEvent.Pre event) {
+  public static void gainStealthXP(LivingDamageEvent.Pre event) {
     if (!isSneakAttack(event)) return;
 
     Player player = null;

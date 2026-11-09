@@ -4,8 +4,8 @@ import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
 import com.avi.skram.commands.SkramCommands;
+import com.avi.skram.effect.HexedEffect;
 import com.avi.skram.magic.SkramMagic;
-import com.avi.skram.magic.SpellCastSoundHandler;
 import com.avi.skram.network.*;
 import com.avi.skram.perks.*;
 import com.avi.skram.skills.*;
@@ -283,6 +283,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_LIVING_HEAL(LivingHealEvent event) {
     SkillHealth.handleHealEvent(event);
+    HexedEffect.reduceHealing(event);
   }
 
   @SubscribeEvent
@@ -310,21 +311,28 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_ENTITY_HURT(LivingDamageEvent.Pre event) {
-    PerkBackstab.handleDamageEvent(event);
+    // Increase damage from flat sources first.
     PerkPugilist.handleDamageEvent(event);
-    PerkSniper.handleDamageEvent(event);
 
+    // Increase damage from multipliers in no particular order.
+    PerkBackstab.handleDamageEvent(event);
+    PerkSniper.handleDamageEvent(event);
     SkillDemolition.applyBlastResistance(event);
-    SkillDemolition.handleDamageEvent(event);
     SkillMelee.handleDamageEvent(event);
     SkillRanged.handleDamageEvent(event);
-    SkillStealth.handleDamageEvent(event);
 
-    // Make sure that SkillHealth.handleDamageEvent() is called last, so that damage values get updated by skills.
-    SkillHealth.handleDamageEvent(event);
+    // Apply hexed effect after increasing damage from all sources, before applying XP.
+    HexedEffect.increaseDamage(event);
 
+    // Gain XP from relevant skills after damage numbers have been updated.
+    SkillDemolition.gainDemolitionXP(event);
+    SkillMelee.gainMeleeXP(event);
+    SkillRanged.gainRangedXP(event);
+    SkillStealth.gainStealthXP(event);
+    SkillHealth.gainHealthXP(event);
+
+    // Misc effects that aren't order dependent.
     SkramMagic.cancelSpell(event);
-
     Perks.applyEntityModifier(event);
     PerkHamstring.handleDamageEvent(event);
     PerkJuggernaut.handleDamageEvent(event);

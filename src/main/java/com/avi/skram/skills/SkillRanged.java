@@ -55,7 +55,14 @@ public class SkillRanged extends Skill {
     if (ranged.enabledAbilities[DAMAGE_BOOST_INDEX]) {
       event.setNewDamage(event.getNewDamage() * (float) (1 + ranged.getDamageBoost()));
     }
+  }
 
+  public static void gainRangedXP(LivingDamageEvent.Pre event) {
+    if (!(event.getSource().getDirectEntity() instanceof Projectile)) return;
+    if (!(event.getSource().getEntity() instanceof Player player)) return;
+    if (player.level().isClientSide()) return;
+
+    SkillRanged ranged = player.getData(Skills.RANGED);
     LivingEntity targetEntity = event.getEntity();
     double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 10 : 1;
 

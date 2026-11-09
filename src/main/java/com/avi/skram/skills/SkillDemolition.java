@@ -86,7 +86,7 @@ public class SkillDemolition extends Skill {
   }
 
   // Encourage the players to blow up entities :)
-  public static void handleDamageEvent(LivingDamageEvent.Pre event) {
+  public static void gainDemolitionXP(LivingDamageEvent.Pre event) {
     if (!event.getSource().is(DamageTypes.PLAYER_EXPLOSION)) return;
     if (!(event.getSource().getEntity() instanceof Player player)) return;
     // No XP for blowing up friendly things.

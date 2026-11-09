@@ -93,7 +93,13 @@ public class SkillMelee extends Skill {
     if (melee.enabledAbilities[DAMAGE_BOOST_INDEX]) {
       event.setNewDamage(event.getNewDamage() * (float) (1 + melee.getDamageBoost()));
     }
+  }
 
+  public static void gainMeleeXP(LivingDamageEvent.Pre event) {
+    if (!(event.getSource().getDirectEntity() instanceof Player player)) return;
+    if (player.level().isClientSide()) return;
+
+    SkillMelee melee = player.getData(Skills.MELEE);
     LivingEntity targetEntity = event.getEntity();
     double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 10 : 1;
 

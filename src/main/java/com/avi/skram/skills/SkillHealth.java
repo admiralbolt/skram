@@ -67,7 +67,7 @@ public class SkillHealth extends Skill {
     }
   }
 
-  public static void handleDamageEvent(LivingDamageEvent.Pre event) {
+  public static void gainHealthXP(LivingDamageEvent.Pre event) {
     Player player = null;
     if (event.getSource().getEntity() instanceof Player) {
       player = (Player) event.getSource().getEntity();

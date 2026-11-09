@@ -50,8 +50,10 @@ public class SkramColoredProjectile extends AbstractHurtingProjectile {
 
   @Override
   protected void onHitEntity(@NonNull EntityHitResult hitResult) {
-    // Eventually we should take a supplier function as an arg to make this generic.
-    this.callback.accept(hitResult.getEntity());
+    // Make sure our callback actually exists.
+    if (this.callback != null) {
+      this.callback.accept(hitResult.getEntity());
+    }
   }
 
   @Override
