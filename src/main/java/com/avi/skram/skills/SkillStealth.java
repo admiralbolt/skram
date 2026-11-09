@@ -84,7 +84,7 @@ public class SkillStealth extends Skill {
     }
 
     // If the player is glowing, they can't be sneaky!
-    if (player.hasEffect(MobEffects.GLOWING)) return;
+    if (player.hasEffect(MobEffects.GLOWING)) return false;
     // Check to see if the target was unaware of us. Only Mobs have targeting information.
     if (!(event.getEntity() instanceof Mob mob)) return false;
     // No stealth XP for friendly mobs.
