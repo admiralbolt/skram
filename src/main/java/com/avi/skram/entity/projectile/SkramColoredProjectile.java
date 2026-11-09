@@ -62,7 +62,6 @@ public class SkramColoredProjectile extends AbstractHurtingProjectile {
     if (!this.level().isClientSide()) {
       this.discard();
     }
-
   }
 
   @Override
