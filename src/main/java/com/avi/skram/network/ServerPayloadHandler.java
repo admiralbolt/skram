@@ -1,6 +1,5 @@
 package com.avi.skram.network;
 
-import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.magic.SpellCastingInfo;
 import com.avi.skram.magic.Spellbook;
@@ -12,8 +11,6 @@ import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.Skill;
 import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.ReflectionUtils;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;

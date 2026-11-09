@@ -5,8 +5,6 @@ import com.avi.skram.skills.SkillDigging;
 import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

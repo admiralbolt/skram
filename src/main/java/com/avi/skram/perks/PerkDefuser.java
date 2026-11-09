@@ -6,12 +6,8 @@ import com.avi.skram.skills.SkillRanged;
 import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.entity.ai.goal.SwellGoal;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 import java.util.List;
 import java.util.Map;

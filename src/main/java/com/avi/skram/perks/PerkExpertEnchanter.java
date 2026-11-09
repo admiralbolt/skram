@@ -6,8 +6,6 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.event.enchanting.EnchantedBlockLootEvent;
-import net.neoforged.neoforge.event.enchanting.EnchantmentLevelSetEvent;
 
 import java.util.List;
 import java.util.Map;

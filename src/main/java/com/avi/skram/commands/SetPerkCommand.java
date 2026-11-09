@@ -3,7 +3,6 @@ package com.avi.skram.commands;
 import com.avi.skram.Skram;
 import com.avi.skram.perks.Perk;
 import com.avi.skram.perks.Perks;
-import com.avi.skram.skills.Skills;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;

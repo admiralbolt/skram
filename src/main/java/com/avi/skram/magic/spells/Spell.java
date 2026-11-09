@@ -1,8 +1,8 @@
 package com.avi.skram.magic.spells;
 
 import com.avi.skram.Skram;
-import com.avi.skram.magic.SpellCastingInfo;
 import com.avi.skram.magic.SkramMagic;
+import com.avi.skram.magic.SpellCastingInfo;
 import com.avi.skram.network.SpellCastPacket;
 import com.avi.skram.skills.SkillMagic;
 import com.avi.skram.skills.Skills;

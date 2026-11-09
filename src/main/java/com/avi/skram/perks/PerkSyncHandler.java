@@ -1,9 +1,7 @@
 package com.avi.skram.perks;
 
-import com.avi.skram.skills.Skills;
 import com.avi.skram.ui.GenericMessageToast;
 import com.avi.skram.ui.ToastUtils;
-import com.avi.skram.ui.XPGainGui;
 import com.avi.skram.utils.StringUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;

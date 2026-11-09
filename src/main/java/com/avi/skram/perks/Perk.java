@@ -1,10 +1,10 @@
 package com.avi.skram.perks;
 
-import com.avi.skram.skills.Skill;
-import com.avi.skram.skills.Skills;
 import com.avi.skram.Skram;
 import com.avi.skram.network.PerkPacket;
 import com.avi.skram.network.PerkResearchPacket;
+import com.avi.skram.skills.Skill;
+import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.StringUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
@@ -30,7 +30,6 @@ import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public abstract class Perk implements ValueIOSerializable {
 

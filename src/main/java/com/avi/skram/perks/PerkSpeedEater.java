@@ -2,9 +2,6 @@ package com.avi.skram.perks;
 
 import com.avi.skram.skills.SkillCooking;
 import com.avi.skram.skills.SkillHealth;
-import com.avi.skram.skills.SkillRanged;
-import com.avi.skram.skills.Skills;
-import com.avi.skram.utils.MathUtils;
 import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.component.DataComponents;
@@ -13,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ProjectileWeaponItem;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.avi.skram.magic;
 
 import com.avi.skram.magic.spells.SpellMinorHeal;
-import com.avi.skram.magic.spells.Spells;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.level.storage.ValueInput;

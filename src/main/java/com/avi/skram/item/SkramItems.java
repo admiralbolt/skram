@@ -1,7 +1,6 @@
 package com.avi.skram.item;
 
 import com.avi.skram.Skram;
-import com.avi.skram.attachments.MiscAttachments;
 import com.avi.skram.magic.spells.Spells;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -13,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 public class SkramItems {

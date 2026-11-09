@@ -4,7 +4,6 @@ import com.avi.skram.item.SkramItems;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.npc.villager.VillagerProfession;

@@ -1,11 +1,7 @@
 package com.avi.skram.ui;
 
 import com.avi.skram.EventHandler;
-import com.avi.skram.ui.tabs.MagicTab;
-import com.avi.skram.ui.tabs.MiscTab;
-import com.avi.skram.ui.tabs.PerksTab;
-import com.avi.skram.ui.tabs.SkillsTab;
-import com.avi.skram.ui.tabs.TabEntry;
+import com.avi.skram.ui.tabs.*;
 import com.avi.skram.utils.ReflectionUtils;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.gui.GuiGraphicsExtractor;

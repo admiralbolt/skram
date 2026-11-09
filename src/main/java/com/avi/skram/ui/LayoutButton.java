@@ -3,9 +3,9 @@ package com.avi.skram.ui;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.network.chat.Component;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.network.chat.Component;
 
 public class LayoutButton extends AbstractWidget {
 
