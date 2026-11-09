@@ -18,6 +18,7 @@ public class Spells {
   public static Spell FIRE_BOLT = new SpellFireBolt();
   public static Spell HOME_TELEPORT = new SpellHomeTeleport();
   public static Spell ICARIAN_FLIGHT = new SpellIcarianFlight();
+  public static Spell LIGHTNING_STORM = new SpellLightningStorm();
   public static Spell MINOR_HEAL = new SpellMinorHeal();
   public static Spell MUSCLE_BURST = new SpellMuscleBurst();
 
@@ -32,6 +33,7 @@ public class Spells {
     .put(SpellFireBolt.NAME, FIRE_BOLT)
     .put(SpellHomeTeleport.NAME, HOME_TELEPORT)
     .put(SpellIcarianFlight.NAME, ICARIAN_FLIGHT)
+    .put(SpellLightningStorm.NAME, LIGHTNING_STORM)
     .put(SpellMinorHeal.NAME, MINOR_HEAL)
     .put(SpellMuscleBurst.NAME, MUSCLE_BURST)
     .build();

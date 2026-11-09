@@ -23,27 +23,14 @@ Misc Ideas:
 MAGIC
 =====
 
-Obviously mana bar + recharge.
-
-Spells are cast with some other hotkey (probably F default?). Each require a
-certain Magic level, and also have to be discovered first.
-
-Spell scrolls will probably just be random drops in chests + from mobs (like
-witches). Using the spell scroll will unlock the spell.
-
-Acutal Magic levels will increase max mana, mana regen, and spell efficacy.
-Giving +X% efficacy to all spells might not quite work but eh.
-
-Probably start with one unlocked by default: Heal!
-
 Spell Ideas:
-* Fireball
 * Lightning
 * Planar Shift
 * Slow (enemy)
 * Low/High Alchemy? (Will only work with EMC)
 * Superheat Ore
 * Control Weather
+* Locate Town / Structure?
 
 
 Construction
