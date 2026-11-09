@@ -12,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
@@ -82,6 +83,8 @@ public class SkillStealth extends Skill {
       return false;
     }
 
+    // If the player is glowing, they can't be sneaky!
+    if (player.hasEffect(MobEffects.GLOWING)) return;
     // Check to see if the target was unaware of us. Only Mobs have targeting information.
     if (!(event.getEntity() instanceof Mob mob)) return false;
     // No stealth XP for friendly mobs.

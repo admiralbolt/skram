@@ -39,15 +39,11 @@ Probably start with one unlocked by default: Heal!
 Spell Ideas:
 * Fireball
 * Lightning
-* Fertile Soil
 * Planar Shift
 * Slow (enemy)
 * Low/High Alchemy? (Will only work with EMC)
 * Superheat Ore
 * Control Weather
-* Home Teleport
-* Divine Enemy
-* Conjure Supplies (Torches, bread, water bottle)
 
 
 Construction
