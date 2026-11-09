@@ -5,6 +5,7 @@ import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
 import com.avi.skram.commands.SkramCommands;
 import com.avi.skram.magic.SkramMagic;
+import com.avi.skram.magic.SpellCastSoundHandler;
 import com.avi.skram.network.*;
 import com.avi.skram.perks.*;
 import com.avi.skram.skills.*;

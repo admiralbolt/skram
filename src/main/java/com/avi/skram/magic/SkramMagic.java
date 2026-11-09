@@ -159,7 +159,7 @@ public class SkramMagic {
     SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
     SpellUI.update(castingInfo, maxManaInstance.getValue());
 
-    if (HANDLER == null) {
+    if (HANDLER == null || HANDLER.player != player) {
       HANDLER = new SpellCastSoundHandler(player);
     }
 
