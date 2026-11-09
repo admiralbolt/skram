@@ -7,7 +7,6 @@ import com.avi.skram.network.SpellCastPacket;
 import com.avi.skram.skills.SkillMagic;
 import com.avi.skram.skills.Skills;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
@@ -15,7 +14,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 public abstract class Spell {
