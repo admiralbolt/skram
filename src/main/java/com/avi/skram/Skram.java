@@ -6,6 +6,7 @@ import com.avi.skram.advancements.ItemSmeltedTrigger;
 import com.avi.skram.attachments.MiscAttachments;
 import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.blocks.BlockData;
+import com.avi.skram.entity.SkramEntities;
 import com.avi.skram.item.SkramItems;
 import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.perks.Perks;
@@ -15,6 +16,8 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
@@ -56,7 +59,7 @@ public class Skram {
   public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
   // Create a Deferred Register    to hold CreativeModeTabs which will all be registered under the "skram" namespace
   public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-
+  public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, MODID);
   public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
   public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, MODID);
 
@@ -110,6 +113,9 @@ public class Skram {
     ATTACHMENT_TYPES.register(modEventBus);
     ATTRIBUTES.register(modEventBus);
     TRIGGER_TYPES.register(modEventBus);
+
+    SkramEntities.register();
+    ENTITY_TYPES.register(modEventBus);
     SkramSounds.SOUND_EVENTS.register(modEventBus);
     GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
 

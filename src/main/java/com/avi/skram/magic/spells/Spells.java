@@ -24,6 +24,7 @@ public class Spells {
   public static Spell MINOR_HEAL = new SpellMinorHeal();
   public static Spell MUSCLE_BURST = new SpellMuscleBurst();
   public static Spell PLANAR_SHIFT = new SpellPlanarShift();
+  public static Spell SAP = new SpellSap();
 
   public static Map<String, Spell> SPELLS_BY_NAME = ImmutableMap.<String, Spell>builder()
     .put(SpellBlueSky.NAME, BLUE_SKY)
@@ -42,6 +43,7 @@ public class Spells {
     .put(SpellMinorHeal.NAME, MINOR_HEAL)
     .put(SpellMuscleBurst.NAME, MUSCLE_BURST)
     .put(SpellPlanarShift.NAME, PLANAR_SHIFT)
+    .put(SpellSap.NAME, SAP)
     .build();
 
   public static List<String> ALL_SPELLS = SPELLS_BY_NAME.keySet().stream().sorted().toList();
