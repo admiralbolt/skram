@@ -16,6 +16,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
+import java.util.Optional;
+
 public abstract class Spell {
 
   public String name;
@@ -52,7 +54,7 @@ public abstract class Spell {
   public void sendCastPacket(Player player) {
     HitResult hitResult = Minecraft.getInstance().hitResult;
 
-    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, (hitResult instanceof BlockHitResult blockHitResult) ? blockHitResult : null));
+    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, (hitResult instanceof BlockHitResult blockHitResult) ? Optional.of(blockHitResult) : Optional.empty()));
   }
 
   // This is done via a method call that way we can correctly apply modifiers from the player.

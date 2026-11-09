@@ -17,6 +17,8 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
+import java.util.Optional;
+
 public class SpellDimensionDoor extends Spell {
 
   public static String NAME = "dimension_door";
@@ -35,7 +37,7 @@ public class SpellDimensionDoor extends Spell {
     SkillMagic magic = player.getData(Skills.MAGIC);
     HitResult hitResult = MinecraftUtils.rayCast(player, (1 + magic.getSpellPower()) * BASE_DISTANCE);
 
-    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, (hitResult instanceof BlockHitResult blockHitResult) ? blockHitResult : null));
+    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, (hitResult instanceof BlockHitResult blockHitResult) ? Optional.of(blockHitResult) : Optional.empty()));
   }
 
   @Override

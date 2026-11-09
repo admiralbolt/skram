@@ -12,6 +12,8 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
+import java.util.Optional;
+
 public class SpellFertileSoil extends Spell {
 
   public static String NAME = "fertile_soil";
@@ -27,7 +29,7 @@ public class SpellFertileSoil extends Spell {
   public void sendCastPacket(Player player) {
     BlockHitResult hitResult = Item.getPlayerPOVHitResult(player.level(), player, ClipContext.Fluid.NONE);
 
-    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, hitResult));
+    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, Optional.of(hitResult)));
   }
 
   @Override

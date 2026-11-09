@@ -18,6 +18,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
+import java.util.Optional;
+
 public class SpellCreateWater extends Spell {
 
   public static String NAME = "create_water";
@@ -33,7 +35,7 @@ public class SpellCreateWater extends Spell {
   public void sendCastPacket(Player player) {
     BlockHitResult hitResult = Item.getPlayerPOVHitResult(player.level(), player, ClipContext.Fluid.NONE);
 
-    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, hitResult));
+    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, Optional.of(hitResult)));
   }
 
   @Override

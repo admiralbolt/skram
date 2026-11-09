@@ -9,13 +9,15 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
-public record SpellCastPacket(String name, BlockHitResult hitResult) implements CustomPacketPayload {
+import java.util.Optional;
+
+public record SpellCastPacket(String name, Optional<BlockHitResult> hitResult) implements CustomPacketPayload {
   public static final CustomPacketPayload.Type<@NotNull SpellCastPacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(Skram.MODID, "spell_cast_packet"));
 
   public static final StreamCodec<ByteBuf, SpellCastPacket> STREAM_CODEC = StreamCodec.composite(
     ByteBufCodecs.STRING_UTF8,
     SpellCastPacket::name,
-    BlockHitResult.STREAM_CODEC,
+    ByteBufCodecs.optional(BlockHitResult.STREAM_CODEC),
     SpellCastPacket::hitResult,
     SpellCastPacket::new
   );

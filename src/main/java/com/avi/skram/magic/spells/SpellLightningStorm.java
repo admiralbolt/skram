@@ -16,6 +16,8 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
+import java.util.Optional;
+
 public class SpellLightningStorm extends Spell {
 
   public static String NAME = "lightning_storm";
@@ -33,7 +35,7 @@ public class SpellLightningStorm extends Spell {
   @Override
   public void sendCastPacket(Player player) {
     HitResult hitResult = MinecraftUtils.rayCast(player, MAX_DISTANCE);
-    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, (hitResult instanceof BlockHitResult blockHitResult) ? blockHitResult : null));
+    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, (hitResult instanceof BlockHitResult blockHitResult) ? Optional.of(blockHitResult) : Optional.empty()));
   }
 
   @Override
