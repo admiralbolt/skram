@@ -34,22 +34,17 @@ public class SpellDimensionDoor extends Spell {
   public void sendCastPacket(Player player) {
     SkillMagic magic = player.getData(Skills.MAGIC);
     HitResult hitResult = MinecraftUtils.rayCast(player, (1 + magic.getSpellPower()) * BASE_DISTANCE);
-    Vec3 targetBlock = Vec3.ZERO;
-    Direction direction = Direction.UP;
-    if (hitResult instanceof BlockHitResult blockHitResult) {
-      targetBlock = hitResult.getLocation();
-      direction = blockHitResult.getDirection();
-    }
 
-    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, targetBlock, direction));
+    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, (hitResult instanceof BlockHitResult blockHitResult) ? blockHitResult : null));
   }
 
   @Override
-  public void doEffect(Player player, Vec3 targetBlock, Direction direction) {
-    super.doEffect(player, targetBlock, direction);
+  public void doEffect(Player player, BlockHitResult hitResult) {
+    super.doEffect(player, hitResult);
 
-    if (targetBlock.equals(Vec3.ZERO)) return;
+    if (hitResult == null) return;
 
+    Vec3 targetBlock = hitResult.getLocation();
     player.teleport(new TeleportTransition((ServerLevel) player.level(), targetBlock, Vec3.ZERO, 0.0F, 0.0F, Relative.ROTATION, TeleportTransition.DO_NOTHING));
     player.level().playSound(null, targetBlock.x, targetBlock.y, targetBlock.z, SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
   }

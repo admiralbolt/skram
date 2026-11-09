@@ -42,8 +42,6 @@ Spell Ideas:
 * Fertile Soil
 * Planar Shift
 * Slow (enemy)
-* Create Water
-* Create Lava?
 * Low/High Alchemy? (Will only work with EMC)
 * Superheat Ore
 * Control Weather

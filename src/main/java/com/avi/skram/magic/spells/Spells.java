@@ -13,6 +13,7 @@ public class Spells {
   public static Spell CREATE_WATER = new SpellCreateWater();
   public static Spell DIMENSION_DOOR = new SpellDimensionDoor();
   public static Spell FEATHER_FALL = new SpellFeatherFall();
+  public static Spell FERTILE_SOIL = new SpellFertileSoil();
   public static Spell ICARIAN_FLIGHT = new SpellIcarianFlight();
   public static Spell MINOR_HEAL = new SpellMinorHeal();
   public static Spell MUSCLE_BURST = new SpellMuscleBurst();
@@ -23,6 +24,7 @@ public class Spells {
     .put(SpellCreateWater.NAME, CREATE_WATER)
     .put(SpellDimensionDoor.NAME, DIMENSION_DOOR)
     .put(SpellFeatherFall.NAME, FEATHER_FALL)
+    .put(SpellFertileSoil.NAME, FERTILE_SOIL)
     .put(SpellIcarianFlight.NAME, ICARIAN_FLIGHT)
     .put(SpellMinorHeal.NAME, MINOR_HEAL)
     .put(SpellMuscleBurst.NAME, MUSCLE_BURST)

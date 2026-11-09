@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class SpellConjureSupplies extends Spell {
@@ -19,8 +20,8 @@ public class SpellConjureSupplies extends Spell {
   }
 
   @Override
-  public void doEffect(Player player, Vec3 targetBlock, Direction direction) {
-    super.doEffect(player, targetBlock, direction);
+  public void doEffect(Player player, BlockHitResult hitResult) {
+    super.doEffect(player, hitResult);
 
     player.getInventory().add(new ItemStack(Items.TORCH, 3));
     player.getInventory().add(new ItemStack(Items.BREAD, 2));

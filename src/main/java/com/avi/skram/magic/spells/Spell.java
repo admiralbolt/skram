@@ -45,7 +45,7 @@ public abstract class Spell {
     return magic.level >= this.requiredMagicLevel;
   }
 
-  public void doEffect(Player player, Vec3 targetBlock, Direction direction) {
+  public void doEffect(Player player, BlockHitResult hitResult) {
     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.spellSound.value(), SoundSource.PLAYERS, 0.35f, 1.0f);
     SkillMagic magic = player.getData(Skills.MAGIC);
     magic.addXp(player, 10 + ((double) this.requiredMagicLevel / 3) + ((double) this.manaCost / 5));
@@ -53,14 +53,8 @@ public abstract class Spell {
 
   public void sendCastPacket(Player player) {
     HitResult hitResult = Minecraft.getInstance().hitResult;
-    Vec3 targetBlock = Vec3.ZERO;
-    Direction direction = Direction.UP;
-    if (hitResult instanceof BlockHitResult blockHitResult) {
-      targetBlock = hitResult.getLocation();
-      direction = blockHitResult.getDirection();
-    }
 
-    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, targetBlock, direction));
+    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, (hitResult instanceof BlockHitResult blockHitResult) ? blockHitResult : null));
   }
 
   // This is done via a method call that way we can correctly apply modifiers from the player.

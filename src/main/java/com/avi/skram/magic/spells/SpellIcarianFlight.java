@@ -8,6 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class SpellIcarianFlight extends Spell {
@@ -25,8 +26,8 @@ public class SpellIcarianFlight extends Spell {
   }
 
   @Override
-  public void doEffect(Player player, Vec3 targetBlock, Direction direction) {
-    super.doEffect(player, targetBlock, direction);
+  public void doEffect(Player player, BlockHitResult hitResult) {
+    super.doEffect(player, hitResult);
 
     SkillMagic magic = player.getData(Skills.MAGIC);
     player.addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST, DURATION_TICKS, (int) ((1 + magic.getSpellPower()) * AMPLIFIER), false, true));

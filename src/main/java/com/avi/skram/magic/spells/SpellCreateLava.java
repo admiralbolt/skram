@@ -12,11 +12,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.block.AbstractCauldronBlock;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 public class SpellCreateLava extends Spell {
@@ -34,26 +32,20 @@ public class SpellCreateLava extends Spell {
   public void sendCastPacket(Player player) {
     BlockHitResult hitResult = Item.getPlayerPOVHitResult(player.level(), player, ClipContext.Fluid.NONE);
 
-    Vec3 targetBlock = Vec3.ZERO;
-    Direction direction = Direction.UP;
-    if (hitResult.getType() != HitResult.Type.MISS) {
-      targetBlock = hitResult.getLocation();
-      direction = hitResult.getDirection();
-    }
-
-    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, targetBlock, direction));
+    ClientPacketDistributor.sendToServer(new SpellCastPacket(this.name, hitResult));
   }
 
   @Override
-  public void doEffect(Player player, Vec3 targetBlock, Direction direction) {
-    super.doEffect(player, targetBlock, direction);
+  public void doEffect(Player player, BlockHitResult hitResult) {
+    super.doEffect(player, hitResult);
 
-    if (targetBlock.equals(Vec3.ZERO)) return;
+    if (hitResult == null) return;
 
     // Create a fake bucket item!
-    BucketItem LavaBucket = (BucketItem) Items.LAVA_BUCKET;
-    ItemStack itemStack = new ItemStack(LavaBucket, 1);
-    BlockPos pos = new BlockPos((int) targetBlock.x, (int) targetBlock.y, (int) targetBlock.z);
+    BucketItem lavaBucket = (BucketItem) Items.LAVA_BUCKET;
+    ItemStack itemStack = new ItemStack(lavaBucket, 1);
+    BlockPos pos = hitResult.getBlockPos();
+    Direction direction = hitResult.getDirection();
     BlockPos directionOffsetPos = pos.relative(direction);
 
     if (!player.level().mayInteract(player, pos) || !player.mayUseItemAt(directionOffsetPos, direction, itemStack))
@@ -65,11 +57,11 @@ public class SpellCreateLava extends Spell {
       return;
     }
 
-    LavaBucket.emptyContents(player, player.level(), pos, null, itemStack);
+    lavaBucket.emptyContents(player, player.level(), (clicked.canBeReplaced(Fluids.LAVA)) ? pos : directionOffsetPos, null, itemStack);
   }
 
   @Override
   public String getDescription(Player player) {
-    return "Create a source Lava block at the target location. Block must be highlighted for spell to take effect.";
+    return "Create a source lava block at the target location. Block must be highlighted for spell to take effect.";
   }
 }
