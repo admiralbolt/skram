@@ -51,7 +51,7 @@ public class InfernalMobsInjector {
 
       // Amusingly rarities are ints. Setting a rarity of 15 means a roughly 1 / 15 chance.
       // Defaults are 15, 7, 7.
-      config.setEliteRarity(3);
+      config.setEliteRarity(9);
       config.setUltraRarity(6);
       config.setInfernoRarity(5);
       config.setMaxDamage(20);
