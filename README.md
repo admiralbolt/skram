@@ -46,8 +46,6 @@ https://github.com/TwelveIterations/Waystones/tree/26.2/common/src/main/java/net
 Perks
 ==================
 
-Photosynthesis: Botany + Farming + Woodcutting => Heal slowly while in sunlight.
-Iron Gut: Brewing + Cooking + Health => Immunity to poison
 Pirate: Sailing + Stealth + ??? => ???
 
 
