@@ -2,6 +2,10 @@ package com.avi.skram.item;
 
 import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.magic.Spellbook;
+import com.avi.skram.magic.spells.Spell;
+import com.avi.skram.magic.spells.Spells;
+import com.avi.skram.skills.SkillMagic;
+import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.StringUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -34,6 +38,9 @@ public class SpellScroll extends Item {
 
   @Override
   public void appendHoverText(@NonNull ItemStack itemStack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, @NonNull Consumer<Component> builder, @NonNull TooltipFlag tooltipFlag) {
+    SpellNameDataComponent spellName = itemStack.get(SkramItems.SPELL_NAME_DATA_COMPONENT.get());
+    Spell spell = Spells.SPELLS_BY_NAME.get(spellName.spellName());
+    builder.accept(Component.literal(String.format("Required Magic Level: %d.", spell.requiredMagicLevel)));
     builder.accept(Component.literal("Using this spell scroll unlocks the spell."));
     super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
   }
@@ -46,22 +53,22 @@ public class SpellScroll extends Item {
   @Override
   public @NonNull InteractionResult use(@NonNull Level level, Player player, @NonNull InteractionHand hand) {
     ItemStack stack = player.getItemInHand(hand);
+    if (level.isClientSide()) return InteractionResult.PASS;
 
-    if (!level.isClientSide()) {
-      // Get our spell name from the attached data component.
-      SpellNameDataComponent spellName = stack.get(SkramItems.SPELL_NAME_DATA_COMPONENT.get());
-      if (spellName != null) {
-        // If we don't have the spell unlocked, unlock it!
-        Spellbook spellbook = player.getData(SkramMagic.SPELLBOOK);
-        if (!spellbook.knownSpells.contains(spellName.spellName())) {
-          spellbook.knownSpells.add(spellName.spellName());
-          player.setData(SkramMagic.SPELLBOOK, spellbook);
-          stack.hurtAndBreak(1, player, hand);
-          return InteractionResult.SUCCESS_SERVER;
-        }
-      }
-    }
+    SpellNameDataComponent spellName = stack.get(SkramItems.SPELL_NAME_DATA_COMPONENT.get());
+    if (spellName == null) return InteractionResult.PASS;
+    if (!Spells.SPELLS_BY_NAME.containsKey(spellName.spellName())) return InteractionResult.PASS;
 
-    return InteractionResult.SUCCESS;
+    Spell spell = Spells.SPELLS_BY_NAME.get(spellName.spellName());
+    SkillMagic magic = player.getData(Skills.MAGIC);
+    if (magic.level < spell.requiredMagicLevel) return InteractionResult.PASS;
+
+    Spellbook spellbook = player.getData(SkramMagic.SPELLBOOK);
+    if (spellbook.knownSpells.contains(spell.name)) return InteractionResult.PASS;
+
+    spellbook.knownSpells.add(spell.name);
+    player.setData(SkramMagic.SPELLBOOK, spellbook);
+    stack.hurtAndBreak(1, player, hand);
+    return InteractionResult.SUCCESS_SERVER;
   }
 }

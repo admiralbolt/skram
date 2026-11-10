@@ -12,7 +12,7 @@ import net.minecraft.world.phys.BlockHitResult;
 public class SpellIcarianFlight extends Spell {
 
   public static String NAME = "icarian_flight";
-  public static int REQUIRED_MAGIC_LEVEL = 30;
+  public static int REQUIRED_MAGIC_LEVEL = 22;
   public static int COST = 3000;
   public static int CASTING_TICKS = 80;
 
