@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "minecraft:item/mega_chest",
+    "model": {
+      "type": "minecraft:chest",
+      "texture": "skram:mega_chest"
+    }
+  }
+}

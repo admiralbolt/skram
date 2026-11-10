@@ -6,10 +6,13 @@ import com.avi.skram.advancements.ItemSmeltedTrigger;
 import com.avi.skram.attachments.MiscAttachments;
 import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.blocks.BlockData;
+import com.avi.skram.blocks.SkramBlocks;
 import com.avi.skram.effect.SkramEffects;
 import com.avi.skram.entity.SkramEntities;
 import com.avi.skram.item.SkramItems;
+import com.avi.skram.item.SpellNameDataComponent;
 import com.avi.skram.magic.SkramMagic;
+import com.avi.skram.magic.spells.Spells;
 import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.Skills;
 import com.mojang.logging.LogUtils;
@@ -17,16 +20,15 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -64,10 +66,11 @@ public class Skram {
   public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
   public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, MODID);
   public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, MODID);
-
+  public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MODID);
   public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIER_SERIALIZERS =
     DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Skram.MODID);
 
+  public static Supplier<CreativeModeTab> SKRAM_TAB;
   // Creates a new Block with the id "skram:example_block", combining the namespace and path
   public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", p -> p.mapColor(MapColor.STONE));
   // Creates a new BlockItem with the id "skram:example_block", combining the namespace and path
@@ -97,14 +100,35 @@ public class Skram {
     modEventBus.addListener(this::commonSetup);
 
     // Register the Deferred Register to the mod event bus so blocks get registered
+    SkramBlocks.registerBlocks();
     BLOCKS.register(modEventBus);
+    SkramItems.register();
+    ITEMS.register(modEventBus);
+    SkramBlocks.registerBlockEntities();
+    BLOCK_ENTITY_TYPES.register(modEventBus);
+
 
     DATA_COMPONENTS.register(modEventBus);
 
-    SkramItems.register();
+
     // Register the Deferred Register to the mod event bus so items get registered
-    ITEMS.register(modEventBus);
+
     // Register the Deferred Register to the mod event bus so tabs get registered
+
+    SKRAM_TAB = Skram.CREATIVE_MODE_TABS.register("skram", () -> CreativeModeTab.builder()
+      .title(Component.literal("Skram!"))
+      .icon(() -> new ItemStack(SkramItems.AWESOME_SNAKE.get()))
+      .displayItems((params, output) -> {
+        output.accept(SkramItems.AWESOME_SNAKE.get());
+        for (String spellName : Spells.ALL_SPELLS) {
+          ItemStack stack = new ItemStack(SkramItems.SPELL_SCROLL.get());
+          stack.set(SkramItems.SPELL_NAME_DATA_COMPONENT.get(), new SpellNameDataComponent(spellName));
+          output.accept(stack);
+        }
+        output.accept(SkramBlocks.MEGA_CHEST_ITEM.get());
+      })
+      .build()
+    );
     CREATIVE_MODE_TABS.register(modEventBus);
 
     BlockData.register();

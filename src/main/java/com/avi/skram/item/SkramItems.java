@@ -1,14 +1,10 @@
 package com.avi.skram.item;
 
 import com.avi.skram.Skram;
-import com.avi.skram.magic.spells.Spells;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
@@ -91,20 +87,6 @@ public class SkramItems {
   );
 
   public static DeferredItem<Item> SPELL_SCROLL;
-
-  public static final Supplier<CreativeModeTab> SKRAM_TAB = Skram.CREATIVE_MODE_TABS.register("skram", () -> CreativeModeTab.builder()
-    .title(Component.literal("Skram!"))
-    .icon(() -> new ItemStack(AWESOME_SNAKE.get()))
-    .displayItems((params, output) -> {
-      output.accept(AWESOME_SNAKE.get());
-      for (String spellName : Spells.ALL_SPELLS) {
-        ItemStack stack = new ItemStack(SPELL_SCROLL.get());
-        stack.set(SPELL_NAME_DATA_COMPONENT.get(), new SpellNameDataComponent(spellName));
-        output.accept(stack);
-      }
-    })
-    .build()
-  );
 
   public static void register() {
     SPELL_SCROLL = Skram.ITEMS.register(SpellScroll.NAME,
