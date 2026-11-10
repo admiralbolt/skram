@@ -16,6 +16,10 @@
   "skram.configuration.magicNumberIntroduction": "Magic Number Text",
   "skram.configuration.magicNumber": "Magic Number",
 
+  "translation.infernalmobs:mod.barraging": "Barraging",
+  "translation.infernalmobs:prefix.barraging": "barraging",
+  "translation.infernalmobs:suffix.theSwarm": " The Swarm",
+
   "translation.infernalmobs:mod.throes": "Death Throes",
   "translation.infernalmobs:prefix.throes": "throeing",
   "translation.infernalmobs:suffix.lastGasp": " Last Gasp",

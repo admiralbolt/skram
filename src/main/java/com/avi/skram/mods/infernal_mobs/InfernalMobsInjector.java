@@ -5,6 +5,7 @@ package com.avi.skram.mods.infernal_mobs;
 import atomicstryker.infernalmobs.common.InfernalMobsCore;
 import atomicstryker.infernalmobs.common.MobModifier;
 import com.avi.skram.Skram;
+import com.avi.skram.mods.infernal_mobs.modifiers.MobModifierBarraging;
 import com.avi.skram.mods.infernal_mobs.modifiers.MobModifierMighty;
 import com.avi.skram.mods.infernal_mobs.modifiers.MobModifierHexing;
 import net.neoforged.bus.api.EventPriority;
@@ -36,6 +37,7 @@ public class InfernalMobsInjector {
       ArrayList<Class<? extends MobModifier>> mobMods = (ArrayList<Class<? extends MobModifier>>) listField.get(instance);
 
       // Now we go to town.
+      mobMods.add(MobModifierBarraging.class);
       mobMods.add(MobModifierMighty.class);
       mobMods.add(MobModifierHexing.class);
       mobMods.add(MobModifierMighty.class);
