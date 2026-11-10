@@ -15,7 +15,6 @@ SkillWoodcutting:
 Misc Ideas:
  - Additional accesory slots (Seems like this can be done easily with https://github.com/TheIllusiveC4/Curios).
  - Artifacts? They are fun.
- - Overall difficulty adjustments: All entities should have more health and damage, disable base regen?
  - Music Discs!
 
 
@@ -36,10 +35,6 @@ BIIIG Bundle
 (Sailing) King of Red Lions
 
 Mega + Giga chests I can make myself.
-
-Waystones can hopefully be imported + integrated. Yar: https://mods.twelveiterations.com/minecraft/waystones/26.1/guides/api
-
-https://github.com/TwelveIterations/Waystones/tree/26.2/common/src/main/java/net/blay09/mods/waystones/api
 
 
 Perks

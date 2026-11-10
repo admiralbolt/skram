@@ -19,6 +19,7 @@ public class Spells {
   public static Spell CREATE_WATER = new SpellCreateWater();
   public static Spell DECOY = new SpellDecoy();
   public static Spell DIMENSION_DOOR = new SpellDimensionDoor();
+  public static Spell DISENCHANT = new SpellDisenchant();
   public static Spell ERUPTION = new SpellEruption();
   public static Spell FAERIE_FIRE = new SpellFaerieFire();
   public static Spell FEATHER_FALL = new SpellFeatherFall();
@@ -44,6 +45,7 @@ public class Spells {
     .put(SpellCreateWater.NAME, CREATE_WATER)
     .put(SpellDecoy.NAME, DECOY)
     .put(SpellDimensionDoor.NAME, DIMENSION_DOOR)
+    .put(SpellDisenchant.NAME, DISENCHANT)
     .put(SpellEruption.NAME, ERUPTION)
     .put(SpellFaerieFire.NAME, FAERIE_FIRE)
     .put(SpellFeatherFall.NAME, FEATHER_FALL)

@@ -3,11 +3,14 @@ package com.avi.skram.mixins;
 import com.avi.skram.perks.PerkExpertEnchanter;
 import com.avi.skram.perks.PerkSpinSlash;
 import com.avi.skram.perks.Perks;
+import com.avi.skram.skills.SkillMagic;
+import com.avi.skram.skills.Skills;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalDoubleRef;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -61,6 +64,16 @@ public class PlayerMixin {
     PerkExpertEnchanter perk = player.getData(Perks.EXPERT_ENCHANTER);
 
     return perk.isFullyEnabled() ? 0 : amount;
+  }
+
+  @Inject(
+    method = {"onEnchantmentPerformed(Lnet/minecraft/world/item/ItemStack;I)V"},
+    at = {@At(value = "HEAD")}
+  )
+  private void giveSkillMagicXP(ItemStack itemStack, int enchantmentCost, CallbackInfo ci) {
+    Player player = (Player) (Object) this;
+    SkillMagic magic = player.getData(Skills.MAGIC);
+    magic.addXp(player, 50 * enchantmentCost);
   }
 
   @ModifyArg(

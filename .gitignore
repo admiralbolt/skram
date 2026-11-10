@@ -9,3 +9,4 @@ run
 dev_mods
 dev_mods/*
 *.DS_Store
+.DS_Store
