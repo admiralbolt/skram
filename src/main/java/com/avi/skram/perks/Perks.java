@@ -56,6 +56,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkSpaceJump>> SPACE_JUMP;
   public static Supplier<AttachmentType<PerkSpeedEater>> SPEED_EATER;
   public static Supplier<AttachmentType<PerkSpinSlash>> SPIN_SLASH;
+  public static Supplier<AttachmentType<PerkStalwartSpellcaster>> STALWART_SPELLCASTER;
   public static Supplier<AttachmentType<PerkSwiftStrafer>> SWIFT_STRAFER;
   public static Supplier<AttachmentType<PerkThievery>> THIEVERY;
   public static Supplier<AttachmentType<PerkVampirism>> VAMPIRISM;
@@ -319,6 +320,16 @@ public class Perks {
     PERKS_BY_NAME.put(PerkSpinSlash.NAME, SPIN_SLASH);
     PERK_RESEARCH_COST_BY_NAME.put(PerkSpinSlash.NAME, PerkSpinSlash::getResearchCost);
     PerkSpinSlash.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(SPIN_SLASH));
+
+    STALWART_SPELLCASTER = Skram.ATTACHMENT_TYPES.register(
+      PerkStalwartSpellcaster.NAME, () -> AttachmentType.serializable(() -> new PerkStalwartSpellcaster())
+        .sync(new PerkSyncHandler<>(PerkStalwartSpellcaster.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkStalwartSpellcaster.NAME, STALWART_SPELLCASTER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkStalwartSpellcaster.NAME, PerkStalwartSpellcaster::getResearchCost);
+    PerkStalwartSpellcaster.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(STALWART_SPELLCASTER));
 
     SWIFT_STRAFER = Skram.ATTACHMENT_TYPES.register(
       PerkSwiftStrafer.NAME, () -> AttachmentType.serializable(() -> new PerkSwiftStrafer())

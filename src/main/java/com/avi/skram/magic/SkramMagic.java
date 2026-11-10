@@ -3,6 +3,8 @@ package com.avi.skram.magic;
 import com.avi.skram.Skram;
 import com.avi.skram.magic.spells.Spell;
 import com.avi.skram.magic.spells.Spells;
+import com.avi.skram.perks.PerkStalwartSpellcaster;
+import com.avi.skram.perks.Perks;
 import com.avi.skram.ui.SpellUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
@@ -194,7 +196,10 @@ public class SkramMagic {
 
   public static void cancelSpell(LivingDamageEvent.Pre event) {
     if (!(event.getEntity() instanceof Player player)) return;
-    if (!player.level().isClientSide()) return;
+    if (player.level().isClientSide()) return;
+
+    PerkStalwartSpellcaster perk = player.getData(Perks.STALWART_SPELLCASTER);
+    if (perk.isFullyEnabled()) return;
 
     SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
     castingInfo.cancel = true;

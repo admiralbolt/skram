@@ -20,15 +20,6 @@ Misc Ideas:
  - Music Discs!
 
 
-MAGIC
-=====
-
-Spell Ideas:
-* Low/High Alchemy? (Will only work with EMC)
-* Superheat Ore
-* Locate Town / Structure?
-
-
 Construction
 ============
 
