@@ -46,9 +46,11 @@ public class Perks {
   public static Supplier<AttachmentType<PerkGrenadier>> GRENADIER;
   public static Supplier<AttachmentType<PerkHamstring>> HAMSTRING;
   public static Supplier<AttachmentType<PerkHeartOfTheForge>> HEART_OF_THE_FORGE;
+  public static Supplier<AttachmentType<PerkIronGut>> IRON_GUT;
   public static Supplier<AttachmentType<PerkJuggernaut>> JUGGERNAUT;
   public static Supplier<AttachmentType<PerkLuckyDog>> LUCKY_DOG;
   public static Supplier<AttachmentType<PerkMasterBlacksmith>> MASTER_BLACKSMITH;
+  public static Supplier<AttachmentType<PerkPhotosynthesis>> PHOTOSYNTHESIS;
   public static Supplier<AttachmentType<PerkPreciseSmasher>> PRECISE_SMASHER;
   public static Supplier<AttachmentType<PerkPugilist>> PUGILIST;
   public static Supplier<AttachmentType<PerkSlayer>> SLAYER;
@@ -220,6 +222,16 @@ public class Perks {
     PERK_RESEARCH_COST_BY_NAME.put(PerkHeartOfTheForge.NAME, PerkHeartOfTheForge::getResearchCost);
     PerkHeartOfTheForge.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(HEART_OF_THE_FORGE));
 
+    IRON_GUT = Skram.ATTACHMENT_TYPES.register(
+      PerkIronGut.NAME, () -> AttachmentType.serializable(() -> new PerkIronGut())
+        .sync(new PerkSyncHandler<>(PerkIronGut.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkIronGut.NAME, IRON_GUT);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkIronGut.NAME, PerkIronGut::getResearchCost);
+    PerkIronGut.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(IRON_GUT));
+
     JUGGERNAUT = Skram.ATTACHMENT_TYPES.register(
       PerkJuggernaut.NAME, () -> AttachmentType.serializable(() -> new PerkJuggernaut())
         .sync(new PerkSyncHandler<>(PerkJuggernaut.STREAM_CODEC))
@@ -250,6 +262,16 @@ public class Perks {
     PERKS_BY_NAME.put(PerkMasterBlacksmith.NAME, MASTER_BLACKSMITH);
     PERK_RESEARCH_COST_BY_NAME.put(PerkMasterBlacksmith.NAME, PerkMasterBlacksmith::getResearchCost);
     PerkMasterBlacksmith.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(MASTER_BLACKSMITH));
+
+    PHOTOSYNTHESIS = Skram.ATTACHMENT_TYPES.register(
+      PerkPhotosynthesis.NAME, () -> AttachmentType.serializable(() -> new PerkPhotosynthesis())
+        .sync(new PerkSyncHandler<>(PerkPhotosynthesis.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkPhotosynthesis.NAME, PHOTOSYNTHESIS);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkPhotosynthesis.NAME, PerkPhotosynthesis::getResearchCost);
+    PerkPhotosynthesis.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(PHOTOSYNTHESIS));
 
     PRECISE_SMASHER = Skram.ATTACHMENT_TYPES.register(
       PerkPreciseSmasher.NAME, () -> AttachmentType.serializable(() -> new PerkPreciseSmasher())

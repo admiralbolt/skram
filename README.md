@@ -49,7 +49,6 @@ Perks
 Photosynthesis: Botany + Farming + Woodcutting => Heal slowly while in sunlight.
 Iron Gut: Brewing + Cooking + Health => Immunity to poison
 Pirate: Sailing + Stealth + ??? => ???
-Stalwart Spellcaster: Magic + health => taking damage no longer interrupts casting.
 
 
 acrobatics: 3

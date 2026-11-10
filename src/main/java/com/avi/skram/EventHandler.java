@@ -19,6 +19,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
@@ -259,6 +260,18 @@ public class EventHandler {
   }
 
   @SubscribeEvent
+  public static void ON_EFFECT_APPLIED(MobEffectEvent.Applicable event) {
+    if (!(event.getEntity() instanceof Player player)) return;
+
+    if (event.getEffectInstance().getEffect() == MobEffects.POISON) {
+      PerkIronGut perk = player.getData(Perks.IRON_GUT);
+      if (perk.isFullyEnabled()) {
+        event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
+      }
+    }
+  }
+
+  @SubscribeEvent
   public static void ON_ANVIL_UPDATE(AnvilUpdateEvent event) {
     SkillSmithing.handleAnvilUpdate(event);
     PerkMasterBlacksmith.handleAnvilUpdate(event);
@@ -353,6 +366,7 @@ public class EventHandler {
   public static void ON_TICK(PlayerTickEvent.Pre event) {
     SkillAthletics.handleTick(event);
     SkramMagic.handleTick(event);
+    PerkPhotosynthesis.healInSunlight(event);
   }
 
   @SubscribeEvent
@@ -465,7 +479,6 @@ public class EventHandler {
       System.out.println("LAVA_BOATING FAILURE: " + e);
     }
   }
-
 
 
 }
