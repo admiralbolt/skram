@@ -28,7 +28,15 @@
   "translation.infernalmobs:prefix.hexing": "hexing",
   "translation.infernalmobs:suffix.theDamned": " the Damned",
 
+  "translation.infernalmobs:mod.infested": "Infested",
+  "translation.infernalmobs:prefix.infested": "infested",
+  "translation.infernalmobs:suffix.theInfested": " the Infested",
+
   "translation.infernalmobs:mod.mighty": "Mighty",
   "translation.infernalmobs:prefix.mighty": "mighty",
-  "translation.infernalmobs:suffix.theMighty": " the Mighty"
+  "translation.infernalmobs:suffix.theMighty": " the Mighty",
+
+  "translation.infernalmobs:mod.unholyPriest": "Unholy Priest",
+  "translation.infernalmobs:prefix.unholyPriest": "unholy priest",
+  "translation.infernalmobs:suffix.unholyPriest": " Unholy Priest"
 }

@@ -10,7 +10,7 @@ public class SpellBlueSky extends Spell {
   public static String NAME = "blue_sky";
   public static int REQUIRED_MAGIC_LEVEL = 6;
   public static int COST = 400;
-  public static int CASTING_TICKS = 60;
+  public static int CASTING_TICKS = 70;
 
   public static int CLEAR_WEATHER_TICKS = 20 * 60 * 20;
 

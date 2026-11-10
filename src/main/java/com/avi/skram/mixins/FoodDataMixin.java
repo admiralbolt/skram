@@ -23,7 +23,7 @@ public class FoodDataMixin {
     index = 0
   )
   private float overrideHealFromFoodSecond(float heal) {
-    return heal * 0.4f;
+    return heal * 0.25f;
   }
 
 }

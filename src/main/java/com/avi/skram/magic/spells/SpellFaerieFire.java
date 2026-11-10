@@ -17,7 +17,7 @@ public class SpellFaerieFire extends Spell {
 
   public static String NAME = "faerie_fire";
   public static int REQUIRED_MAGIC_LEVEL = 8;
-  public static int COST = 500;
+  public static int COST = 700;
   public static int CASTING_TICKS = 30;
 
   public static double BASE_DISTANCE = 20;

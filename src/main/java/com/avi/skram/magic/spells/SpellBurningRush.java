@@ -14,7 +14,7 @@ public class SpellBurningRush extends Spell {
 
   public static String NAME = "burning_rush";
   public static int REQUIRED_MAGIC_LEVEL = 21;
-  public static int COST = 100;
+  public static int COST = 1100;
   public static int CASTING_TICKS = 10;
 
   public static double BASE_SPEED = 2.0;
