@@ -162,7 +162,7 @@ public abstract class Perk implements ValueIOSerializable {
 
     LinearLayout heading = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
     heading.spacing(4).defaultCellSetting();
-    heading.addChild(new ResizableTextureImageWidget(0, 0, 32, 32, this.getIcon(), 32, 32));
+    heading.addChild(new ResizableTextureImageWidget(0, 0, 32, 32, (this.discovered) ? this.getIcon() : Perks.UNKNOWN_ICON, 32, 32));
     heading.addChild(new MultiLineTextWidget(this.getDisplayName(), Minecraft.getInstance().font));
     layout.addChild(heading);
 

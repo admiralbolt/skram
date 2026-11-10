@@ -33,10 +33,10 @@ public class PerkClusterBomb extends Perk {
 
   public static List<ItemStack> getResearchCost() {
     return List.of(
-      new ItemStack(Items.SPLASH_POTION, 12),
-      new ItemStack(Items.REDSTONE, 64),
-      new ItemStack(Items.GLOWSTONE_DUST, 64),
-      new ItemStack(Items.GUNPOWDER, 64)
+      new ItemStack(Items.POTION, 2),
+      new ItemStack(Items.REDSTONE, 128),
+      new ItemStack(Items.GLOWSTONE_DUST, 128),
+      new ItemStack(Items.GUNPOWDER, 128)
     );
   }
 

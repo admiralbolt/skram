@@ -11,6 +11,7 @@ import com.avi.skram.utils.MathUtils;
 import com.avi.skram.utils.StringUtils;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,6 +26,8 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class Perks {
+
+  public static final Identifier UNKNOWN_ICON = Identifier.fromNamespaceAndPath(Skram.MODID, "textures/perks/unknown.png");
 
   public static Map<String, Supplier> PERKS_BY_NAME;
 
