@@ -393,6 +393,11 @@ public class EventHandler {
       SpellEquipPacket.STREAM_CODEC,
       ServerPayloadHandler::handleSpellEquipPacket
     );
+    registrar.playToServer(
+      CastingSyncServerPacket.TYPE,
+      CastingSyncServerPacket.STREAM_CODEC,
+      ServerPayloadHandler::handleCastingSyncPacket
+    );
   }
 
   @SubscribeEvent

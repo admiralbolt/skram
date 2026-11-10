@@ -4,6 +4,7 @@ import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.magic.SpellCastingInfo;
 import com.avi.skram.magic.Spellbook;
 import com.avi.skram.magic.spells.Spell;
+import com.avi.skram.magic.spells.SpellMinorHeal;
 import com.avi.skram.magic.spells.Spells;
 import com.avi.skram.perks.Perk;
 import com.avi.skram.perks.PerkFlyingDutchman;
@@ -106,6 +107,20 @@ public class ServerPayloadHandler {
       castingInfo.equippedSpellName = packet.name();
       player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
     });
+  }
+
+  // We receive this from the client, and should update the values of the server side data attachment accordingly.
+  public static void handleCastingSyncPacket(final CastingSyncServerPacket packet, final IPayloadContext context) {
+    Player player = context.player();
+    // If we use player.setData() it will trigger a sync back to the client, which we don't want.
+    SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
+    castingInfo.currentMana = packet.castingInfo().currentMana;
+    castingInfo.isCasting = packet.castingInfo().isCasting;
+    castingInfo.castingTimer = packet.castingInfo().castingTimer;
+    castingInfo.spellName = packet.castingInfo().spellName;
+    castingInfo.equippedSpellName = packet.castingInfo().equippedSpellName;
+    castingInfo.failedCasting = packet.castingInfo().failedCasting;
+    castingInfo.startCasting = packet.castingInfo().startCasting;
   }
 
 }

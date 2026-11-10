@@ -3,6 +3,7 @@ package com.avi.skram.magic;
 import com.avi.skram.Skram;
 import com.avi.skram.magic.spells.Spell;
 import com.avi.skram.magic.spells.Spells;
+import com.avi.skram.network.CastingSyncServerPacket;
 import com.avi.skram.perks.PerkStalwartSpellcaster;
 import com.avi.skram.perks.Perks;
 import com.avi.skram.ui.SpellUI;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -145,6 +147,7 @@ public class SkramMagic {
     }
 
     player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
+    ClientPacketDistributor.sendToServer(new CastingSyncServerPacket(castingInfo));
   }
 
   public static SpellCastSoundHandler HANDLER = null;
