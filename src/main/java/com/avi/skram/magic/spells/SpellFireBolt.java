@@ -18,7 +18,7 @@ public class SpellFireBolt extends Spell {
   public static double BASE_DAMAGE = 4.0;
 
   public SpellFireBolt() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_FIRE);
   }
 
   @Override

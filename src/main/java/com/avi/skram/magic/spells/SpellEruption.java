@@ -20,7 +20,7 @@ public class SpellEruption extends Spell {
   public static float BASE_EXPLOSION_POWER = 3f;
 
   public SpellEruption() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_SLAM);
   }
 
   @Override

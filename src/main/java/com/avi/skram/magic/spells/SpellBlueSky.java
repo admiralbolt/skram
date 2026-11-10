@@ -15,7 +15,7 @@ public class SpellBlueSky extends Spell {
   public static int CLEAR_WEATHER_TICKS = 20 * 60 * 20;
 
   public SpellBlueSky() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC6);
   }
 
   @Override

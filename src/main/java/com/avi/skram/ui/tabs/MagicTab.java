@@ -46,7 +46,7 @@ public final class MagicTab {
       boolean unlocked = spellbook.knownSpells.contains(spellName);
       LinearLayout indexContent = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
       indexContent.spacing(4).defaultCellSetting().alignVerticallyMiddle();
-      indexContent.addChild(new ResizableTextureImageWidget(0, 0, 16, 16, spell.spellIcon, 16, 16));
+      indexContent.addChild(new ResizableTextureImageWidget(0, 0, 16, 16, (unlocked) ? spell.spellIcon : Spells.UNKNOWN_ICON, 16, 16));
       indexContent.addChild(new MultiLineTextWidget(
         spellIndexComponent(spellName, unlocked),
         Minecraft.getInstance().font
@@ -70,7 +70,7 @@ public final class MagicTab {
 
     LinearLayout summary = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
     summary.spacing(5).defaultCellSetting().alignVerticallyTop();
-    summary.addChild(new ResizableTextureImageWidget(0, 0, 32, 32, spell.spellIcon, 32, 32));
+    summary.addChild(new ResizableTextureImageWidget(0, 0, 32, 32, (unlocked) ? spell.spellIcon : Spells.UNKNOWN_ICON, 32, 32));
 
     LinearLayout summaryText = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
     summaryText.spacing(2).defaultCellSetting();

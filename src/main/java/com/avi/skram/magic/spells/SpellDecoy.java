@@ -25,7 +25,7 @@ public class SpellDecoy extends Spell {
   public static int BASE_RADIUS = 8;
 
   public SpellDecoy() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC7);
   }
 
   @Override

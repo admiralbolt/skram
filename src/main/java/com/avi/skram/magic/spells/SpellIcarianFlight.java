@@ -4,12 +4,10 @@ import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.skills.SkillMagic;
 import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.MathUtils;
-import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 
 public class SpellIcarianFlight extends Spell {
 
@@ -22,7 +20,7 @@ public class SpellIcarianFlight extends Spell {
   public static int AMPLIFIER = 100;
 
   public SpellIcarianFlight() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC5);
   }
 
   @Override

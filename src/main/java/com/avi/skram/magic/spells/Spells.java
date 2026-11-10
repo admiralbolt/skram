@@ -1,12 +1,16 @@
 package com.avi.skram.magic.spells;
 
+import com.avi.skram.Skram;
 import com.avi.skram.utils.MathUtils;
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.resources.Identifier;
 
 import java.util.List;
 import java.util.Map;
 
 public class Spells {
+
+  public static Identifier UNKNOWN_ICON = Identifier.fromNamespaceAndPath(Skram.MODID, "textures/spells/unknown.png");
 
   public static Spell BLUE_SKY = new SpellBlueSky();
   public static Spell BURNING_RUSH = new SpellBurningRush();

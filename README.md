@@ -24,7 +24,6 @@ MAGIC
 =====
 
 Spell Ideas:
-* Slow (enemy)
 * Low/High Alchemy? (Will only work with EMC)
 * Superheat Ore
 * Locate Town / Structure?

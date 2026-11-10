@@ -24,7 +24,7 @@ public class SpellFaerieFire extends Spell {
   public static int DURATION_TICKS = 600;
 
   public SpellFaerieFire() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC1);
   }
 
   @Override

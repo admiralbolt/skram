@@ -20,6 +20,76 @@
       }
     ]
   },
+  "spell_cast_fire": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_fire"
+      }
+    ]
+  },
+  "spell_cast_generic1": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_generic1"
+      }
+    ]
+  },
+  "spell_cast_generic2": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_generic2"
+      }
+    ]
+  },
+  "spell_cast_generic3": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_generic3"
+      }
+    ]
+  },
+  "spell_cast_generic4": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_generic4"
+      }
+    ]
+  },
+  "spell_cast_generic5": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_generic5"
+      }
+    ]
+  },
+  "spell_cast_generic6": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_generic6"
+      }
+    ]
+  },
+  "spell_cast_generic7": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_generic7"
+      }
+    ]
+  },
+  "spell_cast_ominous": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_ominous"
+      }
+    ]
+  },
+  "spell_cast_slam": {
+    "sounds": [
+      {
+        "name": "skram:spell_cast_slam"
+      }
+    ]
+  },
   "spell_heal": {
     "sounds": [
       {

@@ -20,7 +20,7 @@ public class SpellBurningRush extends Spell {
   public static double BASE_SPEED = 2.0;
 
   public SpellBurningRush() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_FIRE);
   }
 
   @Override

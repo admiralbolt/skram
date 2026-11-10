@@ -28,7 +28,7 @@ public class SpellCreateWater extends Spell {
   public static int CASTING_TICKS = 100;
 
   public SpellCreateWater() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC6);
   }
 
   @Override

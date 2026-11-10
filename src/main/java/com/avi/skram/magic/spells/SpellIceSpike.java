@@ -4,6 +4,8 @@ import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.entity.projectile.Icicle;
 import com.avi.skram.skills.SkillMagic;
 import com.avi.skram.skills.Skills;
+import net.minecraft.core.Holder;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -17,7 +19,7 @@ public class SpellIceSpike extends Spell {
   public static double BASE_DAMAGE = 6.0;
 
   public SpellIceSpike() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, Holder.direct(SoundEvents.SNOW_HIT));
   }
 
   @Override

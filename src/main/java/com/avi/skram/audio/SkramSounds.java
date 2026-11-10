@@ -23,6 +23,46 @@ public class SkramSounds {
     "spell_cast_failed", SoundEvent::createVariableRangeEvent
   );
 
+  public static final Holder<SoundEvent> SPELL_CAST_FIRE = SOUND_EVENTS.register(
+    "spell_cast_fire", SoundEvent::createVariableRangeEvent
+  );
+
+  public static final Holder<SoundEvent> SPELL_CAST_GENERIC1 = SOUND_EVENTS.register(
+    "spell_cast_generic1", SoundEvent::createVariableRangeEvent
+  );
+
+  public static final Holder<SoundEvent> SPELL_CAST_GENERIC2 = SOUND_EVENTS.register(
+    "spell_cast_generic2", SoundEvent::createVariableRangeEvent
+  );
+
+  public static final Holder<SoundEvent> SPELL_CAST_GENERIC3 = SOUND_EVENTS.register(
+    "spell_cast_generic3", SoundEvent::createVariableRangeEvent
+  );
+
+  public static final Holder<SoundEvent> SPELL_CAST_GENERIC4 = SOUND_EVENTS.register(
+    "spell_cast_generic4", SoundEvent::createVariableRangeEvent
+  );
+
+  public static final Holder<SoundEvent> SPELL_CAST_GENERIC5 = SOUND_EVENTS.register(
+    "spell_cast_generic5", SoundEvent::createVariableRangeEvent
+  );
+
+  public static final Holder<SoundEvent> SPELL_CAST_GENERIC6 = SOUND_EVENTS.register(
+    "spell_cast_generic6", SoundEvent::createVariableRangeEvent
+  );
+
+  public static final Holder<SoundEvent> SPELL_CAST_GENERIC7 = SOUND_EVENTS.register(
+    "spell_cast_generic7", SoundEvent::createVariableRangeEvent
+  );
+
+  public static final Holder<SoundEvent> SPELL_CAST_OMINOUS = SOUND_EVENTS.register(
+    "spell_cast_ominous", SoundEvent::createVariableRangeEvent
+  );
+
+  public static final Holder<SoundEvent> SPELL_CAST_SLAM = SOUND_EVENTS.register(
+    "spell_cast_slam", SoundEvent::createVariableRangeEvent
+  );
+
   public static final Holder<SoundEvent> SPELL_HEAL = SOUND_EVENTS.register(
     "spell_heal", SoundEvent::createVariableRangeEvent
   );

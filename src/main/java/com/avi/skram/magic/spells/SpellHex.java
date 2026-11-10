@@ -25,7 +25,7 @@ public class SpellHex extends Spell {
   public static final int DURATION_TICKS = 200;
 
   public SpellHex() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_OMINOUS);
   }
 
   @Override

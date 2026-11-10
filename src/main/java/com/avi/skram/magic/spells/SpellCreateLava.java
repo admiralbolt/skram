@@ -27,7 +27,7 @@ public class SpellCreateLava extends Spell {
   public static int CASTING_TICKS = 120;
 
   public SpellCreateLava() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC6);
   }
 
   @Override

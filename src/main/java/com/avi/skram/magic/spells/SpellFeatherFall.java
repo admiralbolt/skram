@@ -22,7 +22,7 @@ public class SpellFeatherFall extends Spell {
   public static int AMPLIFIER = 2;
 
   public SpellFeatherFall() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC2);
   }
 
   @Override

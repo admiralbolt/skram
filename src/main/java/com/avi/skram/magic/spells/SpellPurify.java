@@ -12,7 +12,7 @@ public class SpellPurify extends Spell {
   public static int CASTING_TICKS = 10;
 
   public SpellPurify() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC7);
   }
 
   @Override

@@ -22,7 +22,7 @@ public class SpellMuscleBurst extends Spell {
   public static int AMPLIFIER = 1;
 
   public SpellMuscleBurst() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC3);
   }
 
   @Override

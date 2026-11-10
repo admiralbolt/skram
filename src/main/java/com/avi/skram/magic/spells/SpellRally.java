@@ -24,7 +24,7 @@ public class SpellRally extends Spell {
   public static int AMPLIFIER = 0;
 
   public SpellRally() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC3);
   }
 
   @Override

@@ -22,7 +22,7 @@ public class SpellFertileSoil extends Spell {
   public static int CASTING_TICKS = 25;
 
   public SpellFertileSoil() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_HEAL);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC4);
   }
 
   @Override
