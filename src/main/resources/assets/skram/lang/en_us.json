@@ -16,7 +16,15 @@
   "skram.configuration.magicNumberIntroduction": "Magic Number Text",
   "skram.configuration.magicNumber": "Magic Number",
 
+  "translation.infernalmobs:mod.throes": "Death Throes",
+  "translation.infernalmobs:prefix.throes": "throeing",
+  "translation.infernalmobs:suffix.lastGasp": " Last Gasp",
+
   "translation.infernalmobs:mod.hexing": "Hexing",
   "translation.infernalmobs:prefix.hexing": "hexing",
-  "translation.infernalmobs:suffix.theDamned": " the Damned"
+  "translation.infernalmobs:suffix.theDamned": " the Damned",
+
+  "translation.infernalmobs:mod.mighty": "Mighty",
+  "translation.infernalmobs:prefix.mighty": "mighty",
+  "translation.infernalmobs:suffix.theMighty": " the Mighty"
 }

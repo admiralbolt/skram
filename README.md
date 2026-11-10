@@ -15,7 +15,6 @@ SkillWoodcutting:
 Misc Ideas:
  - Additional accesory slots (Seems like this can be done easily with https://github.com/TheIllusiveC4/Curios).
  - Artifacts? They are fun.
- - Elites -- one or more attributes that mobs can spawn in with to increase difficulty.
  - Overall difficulty adjustments: All entities should have more health and damage, disable base regen?
  - Music Discs!
 
@@ -28,10 +27,13 @@ of this, but don't keep the actual skill itself? I think neither.
 
 What I actually want is:
 
-Mega Chests
-Giga Chests
+(Woodcutting) Mega Chests
+(Woodcutting) Giga Chests
 BIIIG Bundle
-Waystones
+(Magic) Waystones
+(Mining) Compactor
+(Magic) Enchantment Extractor
+(Sailing) King of Red Lions
 
 Mega + Giga chests I can make myself.
 
