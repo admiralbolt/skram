@@ -4,7 +4,6 @@ import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.skills.SkillDemolition;
 import com.avi.skram.skills.SkillMagic;
 import com.avi.skram.skills.Skills;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;

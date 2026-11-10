@@ -9,7 +9,6 @@ import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.network.*;
 import com.avi.skram.perks.*;
 import com.avi.skram.skills.*;
-import com.avi.skram.ui.AddSkillButtonToInventory;
 import com.avi.skram.ui.SkramScreen;
 import com.avi.skram.ui.SpellUI;
 import com.avi.skram.ui.XPGainGui;
@@ -153,12 +152,12 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_SCREEN_INIT_POST(ScreenEvent.Init.Post event) {
-    AddSkillButtonToInventory.addButtonOnInit(event);
+    // AddSkillButtonToInventory.addButtonOnInit(event);
   }
 
   @SubscribeEvent
   public static void ON_SCREEN_RENDER(ScreenEvent.Render.Post event) {
-    AddSkillButtonToInventory.adjustButtonOnReRender(event);
+    // AddSkillButtonToInventory.adjustButtonOnReRender(event);
   }
 
   @SubscribeEvent

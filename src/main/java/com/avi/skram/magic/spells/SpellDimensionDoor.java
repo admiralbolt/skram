@@ -4,7 +4,6 @@ import com.avi.skram.network.SpellCastPacket;
 import com.avi.skram.skills.SkillMagic;
 import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.MinecraftUtils;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;

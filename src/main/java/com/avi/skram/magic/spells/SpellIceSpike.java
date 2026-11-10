@@ -1,6 +1,5 @@
 package com.avi.skram.magic.spells;
 
-import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.entity.projectile.Icicle;
 import com.avi.skram.skills.SkillMagic;
 import com.avi.skram.skills.Skills;

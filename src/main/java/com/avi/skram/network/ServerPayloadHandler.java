@@ -4,7 +4,6 @@ import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.magic.SpellCastingInfo;
 import com.avi.skram.magic.Spellbook;
 import com.avi.skram.magic.spells.Spell;
-import com.avi.skram.magic.spells.SpellMinorHeal;
 import com.avi.skram.magic.spells.Spells;
 import com.avi.skram.perks.Perk;
 import com.avi.skram.perks.PerkFlyingDutchman;

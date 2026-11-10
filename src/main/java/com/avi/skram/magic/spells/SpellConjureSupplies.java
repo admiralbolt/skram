@@ -1,12 +1,10 @@
 package com.avi.skram.magic.spells;
 
 import com.avi.skram.audio.SkramSounds;
-import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 
 public class SpellConjureSupplies extends Spell {
 

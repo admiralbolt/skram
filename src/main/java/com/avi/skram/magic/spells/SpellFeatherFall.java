@@ -4,12 +4,10 @@ import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.skills.SkillMagic;
 import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.MathUtils;
-import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 
 public class SpellFeatherFall extends Spell {
 

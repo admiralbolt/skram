@@ -1,13 +1,9 @@
 package com.avi.skram.network;
 
-import com.avi.skram.magic.SkramMagic;
-import com.avi.skram.magic.SpellCastingInfo;
 import com.avi.skram.perks.Perk;
 import com.avi.skram.perks.Perks;
 import com.avi.skram.ui.SkramScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class ClientPayloadHandler {

@@ -1,6 +1,5 @@
 package com.avi.skram.magic.spells;
 
-import com.avi.skram.audio.SkramSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;

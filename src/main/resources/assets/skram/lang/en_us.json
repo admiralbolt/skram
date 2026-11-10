@@ -1,6 +1,10 @@
 {
   "itemGroup.skram": "Example Mod Tab",
   "block.skram.example_block": "Example Block",
+
+  "effect.skram.burning_rush": "Burning Rush",
+  "effect.skram.hexed": "Hexed",
+
   "item.skram.example_item": "Example Item",
   "item.skram.awesome_snake": "Awesome Snake",
 
@@ -10,5 +14,9 @@
   "skram.configuration.items": "Item List",
   "skram.configuration.logDirtBlock": "Log Dirt Block",
   "skram.configuration.magicNumberIntroduction": "Magic Number Text",
-  "skram.configuration.magicNumber": "Magic Number"
+  "skram.configuration.magicNumber": "Magic Number",
+
+  "translation.infernalmobs:mod.hexing": "Hexing",
+  "translation.infernalmobs:prefix.hexing": "hexing",
+  "translation.infernalmobs:suffix.theDamned": " the Damned"
 }

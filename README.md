@@ -33,14 +33,11 @@ Giga Chests
 BIIIG Bundle
 Waystones
 
-
-
 Mega + Giga chests I can make myself.
 
 Waystones can hopefully be imported + integrated. Yar: https://mods.twelveiterations.com/minecraft/waystones/26.1/guides/api
 
 https://github.com/TwelveIterations/Waystones/tree/26.2/common/src/main/java/net/blay09/mods/waystones/api
-
 
 
 Perks
