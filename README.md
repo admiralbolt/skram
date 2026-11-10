@@ -11,12 +11,9 @@ SkillHusbandry:
 SkillWoodcutting:
   - Additional shavings? Planks and/or sticks.
 
-
 Misc Ideas:
- - Additional accesory slots (Seems like this can be done easily with https://github.com/TheIllusiveC4/Curios).
- - Artifacts? They are fun.
+ - Artifacts? They are fun. Maybe introduce this as construction in a later update.
  - Music Discs!
-
 
 Construction
 ============
@@ -31,7 +28,6 @@ What I actually want is:
 BIIIG Bundle
 (Magic) Waystones
 (Mining) Compactor
-(Magic) Enchantment Extractor
 (Sailing) King of Red Lions
 
 Mega + Giga chests I can make myself.
