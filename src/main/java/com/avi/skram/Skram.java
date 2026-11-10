@@ -139,6 +139,7 @@ public class Skram {
   private void commonSetup(FMLCommonSetupEvent event) {
     event.enqueueWork(Skills::setupSkillIcons);
     event.enqueueWork(Skills::setupSkillXPMaps);
+    event.enqueueWork(Skills::setupRequiredLevels);
     event.enqueueWork(EventHandler::overwriteVanilla);
 
     // Some common setup code

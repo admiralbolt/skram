@@ -123,9 +123,11 @@ dependencies {
     // Infernal Mobs.
     implementation "curse.maven:atomicstrykers-infernal-mobs-227875:8962112"
 
-    // Waystones.
+    // Waystones & it's dependencies.
     compileOnly "net.blay09.mods:waystones-common:26.3.0.2"
     implementation "net.blay09.mods:waystones-neoforge:26.3.0.2"
+    implementation "net.blay09.mods:balm-neoforge:26.3.0.2"
+    implementation "net.blay09.mods:shogi-neoforge:26.3.0.2"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

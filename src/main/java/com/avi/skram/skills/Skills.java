@@ -2,9 +2,23 @@ package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
 import com.avi.skram.perks.Perks;
+import com.avi.skram.ui.GenericMessageToast;
+import com.avi.skram.ui.ToastUtils;
+import com.google.common.collect.ImmutableMap;
+import com.mojang.datafixers.util.Pair;
+import net.blay09.mods.waystones.block.ModBlocks;
+import net.blay09.mods.waystones.block.WaystoneBlock;
+import net.blay09.mods.waystones.block.entity.ModBlockEntities;
+import net.blay09.mods.waystones.item.ModItems;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +57,9 @@ public class Skills {
   // Map skills to the item used for their icon.
   public static Map<String, Identifier> SKILL_ICONS;
   public static Identifier DEFAULT_ICON = Identifier.withDefaultNamespace("textures/item/cow_spawn_egg.png");
+
+  public static Map<Block, Pair<String, Integer>> REQUIRED_LEVELS_FOR_BLOCK;
+  public static Map<Item, Pair<String, Integer>> REQUIRED_LEVELS_FOR_ITEM;
 
   public static void register() {
     SKILLS_BY_NAME = new HashMap<>();
@@ -289,6 +306,76 @@ public class Skills {
     if (itemID.contains("stone")) return 5;
 
     return 1;
+  }
+
+  public static void setupRequiredLevels() {
+    REQUIRED_LEVELS_FOR_BLOCK = new HashMap<>();
+    REQUIRED_LEVELS_FOR_ITEM = new HashMap<>();
+
+    // Waystones!
+    ModBlocks.waystones.values().forEach(block -> {
+      REQUIRED_LEVELS_FOR_BLOCK.put(block.asBlock(), Pair.of(SkillMagic.NAME, 30));
+    });
+    ModBlocks.portstones.values().forEach(block -> {
+      REQUIRED_LEVELS_FOR_BLOCK.put(block.asBlock(), Pair.of(SkillMagic.NAME, 30));
+    });
+    ModBlocks.sharestones.values().forEach(block -> {
+      REQUIRED_LEVELS_FOR_BLOCK.put(block.asBlock(), Pair.of(SkillMagic.NAME, 40));
+    });
+    REQUIRED_LEVELS_FOR_BLOCK.put(ModBlocks.warpPlate.asBlock(), Pair.of(SkillMagic.NAME, 45));
+
+    REQUIRED_LEVELS_FOR_ITEM.put(ModItems.returnScroll.asItem(), Pair.of(SkillMagic.NAME, 15));
+    REQUIRED_LEVELS_FOR_ITEM.put(ModItems.twinboundFeather.asItem(), Pair.of(SkillMagic.NAME, 20));
+    REQUIRED_LEVELS_FOR_ITEM.put(ModItems.warpScroll.asItem(), Pair.of(SkillMagic.NAME, 30));
+    REQUIRED_LEVELS_FOR_ITEM.put(ModItems.portalScroll.asItem(), Pair.of(SkillMagic.NAME, 35));
+    ModItems.warpStones.values().forEach(item -> {
+      REQUIRED_LEVELS_FOR_ITEM.put(item.asItem(), Pair.of(SkillMagic.NAME, 40));
+    });
+    REQUIRED_LEVELS_FOR_ITEM.put(ModItems.dormantShard.asItem(), Pair.of(SkillMagic.NAME, 45));
+    REQUIRED_LEVELS_FOR_ITEM.put(ModItems.attunedShard.asItem(), Pair.of(SkillMagic.NAME, 45));
+  }
+
+
+  public static void handleRequiredLevels(PlayerInteractEvent.RightClickBlock event) {
+    Block block = event.getLevel().getBlockState(event.getPos()).getBlock();
+    if (!REQUIRED_LEVELS_FOR_BLOCK.containsKey(block)) return;
+
+    Pair<String, Integer> skillReq = REQUIRED_LEVELS_FOR_BLOCK.get(block);
+    Skill skill = (Skill) event.getEntity().getData(SKILLS_BY_NAME.get(skillReq.getFirst()));
+    if (skill.level >= skillReq.getSecond()) return;
+
+    // You shall not pass!
+    event.setCanceled(true);
+    if (!event.getLevel().isClientSide()) return;
+
+    ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
+
+    if (!ToastUtils.hasGenericMessageToast(toastManager, skill.getRequiredLevelToastName())) {
+      toastManager.addToast(new GenericMessageToast(
+        skill.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(skill.name, Skills.DEFAULT_ICON), "Using a " + block.getName().getString() + " requires a " + skill.name + " level of " + skillReq.getSecond() + "."
+      ));
+    }
+  }
+
+  public static void handleRequiredLevels(PlayerInteractEvent.RightClickItem event) {
+    Item item = event.getItemStack().getItem();
+    if (!REQUIRED_LEVELS_FOR_ITEM.containsKey(item)) return;
+
+    Pair<String, Integer> skillReq = REQUIRED_LEVELS_FOR_ITEM.get(item);
+    Skill skill = (Skill) event.getEntity().getData(SKILLS_BY_NAME.get(skillReq.getFirst()));
+    if (skill.level >= skillReq.getSecond()) return;
+
+    // You shall not pass!
+    event.setCanceled(true);
+    if (!event.getLevel().isClientSide()) return;
+
+    ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
+
+    if (!ToastUtils.hasGenericMessageToast(toastManager, skill.getRequiredLevelToastName())) {
+      toastManager.addToast(new GenericMessageToast(
+        skill.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(skill.name, Skills.DEFAULT_ICON), "Using a " + item.getName(event.getItemStack()) + " requires a " + skill.name + " level of " + skillReq.getSecond() + "."
+      ));
+    }
   }
 
 }

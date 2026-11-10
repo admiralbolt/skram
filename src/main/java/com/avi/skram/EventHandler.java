@@ -213,6 +213,8 @@ public class EventHandler {
     SkillFarming.handleRightClick(event);
     SkillHusbandry.handleBlockInteract(event);
     SkillWoodcutting.handleRightClick(event);
+
+    Skills.handleRequiredLevels(event);
   }
 
   @SubscribeEvent
@@ -220,6 +222,8 @@ public class EventHandler {
     SkramMagic.cancelSpell(event);
     PerkBatman.handleBatman(event);
     PerkClusterBomb.handleItemRightClick(event);
+
+    Skills.handleRequiredLevels(event);
   }
 
   @SubscribeEvent
