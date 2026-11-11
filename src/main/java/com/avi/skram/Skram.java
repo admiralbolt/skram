@@ -9,6 +9,7 @@ import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.SkramBlocks;
 import com.avi.skram.effect.SkramEffects;
 import com.avi.skram.entity.SkramEntities;
+import com.avi.skram.inventory.SkramMenus;
 import com.avi.skram.item.SkramItems;
 import com.avi.skram.item.SpellNameDataComponent;
 import com.avi.skram.magic.SkramMagic;
@@ -102,6 +103,7 @@ public class Skram {
     // Register the Deferred Register to the mod event bus so blocks get registered
     SkramBlocks.registerBlocks();
     BLOCKS.register(modEventBus);
+    SkramMenus.register(modEventBus);
     SkramItems.register();
     ITEMS.register(modEventBus);
     SkramBlocks.registerBlockEntities();

@@ -1,5 +1,7 @@
 package com.avi.skram;
 
+import com.avi.skram.client.screens.MegaChestScreen;
+import com.avi.skram.inventory.SkramMenus;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -7,6 +9,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
@@ -27,5 +30,10 @@ public class SkramClient {
         // Some client setup code
         Skram.LOGGER.info("HELLO FROM CLIENT SETUP");
         Skram.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+    }
+
+    @SubscribeEvent
+    static void registerMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(SkramMenus.MEGA_CHEST.get(), MegaChestScreen::new);
     }
 }

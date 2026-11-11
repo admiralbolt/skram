@@ -6,7 +6,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -17,14 +16,14 @@ import java.util.function.Supplier;
 
 public class SkramBlocks {
 
-  public static DeferredBlock<Block> MEGA_CHEST;
+  public static DeferredBlock<MegaChestBlock> MEGA_CHEST;
   public static DeferredItem<BlockItem> MEGA_CHEST_ITEM;
 
   public static Supplier<BlockEntityType<MegaChestBlockEntity>> MEGA_CHEST_BLOCK_ENTITY;
 
   public static void registerBlocks() {
     MEGA_CHEST = Skram.BLOCKS.register(
-      MegaChestBlock.NAME, (registryName) -> new Block(
+      MegaChestBlock.NAME, (registryName) -> new MegaChestBlock(
         BlockBehaviour.Properties.of()
           .destroyTime(6.0f)
           .explosionResistance(50.0f)

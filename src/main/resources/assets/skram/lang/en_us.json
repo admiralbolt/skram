@@ -1,6 +1,9 @@
 {
   "itemGroup.skram": "Example Mod Tab",
   "block.skram.example_block": "Example Block",
+  "block.skram.mega_chest": "Mega Chest",
+  "container.mega_chest": "Mega Chest",
+  "container.mega_chest.sort": "Sort",
 
   "effect.skram.burning_rush": "Burning Rush",
   "effect.skram.hexed": "Hexed",
