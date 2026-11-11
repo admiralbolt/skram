@@ -10,6 +10,7 @@ import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -247,13 +248,17 @@ public class SkramItems {
     WOODED_BADLANDS = Skram.ITEMS.registerSimpleItem("wooded_badlands");
   }
 
+  public static List<DeferredItem<Item>> ALL_RECORDS = new ArrayList<>();
+
   private static DeferredItem<Item> registerMusicDisc(String name, ResourceKey<JukeboxSong> song) {
-    return Skram.ITEMS.register(name, registryName -> new Item(
+    DeferredItem<Item> item = Skram.ITEMS.register(name, registryName -> new Item(
       new Item.Properties()
         .jukeboxPlayable(song)
         .stacksTo(1)
         .setId(ResourceKey.create(Registries.ITEM, registryName))
     ));
+    ALL_RECORDS.add(item);
+    return item;
   }
 
 }

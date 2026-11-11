@@ -1,0 +1,16 @@
+{
+  "type": "skram:random_random_record",
+  "condition": {
+    "type": "minecraft:all_of",
+    "terms": [
+      {
+        "type": "neoforge:loot_table_id",
+        "loot_table_id": "minecraft:chests/stronghold_crossing"
+      },
+      {
+        "type": "minecraft:random_chance",
+        "chance": 0.04
+      }
+    ]
+  }
+}

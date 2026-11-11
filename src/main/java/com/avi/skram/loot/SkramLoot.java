@@ -14,6 +14,9 @@ public class SkramLoot {
   public static final Supplier<MapCodec<SpellScrollLootModifier>> MODIFIER =
     Skram.GLOBAL_LOOT_MODIFIER_SERIALIZERS.register("random_spell_scroll", () -> SpellScrollLootModifier.CODEC);
 
+  public static final Supplier<MapCodec<RandomRecordLootModifier>> RANDOM_RECORD_MODIFIER =
+    Skram.GLOBAL_LOOT_MODIFIER_SERIALIZERS.register("random_random_record", () -> RandomRecordLootModifier.CODEC);
+
 
   @SubscribeEvent
   public static void gatherData(GatherDataEvent.Client event) {

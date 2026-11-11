@@ -5,6 +5,7 @@ package com.avi.skram.mods.infernal_mobs;
 import atomicstryker.infernalmobs.common.InfernalMobsConfig;
 import atomicstryker.infernalmobs.common.InfernalMobsCore;
 import atomicstryker.infernalmobs.common.MobModifier;
+import atomicstryker.infernalmobs.common.mods.MM_Ender;
 import com.avi.skram.Skram;
 import com.avi.skram.mods.infernal_mobs.modifiers.*;
 import net.neoforged.bus.api.EventPriority;
@@ -13,13 +14,16 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 @EventBusSubscriber(modid = Skram.MODID)
 public class InfernalMobsInjector {
+
+  public static Set<Class<?>> EXCLUDE = Set.of(
+    // This can cause crashes apparently since it calls hurt() inside LivingDamageEvent.Pre.
+    MM_Ender.class
+  );
 
   @SubscribeEvent(priority = EventPriority.LOW)
   public static void injectInfernal(ServerStartedEvent event) {
@@ -59,6 +63,8 @@ public class InfernalMobsInjector {
       // Need to reset the enabled mods config since we've updated the list of mods.
       Map<String, Boolean> modsEnabled = new HashMap<>();
       for (Class<?> c : mobMods) {
+        if (EXCLUDE.contains(c)) continue;
+
         modsEnabled.put(c.getSimpleName(), true);
       }
       config.setModsEnabled(modsEnabled);
