@@ -254,6 +254,7 @@ public class SkramItems {
     DeferredItem<Item> item = Skram.ITEMS.register(name, registryName -> new Item(
       new Item.Properties()
         .jukeboxPlayable(song)
+        .rarity(Rarity.UNCOMMON)
         .stacksTo(1)
         .setId(ResourceKey.create(Registries.ITEM, registryName))
     ));
