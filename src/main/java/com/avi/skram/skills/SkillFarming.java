@@ -81,8 +81,14 @@ public class SkillFarming extends Skill {
     XP_MAP.put(Blocks.WARPED_FUNGUS, 80);
 
     // Tall.
-    XP_MAP.put(Blocks.BAMBOO, 15);
-    XP_MAP.put(Blocks.SUGAR_CANE, 15);
+    XP_MAP.put(Blocks.BAMBOO, 20);
+    XP_MAP.put(Blocks.SUGAR_CANE, 10);
+
+    // Weeds!
+    XP_MAP.put(Blocks.SHORT_GRASS, 1);
+    XP_MAP.put(Blocks.SHORT_DRY_GRASS, 1);
+    XP_MAP.put(Blocks.TALL_GRASS, 2);
+    XP_MAP.put(Blocks.TALL_DRY_GRASS, 2);
   }
 
   @Override
@@ -92,11 +98,11 @@ public class SkillFarming extends Skill {
   }
 
   public float getCropGrowthChance() {
-    return 1f * this.level;
+    return 0.02f * this.level;
   }
 
   public double getFortuneChance() {
-    return 0.91 * this.level;
+    return 0.02 * this.level;
   }
 
   public int getFortuneAmount() {
