@@ -23,6 +23,13 @@ public class SkillAcrobatics extends Skill {
 
   public static final Identifier JUMP_STRENGTH_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "acrobatics_jump_boost");
   public static final Identifier SAFE_FALL_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "acrobatics_safe_fall_boost");
+  public static final String DESCRIPTION = """
+    Gain XP by jumping! No really, that's it.
+    
+    Two thing worth noting:
+      1. 'Jump Strength' is opaque because it isn't a fixed block height, but is used in some kind of physics calculation. For reference, the base Jump Strength is 0.42.
+      2. Safe fall distance is rounded up to the nearest block i.e. a safe fall distance of +0.2 blocks means +1 block.
+    """;
 
   public static final int JUMP_STRENGTH_INDEX = 0;
   public static final int SAFE_FALL_INDEX = 1;
@@ -111,6 +118,11 @@ public class SkillAcrobatics extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 
 }

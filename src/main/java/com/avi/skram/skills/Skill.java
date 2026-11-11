@@ -4,6 +4,7 @@ import com.avi.skram.network.SkillPacket;
 import com.avi.skram.perks.Perks;
 import com.avi.skram.ui.GenericMessageToast;
 import com.avi.skram.ui.ToastUtils;
+import com.avi.skram.ui.WidgetUtils;
 import com.avi.skram.ui.XPGainGui;
 import com.avi.skram.utils.MathUtils;
 import com.avi.skram.utils.StringUtils;
@@ -14,6 +15,7 @@ import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
+import net.minecraft.client.gui.layouts.SpacerElement;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
@@ -36,6 +38,7 @@ public abstract class Skill implements ValueIOSerializable {
   public static final int XP_FACTOR = 100;
   public static Identifier YELLOW_BAR = Identifier.withDefaultNamespace("textures/gui/sprites/boss_bar/yellow_progress.png");
   public static Identifier YELLOW_BAR_BACKGROUND = Identifier.withDefaultNamespace("textures/gui/sprites/boss_bar/yellow_background.png");
+  public static Identifier WHITE_BAR = Identifier.withDefaultNamespace("textures/gui/sprites/boss_bar/white_progress.png");
 
   public static double PERK_CHANCE = 100000;
 
@@ -238,6 +241,8 @@ public abstract class Skill implements ValueIOSerializable {
     vertical.addChild(new MultiLineTextWidget(Component.literal("Next: " + String.format("%,d", Skill.getTotalXpForLevel(this.level + 1))), Minecraft.getInstance().font));
     vertical.addChild(new MultiLineTextWidget(Component.literal("Bonus: +" + (int) ((this.xpMultiplier - 1) * 100) + "%"), Minecraft.getInstance().font));
     vertical.addChild(this.renderSkillAbilities());
+    vertical.addChild(new ResizableTextureImageWidget(0, 0, 182, 3, WHITE_BAR, 182, 5));
+    vertical.addChild(this.renderSkillDetails());
 
     layout.addChild(vertical);
 
@@ -245,5 +250,25 @@ public abstract class Skill implements ValueIOSerializable {
   }
 
   public abstract Layout renderSkillAbilities();
+
+  public String getDescription() {
+    return "";
+  }
+
+  public Layout renderSkillDetails() {
+    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
+    vertical.spacing(2).defaultCellSetting().paddingTop(2);
+
+    String[] lines = this.getDescription().split("\n");
+    for (String line : lines) {
+      if (line.isEmpty()) {
+        vertical.addChild(new SpacerElement(180, 2));
+      }
+
+      vertical.addChild(WidgetUtils.textWidget180(line));
+    }
+
+    return vertical;
+  }
 
 }

@@ -2,8 +2,6 @@
 TODO
 ====
 
-* Recipe for mega chest.
-
 SkillFarming:
   - Extend increased growth chance to crops that grow upwards (SugarCane + Bamboo).
 
@@ -15,6 +13,7 @@ SkillWoodcutting:
 
 Misc Ideas:
  - Artifacts? They are fun. Maybe introduce this as construction in a later update.
+ - Extra info on skill pages.
 
 
 Construction
@@ -25,7 +24,6 @@ of this, but don't keep the actual skill itself? I think neither.
 
 What I actually want is:
 
-(Woodcutting) Giga Chests
 BIIIG Bundle
 (Mining) Compactor
 (Sailing) King of Red Lions
