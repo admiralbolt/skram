@@ -1,10 +1,10 @@
 {
   "model": {
-    "type": "minecraft:special",
-    "base": "minecraft:item/mega_chest",
+    "type": "skram:mega_chest_special",
+    "base": "skram:item/mega_chest",
     "model": {
       "type": "minecraft:chest",
-      "texture": "skram:mega_chest"
+      "texture": "skram:entity/chests/mega_chest"
     }
   }
 }

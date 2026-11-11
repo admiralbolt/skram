@@ -5,7 +5,6 @@ import com.avi.skram.blocks.entity.MegaChestBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -27,6 +26,7 @@ public class SkramBlocks {
         BlockBehaviour.Properties.of()
           .destroyTime(6.0f)
           .explosionResistance(50.0f)
+          .noOcclusion()
           .sound(SoundType.WOOD)
           .setId(ResourceKey.create(Registries.BLOCK, registryName))
       )
