@@ -103,5 +103,12 @@
         "name": "skram:spell_interrupted"
       }
     ]
+  },
+  "arcturia": {
+    "sounds": [
+      {
+        "name": "skram:songs/arcturia"
+      }
+    ]
   }
 }

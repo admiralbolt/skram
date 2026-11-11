@@ -11,6 +11,10 @@
   "item.skram.example_item": "Example Item",
   "item.skram.awesome_snake": "Awesome Snake",
 
+
+  "item.skram.arcturia_music_disc": "Arcturia",
+  "item.skram.arcturia_music_disc.desc": "Mistveil OST: Arcturia",
+
   "skram.configuration.title": "skram Configs",
   "skram.configuration.section.skram.common.toml": "skram Configs",
   "skram.configuration.section.skram.common.toml.title": "skram Configs",

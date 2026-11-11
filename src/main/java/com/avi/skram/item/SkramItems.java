@@ -1,6 +1,7 @@
 package com.avi.skram.item;
 
 import com.avi.skram.Skram;
+import com.avi.skram.audio.SkramSounds;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -88,6 +89,9 @@ public class SkramItems {
 
   public static DeferredItem<Item> SPELL_SCROLL;
 
+  // Music dics.
+  public static DeferredItem<Item> ARCTURIA_MUSIC_DISC;
+
   public static void register() {
     SPELL_SCROLL = Skram.ITEMS.register(SpellScroll.NAME,
       registryName -> new SpellScroll(
@@ -98,6 +102,10 @@ public class SkramItems {
           .rarity(Rarity.EPIC)
       )
     );
+
+    ARCTURIA_MUSIC_DISC = Skram.ITEMS.register("arcturia_music_disc", (registryName) -> new Item(
+      new Item.Properties().jukeboxPlayable(SkramSounds.ARCTURIA_SONG).stacksTo(1).setId(ResourceKey.create(Registries.ITEM, registryName))
+    ));
 
     // All of these registrations are not "real" items, they are just icons used for the UI.
     AWESOME_SNAKE = Skram.ITEMS.registerSimpleItem("awesome_snake");

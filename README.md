@@ -23,10 +23,8 @@ of this, but don't keep the actual skill itself? I think neither.
 
 What I actually want is:
 
-(Woodcutting) Mega Chests
 (Woodcutting) Giga Chests
 BIIIG Bundle
-(Magic) Waystones
 (Mining) Compactor
 (Sailing) King of Red Lions
 

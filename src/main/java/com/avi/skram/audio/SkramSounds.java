@@ -3,10 +3,20 @@ package com.avi.skram.audio;
 import com.avi.skram.Skram;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.JukeboxSong;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Supplier;
+
 public class SkramSounds {
+
+  public static ResourceKey<JukeboxSong> createSong(String name) {
+    return ResourceKey.create(Registries.JUKEBOX_SONG, Identifier.fromNamespaceAndPath(Skram.MODID, name));
+  }
 
   public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
     DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, Skram.MODID);
@@ -70,5 +80,10 @@ public class SkramSounds {
   public static final Holder<SoundEvent> SPELL_INTERRUPTED = SOUND_EVENTS.register(
     "spell_interrupted", SoundEvent::createVariableRangeEvent
   );
+
+
+  // Jukebox!
+  public static final Supplier<SoundEvent> ARCTURIA = SOUND_EVENTS.register("arcturia", SoundEvent::createVariableRangeEvent);
+  public static final ResourceKey<JukeboxSong> ARCTURIA_SONG = createSong("arcturia");
 
 }

@@ -128,6 +128,8 @@ public class Skram {
           output.accept(stack);
         }
         output.accept(SkramBlocks.MEGA_CHEST_ITEM.get());
+
+        output.accept(SkramItems.ARCTURIA_MUSIC_DISC);
       })
       .build()
     );
