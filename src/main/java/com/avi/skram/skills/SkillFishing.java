@@ -25,6 +25,12 @@ public class SkillFishing extends Skill {
 
   public static final String NAME = "fishing";
   public static final StreamCodec<ByteBuf, SkillFishing> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillFishing::new);
+  public static final String DESCRIPTION = """
+    Fishy fishy!
+    
+    Fishing additional loot is rolled from the Buried Treasure loot table, excluding the Heart of the Sea.
+    You gain 200 XP per fish caught.
+    """;
 
   public static final int FISHING_SPEED_INDEX = 0;
   public static final int CATCH_TREASURE_INDEX = 1;
@@ -108,5 +114,10 @@ public class SkillFishing extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

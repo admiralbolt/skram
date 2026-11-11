@@ -31,6 +31,11 @@ public class SkillMelee extends Skill {
 
   public static final String NAME = "melee";
   public static final StreamCodec<ByteBuf, SkillMelee> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillMelee::new);
+  public static final String DESCRIPTION = """
+    Shlice.
+    
+    XP Gained is 10x damage dealt (with a 10x penalty for friendly mobs).
+    """;
 
   public static final Identifier ATTACK_SPEED_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "melee_attack_speed_boost");
 
@@ -156,5 +161,10 @@ public class SkillMelee extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

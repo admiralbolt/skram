@@ -23,6 +23,17 @@ public class SkillDemolition extends Skill {
 
   public static final String NAME = "demolition";
   public static final StreamCodec<ByteBuf, SkillDemolition> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillDemolition::new);
+  public static final String DESCRIPTION = """
+  Make BOOM go bigger.
+  
+  Blast resistance scaling is logarithmic based on this formula: 1 / (1 + 0.04 * level). Level 25 Demolition = 50% damage from explosions. Level 50 Demolition = 33% damage from explosions.
+  Explosion power scaling is linear, but the actual damage dealt by an explosion is based on the square of the explosion power. This means that your explosion damage WILL outscale your damage resistance.
+  TNT has a base explosion power of 4.
+  
+  You gain demolition XP by:
+   - Blowing up TNT (100 * totalExplosionPower) + any damage dealt by the explosion.
+   - Killing creepers gives 30.
+  """;
   public static final Identifier EXPLOSION_KNOCKBACK_RESISTANCE = Identifier.fromNamespaceAndPath(Skram.MODID, "demolition_knockback_resistance");
   // Explosions deal hella damage, and can hit lots of stuff. Attempting to pre-nerf this.
   public static final double EXPLOSION_DAMAGE_XP_MODIFIER = 0.1;
@@ -82,7 +93,7 @@ public class SkillDemolition extends Skill {
     if (!(event.getEntity() instanceof Creeper)) return;
 
     SkillDemolition demolition = player.getData(Skills.DEMOLITION);
-    demolition.addXp(player, 20);
+    demolition.addXp(player, 30);
   }
 
   // Encourage the players to blow up entities :)
@@ -147,5 +158,10 @@ public class SkillDemolition extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

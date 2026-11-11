@@ -12,6 +12,12 @@ public class SkillSailing extends Skill {
 
   public static final String NAME = "sailing";
   public static final StreamCodec<ByteBuf, SkillSailing> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillSailing::new);
+  public static final String DESCRIPTION = """
+    Boat faster.
+    
+    Acceleration is a magic value again because once again it's used in physics calculation I can't be bothered to understand.
+    More number means more faster.
+    """;
 
   public static final int SAILING_ACCELERATION_INDEX = 0;
 
@@ -47,5 +53,10 @@ public class SkillSailing extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

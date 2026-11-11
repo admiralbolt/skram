@@ -22,6 +22,14 @@ public class SkillBotany extends Skill {
 
   public static final String NAME = "botany";
   public static final StreamCodec<ByteBuf, SkillBotany> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillBotany::new);
+  public static final String DESCRIPTION = """
+    Gain XP by breaking flowers!
+    
+    Base XP rates are:
+     - Tall flowers: 180
+     - Small flowers: 80
+     - Other flowers: 20
+    """;
 
   public static final int BOTANY_FORTUNE_INDEX = 0;
 
@@ -103,5 +111,10 @@ public class SkillBotany extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

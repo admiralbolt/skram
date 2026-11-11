@@ -20,6 +20,15 @@ public class SkillMercantile extends Skill {
 
   public static final String NAME = "mercantile";
   public static final StreamCodec<ByteBuf, SkillMercantile> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillMercantile::new);
+  public static final String DESCRIPTION = """
+    Also it's own skill!
+    
+    Price reduction is once again logarithmic scaling based on 1 / (1 + 0.02 * level). Level 50 Mercantile = 50% prices, Level 100 Mercantile = 33% prices.
+    XP gained from any trade is a base of 400. XP is modified depending on demand + how many times you've traded:
+     - 75XP per demand.
+     - 10XP per number of trades.
+    Minimum XP gained from any trade is 50.
+    """;
 
   public static final int PRICE_REDUCTION_INDEX = 0;
 
@@ -85,5 +94,10 @@ public class SkillMercantile extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

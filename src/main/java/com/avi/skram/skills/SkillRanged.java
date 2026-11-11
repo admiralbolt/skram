@@ -19,6 +19,11 @@ public class SkillRanged extends Skill {
 
   public static final String NAME = "ranged";
   public static final StreamCodec<ByteBuf, SkillRanged> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillRanged::new);
+  public static final String DESCRIPTION = """
+    Shnipe.
+    
+    XP Gained is 10x damage dealt (with a 10x penalty for friendly mobs).
+    """;
 
   public static final int DAMAGE_BOOST_INDEX = 0;
   public static final int DRAW_SPEED_INDEX = 1;
@@ -105,5 +110,10 @@ public class SkillRanged extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

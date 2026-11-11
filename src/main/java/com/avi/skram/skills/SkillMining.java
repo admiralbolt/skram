@@ -27,6 +27,11 @@ public class SkillMining extends Skill {
 
   public static final String NAME = "mining";
   public static final StreamCodec<ByteBuf, SkillMining> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillMining::new);
+  public static final String DESCRIPTION = """
+    Same ole' skill.
+    
+    Any block mineable with a pickaxe is worth 10XP base. Otherwise, XP:
+    """;
   public static Map<Block, Integer> XP_MAP;
 
   public static final int MINING_SPEED_INDEX = 0;
@@ -34,10 +39,6 @@ public class SkillMining extends Skill {
 
   public SkillMining() {
     super(NAME, 1, 0);
-
-    // Abilities:
-    //   0: Mining Speed.
-    //   1: Fortune.
     this.enabledAbilities = new boolean[]{true, true};
   }
 
@@ -178,5 +179,14 @@ public class SkillMining extends Skill {
     return vertical;
   }
 
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
+  }
+
+  @Override
+  public Layout renderXPMap() {
+    return Skill.renderBlockXPMap(XP_MAP);
+  }
 
 }

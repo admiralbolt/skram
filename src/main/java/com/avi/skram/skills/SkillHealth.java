@@ -24,6 +24,16 @@ public class SkillHealth extends Skill {
 
   public static final String NAME = "health";
   public static final StreamCodec<ByteBuf, SkillHealth> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillHealth::new);
+  public static final String DESCRIPTION = """
+    Health!
+    
+    More health levels means more health AND more healing from ALL sources.
+    Wearing armor also has a health level requirement!
+    XP sources include:
+     - 4x damage you deal to other entities (10x less for friendly mobs).
+     - Any healing you do.
+     - 10x damage blocked if you use a shield.
+    """;
 
   public static final Identifier BONUS_HEALTH = Identifier.fromNamespaceAndPath(Skram.MODID, "health_bonus");
   public static final int BONUS_HEALTH_INDEX = 0;
@@ -139,5 +149,10 @@ public class SkillHealth extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

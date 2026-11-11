@@ -33,6 +33,15 @@ public class SkillFarming extends Skill {
 
   public static final String NAME = "farming";
   public static final StreamCodec<ByteBuf, SkillFarming> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillFarming::new);
+  public static final String DESCRIPTION = """
+    Farm dem plants!
+    
+    Crop Growth Chance is complicated. Crops only have a chance to grow *if* they get randomly ticked. The median time for a random tick to occur for any particular block is ~48 seconds.
+    Once randomly ticked, each crop has it's own percent chance to actually grow e.g. nether wart has a ~10% chance to grow.
+    The additional growth chance is rolled separately, and growth is successful if either the original roll succeeds OR the additional roll succeeds.
+    
+    XP values for farming:
+    """;
   public static Map<Block, Integer> XP_MAP;
 
   public static final int CROP_GROWTH_CHANCE_INDEX = 0;
@@ -71,7 +80,6 @@ public class SkillFarming extends Skill {
 
     // ???
     XP_MAP.put(Blocks.SWEET_BERRY_BUSH, 60);
-    XP_MAP.put(Blocks.CAVE_VINES_PLANT, 60);
     XP_MAP.put(Blocks.CHORUS_FLOWER, 60);
     XP_MAP.put(Blocks.COCOA, 40);
 
@@ -230,5 +238,15 @@ public class SkillFarming extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
+  }
+
+  @Override
+  public Layout renderXPMap() {
+    return Skill.renderBlockXPMap(XP_MAP);
   }
 }

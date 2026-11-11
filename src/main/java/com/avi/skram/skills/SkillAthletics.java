@@ -22,6 +22,12 @@ public class SkillAthletics extends Skill {
 
   public static final String NAME = "athletics";
   public static final StreamCodec<ByteBuf, SkillAthletics> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillAthletics::new);
+  public static final String DESCRIPTION = """
+    Gain XP by moving. More is gained if you are sprinting or swimming.
+    
+    1. Speed bonuses are magic numbers again, with even more complex calculations this time around. All that matters: bigger means faster.
+    2. Oxygen bonus is *mostly* accurate. The actual oxygen decay is done via RNG calculation, so there is potential for time variance if you are very lucky or unlucky.
+    """;
 
   public static final Identifier MOVEMENT_SPEED_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "athletics_movement_speed_boost");
   public static final Identifier SWIM_SPEED_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "athletics_swim_speed_boost");
@@ -160,5 +166,10 @@ public class SkillAthletics extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

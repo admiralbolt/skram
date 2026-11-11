@@ -19,6 +19,15 @@ public class SkillMagic extends Skill {
 
   public static final String NAME = "magic";
   public static final StreamCodec<ByteBuf, SkillMagic> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillMagic::new);
+  public static final String DESCRIPTION = """
+    Magic IS real!
+    
+    Spells can be discovered as loot from most chests, and from a few different magical mobs (Witches, Evokers, Guardian & Elder Guardian).
+    Casting a spell takes a lot of concentration, so it's interrupted by many things (not sprinting or jumping though!).
+    
+    Magic XP is gained by casting a spell with a formula based on the level of spell & total mana used:
+      10 + (requiredLevel / 3) + (manaCost / 5)
+    """;
 
   public static final Identifier MANA_CAPACITY_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "magic_mana_capacity_boost");
   public static final Identifier MANA_REGENERATION_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "magic_mana_regeneration_boost");
@@ -111,5 +120,10 @@ public class SkillMagic extends Skill {
       .build());
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

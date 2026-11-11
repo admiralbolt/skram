@@ -21,6 +21,16 @@ public class SkillSmithing extends Skill {
 
   public static final String NAME = "smithing";
   public static final StreamCodec<ByteBuf, SkillSmithing> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillSmithing::new);
+  public static final String DESCRIPTION = """
+    Mr. Smith.
+    
+    Smithing Speed and XP gained for brewing are tied directly to the furnace itself. Furnaces YOU place will be marked as yours, and will burn faster based on YOUR level and give YOU XP.
+    If you smelt in someone else's furnace, THEY will get XP.
+    If you open the furnace interface and see your name, it is YOUR furnace.
+    If you open the furnace interface and see someone else's name, it is THEIR furnace.
+    
+    XP is gained for repairing items, and smelting stuff:
+    """;
   public static Map<Item, Integer> XP_MAP;
 
   public static final int SMITHING_SPEED_INDEX = 0;
@@ -160,6 +170,16 @@ public class SkillSmithing extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
+  }
+
+  @Override
+  public Layout renderXPMap() {
+    return Skill.renderItemXPMap(XP_MAP);
   }
 
 }

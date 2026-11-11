@@ -35,6 +35,17 @@ public class SkillHusbandry extends Skill {
 
   public static final String NAME = "husbandry";
   public static final StreamCodec<ByteBuf, SkillHusbandry> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillHusbandry::new);
+  public static final String DESCRIPTION = """
+    Its own skill!!!
+    
+    You get husbandry XP for a wide variety of animal related activities, including:
+     - Breeding: 100xp.
+     - Taming: 150xp.
+     - Gathering Honey: 40xp.
+     - Getting Milk: 10xp.
+     - Shearing Sheep: 10xp.
+     - Harvesting Animals: 10xp.
+    """;
 
   public static final int HUSBANDRY_BREEDING_XP_INDEX = 0;
   public static final int HUSBANDRY_FORTUNE_INDEX = 1;
@@ -152,7 +163,7 @@ public class SkillHusbandry extends Skill {
 
       Player player = event.getEntity();
       SkillHusbandry husbandry = player.getData(Skills.HUSBANDRY);
-      husbandry.addXp(player, 5);
+      husbandry.addXp(player, 10);
     }
 
   }
@@ -200,5 +211,10 @@ public class SkillHusbandry extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

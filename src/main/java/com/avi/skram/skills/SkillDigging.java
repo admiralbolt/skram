@@ -26,6 +26,12 @@ public class SkillDigging extends Skill {
 
   public static final String NAME = "digging";
   public static final StreamCodec<ByteBuf, SkillDigging> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillDigging::new);
+  public static final String DESCRIPTION = """
+    Dig things faster!
+    
+    No treasure chance in this one, too annoying to balance considering how easy it is to break dirt.
+    Any block mineable by a shovel is worth 10 XP base. Otherwise, XP:
+    """;
   public static Map<Block, Integer> XP_MAP;
 
   public static final int DIGGING_SPEED_INDEX = 0;
@@ -125,6 +131,16 @@ public class SkillDigging extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
+  }
+
+  @Override
+  public Layout renderXPMap() {
+    return Skill.renderBlockXPMap(XP_MAP);
   }
 
 }

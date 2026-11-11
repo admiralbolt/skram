@@ -26,6 +26,15 @@ public class SkillStealth extends Skill {
 
   public static final String NAME = "stealth";
   public static final StreamCodec<ByteBuf, SkillStealth> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillStealth::new);
+  public static final String DESCRIPTION = """
+    Sneaky sneaky.
+    
+    The logic for determining if an enemy has noticed you is suspicious at best, but it works okay enough.
+    Visibility detection range is once again logarithmic based on 1 / (1 + 0.04 * this.level).
+    XP is gained by dealing damage to unaware entities:
+     - Base XP gained is 24x damage dealt (no xp for friendly mobs).
+     - XP gained is divided by the number of blocks between you and your target. (I'm nerfing stealth archer in pre-release).
+    """;
 
   public static final Identifier SNEAKING_SPEED_BOOST = Identifier.fromNamespaceAndPath(Skram.MODID, "stealth_sneaking_speed_boost");
   public static final double MAX_SNEAKING_SPEED = 1.0;
@@ -160,7 +169,7 @@ public class SkillStealth extends Skill {
 
     vertical.addChild(
       Checkbox.builder(
-          Component.literal("Detection Range: " + (int) (100.0 / (1 + this.getVisibilityModifier())) + "%."),
+          Component.literal("Detection Range: " + (int) (1.0 / (1 + this.getVisibilityModifier())) + "%."),
           Minecraft.getInstance().font
         )
         .selected(this.enabledAbilities[VISIBILITY_INDEX])
@@ -169,5 +178,10 @@ public class SkillStealth extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
   }
 }

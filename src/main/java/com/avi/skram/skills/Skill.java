@@ -10,6 +10,7 @@ import com.avi.skram.utils.MathUtils;
 import com.avi.skram.utils.StringUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.ItemDisplayWidget;
 import net.minecraft.client.gui.components.MultiLineTextWidget;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.gui.layouts.GridLayout;
@@ -19,7 +20,9 @@ import net.minecraft.client.gui.layouts.SpacerElement;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.bus.api.ICancellableEvent;
@@ -28,9 +31,9 @@ import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.util.ValueIOSerializable;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
+import java.lang.reflect.Field;
 import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public abstract class Skill implements ValueIOSerializable {
@@ -243,6 +246,7 @@ public abstract class Skill implements ValueIOSerializable {
     vertical.addChild(this.renderSkillAbilities());
     vertical.addChild(new ResizableTextureImageWidget(0, 0, 182, 3, WHITE_BAR, 182, 5));
     vertical.addChild(this.renderSkillDetails());
+    vertical.addChild(this.renderXPMap());
 
     layout.addChild(vertical);
 
@@ -268,6 +272,75 @@ public abstract class Skill implements ValueIOSerializable {
       vertical.addChild(WidgetUtils.textWidget180(line));
     }
 
+    return vertical;
+  }
+
+  public Layout renderXPMap() {
+    return new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
+  }
+
+  public static Layout renderItemXPMap(Map<Item, Integer> xpMap) {
+    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
+
+    List<Item> items = new ArrayList<>(xpMap.keySet().stream().toList());
+    items.sort(Comparator.comparing((item) -> {
+      ItemStack stack = new ItemStack(item);
+      return item.getName(stack).getString();
+    }));
+    GridLayout grid = new GridLayout();
+    GridLayout.RowHelper rowHelper = grid.createRowHelper(3);
+
+    rowHelper.addChild(SpacerElement.width(50));
+    rowHelper.addChild(SpacerElement.width(50));
+    rowHelper.addChild(SpacerElement.width(50));
+
+    for (int i = 0; i < items.size(); i += 3) {
+      for (int j = i; j < i + 3; j++) {
+        if (j >= items.size()) break;
+
+        LinearLayout horizontal = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
+        horizontal.spacing(4).defaultCellSetting().alignVerticallyMiddle();
+        Item item = items.get(j);
+        ItemStack stack = new ItemStack(item);
+
+        horizontal.addChild(new ItemDisplayWidget(Minecraft.getInstance(), 0, 0, 16, 16, stack.getHoverName(), stack, false, true));
+        horizontal.addChild(new MultiLineTextWidget(Component.literal(xpMap.get(item).toString()), Minecraft.getInstance().font));
+        rowHelper.addChild(horizontal);
+      }
+    }
+
+    vertical.addChild(grid);
+    return vertical;
+  }
+
+  public static Layout renderBlockXPMap(Map<Block, Integer> xpMap) {
+    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
+
+    List<Block> blocks = new ArrayList<>(xpMap.keySet().stream().toList());
+    blocks.sort(Comparator.comparing((block) -> block.getName().getString()));
+    GridLayout grid = new GridLayout();
+    GridLayout.RowHelper rowHelper = grid.createRowHelper(3);
+
+    rowHelper.addChild(SpacerElement.width(50));
+    rowHelper.addChild(SpacerElement.width(50));
+    rowHelper.addChild(SpacerElement.width(50));
+
+    for (int i = 0; i < blocks.size(); i += 3) {
+      for (int j = i; j < i + 3; j++) {
+        if (j >= blocks.size()) break;
+
+        LinearLayout horizontal = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
+        horizontal.spacing(4).defaultCellSetting().alignVerticallyMiddle();
+        Block block = blocks.get(j);
+        ItemStack stack = new ItemStack(block);
+
+        horizontal.addChild(new ItemDisplayWidget(Minecraft.getInstance(), 0, 0, 16, 16, stack.getHoverName(), stack, false, true));
+        horizontal.addChild(new MultiLineTextWidget(Component.literal(xpMap.get(block).toString()), Minecraft.getInstance().font));
+        rowHelper.addChild(horizontal);
+      }
+    }
+
+    vertical.addChild(grid);
     return vertical;
   }
 

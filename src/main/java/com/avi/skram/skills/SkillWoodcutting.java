@@ -30,6 +30,11 @@ public class SkillWoodcutting extends Skill {
 
   public static final String NAME = "woodcutting";
   public static final StreamCodec<ByteBuf, SkillWoodcutting> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillWoodcutting::new);
+  public static final String DESCRIPTION = """
+    Chop wood.
+    
+    XP is also gained for a wide variety of axe right-clicking things. Also any leaf block OR block mineable with an axe is worth 10xp. Otherwise, XP:
+    """;
   public static Map<Block, Integer> XP_MAP;
 
   public static final int WOODCUTTING_SPEED_INDEX = 0;
@@ -158,6 +163,16 @@ public class SkillWoodcutting extends Skill {
     );
 
     return vertical;
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
+  }
+
+  @Override
+  public Layout renderXPMap() {
+    return Skill.renderBlockXPMap(XP_MAP);
   }
 
 }

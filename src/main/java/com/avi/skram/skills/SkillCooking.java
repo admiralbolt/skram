@@ -22,6 +22,14 @@ public class SkillCooking extends Skill {
 
   public static final String NAME = "cooking";
   public static final StreamCodec<ByteBuf, SkillCooking> STREAM_CODEC = StreamCodec.ofMember(Skill::encode, SkillCooking::new);
+  public static final String DESCRIPTION = """
+    Cooking makes your food better!
+    
+    While each level of cooking says it gives +1% food boost, to avoid cluttering up inventories with many unstackable foods of the same type, foods are bucketed at certain bonus thresholds i.e. +1, +2, +3.
+    All Bread +1 items are the same, and can stack, regardless of who cooked it.
+    
+    XP values for cooking:
+    """;
   public static Map<Item, Integer> XP_MAP;
 
   public static final int FOOD_BOOST_INDEX = 0;
@@ -52,7 +60,6 @@ public class SkillCooking extends Skill {
     XP_MAP.put(Items.DRIED_KELP, 30);
     XP_MAP.put(Items.GOLDEN_APPLE, 100);
     XP_MAP.put(Items.GOLDEN_CARROT, 80);
-    XP_MAP.put(Items.HONEY_BLOCK, 40);
     XP_MAP.put(Items.PUMPKIN_PIE, 90);
     XP_MAP.put(Items.RABBIT_STEW, 250);
     XP_MAP.put(Items.SUSPICIOUS_STEW, 200);
@@ -119,6 +126,16 @@ public class SkillCooking extends Skill {
     newName.append(stack.getItemName());
     newName.append(" +" + (newNutrition - foodBase.nutrition()));
     stack.set(DataComponents.ITEM_NAME, newName);
+  }
+
+  @Override
+  public String getDescription() {
+    return DESCRIPTION;
+  }
+
+  @Override
+  public Layout renderXPMap() {
+    return Skill.renderItemXPMap(XP_MAP);
   }
 
 }
