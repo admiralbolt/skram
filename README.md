@@ -2,33 +2,11 @@
 TODO
 ====
 
-SkillFarming:
-  - Extend increased growth chance to crops that grow upwards (SugarCane + Bamboo).
-
 SkillHusbandry:
   - Bred entities increased stats?
 
-SkillWoodcutting:
-  - Additional shavings? Planks and/or sticks.
-
 Misc Ideas:
  - Artifacts? They are fun. Maybe introduce this as construction in a later update.
- - Extra info on skill pages.
-
-
-Construction
-============
-
-Alternatively, what if we just take the blueprints / unlocking recipes part
-of this, but don't keep the actual skill itself? I think neither.
-
-What I actually want is:
-
-BIIIG Bundle
-(Mining) Compactor
-(Sailing) King of Red Lions
-
-Mega + Giga chests I can make myself.
 
 
 Perks

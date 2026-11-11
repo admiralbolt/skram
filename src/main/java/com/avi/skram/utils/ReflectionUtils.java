@@ -105,7 +105,12 @@ public class ReflectionUtils {
       }
     }
 
-    if (bestMatch == null || ambiguous) {
+    if (bestMatch == null) {
+      throw new NoSuchMethodException(
+        "No method '" + methodName + "' matching the supplied arguments in " + clazz.getName()
+      );
+    }
+    if (ambiguous) {
       throw new NoSuchMethodException(
         "No unambiguous method '" + methodName + "' matching the supplied arguments in " + clazz.getName()
       );

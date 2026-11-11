@@ -195,6 +195,25 @@ public class SkillFarming extends Skill {
     }
   }
 
+  public static void handleTallPlants(CropGrowEvent.Post event) {
+    if (event.getLevel().isClientSide()) return;
+    if (event.getState().getBlock() != Blocks.SUGAR_CANE && event.getState().getBlock() != Blocks.BAMBOO) return;
+
+    boolean isSugarCane = event.getState().getBlock() == Blocks.SUGAR_CANE;
+    // The events fire with slightly different positions (sadly).
+    BlockPos below = (isSugarCane) ? event.getPos().below() : event.getPos();
+    BlockPos newBlock = (isSugarCane) ? event.getPos() : event.getPos().above();
+
+    // Copy the block data from below to above.
+    ChunkAccess chunk = event.getLevel().getChunk(below);
+    PlayerOwnedBlocks pob = chunk.getData(BlockData.PLAYER_OWNED);
+    PlayerOwnedData playerData = pob.playerOwnedBlocks.get(below);
+    if (playerData == null) return;
+
+    pob.playerOwnedBlocks.put(newBlock, playerData);
+    chunk.markUnsaved();
+  }
+
   public static void handleRightClick(PlayerInteractEvent.RightClickBlock event) {
     ItemStack usedItem = event.getItemStack();
     if (!usedItem.is(ItemTags.HOES)) return;

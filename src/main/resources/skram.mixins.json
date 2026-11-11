@@ -5,6 +5,7 @@
   "mixins": [
     "AbstractBoatMixin",
     "AbstractFurnaceBlockEntityMixin",
+    "BambooSaplingBlockMixin",
     "BrewingStandBlockEntityMixin",
     "CraftingMenuMixin",
     "CreeperMixin",

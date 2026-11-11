@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.neoforged.neoforge.event.level.block.CropGrowEvent;
@@ -25,7 +26,7 @@ import java.util.Map;
 public class PerkChainReaction extends Perk {
 
   public static final String NAME = "chain_reaction";
-  public static final String DESCRIPTION = "Whenever one of your crops grows, it has a 80% chance to randomly tick again.";
+  public static final String DESCRIPTION = "Whenever one of your crops grows, it has a 60% chance to randomly tick again.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
     .put(SkillFarming.NAME, 30)
     .build();
@@ -66,10 +67,15 @@ public class PerkChainReaction extends Perk {
     PerkChainReaction chainReaction = owner.getData(Perks.CHAIN_REACTION);
     if (!chainReaction.isFullyEnabled()) return;
     if (SkillFarming.isPlantFullyGrown(state)) return;
-    if (Math.random() > 0.8) return;
+    if (Math.random() > 0.6) return;
 
     try {
-      ReflectionUtils.invokeMethod(state.getBlock(), "randomTick", state, level, pos, MathUtils.RANDOM);
+      // Bamboo blocks are called with the base position.
+      if (state.getBlock() == Blocks.BAMBOO || state.getBlock() == Blocks.BAMBOO_SAPLING) {
+        pos = pos.above();
+        state = level.getBlockState(pos);
+      }
+      ReflectionUtils.invokeMethod(state.getBlock(), "randomTick", state, level, pos, level.getRandom());
     } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
       System.out.println("Can't invoke randomTick: " + e);
     }

@@ -362,6 +362,7 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_CROP_GROW_POST(CropGrowEvent.Post event) {
+    SkillFarming.handleTallPlants(event);
     PerkChainReaction.handleCropGrowth(event);
   }
 
