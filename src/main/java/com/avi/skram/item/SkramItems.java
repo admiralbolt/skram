@@ -6,9 +6,11 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class SkramItems {
@@ -90,7 +92,55 @@ public class SkramItems {
   public static DeferredItem<Item> SPELL_SCROLL;
 
   // Music dics.
-  public static DeferredItem<Item> ARCTURIA_MUSIC_DISC;
+  public static DeferredItem<Item> MUSIC_DISC_ARCTURIA;
+  public static DeferredItem<Item> MUSIC_DISC_ABANDONED_MINE_BATTLE;
+  public static DeferredItem<Item> MUSIC_DISC_ABANDONED_RESEARCH_BATTLE;
+  public static DeferredItem<Item> MUSIC_DISC_BELLATRIS;
+  public static DeferredItem<Item> MUSIC_DISC_CASTORIA;
+  public static DeferredItem<Item> MUSIC_DISC_DENNEBURG;
+  public static DeferredItem<Item> MUSIC_DISC_ELTANIN;
+  public static DeferredItem<Item> MUSIC_DISC_FORAX_SHAMBLER_BATTLE;
+  public static DeferredItem<Item> MUSIC_DISC_FORAX_WOOD_GOLEM_FIGHT;
+  public static DeferredItem<Item> MUSIC_DISC_FORAX;
+  public static DeferredItem<Item> MUSIC_DISC_GACRUXIA_HAUNTED_HOUSE_BOSS;
+  public static DeferredItem<Item> MUSIC_DISC_GACRUXIA;
+  public static DeferredItem<Item> MUSIC_DISC_GRAND_TREE;
+  public static DeferredItem<Item> MUSIC_DISC_MISC_BATTLE1;
+  public static DeferredItem<Item> MUSIC_DISC_MISC_BATTLE3;
+  public static DeferredItem<Item> MUSIC_DISC_REMEMBERANCE;
+  public static DeferredItem<Item> MUSIC_DISC_SECRET_LAB_BATTLE;
+  public static DeferredItem<Item> MUSIC_DISC_SEWER_BATTLE;
+  public static DeferredItem<Item> MUSIC_DISC_SHROUDED_DEN_BATTLE;
+  public static DeferredItem<Item> MUSIC_DISC_SHROUDED_DEN_BOSS;
+  public static DeferredItem<Item> MUSIC_DISC_SUNKEN_TEMPLE;
+  public static DeferredItem<Item> MUSIC_DISC_WATERFALL_CAVE_BOSS_FIGHT;
+
+  public static List<DeferredItem<Item>> musicDiscs() {
+    return List.of(
+      MUSIC_DISC_ARCTURIA,
+      MUSIC_DISC_ABANDONED_MINE_BATTLE,
+      MUSIC_DISC_ABANDONED_RESEARCH_BATTLE,
+      MUSIC_DISC_BELLATRIS,
+      MUSIC_DISC_CASTORIA,
+      MUSIC_DISC_DENNEBURG,
+      MUSIC_DISC_ELTANIN,
+      MUSIC_DISC_FORAX_SHAMBLER_BATTLE,
+      MUSIC_DISC_FORAX_WOOD_GOLEM_FIGHT,
+      MUSIC_DISC_FORAX,
+      MUSIC_DISC_GACRUXIA_HAUNTED_HOUSE_BOSS,
+      MUSIC_DISC_GACRUXIA,
+      MUSIC_DISC_GRAND_TREE,
+      MUSIC_DISC_MISC_BATTLE1,
+      MUSIC_DISC_MISC_BATTLE3,
+      MUSIC_DISC_REMEMBERANCE,
+      MUSIC_DISC_SECRET_LAB_BATTLE,
+      MUSIC_DISC_SEWER_BATTLE,
+      MUSIC_DISC_SHROUDED_DEN_BATTLE,
+      MUSIC_DISC_SHROUDED_DEN_BOSS,
+      MUSIC_DISC_SUNKEN_TEMPLE,
+      MUSIC_DISC_WATERFALL_CAVE_BOSS_FIGHT
+    );
+  }
 
   public static void register() {
     SPELL_SCROLL = Skram.ITEMS.register(SpellScroll.NAME,
@@ -103,9 +153,28 @@ public class SkramItems {
       )
     );
 
-    ARCTURIA_MUSIC_DISC = Skram.ITEMS.register("arcturia_music_disc", (registryName) -> new Item(
-      new Item.Properties().jukeboxPlayable(SkramSounds.ARCTURIA_SONG).stacksTo(1).setId(ResourceKey.create(Registries.ITEM, registryName))
-    ));
+    MUSIC_DISC_ARCTURIA = registerMusicDisc("music_disc_arcturia", SkramSounds.ARCTURIA_SONG);
+    MUSIC_DISC_ABANDONED_MINE_BATTLE = registerMusicDisc("music_disc_abandoned_mine_battle", SkramSounds.ABANDONED_MINE_BATTLE_SONG);
+    MUSIC_DISC_ABANDONED_RESEARCH_BATTLE = registerMusicDisc("music_disc_abandoned_research_battle", SkramSounds.ABANDONED_RESEARCH_BATTLE_SONG);
+    MUSIC_DISC_BELLATRIS = registerMusicDisc("music_disc_bellatris", SkramSounds.BELLATRIS_SONG);
+    MUSIC_DISC_CASTORIA = registerMusicDisc("music_disc_castoria", SkramSounds.CASTORIA_SONG);
+    MUSIC_DISC_DENNEBURG = registerMusicDisc("music_disc_denneburg", SkramSounds.DENNEBURG_SONG);
+    MUSIC_DISC_ELTANIN = registerMusicDisc("music_disc_eltanin", SkramSounds.ELTANIN_SONG);
+    MUSIC_DISC_FORAX_SHAMBLER_BATTLE = registerMusicDisc("music_disc_forax_shambler_battle", SkramSounds.FORAX_SHAMBLER_BATTLE_SONG);
+    MUSIC_DISC_FORAX_WOOD_GOLEM_FIGHT = registerMusicDisc("music_disc_forax_wood_golem_fight", SkramSounds.FORAX_WOOD_GOLEM_FIGHT_SONG);
+    MUSIC_DISC_FORAX = registerMusicDisc("music_disc_forax", SkramSounds.FORAX_SONG);
+    MUSIC_DISC_GACRUXIA_HAUNTED_HOUSE_BOSS = registerMusicDisc("music_disc_gacruxia_haunted_house_boss", SkramSounds.GACRUXIA_HAUNTED_HOUSE_BOSS_SONG);
+    MUSIC_DISC_GACRUXIA = registerMusicDisc("music_disc_gacruxia", SkramSounds.GACRUXIA_SONG);
+    MUSIC_DISC_GRAND_TREE = registerMusicDisc("music_disc_grand_tree", SkramSounds.GRAND_TREE_SONG);
+    MUSIC_DISC_MISC_BATTLE1 = registerMusicDisc("music_disc_misc_battle1", SkramSounds.MISC_BATTLE1_SONG);
+    MUSIC_DISC_MISC_BATTLE3 = registerMusicDisc("music_disc_misc_battle3", SkramSounds.MISC_BATTLE3_SONG);
+    MUSIC_DISC_REMEMBERANCE = registerMusicDisc("music_disc_rememberance", SkramSounds.REMEMBERANCE_SONG);
+    MUSIC_DISC_SECRET_LAB_BATTLE = registerMusicDisc("music_disc_secret_lab_battle", SkramSounds.SECRET_LAB_BATTLE_SONG);
+    MUSIC_DISC_SEWER_BATTLE = registerMusicDisc("music_disc_sewer_battle", SkramSounds.SEWER_BATTLE_SONG);
+    MUSIC_DISC_SHROUDED_DEN_BATTLE = registerMusicDisc("music_disc_shrouded_den_battle", SkramSounds.SHROUDED_DEN_BATTLE_SONG);
+    MUSIC_DISC_SHROUDED_DEN_BOSS = registerMusicDisc("music_disc_shrouded_den_boss", SkramSounds.SHROUDED_DEN_BOSS_SONG);
+    MUSIC_DISC_SUNKEN_TEMPLE = registerMusicDisc("music_disc_sunken_temple", SkramSounds.SUNKEN_TEMPLE_SONG);
+    MUSIC_DISC_WATERFALL_CAVE_BOSS_FIGHT = registerMusicDisc("music_disc_waterfall_cave_boss_fight", SkramSounds.WATERFALL_CAVE_BOSS_FIGHT_SONG);
 
     // All of these registrations are not "real" items, they are just icons used for the UI.
     AWESOME_SNAKE = Skram.ITEMS.registerSimpleItem("awesome_snake");
@@ -176,6 +245,15 @@ public class SkramItems {
     WINDSWEPT_HILLS = Skram.ITEMS.registerSimpleItem("windswept_hills");
     WINDSWEPT_SAVANNA = Skram.ITEMS.registerSimpleItem("windswept_savanna");
     WOODED_BADLANDS = Skram.ITEMS.registerSimpleItem("wooded_badlands");
+  }
+
+  private static DeferredItem<Item> registerMusicDisc(String name, ResourceKey<JukeboxSong> song) {
+    return Skram.ITEMS.register(name, registryName -> new Item(
+      new Item.Properties()
+        .jukeboxPlayable(song)
+        .stacksTo(1)
+        .setId(ResourceKey.create(Registries.ITEM, registryName))
+    ));
   }
 
 }

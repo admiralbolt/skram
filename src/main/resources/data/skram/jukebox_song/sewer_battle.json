@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_sewer_battle.desc"
+  },
+  "length_in_seconds": 140.307687,
+  "sound_event": "skram:sewer_battle"
+}

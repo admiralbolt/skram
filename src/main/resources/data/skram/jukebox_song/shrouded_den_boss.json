@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_shrouded_den_boss.desc"
+  },
+  "length_in_seconds": 148.114286,
+  "sound_event": "skram:shrouded_den_boss"
+}

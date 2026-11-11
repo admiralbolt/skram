@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_bellatris.desc"
+  },
+  "length_in_seconds": 184.444444,
+  "sound_event": "skram:bellatris"
+}

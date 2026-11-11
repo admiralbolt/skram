@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_eltanin.desc"
+  },
+  "length_in_seconds": 275.478277,
+  "sound_event": "skram:eltanin"
+}

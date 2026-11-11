@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_rememberance.desc"
+  },
+  "length_in_seconds": 112.941179,
+  "sound_event": "skram:rememberance"
+}

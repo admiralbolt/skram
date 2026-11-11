@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_grand_tree.desc"
+  },
+  "length_in_seconds": 140.0,
+  "sound_event": "skram:grand_tree"
+}

@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_waterfall_cave_boss_fight.desc"
+  },
+  "length_in_seconds": 104.571429,
+  "sound_event": "skram:waterfall_cave_boss_fight"
+}

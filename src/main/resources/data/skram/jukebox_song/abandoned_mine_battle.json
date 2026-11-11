@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_abandoned_mine_battle.desc"
+  },
+  "length_in_seconds": 89.659342,
+  "sound_event": "skram:abandoned_mine_battle"
+}

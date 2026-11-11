@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_forax.desc"
+  },
+  "length_in_seconds": 236.307687,
+  "sound_event": "skram:forax"
+}

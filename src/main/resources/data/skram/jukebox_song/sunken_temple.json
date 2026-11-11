@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_sunken_temple.desc"
+  },
+  "length_in_seconds": 259.2,
+  "sound_event": "skram:sunken_temple"
+}

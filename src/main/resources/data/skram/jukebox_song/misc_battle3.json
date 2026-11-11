@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_misc_battle3.desc"
+  },
+  "length_in_seconds": 93.191497,
+  "sound_event": "skram:misc_battle3"
+}

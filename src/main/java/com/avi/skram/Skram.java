@@ -129,7 +129,7 @@ public class Skram {
         }
         output.accept(SkramBlocks.MEGA_CHEST_ITEM.get());
 
-        output.accept(SkramItems.ARCTURIA_MUSIC_DISC);
+        SkramItems.musicDiscs().forEach(output::accept);
       })
       .build()
     );

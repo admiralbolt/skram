@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_gacruxia.desc"
+  },
+  "length_in_seconds": 236.16,
+  "sound_event": "skram:gacruxia"
+}

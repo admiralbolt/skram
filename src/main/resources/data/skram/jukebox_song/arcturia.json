@@ -1,7 +1,7 @@
 {
   "comparator_output": 15,
   "description": {
-    "translate": "item.skram.arcturia_music_disc.desc"
+    "translate": "item.skram.music_disc_arcturia.desc"
   },
   "length_in_seconds": 204,
   "sound_event": "skram:arcturia"

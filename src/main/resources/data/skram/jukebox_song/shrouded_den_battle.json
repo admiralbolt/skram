@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_shrouded_den_battle.desc"
+  },
+  "length_in_seconds": 112.941156,
+  "sound_event": "skram:shrouded_den_battle"
+}

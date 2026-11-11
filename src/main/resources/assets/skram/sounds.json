@@ -110,5 +110,152 @@
         "name": "skram:songs/arcturia"
       }
     ]
+  },
+  "abandoned_mine_battle": {
+    "sounds": [
+      {
+        "name": "skram:songs/abandoned_mine_battle"
+      }
+    ]
+  },
+  "abandoned_research_battle": {
+    "sounds": [
+      {
+        "name": "skram:songs/abandoned_research_battle"
+      }
+    ]
+  },
+  "bellatris": {
+    "sounds": [
+      {
+        "name": "skram:songs/bellatris"
+      }
+    ]
+  },
+  "castoria": {
+    "sounds": [
+      {
+        "name": "skram:songs/castoria"
+      }
+    ]
+  },
+  "denneburg": {
+    "sounds": [
+      {
+        "name": "skram:songs/denneburg"
+      }
+    ]
+  },
+  "eltanin": {
+    "sounds": [
+      {
+        "name": "skram:songs/eltanin"
+      }
+    ]
+  },
+  "forax_shambler_battle": {
+    "sounds": [
+      {
+        "name": "skram:songs/forax_shambler_battle"
+      }
+    ]
+  },
+  "forax_wood_golem_fight": {
+    "sounds": [
+      {
+        "name": "skram:songs/forax_wood_golem_fight"
+      }
+    ]
+  },
+  "forax": {
+    "sounds": [
+      {
+        "name": "skram:songs/forax"
+      }
+    ]
+  },
+  "gacruxia_haunted_house_boss": {
+    "sounds": [
+      {
+        "name": "skram:songs/gacruxia_haunted_house_boss"
+      }
+    ]
+  },
+  "gacruxia": {
+    "sounds": [
+      {
+        "name": "skram:songs/gacruxia"
+      }
+    ]
+  },
+  "grand_tree": {
+    "sounds": [
+      {
+        "name": "skram:songs/grand_tree"
+      }
+    ]
+  },
+  "misc_battle1": {
+    "sounds": [
+      {
+        "name": "skram:songs/misc_battle1"
+      }
+    ]
+  },
+  "misc_battle3": {
+    "sounds": [
+      {
+        "name": "skram:songs/misc_battle3"
+      }
+    ]
+  },
+  "rememberance": {
+    "sounds": [
+      {
+        "name": "skram:songs/rememberance"
+      }
+    ]
+  },
+  "secret_lab_battle": {
+    "sounds": [
+      {
+        "name": "skram:songs/secret_lab_battle"
+      }
+    ]
+  },
+  "sewer_battle": {
+    "sounds": [
+      {
+        "name": "skram:songs/sewer_battle"
+      }
+    ]
+  },
+  "shrouded_den_battle": {
+    "sounds": [
+      {
+        "name": "skram:songs/shrouded_den_battle"
+      }
+    ]
+  },
+  "shrouded_den_boss": {
+    "sounds": [
+      {
+        "name": "skram:songs/shrouded_den_boss"
+      }
+    ]
+  },
+  "sunken_temple": {
+    "sounds": [
+      {
+        "name": "skram:songs/sunken_temple"
+      }
+    ]
+  },
+  "waterfall_cave_boss_fight": {
+    "sounds": [
+      {
+        "name": "skram:songs/waterfall_cave_boss_fight"
+      }
+    ]
   }
 }

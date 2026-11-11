@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_abandoned_research_battle.desc"
+  },
+  "length_in_seconds": 93.124989,
+  "sound_event": "skram:abandoned_research_battle"
+}

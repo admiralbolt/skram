@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_forax_wood_golem_fight.desc"
+  },
+  "length_in_seconds": 74.666667,
+  "sound_event": "skram:forax_wood_golem_fight"
+}

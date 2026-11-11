@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_castoria.desc"
+  },
+  "length_in_seconds": 160.0,
+  "sound_event": "skram:castoria"
+}

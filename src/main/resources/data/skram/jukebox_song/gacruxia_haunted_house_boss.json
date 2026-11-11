@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.skram.music_disc_gacruxia_haunted_house_boss.desc"
+  },
+  "length_in_seconds": 145.454535,
+  "sound_event": "skram:gacruxia_haunted_house_boss"
+}
