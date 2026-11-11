@@ -2,6 +2,8 @@
 TODO
 ====
 
+* Recipe for mega chest.
+
 SkillFarming:
   - Extend increased growth chance to crops that grow upwards (SugarCane + Bamboo).
 
@@ -13,6 +15,7 @@ SkillWoodcutting:
 
 Misc Ideas:
  - Artifacts? They are fun. Maybe introduce this as construction in a later update.
+
 
 Construction
 ============
