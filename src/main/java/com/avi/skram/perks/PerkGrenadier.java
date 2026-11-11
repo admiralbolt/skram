@@ -15,8 +15,8 @@ public class PerkGrenadier extends Perk {
   public static final String NAME = "grenadier";
   public static final String DESCRIPTION = "Double the range and splash radius of thrown potions.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
+    .put(SkillBrewing.NAME, 30)
     .put(SkillRanged.NAME, 20)
-    .put(SkillBrewing.NAME, 40)
     .build();
   public static final StreamCodec<ByteBuf, PerkGrenadier> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkGrenadier::new);
 

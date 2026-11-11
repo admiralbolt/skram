@@ -24,10 +24,10 @@ public class PerkClusterBomb extends Perk {
   public static final String NAME = "cluster_bomb";
   public static final String DESCRIPTION = "Create 2 additional copies of any splash potion thrown.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillBrewing.NAME, 60)
-    .put(SkillMagic.NAME, 40)
-    .put(SkillRanged.NAME, 30)
-    .put(SkillDemolition.NAME, 20)
+    .put(SkillBrewing.NAME, 30)
+    .put(SkillMagic.NAME, 20)
+    .put(SkillRanged.NAME, 20)
+    .put(SkillDemolition.NAME, 10)
     .build();
   public static final StreamCodec<ByteBuf, PerkClusterBomb> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkClusterBomb::new);
 

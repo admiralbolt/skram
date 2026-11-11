@@ -52,6 +52,7 @@ public class SkillMining extends Skill {
     XP_MAP.put(Blocks.ANDESITE, 25);
     XP_MAP.put(Blocks.BASALT, 30);
     XP_MAP.put(Blocks.BLACKSTONE, 30);
+    XP_MAP.put(Blocks.CALCITE, 25);
     XP_MAP.put(Blocks.CINNABAR, 30);
     XP_MAP.put(Blocks.COAL_ORE, 100);
     XP_MAP.put(Blocks.COBBLESTONE, 20);

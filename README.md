@@ -13,7 +13,7 @@ SkillWoodcutting:
 
 Misc Ideas:
  - Artifacts? They are fun. Maybe introduce this as construction in a later update.
- - Music Discs!
+ - Waystones don't generate for villages.
 
 Construction
 ============

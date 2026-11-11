@@ -37,6 +37,8 @@ public abstract class Skill implements ValueIOSerializable {
   public static Identifier YELLOW_BAR = Identifier.withDefaultNamespace("textures/gui/sprites/boss_bar/yellow_progress.png");
   public static Identifier YELLOW_BAR_BACKGROUND = Identifier.withDefaultNamespace("textures/gui/sprites/boss_bar/yellow_background.png");
 
+  public static double PERK_CHANCE = 100000;
+
   public static Map<Integer, Integer> XP_FOR_LEVEL = new HashMap<>();
 
   // Probably unnecessary optimization, but cache this value so we don't concat this string all the time.
@@ -146,7 +148,7 @@ public abstract class Skill implements ValueIOSerializable {
     this.xp += gainedXp;
 
     // Whenever we gain xp, we want to give a chance of discovering a relevant perk.
-    if (Math.random() < (gainedXp / 100.0)) {
+    if (Math.random() < (gainedXp / PERK_CHANCE)) {
       Perks.discoverRandomPerk(player, this, syncToServer);
     }
 

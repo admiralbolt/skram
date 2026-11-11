@@ -18,7 +18,7 @@ public class PerkMasterBlacksmith extends Perk {
   public static final String NAME = "master_blacksmith";
   public static final String DESCRIPTION = "Significantly reduce prior work cost when repairing items on an Anvil.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillSmithing.NAME, 40)
+    .put(SkillSmithing.NAME, 30)
     .build();
   public static final StreamCodec<ByteBuf, PerkMasterBlacksmith> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkMasterBlacksmith::new);
 

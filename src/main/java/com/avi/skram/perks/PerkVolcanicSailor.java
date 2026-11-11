@@ -17,7 +17,7 @@ public class PerkVolcanicSailor extends Perk {
   public static final String NAME = "volcanic_sailor";
   public static final String DESCRIPTION = "Safely sail on lava. While in a boat on lava, both you and your boat are immune to fire.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillSailing.NAME, 40)
+    .put(SkillSailing.NAME, 30)
     .put(SkillSmithing.NAME, 30)
     .put(SkillHealth.NAME, 20)
     .build();

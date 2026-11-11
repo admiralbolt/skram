@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class PerkDefuser extends Perk {
   public static final String NAME = "defuser";
-  public static final String DESCRIPTION = "Dealing damage to a creeper defuses it.";
+  public static final String DESCRIPTION = "Dealing damage to a creeper permanently defuses it.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
     .put(SkillDemolition.NAME, 30)
     .put(SkillMelee.NAME, 20)

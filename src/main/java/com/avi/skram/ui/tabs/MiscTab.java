@@ -1,5 +1,7 @@
 package com.avi.skram.ui.tabs;
 
+import com.avi.skram.skills.Skill;
+import com.avi.skram.skills.Skills;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.MultiLineTextWidget;
 import net.minecraft.client.gui.layouts.Layout;
@@ -9,30 +11,99 @@ import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.gui.widget.ResizableTextureImageWidget;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public final class MiscTab {
 
   private MiscTab() {}
 
-  public static Layout getLayout() {
-    LinearLayout layout = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    layout.addChild(new MultiLineTextWidget(Component.literal("Miscellaneous content coming soon."), Minecraft.getInstance().font));
-    return layout;
+  public static List<TabEntry> entries() {
+    return List.of(
+      createGeneralEntry(),
+      createSkillsEntry(),
+      createPerksEntry(),
+      createMagicEntry()
+    );
   }
 
-  public static List<TabEntry> entries() {
+  private static MultiLineTextWidget textWidget(String text) {
+    MultiLineTextWidget widget = new MultiLineTextWidget(Component.literal(text), Minecraft.getInstance().font);
+    widget.setMaxWidth(220);
+    return widget;
+  }
+
+  private static TabEntry createGeneralEntry() {
+    return createEntry("general", "General", "textures/item/book.png", MiscTab::createGeneralDetails);
+  }
+
+  private static TabEntry createSkillsEntry() {
+    return createEntry("skills", "Skills", "textures/item/iron_sword.png", MiscTab::createSkillsDetails);
+  }
+
+  private static TabEntry createPerksEntry() {
+    return createEntry("perks", "Perks", "textures/item/diamond.png", MiscTab::createPerksDetails);
+  }
+
+  private static TabEntry createMagicEntry() {
+    return createEntry("magic", "Magic", "textures/item/enchanted_book.png", MiscTab::createMagicDetails);
+  }
+
+  private static TabEntry createEntry(String key, String name, String icon, Supplier<Layout> details) {
     LinearLayout indexContent = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
     indexContent.spacing(4).defaultCellSetting().alignVerticallyMiddle();
     indexContent.addChild(new ResizableTextureImageWidget(
-      0, 0, 16, 16, Identifier.withDefaultNamespace("textures/item/book.png"), 16, 16
+      0, 0, 16, 16, Identifier.withDefaultNamespace(icon), 16, 16
     ));
-    indexContent.addChild(new MultiLineTextWidget(Component.literal("Miscellaneous"), Minecraft.getInstance().font));
-    return List.of(new TabEntry(
-      "misc",
+    indexContent.addChild(new MultiLineTextWidget(Component.literal(name), Minecraft.getInstance().font));
+    return new TabEntry(
+      key,
       indexContent,
       145,
       28,
-      MiscTab::getLayout
+      details
+    );
+  }
+
+  private static Layout createGeneralDetails() {
+    LinearLayout layout = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
+    layout.spacing(6);
+    layout.addChild(new MultiLineTextWidget(
+      Component.literal("Well, well, well."),
+      Minecraft.getInstance().font
     ));
+    layout.addChild(textWidget(
+      "Welcome to Skram™. A few things have changed, but the gist is mostly the same. Skills provided permanent passive benefits, and can be leveled up by doing stuff! Perks have a chance to be discovered whenever you gain XP. Spells must be learned from spell scrolls, which you'll find out in the wild."
+    ));
+    layout.addChild(textWidget(
+      "Enjoy! If you encounter any bugs, or have feedback please let me know!"
+    ));
+    layout.addChild(textWidget(
+      "Some other general balance notes:\n* Healing from food is nerfed to 25% effectiveness.\n* Food exhaustion from all sources increased by 50%\n* Items & Armor have skill level requirements.\n* Infernal mobs is configured to higher than normal settings.\n* Waystones exist and are craftable, but have a high magic level requirement."
+    ));
+    return layout;
+  }
+
+  private static Layout createSkillsDetails() {
+    LinearLayout layout = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
+    layout.spacing(6);
+    layout.addChild(textWidget("There are currently: §6 " + Skills.SKILLS_BY_NAME.size() + "§f skills!"));
+    layout.addChild(textWidget("All the familiar ones, plus some new ones too! Of general note, XP bonus is tracked per skill based on a completion log. See the achievements for the full details."));
+    return layout;
+  }
+
+  private static Layout createPerksDetails() {
+    LinearLayout layout = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
+    layout.spacing(6);
+    layout.addChild(textWidget("Perks have a chance of being discovered every time you gain XP (the exact chance is [XP_GAINED / " + Skill.PERK_CHANCE + "]). Once discovered, perks can be researched if you have both the required levels and the required materials."));
+    layout.addChild(textWidget("Not all perks are created equal."));
+    return layout;
+  }
+
+  private static Layout createMagicDetails() {
+    LinearLayout layout = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
+    layout.spacing(6);
+    layout.addChild(textWidget("Casting spells is done with the 'c' key by default. Spell casting requires a lot of focus, and is interrupted by left/right clicking anything, or by taking damage."));
+    layout.addChild(textWidget("Levelling up your magic increase your max mana, mana regeneration, and spell power of many spells. Spells must be discovered! They can be found in many chests, and as a drop from some mobs. You can't learn a spell from a scroll until you have the required magic level."));
+    return layout;
   }
 }

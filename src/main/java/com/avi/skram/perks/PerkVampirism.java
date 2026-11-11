@@ -19,8 +19,8 @@ public class PerkVampirism extends Perk {
   public static final String NAME = "vampirism";
   public static final String DESCRIPTION = "Whenever you kill a mob with a melee attack, restore 1/2 heart.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillMelee.NAME, 40)
-    .put(SkillMagic.NAME, 30)
+    .put(SkillMelee.NAME, 30)
+    .put(SkillMagic.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkVampirism> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkVampirism::new);
 

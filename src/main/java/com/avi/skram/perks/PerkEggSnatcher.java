@@ -24,10 +24,10 @@ public class PerkEggSnatcher extends Perk {
   public static final String NAME = "egg_snatcher";
   public static final String DESCRIPTION = "ANY entity killed has a 6% chance of dropping their spawn egg.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillMelee.NAME, 40)
-    .put(SkillRanged.NAME, 40)
+    .put(SkillMelee.NAME, 30)
+    .put(SkillRanged.NAME, 30)
     .put(SkillHusbandry.NAME, 40)
-    .put(SkillStealth.NAME, 30)
+    .put(SkillStealth.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkEggSnatcher> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkEggSnatcher::new);
 

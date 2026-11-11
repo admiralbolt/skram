@@ -19,7 +19,7 @@ public class PerkBatman extends Perk {
   public static final String NAME = "batman";
   public static final String DESCRIPTION = "Your fishing rod can now be used as a grappling hook.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillFishing.NAME, 40)
+    .put(SkillFishing.NAME, 30)
     .put(SkillAthletics.NAME, 20)
     .put(SkillAcrobatics.NAME, 20)
     .build();

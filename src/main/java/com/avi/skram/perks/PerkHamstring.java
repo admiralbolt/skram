@@ -19,7 +19,7 @@ public class PerkHamstring extends Perk {
   public static final String NAME = "hamstring";
   public static final String DESCRIPTION = "Melee attacks inflict slowness. Duration is based on damage dealt.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillMelee.NAME, 40)
+    .put(SkillMelee.NAME, 30)
     .put(SkillStealth.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkHamstring> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkHamstring::new);

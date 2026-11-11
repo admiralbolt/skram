@@ -20,7 +20,7 @@ public class PerkGemini extends Perk {
   public static final String NAME = "gemini";
   public static final String DESCRIPTION = "Whenever you breed animals, breed twins.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillHusbandry.NAME, 50)
+    .put(SkillHusbandry.NAME, 30)
     .build();
   public static final StreamCodec<ByteBuf, PerkGemini> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkGemini::new);
 

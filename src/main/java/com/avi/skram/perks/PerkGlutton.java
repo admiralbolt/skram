@@ -21,7 +21,7 @@ public class PerkGlutton extends Perk {
   public static final String NAME = "glutton";
   public static final String DESCRIPTION = "Eating food now applies regeneration and hunger.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillCooking.NAME, 40)
+    .put(SkillCooking.NAME, 30)
     .put(SkillHealth.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkGlutton> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkGlutton::new);

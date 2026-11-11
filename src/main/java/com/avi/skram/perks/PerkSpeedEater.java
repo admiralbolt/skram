@@ -19,7 +19,7 @@ public class PerkSpeedEater extends Perk {
   public static final String NAME = "speed_eater";
   public static final String DESCRIPTION = "Consume food twice as fast.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillCooking.NAME, 40)
+    .put(SkillCooking.NAME, 30)
     .put(SkillHealth.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkSpeedEater> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkSpeedEater::new);

@@ -26,8 +26,8 @@ public class PerkDebonair extends Perk {
   public static final String NAME = "debonair";
   public static final String DESCRIPTION = "Use flowers on villagers to increase your favor with them. Gain +1 favor for each 5 levels of Botany OR Mercantile you have.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillMercantile.NAME, 40)
-    .put(SkillBotany.NAME, 30)
+    .put(SkillMercantile.NAME, 30)
+    .put(SkillBotany.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkDebonair> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkDebonair::new);
 

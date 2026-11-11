@@ -13,7 +13,7 @@ import java.util.Map;
 public class PerkSpaceJump extends Perk {
 
   public static final String NAME = "space_jump";
-  public static final String DESCRIPTION = "";
+  public static final String DESCRIPTION = "Gain a double jump.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder().put(SkillAcrobatics.NAME, 50).build();
   public static final StreamCodec<ByteBuf, PerkSpaceJump> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkSpaceJump::new);
 

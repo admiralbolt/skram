@@ -16,7 +16,7 @@ public class PerkFlyingDutchman extends Perk {
   public static final String DESCRIPTION = "You can now jump while controlling a boat.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
     .put(SkillAcrobatics.NAME, 20)
-    .put(SkillSailing.NAME, 50)
+    .put(SkillSailing.NAME, 30)
     .build();
   public static final StreamCodec<ByteBuf, PerkFlyingDutchman> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkFlyingDutchman::new);
 

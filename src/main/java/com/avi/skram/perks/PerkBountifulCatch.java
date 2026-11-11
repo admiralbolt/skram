@@ -17,7 +17,7 @@ public class PerkBountifulCatch extends Perk {
   public static final String NAME = "bountiful_catch";
   public static final String DESCRIPTION = "Fishing grants +3 XP per catch.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillFishing.NAME, 30)
+    .put(SkillFishing.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkBountifulCatch> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkBountifulCatch::new);
 

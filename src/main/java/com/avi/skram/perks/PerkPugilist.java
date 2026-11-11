@@ -19,8 +19,8 @@ public class PerkPugilist extends Perk {
   public static final String NAME = "pugilist";
   public static final String DESCRIPTION = "Unarmed melee attacks deal +10 damage.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillMelee.NAME, 60)
-    .put(SkillAthletics.NAME, 30)
+    .put(SkillAthletics.NAME, 40)
+    .put(SkillMelee.NAME, 30)
     .build();
   public static final StreamCodec<ByteBuf, PerkPugilist> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkPugilist::new);
 

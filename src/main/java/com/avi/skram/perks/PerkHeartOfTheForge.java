@@ -23,8 +23,8 @@ public class PerkHeartOfTheForge extends Perk {
   public static final String NAME = "heart_of_the_forge";
   public static final String DESCRIPTION = "Reduces time spent burning by 50%";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillSmithing.NAME, 40)
-    .put(SkillHealth.NAME, 30)
+    .put(SkillSmithing.NAME, 30)
+    .put(SkillHealth.NAME, 20)
     .build();
   public static StreamCodec<ByteBuf, PerkHeartOfTheForge> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkHeartOfTheForge::new);
 

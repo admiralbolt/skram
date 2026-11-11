@@ -18,8 +18,8 @@ public class PerkJuggernaut extends Perk {
   public static final String NAME = "juggernaut";
   public static final String DESCRIPTION = "While sprinting, take 50% less damage.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillAthletics.NAME, 30)
-    .put(SkillHealth.NAME, 30)
+    .put(SkillAthletics.NAME, 20)
+    .put(SkillHealth.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkJuggernaut> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkJuggernaut::new);
 

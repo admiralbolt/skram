@@ -16,9 +16,9 @@ public class PerkPreciseSmasher extends Perk {
   public static final String NAME = "precise_smasher";
   public static final String DESCRIPTION = "Gain a 10% chance to not damage any tool when breaking a block. (stacks with unbreaking)";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillDigging.NAME, 30)
-    .put(SkillMining.NAME, 30)
-    .put(SkillWoodcutting.NAME, 30)
+    .put(SkillDigging.NAME, 20)
+    .put(SkillMining.NAME, 20)
+    .put(SkillWoodcutting.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkPreciseSmasher> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkPreciseSmasher::new);
 

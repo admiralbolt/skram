@@ -18,8 +18,8 @@ public class PerkVitalicBreathing extends Perk {
   public static final String NAME = "vitalic_breathing";
   public static final String DESCRIPTION = "No longer take suffocation damage from being trapped in walls.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillDigging.NAME, 30)
-    .put(SkillAthletics.NAME, 20)
+    .put(SkillDigging.NAME, 20)
+    .put(SkillAthletics.NAME, 15)
     .build();
   public static final StreamCodec<ByteBuf, PerkVitalicBreathing> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkVitalicBreathing::new);
 

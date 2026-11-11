@@ -27,7 +27,7 @@ public class PerkChainReaction extends Perk {
   public static final String NAME = "chain_reaction";
   public static final String DESCRIPTION = "Whenever one of your crops grows, it has a 80% chance to randomly tick again.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillFarming.NAME, 40)
+    .put(SkillFarming.NAME, 30)
     .build();
   public static final StreamCodec<ByteBuf, PerkChainReaction> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkChainReaction::new);
 
