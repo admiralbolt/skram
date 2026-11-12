@@ -33,10 +33,12 @@ public class Perks {
 
   public static Supplier<AttachmentType<PerkBackstab>> BACKSTAB;
   public static Supplier<AttachmentType<PerkBatman>> BATMAN;
+  public static Supplier<AttachmentType<PerkBlastMining>> BLAST_MINING;
   public static Supplier<AttachmentType<PerkBountifulCatch>> BOUNTIFUL_CATCH;
   public static Supplier<AttachmentType<PerkChainReaction>> CHAIN_REACTION;
   public static Supplier<AttachmentType<PerkClusterBomb>> CLUSTER_BOMB;
   public static Supplier<AttachmentType<PerkDebonair>> DEBONAIR;
+  public static Supplier<AttachmentType<PerkDeepSeaDredger>> DEEP_SEA_DREDGER;
   public static Supplier<AttachmentType<PerkDefuser>> DEFUSER;
   public static Supplier<AttachmentType<PerkEggSnatcher>> EGG_SNATCHER;
   public static Supplier<AttachmentType<PerkExpertEnchanter>> EXPERT_ENCHANTER;
@@ -52,6 +54,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkLuckyDog>> LUCKY_DOG;
   public static Supplier<AttachmentType<PerkMasterBlacksmith>> MASTER_BLACKSMITH;
   public static Supplier<AttachmentType<PerkPhotosynthesis>> PHOTOSYNTHESIS;
+  public static Supplier<AttachmentType<PerkPirateering>> PIRATEERING;
   public static Supplier<AttachmentType<PerkPreciseSmasher>> PRECISE_SMASHER;
   public static Supplier<AttachmentType<PerkPugilist>> PUGILIST;
   public static Supplier<AttachmentType<PerkSlayer>> SLAYER;
@@ -94,6 +97,16 @@ public class Perks {
     PERK_RESEARCH_COST_BY_NAME.put(PerkBatman.NAME, PerkBatman::getResearchCost);
     PerkBatman.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(BATMAN));
 
+    BLAST_MINING = Skram.ATTACHMENT_TYPES.register(
+      PerkBlastMining.NAME, () -> AttachmentType.serializable(() -> new PerkBlastMining())
+        .sync(new PerkSyncHandler<>(PerkBlastMining.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkBlastMining.NAME, BLAST_MINING);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkBlastMining.NAME, PerkBlastMining::getResearchCost);
+    PerkBlastMining.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(BLAST_MINING));
+
     BOUNTIFUL_CATCH = Skram.ATTACHMENT_TYPES.register(
       PerkBountifulCatch.NAME, () -> AttachmentType.serializable(() -> new PerkBountifulCatch())
         .sync(new PerkSyncHandler<>(PerkBountifulCatch.STREAM_CODEC))
@@ -133,6 +146,16 @@ public class Perks {
     PERKS_BY_NAME.put(PerkDebonair.NAME, DEBONAIR);
     PERK_RESEARCH_COST_BY_NAME.put(PerkDebonair.NAME, PerkDebonair::getResearchCost);
     PerkDebonair.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(DEBONAIR));
+
+    DEEP_SEA_DREDGER = Skram.ATTACHMENT_TYPES.register(
+      PerkDeepSeaDredger.NAME, () -> AttachmentType.serializable(() -> new PerkDeepSeaDredger())
+        .sync(new PerkSyncHandler<>(PerkDeepSeaDredger.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkDeepSeaDredger.NAME, DEEP_SEA_DREDGER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkDeepSeaDredger.NAME, PerkDeepSeaDredger::getResearchCost);
+    PerkDeepSeaDredger.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(DEEP_SEA_DREDGER));
 
     DEFUSER = Skram.ATTACHMENT_TYPES.register(
       PerkDefuser.NAME, () -> AttachmentType.serializable(() -> new PerkDefuser())
@@ -284,6 +307,16 @@ public class Perks {
     PERKS_BY_NAME.put(PerkPhotosynthesis.NAME, PHOTOSYNTHESIS);
     PERK_RESEARCH_COST_BY_NAME.put(PerkPhotosynthesis.NAME, PerkPhotosynthesis::getResearchCost);
     PerkPhotosynthesis.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(PHOTOSYNTHESIS));
+
+    PIRATEERING = Skram.ATTACHMENT_TYPES.register(
+      PerkPirateering.NAME, () -> AttachmentType.serializable(() -> new PerkPirateering())
+        .sync(new PerkSyncHandler<>(PerkPirateering.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkPirateering.NAME, PIRATEERING);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkPirateering.NAME, PerkPirateering::getResearchCost);
+    PerkPirateering.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(PIRATEERING));
 
     PRECISE_SMASHER = Skram.ATTACHMENT_TYPES.register(
       PerkPreciseSmasher.NAME, () -> AttachmentType.serializable(() -> new PerkPreciseSmasher())

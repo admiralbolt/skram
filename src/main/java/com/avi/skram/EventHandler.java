@@ -18,12 +18,16 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerExplosion;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
@@ -34,12 +38,14 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.event.AnvilUpdateEvent;
+import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.neoforge.event.level.block.CropGrowEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -47,6 +53,7 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = Skram.MODID)
@@ -354,6 +361,34 @@ public class EventHandler {
     PerkHamstring.handleDamageEvent(event);
     PerkJuggernaut.handleDamageEvent(event);
     PerkVitalicBreathing.handleDamageEvent(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_ENTITY_HURT_POST(LivingDamageEvent.Post event) {
+    PerkPirateering.handleDamageEvent(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_GO_BOOM(ExplosionEvent.Detonate event) {
+    // To properly track stuff for demolition we want to add players as the source for any explosion they cause.
+    // This has an unintended effect of excluding the player from damage calculation in certain cases, due to
+    // the explosion source being excluded by default in ServerExplosion:
+    //   List<Entity> list = this.level.getEntities(this.source, new AABB((double)x0, (double)y0, (double)z0, (double)x1, (double)y1, (double)z1));
+    // If this is player owned explosion, we add them back to the list of entities that should be affected.
+    ServerExplosion explosion = event.getExplosion();
+    Player player = null;
+    if (explosion.getDirectSourceEntity() instanceof Player) {
+      player = (Player) explosion.getDirectSourceEntity();
+    } else if (explosion.getIndirectSourceEntity() instanceof Player) {
+      player = (Player) explosion.getIndirectSourceEntity();
+    }
+    if (player == null) return;
+
+    // Do a quick and dirty check just to make sure they're in range. This roughly follows the same logic of
+    // ServerExplosion.
+    if (explosion.center().distanceTo(player.position()) > (explosion.radius() * 2)) return;
+
+    event.getAffectedEntities().add(player);
   }
 
   @SubscribeEvent

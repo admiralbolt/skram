@@ -9,26 +9,23 @@ Misc Ideas:
 Perks
 ==================
 
-Pirate: Sailing + Stealth + ??? => ???
-
-
-acrobatics: 3
-athletics: 6
-botany: 2
-brewing: 2
-cooking: 2
-demolition: 2
-digging: 2
-farming: 2
+acrobatics: 4
+athletics: 7
+botany: 3
+brewing: 3
+cooking: 3
+demolition: 3
+digging: 4
+farming: 3
 fishing: 3
-health: 5
-husbandry: 3
-magic: 3
-melee: 8
-mercantile: 2
-mining: 2
+health: 7
+husbandry: 4
+magic: 4
+melee: 9
+mercantile: 3
+mining: 4
 ranged: 7
-sailing: 2
+sailing: 4
 smithing: 3
 stealth: 4
-woodcutting: 1
+woodcutting: 3
