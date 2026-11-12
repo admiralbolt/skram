@@ -5,6 +5,7 @@ import java.awt.*;
 public class Palette {
 
   public static Color AQUA = new Color(0, 200, 160, 255);
+  public static Color CERULEAN = new Color(0, 180, 255, 255);
   public static Color FIRE = new Color(200, 90, 0, 255);
   public static Color GREEN = new Color(0, 255, 0, 255);
   public static Color INDIGO = new Color(19, 15, 54, 255);

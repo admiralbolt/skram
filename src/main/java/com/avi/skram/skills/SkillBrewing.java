@@ -89,7 +89,7 @@ public class SkillBrewing extends Skill {
       Component name = potionItem.getName(stack);
       if (!(name.getContents() instanceof TranslatableContents translatableContents)) continue;
 
-      totalXp += XP_MAP.getOrDefault(translatableContents.getKey(), 0);
+      totalXp += XP_MAP.getOrDefault(translatableContents.getKey(), 100);
     }
     this.addXp(player, totalXp);
   }

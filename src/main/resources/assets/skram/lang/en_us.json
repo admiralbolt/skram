@@ -5,9 +5,13 @@
   "container.mega_chest": "Mega Chest",
   "container.mega_chest.sort": "Sort",
 
+  "attributes.skram.mana_regeneration": "Mana Regneration",
+
   "effect.skram.burning_rush": "Burning Rush",
   "effect.skram.flanked": "Flanked",
   "effect.skram.hexed": "Hexed",
+  "effect.skram.mana_regeneration": "Mana Regeneration",
+  "item.minecraft.potion.effect.mana_regeneration_potion": "Potion of Mana Regeneration",
 
   "item.skram.example_item": "Example Item",
   "item.skram.awesome_snake": "Awesome Snake",
