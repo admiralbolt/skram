@@ -10,6 +10,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 public class SkramEffects {
 
   public static Holder<MobEffect> BURNING_RUSH;
+  public static Holder<MobEffect> FLANKED;
   public static Holder<MobEffect> HEXED;
 
   public static void register() {
@@ -17,6 +18,13 @@ public class SkramEffects {
       BurningRushEffect.NAME, () -> new BurningRushEffect(
         MobEffectCategory.BENEFICIAL,
         MathUtils.getColorValue(Palette.FIRE)
+      )
+    );
+
+    FLANKED = Skram.EFFECTS.register(
+      FlankedEffect.NAME, () -> new FlankedEffect(
+        MobEffectCategory.HARMFUL,
+        MathUtils.getColorValue(Palette.INDIGO)
       )
     );
 

@@ -6,11 +6,11 @@
   "container.mega_chest.sort": "Sort",
 
   "effect.skram.burning_rush": "Burning Rush",
+  "effect.skram.flanked": "Flanked",
   "effect.skram.hexed": "Hexed",
 
   "item.skram.example_item": "Example Item",
   "item.skram.awesome_snake": "Awesome Snake",
-
 
   "item.skram.music_disc_arcturia": "Arcturia",
   "item.skram.music_disc_arcturia.desc": "Mistveil OST: Arcturia",

@@ -24,7 +24,7 @@ public class PerkDefuser extends Perk {
 
   public static List<ItemStack> getResearchCost() {
     return List.of(
-      new ItemStack(Items.TRIPWIRE_HOOK, 128),
+      new ItemStack(Items.TRIPWIRE_HOOK, 64),
       new ItemStack(Items.CREEPER_HEAD, 3)
     );
   }

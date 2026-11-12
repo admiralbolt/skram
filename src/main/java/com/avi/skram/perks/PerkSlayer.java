@@ -23,10 +23,10 @@ public class PerkSlayer extends Perk {
 
   public static List<ItemStack> getResearchCost() {
     return List.of(
-      new ItemStack(Items.ROTTEN_FLESH, 640),
-      new ItemStack(Items.BONE, 320),
-      new ItemStack(Items.GUNPOWDER, 128),
-      new ItemStack(Items.WITHER_ROSE, 24)
+      new ItemStack(Items.ROTTEN_FLESH, 256),
+      new ItemStack(Items.BONE, 128),
+      new ItemStack(Items.GUNPOWDER, 64),
+      new ItemStack(Items.WITHER_ROSE, 32)
     );
   }
 

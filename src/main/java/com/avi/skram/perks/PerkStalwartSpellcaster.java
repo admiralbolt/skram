@@ -16,7 +16,7 @@ public class PerkStalwartSpellcaster extends Perk {
   public static final String NAME = "stalwart_spellcaster";
   public static final String DESCRIPTION = "Taking damage no longer interrupts spellcasting.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillMagic.NAME, 30)
+    .put(SkillMagic.NAME, 15)
     .put(SkillHealth.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkStalwartSpellcaster> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkStalwartSpellcaster::new);

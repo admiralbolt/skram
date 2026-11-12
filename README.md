@@ -2,10 +2,8 @@
 TODO
 ====
 
+* XP boost for total levels.
 * Mana potion
-* 2ish more spells?
-  * Magnetize
-* Flanking perk.
 * Giga Chest
 
 

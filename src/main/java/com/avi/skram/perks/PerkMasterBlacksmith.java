@@ -25,9 +25,8 @@ public class PerkMasterBlacksmith extends Perk {
   public static List<ItemStack> getResearchCost() {
     return List.of(
       new ItemStack(Items.COPPER_INGOT, 256),
-      new ItemStack(Items.IRON_INGOT, 192),
-      new ItemStack(Items.GOLD_INGOT, 128),
-      new ItemStack(Items.DIAMOND, 64)
+      new ItemStack(Items.IRON_INGOT, 128),
+      new ItemStack(Items.GOLD_INGOT, 64)
     );
   }
 

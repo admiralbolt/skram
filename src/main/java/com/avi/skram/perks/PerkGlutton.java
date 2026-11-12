@@ -21,16 +21,16 @@ public class PerkGlutton extends Perk {
   public static final String NAME = "glutton";
   public static final String DESCRIPTION = "Eating food now applies regeneration and hunger.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillCooking.NAME, 30)
+    .put(SkillCooking.NAME, 20)
     .put(SkillHealth.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkGlutton> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkGlutton::new);
 
   public static List<ItemStack> getResearchCost() {
     return List.of(
-      new ItemStack(Items.BREAD, 640),
-      new ItemStack(Items.BAKED_POTATO, 640),
-      new ItemStack(Items.COOKED_BEEF, 256)
+      new ItemStack(Items.BREAD, 320),
+      new ItemStack(Items.BAKED_POTATO, 320),
+      new ItemStack(Items.COOKED_BEEF, 128)
     );
   }
 

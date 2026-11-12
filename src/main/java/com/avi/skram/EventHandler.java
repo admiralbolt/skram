@@ -4,6 +4,7 @@ import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
 import com.avi.skram.commands.SkramCommands;
+import com.avi.skram.effect.FlankedEffect;
 import com.avi.skram.effect.HexedEffect;
 import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.network.*;
@@ -346,6 +347,7 @@ public class EventHandler {
     SkillRanged.handleDamageEvent(event);
 
     // Apply hexed effect after increasing damage from all sources, before applying XP.
+    FlankedEffect.increaseDamage(event);
     HexedEffect.increaseDamage(event);
 
     // Gain XP from relevant skills after damage numbers have been updated.
@@ -360,6 +362,7 @@ public class EventHandler {
     Perks.applyEntityModifier(event);
     PerkHamstring.handleDamageEvent(event);
     PerkJuggernaut.handleDamageEvent(event);
+    PerkTeamwork.handleDamageEvent(event);
     PerkVitalicBreathing.handleDamageEvent(event);
   }
 

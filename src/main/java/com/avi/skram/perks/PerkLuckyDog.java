@@ -34,11 +34,7 @@ public class PerkLuckyDog extends Perk {
 
   public static List<ItemStack> getResearchCost() {
     return List.of(
-      new ItemStack(Items.SUNFLOWER, 64),
-      new ItemStack(Items.NAUTILUS_SHELL, 32),
-      new ItemStack(Items.BEETROOT, 128),
-      new ItemStack(Items.RABBIT_FOOT, 64),
-      new ItemStack(Items.EMERALD, 64)
+      new ItemStack(Items.RABBIT_FOOT, 16)
     );
   }
 

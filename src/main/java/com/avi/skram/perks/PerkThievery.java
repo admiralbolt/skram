@@ -32,7 +32,7 @@ public class PerkThievery extends Perk {
   public static final String NAME = "thievery";
   public static final String DESCRIPTION = "Enables you to steal emeralds from Villagers. Cooldown of " + COOLDOWN_MINUTES + " minutes per villager.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillStealth.NAME, 30)
+    .put(SkillStealth.NAME, 25)
     .put(SkillMercantile.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkThievery> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkThievery::new);

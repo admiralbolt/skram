@@ -65,6 +65,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkStalwartSpellcaster>> STALWART_SPELLCASTER;
   public static Supplier<AttachmentType<PerkSwiftStrafer>> SWIFT_STRAFER;
   public static Supplier<AttachmentType<PerkThievery>> THIEVERY;
+  public static Supplier<AttachmentType<PerkTeamwork>> TEAMWORK;
   public static Supplier<AttachmentType<PerkVampirism>> VAMPIRISM;
   public static Supplier<AttachmentType<PerkVitalicBreathing>> VITALIC_BREATHING;
   public static Supplier<AttachmentType<PerkVolcanicSailor>> VOLCANIC_SAILOR;
@@ -418,6 +419,16 @@ public class Perks {
     PERK_RESEARCH_COST_BY_NAME.put(PerkThievery.NAME, PerkThievery::getResearchCost);
     PerkThievery.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(THIEVERY));
 
+    TEAMWORK = Skram.ATTACHMENT_TYPES.register(
+      PerkTeamwork.NAME, () -> AttachmentType.serializable(() -> new PerkTeamwork())
+        .sync(new PerkSyncHandler<>(PerkTeamwork.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkTeamwork.NAME, TEAMWORK);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkTeamwork.NAME, PerkTeamwork::getResearchCost);
+    PerkTeamwork.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(TEAMWORK));
+
     VAMPIRISM = Skram.ATTACHMENT_TYPES.register(
       PerkVampirism.NAME, () -> AttachmentType.serializable(() -> new PerkVampirism())
         .sync(new PerkSyncHandler<>(PerkVampirism.STREAM_CODEC))
@@ -500,6 +511,8 @@ public class Perks {
 
   // We are doing this here in case we ever need to attach multiple entity modifier values.
   // Probably mildly overengineered, but eh.
+  // Hello, it's me from the future, I needed to attach multiple entity modifier values.
+  // Thanks past me.
   public static void applyEntityModifier(LivingDamageEvent.Pre event) {
     Player player = null;
     if (event.getSource().getEntity() instanceof Player) {
@@ -517,6 +530,11 @@ public class Perks {
     PerkDefuser perk = player.getData(Perks.DEFUSER);
     if (perk.isFullyEnabled() && (event.getEntity() instanceof Creeper)) {
       modifier.canExplode = false;
+    }
+
+    PerkTeamwork teamwork = player.getData(Perks.TEAMWORK);
+    if (teamwork.isFullyEnabled()) {
+      modifier.flankApplicator = player.getUUID();
     }
 
     event.getEntity().setData(MiscAttachments.SKRAM_ENTITY_MODIFIER, modifier);
