@@ -1,13 +1,7 @@
 package com.avi.skram.skills;
 
-import com.avi.skram.ui.GenericMessageToast;
-import com.avi.skram.ui.ToastUtils;
+import com.avi.skram.client.SkramClientSkillHooks;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.components.toasts.ToastManager;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
@@ -102,12 +96,7 @@ public class SkillWoodcutting extends Skill {
     if (woodcutting.level < requiredLevel) {
       event.setCanceled(true);
       if (event.getLevel().isClientSide()) {
-        ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
-        if (!ToastUtils.hasGenericMessageToast(toastManager, woodcutting.getRequiredLevelToastName())) {
-          toastManager.addToast(new GenericMessageToast(
-            woodcutting.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(woodcutting.name, Skills.DEFAULT_ICON), "Using a " + usedItem.getItemName().getString() + " requires a " + SkillWoodcutting.NAME + " level of " + requiredLevel + "."
-          ));
-        }
+        SkramClientSkillHooks.showRequiredLevelToast(woodcutting, "Using a " + usedItem.getItemName().getString() + " requires a " + SkillWoodcutting.NAME + " level of " + requiredLevel + ".");
       }
     }
   }
@@ -148,21 +137,11 @@ public class SkillWoodcutting extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Woodcutting Speed: +" + (int) (100 * this.getSpeedBonus()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[WOODCUTTING_SPEED_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(WOODCUTTING_SPEED_INDEX))
-        .build()
-    );
-
-    return vertical;
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(new AbilityDescription(
+      "Woodcutting Speed: +" + (int) (100 * this.getSpeedBonus()) + "%.",
+      WOODCUTTING_SPEED_INDEX
+    ));
   }
 
   @Override
@@ -171,8 +150,8 @@ public class SkillWoodcutting extends Skill {
   }
 
   @Override
-  public Layout renderXPMap() {
-    return Skill.renderBlockXPMap(XP_MAP);
+  public Map<Block, Integer> getBlockXpMap() {
+    return XP_MAP;
   }
 
 }

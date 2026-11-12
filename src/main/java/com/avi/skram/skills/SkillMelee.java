@@ -1,15 +1,8 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
-import com.avi.skram.ui.GenericMessageToast;
-import com.avi.skram.ui.ToastUtils;
+import com.avi.skram.client.SkramClientSkillHooks;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.components.toasts.ToastManager;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
@@ -126,41 +119,15 @@ public class SkillMelee extends Skill {
 
     event.setCanceled(true);
     if (!player.level().isClientSide()) return;
-    ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
-
-    if (!ToastUtils.hasGenericMessageToast(toastManager, melee.getRequiredLevelToastName())) {
-      toastManager.addToast(new GenericMessageToast(
-        melee.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(melee.name, Skills.DEFAULT_ICON), "Using a " + usedItem.getItemName().getString() + " requires a " + melee.name + " level of " + requiredLevel + "."
-      ));
-    }
+    SkramClientSkillHooks.showRequiredLevelToast(melee, "Using a " + usedItem.getItemName().getString() + " requires a " + melee.name + " level of " + requiredLevel + ".");
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Damage Boost: +" + (int) (100 * this.getDamageBoost()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[DAMAGE_BOOST_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(DAMAGE_BOOST_INDEX))
-        .build()
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(
+      new AbilityDescription("Damage Boost: +" + (int) (100 * this.getDamageBoost()) + "%.", DAMAGE_BOOST_INDEX),
+      new AbilityDescription("Attack Speed: +" + (int) (100 * this.getAttackSpeed()) + "%.", ATTACK_SPEED_INDEX)
     );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Attack Speed: +" + (int) (100 * this.getAttackSpeed()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[ATTACK_SPEED_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(ATTACK_SPEED_INDEX))
-        .build()
-    );
-
-    return vertical;
   }
 
   @Override

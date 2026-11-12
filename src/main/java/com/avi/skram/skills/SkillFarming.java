@@ -4,10 +4,6 @@ import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
@@ -232,31 +228,11 @@ public class SkillFarming extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Bonus Crop Growth Chance: " + (int) (100 * this.getCropGrowthChance()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[CROP_GROWTH_CHANCE_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(CROP_GROWTH_CHANCE_INDEX))
-        .build()
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(
+      new AbilityDescription("Bonus Crop Growth Chance: " + (int) (100 * this.getCropGrowthChance()) + "%.", CROP_GROWTH_CHANCE_INDEX),
+      new AbilityDescription("Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items.", FARMING_FORTUNE_INDEX)
     );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[FARMING_FORTUNE_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(FARMING_FORTUNE_INDEX))
-        .build()
-    );
-
-    return vertical;
   }
 
   @Override
@@ -265,7 +241,7 @@ public class SkillFarming extends Skill {
   }
 
   @Override
-  public Layout renderXPMap() {
-    return Skill.renderBlockXPMap(XP_MAP);
+  public Map<Block, Integer> getBlockXpMap() {
+    return XP_MAP;
   }
 }

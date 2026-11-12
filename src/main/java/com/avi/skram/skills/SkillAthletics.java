@@ -2,11 +2,6 @@ package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -131,41 +126,12 @@ public class SkillAthletics extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Movement Speed: +" + String.format("%.2f", this.getMovementSpeedBoost()) + "."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[MOVEMENT_SPEED_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(MOVEMENT_SPEED_INDEX))
-        .build()
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(
+      new AbilityDescription("Movement Speed: +" + String.format("%.2f", this.getMovementSpeedBoost()) + ".", MOVEMENT_SPEED_INDEX),
+      new AbilityDescription("Swim Speed: +" + String.format("%.2f", this.getMovementSpeedBoost()) + ".", SWIM_SPEED_INDEX),
+      new AbilityDescription("Oxygen Increase: +" + (100 * this.getOxygenBonus()) + "%.", OXYGEN_BONUS_INDEX)
     );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Swim Speed: +" + String.format("%.2f", this.getMovementSpeedBoost()) + "."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[SWIM_SPEED_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(SWIM_SPEED_INDEX))
-        .build()
-    );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Oxygen Increase: +" + (100 * this.getOxygenBonus()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[OXYGEN_BONUS_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(OXYGEN_BONUS_INDEX))
-        .build()
-    );
-
-    return vertical;
   }
 
   @Override

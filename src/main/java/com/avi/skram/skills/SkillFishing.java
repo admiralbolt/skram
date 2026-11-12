@@ -1,10 +1,6 @@
 package com.avi.skram.skills;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
@@ -89,31 +85,11 @@ public class SkillFishing extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Fishing Speed: +" + (int) (100 * this.getSpeedBonus()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[FISHING_SPEED_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(FISHING_SPEED_INDEX))
-        .build()
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(
+      new AbilityDescription("Fishing Speed: +" + (int) (100 * this.getSpeedBonus()) + "%.", FISHING_SPEED_INDEX),
+      new AbilityDescription("Treasure Chance: " + (int) (100 * this.catchTreasureChance()) + "%.", CATCH_TREASURE_INDEX)
     );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Treasure Chance: " + (int) (100 * this.catchTreasureChance()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[CATCH_TREASURE_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(CATCH_TREASURE_INDEX))
-        .build()
-    );
-
-    return vertical;
   }
 
   @Override

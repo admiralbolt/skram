@@ -1,10 +1,6 @@
 package com.avi.skram.skills;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -76,21 +72,11 @@ public class SkillCooking extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Food Boost: +" + (int) (100 * this.getFoodBoost()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[FOOD_BOOST_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(FOOD_BOOST_INDEX))
-        .build()
-    );
-
-    return vertical;
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(new AbilityDescription(
+      "Food Boost: +" + (int) (100 * this.getFoodBoost()) + "%.",
+      FOOD_BOOST_INDEX
+    ));
   }
 
   public static void handleCrafting(Player player, ItemStack itemStack) {
@@ -134,8 +120,8 @@ public class SkillCooking extends Skill {
   }
 
   @Override
-  public Layout renderXPMap() {
-    return Skill.renderItemXPMap(XP_MAP);
+  public Map<Item, Integer> getItemXpMap() {
+    return XP_MAP;
   }
 
 }

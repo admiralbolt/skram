@@ -2,11 +2,6 @@ package com.avi.skram.skills;
 
 import com.avi.skram.utils.MathUtils;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -85,31 +80,11 @@ public class SkillRanged extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Damage Boost: +" + (int) (100 * this.getDamageBoost()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[DAMAGE_BOOST_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(DAMAGE_BOOST_INDEX))
-        .build()
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(
+      new AbilityDescription("Damage Boost: +" + (int) (100 * this.getDamageBoost()) + "%.", DAMAGE_BOOST_INDEX),
+      new AbilityDescription("Draw Speed: +" + (int) (100 * this.getDrawSpeed()) + "%.", DRAW_SPEED_INDEX)
     );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Draw Speed: +" + (int) (100 * this.getDrawSpeed()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[DRAW_SPEED_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(DRAW_SPEED_INDEX))
-        .build()
-    );
-
-    return vertical;
   }
 
   @Override

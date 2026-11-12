@@ -1,14 +1,11 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
+import com.avi.skram.client.SkramClientSkillHooks;
 import com.avi.skram.perks.Perks;
-import com.avi.skram.ui.GenericMessageToast;
-import com.avi.skram.ui.ToastUtils;
 import com.mojang.datafixers.util.Pair;
 import net.blay09.mods.waystones.block.ModBlocks;
 import net.blay09.mods.waystones.item.ModItems;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -344,13 +341,7 @@ public class Skills {
     event.setCanceled(true);
     if (!event.getLevel().isClientSide()) return;
 
-    ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
-
-    if (!ToastUtils.hasGenericMessageToast(toastManager, skill.getRequiredLevelToastName())) {
-      toastManager.addToast(new GenericMessageToast(
-        skill.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(skill.name, Skills.DEFAULT_ICON), "Using a " + block.getName().getString() + " requires a " + skill.name + " level of " + skillReq.getSecond() + "."
-      ));
-    }
+    SkramClientSkillHooks.showRequiredLevelToast(skill, "Using a " + block.getName().getString() + " requires a " + skill.name + " level of " + skillReq.getSecond() + ".");
   }
 
   public static void handleRequiredLevels(PlayerInteractEvent.RightClickItem event) {
@@ -365,13 +356,7 @@ public class Skills {
     event.setCanceled(true);
     if (!event.getLevel().isClientSide()) return;
 
-    ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
-
-    if (!ToastUtils.hasGenericMessageToast(toastManager, skill.getRequiredLevelToastName())) {
-      toastManager.addToast(new GenericMessageToast(
-        skill.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(skill.name, Skills.DEFAULT_ICON), "Using a " + item.getName(event.getItemStack()) + " requires a " + skill.name + " level of " + skillReq.getSecond() + "."
-      ));
-    }
+    SkramClientSkillHooks.showRequiredLevelToast(skill, "Using a " + item.getName(event.getItemStack()) + " requires a " + skill.name + " level of " + skillReq.getSecond() + ".");
   }
 
 }

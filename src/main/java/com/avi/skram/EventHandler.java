@@ -11,8 +11,6 @@ import com.avi.skram.network.*;
 import com.avi.skram.perks.*;
 import com.avi.skram.skills.*;
 import com.avi.skram.ui.SkramScreen;
-import com.avi.skram.ui.SpellUI;
-import com.avi.skram.ui.XPGainGui;
 import com.avi.skram.utils.ReflectionUtils;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
@@ -29,10 +27,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.event.ScreenEvent;
-import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.event.AnvilUpdateEvent;
@@ -151,16 +145,6 @@ public class EventHandler {
     if (event.getEntity().level().isClientSide()) return;
 
     SkillCooking.handleCrafting(event.getEntity(), event.getCrafting());
-  }
-
-  @SubscribeEvent
-  public static void ON_SCREEN_INIT_POST(ScreenEvent.Init.Post event) {
-    // AddSkillButtonToInventory.addButtonOnInit(event);
-  }
-
-  @SubscribeEvent
-  public static void ON_SCREEN_RENDER(ScreenEvent.Render.Post event) {
-    // AddSkillButtonToInventory.adjustButtonOnReRender(event);
   }
 
   @SubscribeEvent
@@ -457,30 +441,6 @@ public class EventHandler {
     event.register(SkillPacket.TYPE, ClientPayloadHandler::handleSkillPacket);
     event.register(PerkPacket.TYPE, ClientPayloadHandler::handlePerkPacket);
     event.register(PerkResearchPacket.TYPE, ClientPayloadHandler::handlePerkResearchPacket);
-  }
-
-  public static final Identifier CUSTOM_LAYER = Identifier.fromNamespaceAndPath(Skram.MODID, "asdf");
-
-  @SubscribeEvent
-  public static void REGISTER_GUI_LAYERS(RegisterGuiLayersEvent event) {
-    event.registerAbove(
-      VanillaGuiLayers.HOTBAR,
-      CUSTOM_LAYER,
-      XPGainGui.layer
-    );
-
-    event.registerAbove(
-      VanillaGuiLayers.HOTBAR,
-      SpellUI.SPELl_UI,
-      SpellUI.layer
-    );
-
-  }
-
-  @SubscribeEvent
-  public static void REGISTER_BINDINGS(RegisterKeyMappingsEvent event) {
-    event.registerCategory(SKRAM_CATEGORY);
-    event.register(OPEN_SKILLS_UI.get());
   }
 
   @SubscribeEvent

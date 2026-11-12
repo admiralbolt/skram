@@ -2,10 +2,6 @@ package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
@@ -123,41 +119,12 @@ public class SkillDemolition extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Explosion Power: +" + (int) (100 * this.getBlastPower()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[BLAST_POWER_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(BLAST_POWER_INDEX))
-        .build()
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(
+      new AbilityDescription("Explosion Power: +" + (int) (100 * this.getBlastPower()) + "%.", BLAST_POWER_INDEX),
+      new AbilityDescription("Explosion Damage Taken: " + (int) (100 * this.getBlastResistance()) + "%.", BLAST_RESISTANCE_INDEX),
+      new AbilityDescription("Blast Knockback Resistance: " + (int) (100 * this.getBlastKnockbackResistance()) + "%.", BLAST_KNOCKBACK_RESISTANCE_INDEX)
     );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Explosion Damage Taken: " + (int) (100 * this.getBlastResistance()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[BLAST_RESISTANCE_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(BLAST_RESISTANCE_INDEX))
-        .build()
-    );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Blast Knockback Resistance: " + (int) (100 * this.getBlastKnockbackResistance()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[BLAST_KNOCKBACK_RESISTANCE_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(BLAST_KNOCKBACK_RESISTANCE_INDEX))
-        .build()
-    );
-
-    return vertical;
   }
 
   @Override

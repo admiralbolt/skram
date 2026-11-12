@@ -2,11 +2,6 @@ package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -93,31 +88,11 @@ public class SkillAcrobatics extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Jump Strength: +" + this.getJumpBoost() + "."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[JUMP_STRENGTH_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(JUMP_STRENGTH_INDEX))
-        .build()
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(
+      new AbilityDescription("Jump Strength: +" + this.getJumpBoost() + ".", JUMP_STRENGTH_INDEX),
+      new AbilityDescription("Safe Fall Distance: +" + this.getSafeFallDistanceBoost() + " blocks.", SAFE_FALL_INDEX)
     );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Safe Fall Distance: +" + this.getSafeFallDistanceBoost() + " blocks."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[SAFE_FALL_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(SAFE_FALL_INDEX))
-        .build()
-    );
-
-    return vertical;
   }
 
   @Override

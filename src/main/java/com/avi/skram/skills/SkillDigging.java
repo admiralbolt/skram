@@ -1,10 +1,6 @@
 package com.avi.skram.skills;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
@@ -116,21 +112,11 @@ public class SkillDigging extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Digging Speed: +" + (int) (100 * this.getSpeedBonus()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[DIGGING_SPEED_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(DIGGING_SPEED_INDEX))
-        .build()
-    );
-
-    return vertical;
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(new AbilityDescription(
+      "Digging Speed: +" + (int) (100 * this.getSpeedBonus()) + "%.",
+      DIGGING_SPEED_INDEX
+    ));
   }
 
   @Override
@@ -139,8 +125,8 @@ public class SkillDigging extends Skill {
   }
 
   @Override
-  public Layout renderXPMap() {
-    return Skill.renderBlockXPMap(XP_MAP);
+  public Map<Block, Integer> getBlockXpMap() {
+    return XP_MAP;
   }
 
 }

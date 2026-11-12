@@ -1,10 +1,6 @@
 package com.avi.skram.skills;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
@@ -186,31 +182,11 @@ public class SkillHusbandry extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Breeding Bonus XP: +" + this.getBonusXPOnBreed() + "."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[HUSBANDRY_BREEDING_XP_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(HUSBANDRY_BREEDING_XP_INDEX))
-        .build()
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(
+      new AbilityDescription("Breeding Bonus XP: +" + this.getBonusXPOnBreed() + ".", HUSBANDRY_BREEDING_XP_INDEX),
+      new AbilityDescription("Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items.", HUSBANDRY_FORTUNE_INDEX)
     );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[HUSBANDRY_FORTUNE_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(HUSBANDRY_FORTUNE_INDEX))
-        .build()
-    );
-
-    return vertical;
   }
 
   @Override

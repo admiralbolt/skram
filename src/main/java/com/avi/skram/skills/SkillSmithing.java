@@ -1,10 +1,6 @@
 package com.avi.skram.skills;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
@@ -135,41 +131,12 @@ public class SkillSmithing extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Furnace Speed: +" + (int) (100 * this.getSmithingSpeed()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[SMITHING_SPEED_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(SMITHING_SPEED_INDEX))
-        .build()
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(
+      new AbilityDescription("Furnace Speed: +" + (int) (100 * this.getSmithingSpeed()) + "%.", SMITHING_SPEED_INDEX),
+      new AbilityDescription("Double Production Chance: " + (int) (100 * this.getDoubleProductionChance()) + "%.", DOUBLE_PRODUCTION_INDEX),
+      new AbilityDescription("Enhance Repairs: +" + (int) (100 * this.getRepairBonus()) + "%.", ENHANCE_REPAIR_INDEX)
     );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Double Production Chance: " + (int) (100 * this.getDoubleProductionChance()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[DOUBLE_PRODUCTION_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(DOUBLE_PRODUCTION_INDEX))
-        .build()
-    );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Enhance Repairs: +" + (int) (100 * this.getRepairBonus()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[ENHANCE_REPAIR_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(ENHANCE_REPAIR_INDEX))
-        .build()
-    );
-
-    return vertical;
   }
 
   @Override
@@ -178,8 +145,8 @@ public class SkillSmithing extends Skill {
   }
 
   @Override
-  public Layout renderXPMap() {
-    return Skill.renderItemXPMap(XP_MAP);
+  public Map<Item, Integer> getItemXpMap() {
+    return XP_MAP;
   }
 
 }

@@ -2,6 +2,7 @@ package com.avi.skram.ui.tabs;
 
 import com.avi.skram.skills.Skill;
 import com.avi.skram.skills.Skills;
+import com.avi.skram.client.SkramClientSkillHooks;
 import com.avi.skram.utils.MathUtils;
 import com.avi.skram.utils.StringUtils;
 import net.minecraft.client.Minecraft;
@@ -54,7 +55,7 @@ public final class SkillsTab {
         indexContent,
         145,
         32,
-        skill::renderToLayout
+        () -> SkramClientSkillHooks.renderSkill(skill)
       ));
     }
 

@@ -2,10 +2,6 @@ package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
@@ -124,31 +120,11 @@ public class SkillHealth extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Bonus Health: +" + this.getBonusHealth() + "."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[BONUS_HEALTH_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(BONUS_HEALTH_INDEX))
-        .build()
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(
+      new AbilityDescription("Bonus Health: +" + this.getBonusHealth() + ".", BONUS_HEALTH_INDEX),
+      new AbilityDescription("Bonus Healing: +" + (int) (100 * this.getBonusHealing()) + "%.", BONUS_HEALING_INDEX)
     );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Bonus Healing: +" + (int) (100 * this.getBonusHealing()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[BONUS_HEALING_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(BONUS_HEALING_INDEX))
-        .build()
-    );
-
-    return vertical;
   }
 
   @Override

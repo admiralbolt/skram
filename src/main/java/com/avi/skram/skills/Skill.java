@@ -1,23 +1,8 @@
 package com.avi.skram.skills;
 
-import com.avi.skram.network.SkillPacket;
 import com.avi.skram.perks.Perks;
-import com.avi.skram.ui.GenericMessageToast;
-import com.avi.skram.ui.ToastUtils;
-import com.avi.skram.ui.WidgetUtils;
-import com.avi.skram.ui.XPGainGui;
-import com.avi.skram.utils.MathUtils;
-import com.avi.skram.utils.StringUtils;
+import com.avi.skram.client.SkramClientSkillHooks;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.ItemDisplayWidget;
-import net.minecraft.client.gui.components.MultiLineTextWidget;
-import net.minecraft.client.gui.components.toasts.ToastManager;
-import net.minecraft.client.gui.layouts.GridLayout;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
-import net.minecraft.client.gui.layouts.SpacerElement;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -26,8 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.bus.api.ICancellableEvent;
-import net.neoforged.neoforge.client.gui.widget.ResizableTextureImageWidget;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.util.ValueIOSerializable;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
@@ -186,19 +169,15 @@ public abstract class Skill implements ValueIOSerializable {
 
     // If we want to sync from client -> server we need to explicitly send a packet.
     if (syncToServer) {
-      XPGainGui.notify(this.name, xp);
-      ClientPacketDistributor.sendToServer(new SkillPacket(this.name, this.level, this.xp, this.xpMultiplier, this.enabledAbilities));
+      SkramClientSkillHooks.notifyXpGain(this.name, xp);
+      SkramClientSkillHooks.sendSkillToServer(this);
     }
   }
 
   public void onLevelChange(Player player) {
     // If we are on the client side, display the level up toast!
     if (player.level().isClientSide()) {
-      Minecraft.getInstance().gui.toastManager().addToast(new GenericMessageToast(
-        this.name + ":level_up",
-        Skills.SKILL_ICONS.getOrDefault(this.name, Skills.DEFAULT_ICON),
-        StringUtils.capitalize(this.name) + " leveled up to Lvl " + this.level + "."
-      ));
+      SkramClientSkillHooks.showLevelUpToast(this);
     }
 
     this.applyModifiers(player);
@@ -210,10 +189,7 @@ public abstract class Skill implements ValueIOSerializable {
 
   public void toggleEnabled(int i) {
     this.enabledAbilities[i] = !this.enabledAbilities[i];
-    // If we call this on the client side (which we expect to), update the server side as well.
-    if (Minecraft.getInstance().level != null && Minecraft.getInstance().level.isClientSide()) {
-      ClientPacketDistributor.sendToServer(new SkillPacket(this.name, this.level, this.xp, this.xpMultiplier, this.enabledAbilities));
-    }
+    SkramClientSkillHooks.sendSkillToServer(this);
   }
 
   public <T extends PlayerInteractEvent & ICancellableEvent> void requiredLevelCheck(T event) {
@@ -226,134 +202,25 @@ public abstract class Skill implements ValueIOSerializable {
 
     event.setCanceled(true);
     if (!event.getLevel().isClientSide()) return;
-    ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
-
-    if (!ToastUtils.hasGenericMessageToast(toastManager, this.getRequiredLevelToastName())) {
-      toastManager.addToast(new GenericMessageToast(
-        this.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(this.name, Skills.DEFAULT_ICON), "Using a " + usedItem.getItemName().getString() + " requires a " + this.name + " level of " + requiredLevel + "."
-      ));
-    }
+    SkramClientSkillHooks.showRequiredLevelToast(this, "Using a " + usedItem.getItemName().getString() + " requires a " + this.name + " level of " + requiredLevel + ".");
   }
 
-  public Layout renderToLayout() {
-    LinearLayout layout = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
-    layout.spacing(2).defaultCellSetting().padding(2);
+  public record AbilityDescription(String text, int enabledIndex) {}
 
-    layout.addChild(new ResizableTextureImageWidget(0, 0, 32, 32, Skills.SKILL_ICONS.get(this.name), 16, 16));
-
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(3).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(new MultiLineTextWidget(Component.literal(StringUtils.capitalize(this.name) + " Lvl " + this.level), Minecraft.getInstance().font));
-
-    GridLayout xpBarLayout = new GridLayout();
-    int xpBarWidth = (int) MathUtils.linearRescale(this.xp, Skill.getTotalXpForLevel(this.level), Skill.getTotalXpForLevel(this.level + 1), 0, 100);
-    xpBarLayout.addChild(new ResizableTextureImageWidget(0, 0, 100, 3, YELLOW_BAR_BACKGROUND, 182, 5), 0, 0);
-    xpBarLayout.addChild(new ResizableTextureImageWidget(0, 0, xpBarWidth, 3, YELLOW_BAR, 182, 5), 0, 0);
-    vertical.addChild(xpBarLayout);
-
-    vertical.addChild(new MultiLineTextWidget(Component.literal("EXP:  " + String.format("%,d", (int) this.xp)), Minecraft.getInstance().font));
-    vertical.addChild(new MultiLineTextWidget(Component.literal("Next: " + String.format("%,d", Skill.getTotalXpForLevel(this.level + 1))), Minecraft.getInstance().font));
-    vertical.addChild(new MultiLineTextWidget(Component.literal("Bonus: +" + (int) ((this.getTotalXpMultiplier(Minecraft.getInstance().player) - 1) * 100) + "%"), Minecraft.getInstance().font));
-    vertical.addChild(this.renderSkillAbilities());
-    vertical.addChild(new ResizableTextureImageWidget(0, 0, 182, 3, WHITE_BAR, 182, 5));
-    vertical.addChild(this.renderSkillDetails());
-    vertical.addChild(this.renderXPMap());
-
-    layout.addChild(vertical);
-
-    return layout;
+  public List<AbilityDescription> getAbilityDescriptions() {
+    return List.of();
   }
-
-  public abstract Layout renderSkillAbilities();
 
   public String getDescription() {
     return "";
   }
 
-  public Layout renderSkillDetails() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(2).defaultCellSetting().paddingTop(2);
-
-    String[] lines = this.getDescription().split("\n");
-    for (String line : lines) {
-      if (line.isEmpty()) {
-        vertical.addChild(new SpacerElement(180, 2));
-      }
-
-      vertical.addChild(WidgetUtils.textWidget180(line));
-    }
-
-    return vertical;
+  public Map<Item, Integer> getItemXpMap() {
+    return Map.of();
   }
 
-  public Layout renderXPMap() {
-    return new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
-  }
-
-  public static Layout renderItemXPMap(Map<Item, Integer> xpMap) {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-
-    List<Item> items = new ArrayList<>(xpMap.keySet().stream().toList());
-    items.sort(Comparator.comparing((item) -> {
-      ItemStack stack = new ItemStack(item);
-      return item.getName(stack).getString();
-    }));
-    GridLayout grid = new GridLayout();
-    GridLayout.RowHelper rowHelper = grid.createRowHelper(3);
-
-    rowHelper.addChild(SpacerElement.width(50));
-    rowHelper.addChild(SpacerElement.width(50));
-    rowHelper.addChild(SpacerElement.width(50));
-
-    for (int i = 0; i < items.size(); i += 3) {
-      for (int j = i; j < i + 3; j++) {
-        if (j >= items.size()) break;
-
-        LinearLayout horizontal = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
-        horizontal.spacing(4).defaultCellSetting().alignVerticallyMiddle();
-        Item item = items.get(j);
-        ItemStack stack = new ItemStack(item);
-
-        horizontal.addChild(new ItemDisplayWidget(Minecraft.getInstance(), 0, 0, 16, 16, stack.getHoverName(), stack, false, true));
-        horizontal.addChild(new MultiLineTextWidget(Component.literal(xpMap.get(item).toString()), Minecraft.getInstance().font));
-        rowHelper.addChild(horizontal);
-      }
-    }
-
-    vertical.addChild(grid);
-    return vertical;
-  }
-
-  public static Layout renderBlockXPMap(Map<Block, Integer> xpMap) {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-
-    List<Block> blocks = new ArrayList<>(xpMap.keySet().stream().toList());
-    blocks.sort(Comparator.comparing((block) -> block.getName().getString()));
-    GridLayout grid = new GridLayout();
-    GridLayout.RowHelper rowHelper = grid.createRowHelper(3);
-
-    rowHelper.addChild(SpacerElement.width(50));
-    rowHelper.addChild(SpacerElement.width(50));
-    rowHelper.addChild(SpacerElement.width(50));
-
-    for (int i = 0; i < blocks.size(); i += 3) {
-      for (int j = i; j < i + 3; j++) {
-        if (j >= blocks.size()) break;
-
-        LinearLayout horizontal = new LinearLayout(0, 0, LinearLayout.Orientation.HORIZONTAL);
-        horizontal.spacing(4).defaultCellSetting().alignVerticallyMiddle();
-        Block block = blocks.get(j);
-        ItemStack stack = new ItemStack(block);
-
-        horizontal.addChild(new ItemDisplayWidget(Minecraft.getInstance(), 0, 0, 16, 16, stack.getHoverName(), stack, false, true));
-        horizontal.addChild(new MultiLineTextWidget(Component.literal(xpMap.get(block).toString()), Minecraft.getInstance().font));
-        rowHelper.addChild(horizontal);
-      }
-    }
-
-    vertical.addChild(grid);
-    return vertical;
+  public Map<Block, Integer> getBlockXpMap() {
+    return Map.of();
   }
 
 }

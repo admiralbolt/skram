@@ -2,11 +2,6 @@ package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.npc.villager.AbstractVillager;
@@ -79,21 +74,11 @@ public class SkillMercantile extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Trade Cost: " + (int) (100 * this.getPriceReduction()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[PRICE_REDUCTION_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(PRICE_REDUCTION_INDEX))
-        .build()
-    );
-
-    return vertical;
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(new AbilityDescription(
+      "Trade Cost: " + (int) (100 * this.getPriceReduction()) + "%.",
+      PRICE_REDUCTION_INDEX
+    ));
   }
 
   @Override

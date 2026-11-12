@@ -1,10 +1,6 @@
 package com.avi.skram.skills;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -99,21 +95,11 @@ public class SkillBrewing extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Brewing Speed: +" + (int) (100 * this.getBrewingSpeed()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[BREWING_SPEED_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(BREWING_SPEED_INDEX))
-        .build()
-    );
-
-    return vertical;
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(new AbilityDescription(
+      "Brewing Speed: +" + (int) (100 * this.getBrewingSpeed()) + "%.",
+      BREWING_SPEED_INDEX
+    ));
   }
 
   @Override

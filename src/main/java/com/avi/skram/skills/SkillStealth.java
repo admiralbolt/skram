@@ -4,11 +4,6 @@ import com.avi.skram.Skram;
 import com.avi.skram.utils.ReflectionUtils;
 import io.netty.buffer.ByteBuf;
 import it.unimi.dsi.fastutil.ints.IntSet;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -153,31 +148,11 @@ public class SkillStealth extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Sneaking Speed: +" + (int) (100 * this.getSneakingSpeedBoost()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[SNEAKING_SPEED_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(SNEAKING_SPEED_INDEX))
-        .build()
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(
+      new AbilityDescription("Sneaking Speed: +" + (int) (100 * this.getSneakingSpeedBoost()) + "%.", SNEAKING_SPEED_INDEX),
+      new AbilityDescription("Detection Range: " + (int) (1.0 / (1 + this.getVisibilityModifier())) + "%.", VISIBILITY_INDEX)
     );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Detection Range: " + (int) (1.0 / (1 + this.getVisibilityModifier())) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[VISIBILITY_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(VISIBILITY_INDEX))
-        .build()
-    );
-
-    return vertical;
   }
 
   @Override

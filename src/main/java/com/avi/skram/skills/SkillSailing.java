@@ -1,11 +1,6 @@
 package com.avi.skram.skills;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 
 public class SkillSailing extends Skill {
@@ -38,21 +33,11 @@ public class SkillSailing extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Sailing Acceleration: +" + (int) (this.getAccelerationBoost() * 100) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[SAILING_ACCELERATION_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(SAILING_ACCELERATION_INDEX))
-        .build()
-    );
-
-    return vertical;
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(new AbilityDescription(
+      "Sailing Acceleration: +" + (int) (this.getAccelerationBoost() * 100) + "%.",
+      SAILING_ACCELERATION_INDEX
+    ));
   }
 
   @Override

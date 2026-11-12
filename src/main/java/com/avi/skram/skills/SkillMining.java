@@ -1,10 +1,6 @@
 package com.avi.skram.skills;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Checkbox;
-import net.minecraft.client.gui.layouts.Layout;
-import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.BlockTags;
@@ -152,31 +148,11 @@ public class SkillMining extends Skill {
   }
 
   @Override
-  public Layout renderSkillAbilities() {
-    LinearLayout vertical = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    vertical.spacing(1).defaultCellSetting().paddingBottom(2);
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Mining Speed: +" + (int) (100 * this.getSpeedBonus()) + "%."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[MINING_SPEED_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(MINING_SPEED_INDEX))
-        .build()
+  public java.util.List<AbilityDescription> getAbilityDescriptions() {
+    return java.util.List.of(
+      new AbilityDescription("Mining Speed: +" + (int) (100 * this.getSpeedBonus()) + "%.", MINING_SPEED_INDEX),
+      new AbilityDescription("Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items.", MINING_SPEED_INDEX)
     );
-
-    vertical.addChild(
-      Checkbox.builder(
-          Component.literal("Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items."),
-          Minecraft.getInstance().font
-        )
-        .selected(this.enabledAbilities[MINING_SPEED_INDEX])
-        .onValueChange((checkbox, value) -> this.toggleEnabled(MINING_SPEED_INDEX))
-        .build()
-    );
-
-    return vertical;
   }
 
   @Override
@@ -185,8 +161,8 @@ public class SkillMining extends Skill {
   }
 
   @Override
-  public Layout renderXPMap() {
-    return Skill.renderBlockXPMap(XP_MAP);
+  public Map<Block, Integer> getBlockXpMap() {
+    return XP_MAP;
   }
 
 }
