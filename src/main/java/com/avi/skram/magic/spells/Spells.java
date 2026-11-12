@@ -30,6 +30,7 @@ public class Spells {
   public static Spell ICARIAN_FLIGHT = new SpellIcarianFlight();
   public static Spell ICE_SPIKE = new SpellIceSpike();
   public static Spell LIGHTNING_STORM = new SpellLightningStorm();
+  public static Spell MAGNETIZE = new SpellMagnetize();
   public static Spell MINOR_HEAL = new SpellMinorHeal();
   public static Spell MUSCLE_BURST = new SpellMuscleBurst();
   public static Spell PLANAR_SHIFT = new SpellPlanarShift();
@@ -57,6 +58,7 @@ public class Spells {
     .put(SpellIcarianFlight.NAME, ICARIAN_FLIGHT)
     .put(SpellIceSpike.NAME, ICE_SPIKE)
     .put(SpellLightningStorm.NAME, LIGHTNING_STORM)
+    .put(SpellMagnetize.NAME, MAGNETIZE)
     .put(SpellMinorHeal.NAME, MINOR_HEAL)
     .put(SpellMuscleBurst.NAME, MUSCLE_BURST)
     .put(SpellPlanarShift.NAME, PLANAR_SHIFT)

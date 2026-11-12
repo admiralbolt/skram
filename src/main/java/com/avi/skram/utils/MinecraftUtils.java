@@ -109,7 +109,6 @@ public class MinecraftUtils {
   }
 
   public static void applyKnockback(Entity entity, Vec3 sourceLocation, double power) {
-    // Only handle actual knockback effects.
     if (power <= 0) return;
 
     // If the entity is a living entity, we want to apply it's knockback resistance.
@@ -118,6 +117,18 @@ public class MinecraftUtils {
     }
 
     Vec3 forceVector = entity.position().subtract(sourceLocation).normalize().scale(power);
+    entity.setDeltaMovement(forceVector);
+  }
+
+  public static void applyPull(Entity entity, Vec3 sourceLocation, double power) {
+    if (power <= 0) return;
+
+    // If the entity is a living entity, we want to apply it's knockback resistance.
+    if (entity instanceof LivingEntity live) {
+      power *= (1.0 - live.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+    }
+
+    Vec3 forceVector = sourceLocation.subtract(entity.position()).normalize().scale(power);
     entity.setDeltaMovement(forceVector);
   }
 

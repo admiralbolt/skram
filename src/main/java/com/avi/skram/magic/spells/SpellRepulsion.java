@@ -20,10 +20,10 @@ public class SpellRepulsion extends Spell {
   public static int CASTING_TICKS = 6;
 
   public static int RADIUS = 7;
-  public static double BASE_KNOCKBACK = 2.0;
+  public static double BASE_KNOCKBACK = 4.0;
 
   public SpellRepulsion() {
-    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_FIRE);
+    super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC4);
   }
 
   @Override
