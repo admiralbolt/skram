@@ -65,6 +65,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkVampirism>> VAMPIRISM;
   public static Supplier<AttachmentType<PerkVitalicBreathing>> VITALIC_BREATHING;
   public static Supplier<AttachmentType<PerkVolcanicSailor>> VOLCANIC_SAILOR;
+  public static Supplier<AttachmentType<PerkWhatAThrill>> WHAT_A_THRILL;
 
   public static Map<String, Supplier<List<ItemStack>>> PERK_RESEARCH_COST_BY_NAME;
   public static Map<String, List<Supplier>> SKILLS_TO_PERKS;
@@ -413,6 +414,16 @@ public class Perks {
     PERKS_BY_NAME.put(PerkVolcanicSailor.NAME, VOLCANIC_SAILOR);
     PERK_RESEARCH_COST_BY_NAME.put(PerkVolcanicSailor.NAME, PerkVolcanicSailor::getResearchCost);
     PerkVolcanicSailor.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(VOLCANIC_SAILOR));
+
+    WHAT_A_THRILL = Skram.ATTACHMENT_TYPES.register(
+      PerkWhatAThrill.NAME, () -> AttachmentType.serializable(() -> new PerkWhatAThrill())
+        .sync(new PerkSyncHandler<>(PerkWhatAThrill.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkWhatAThrill.NAME, WHAT_A_THRILL);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkWhatAThrill.NAME, PerkWhatAThrill::getResearchCost);
+    PerkWhatAThrill.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(WHAT_A_THRILL));
 
 
     // Logging purposes.
