@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class PerkBlastMining extends Perk {
 
-  public static final int XP_PERCENT = 20;
+  public static final int XP_PERCENT = 15;
 
   public static final String NAME = "blast_mining";
   public static final String DESCRIPTION = "Gain " + XP_PERCENT + "% of the normal XP for each block you blow up.";

@@ -2,8 +2,12 @@
 TODO
 ====
 
-Misc Ideas:
- - Artifacts? They are fun. Maybe introduce this as construction in a later update.
+* Mana potion
+* 2ish more spells?
+  * Magnetize
+* Flanking perk.
+* Giga Chest
+
 
 
 Perks

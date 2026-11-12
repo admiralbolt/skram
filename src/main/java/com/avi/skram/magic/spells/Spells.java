@@ -35,6 +35,7 @@ public class Spells {
   public static Spell PLANAR_SHIFT = new SpellPlanarShift();
   public static Spell PURIFY = new SpellPurify();
   public static Spell RALLY = new SpellRally();
+  public static Spell REPULSION = new SpellRepulsion();
   public static Spell SAP = new SpellSap();
 
   public static Map<String, Spell> SPELLS_BY_NAME = ImmutableMap.<String, Spell>builder()
@@ -61,6 +62,7 @@ public class Spells {
     .put(SpellPlanarShift.NAME, PLANAR_SHIFT)
     .put(SpellPurify.NAME, PURIFY)
     .put(SpellRally.NAME, RALLY)
+    .put(SpellRepulsion.NAME, REPULSION)
     .put(SpellSap.NAME, SAP)
     .build();
 

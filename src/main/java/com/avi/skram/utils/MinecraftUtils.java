@@ -5,7 +5,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.BlockUtil;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -17,6 +20,8 @@ import net.minecraft.world.level.portal.PortalShape;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 
 import java.util.Optional;
 
@@ -101,6 +106,19 @@ public class MinecraftUtils {
       player.getXRot(),
       postTeleport
     ));
+  }
+
+  public static void applyKnockback(Entity entity, Vec3 sourceLocation, double power) {
+    // Only handle actual knockback effects.
+    if (power <= 0) return;
+
+    // If the entity is a living entity, we want to apply it's knockback resistance.
+    if (entity instanceof LivingEntity live) {
+      power *= (1.0 - live.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+    }
+
+    Vec3 forceVector = entity.position().subtract(sourceLocation).normalize().scale(power);
+    entity.setDeltaMovement(forceVector);
   }
 
 }
