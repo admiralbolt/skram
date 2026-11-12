@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -58,6 +59,14 @@ public class PerkGemini extends Perk {
     newBaby.setBaby(true);
     newBaby.snapTo(primary.getX(), primary.getY(), primary.getZ(), 0.0F, 0.0F);
     primary.finalizeSpawnChildFromBreeding(level, partner, newBaby);
+
+    if (newBaby instanceof AbstractHorse horse) {
+      PerkGenealogy perkGenealogy = player.getData(Perks.GENEALOGY);
+      if (perkGenealogy.isFullyEnabled()) {
+        PerkGenealogy.applyAttributes(primary, partner, horse);
+      }
+    }
+
     level.addFreshEntityWithPassengers(newBaby);
   }
 

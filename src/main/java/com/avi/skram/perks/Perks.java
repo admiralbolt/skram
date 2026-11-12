@@ -42,6 +42,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkExpertEnchanter>> EXPERT_ENCHANTER;
   public static Supplier<AttachmentType<PerkFlyingDutchman>> FLYING_DUTCHMAN;
   public static Supplier<AttachmentType<PerkGemini>> GEMINI;
+  public static Supplier<AttachmentType<PerkGenealogy>> GENEALOGY;
   public static Supplier<AttachmentType<PerkGlutton>> GLUTTON;
   public static Supplier<AttachmentType<PerkGrenadier>> GRENADIER;
   public static Supplier<AttachmentType<PerkHamstring>> HAMSTRING;
@@ -181,6 +182,16 @@ public class Perks {
     PERKS_BY_NAME.put(PerkGemini.NAME, GEMINI);
     PERK_RESEARCH_COST_BY_NAME.put(PerkGemini.NAME, PerkGemini::getResearchCost);
     PerkGemini.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(GEMINI));
+
+    GENEALOGY = Skram.ATTACHMENT_TYPES.register(
+      PerkGenealogy.NAME, () -> AttachmentType.serializable(() -> new PerkGenealogy())
+        .sync(new PerkSyncHandler<>(PerkGenealogy.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkGenealogy.NAME, GENEALOGY);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkGenealogy.NAME, PerkGenealogy::getResearchCost);
+    PerkGenealogy.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(GENEALOGY));
 
     GLUTTON = Skram.ATTACHMENT_TYPES.register(
       PerkGlutton.NAME, () -> AttachmentType.serializable(() -> new PerkGlutton())

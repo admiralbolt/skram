@@ -2,8 +2,9 @@
 TODO
 ====
 
-SkillHusbandry:
-  - Bred entities increased stats?
+Bat Spawn Eggs!
+Geneology
+
 
 Misc Ideas:
  - Artifacts? They are fun. Maybe introduce this as construction in a later update.
