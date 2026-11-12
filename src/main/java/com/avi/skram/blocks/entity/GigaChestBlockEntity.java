@@ -1,5 +1,7 @@
 package com.avi.skram.blocks.entity;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.avi.skram.blocks.SkramBlocks;
 import com.avi.skram.inventory.GigaChestMenu;
 import com.avi.skram.inventory.GigaChestTabs;
@@ -29,6 +31,10 @@ import java.util.List;
 public class GigaChestBlockEntity extends BaseContainerBlockEntity implements LidBlockEntity {
 
   public static final String NAME = "giga_chest_block_entity";
+  private static final Codec<StoredItem> STORED_ITEM_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    Codec.INT.fieldOf("Slot").forGetter(StoredItem::slot),
+    ItemStack.MAP_CODEC.forGetter(StoredItem::stack)
+  ).apply(instance, StoredItem::new));
   private NonNullList<ItemStack> items = NonNullList.withSize(GigaChestTabs.CONTAINER_SIZE, ItemStack.EMPTY);
   private final ChestLidController lidController = new ChestLidController();
   private int openCount;
@@ -93,13 +99,25 @@ public class GigaChestBlockEntity extends BaseContainerBlockEntity implements Li
   @Override
   protected void loadAdditional(net.minecraft.world.level.storage.ValueInput input) {
     super.loadAdditional(input);
-    ContainerHelper.loadAllItems(input, this.items);
+    this.items = NonNullList.withSize(GigaChestTabs.CONTAINER_SIZE, ItemStack.EMPTY);
+    for (StoredItem item : input.listOrEmpty(ContainerHelper.TAG_ITEMS, STORED_ITEM_CODEC)) {
+      if (item.slot() >= 0 && item.slot() < this.items.size()) {
+        this.items.set(item.slot(), item.stack());
+      }
+    }
   }
 
   @Override
   protected void saveAdditional(net.minecraft.world.level.storage.ValueOutput output) {
     super.saveAdditional(output);
-    ContainerHelper.saveAllItems(output, this.items);
+    net.minecraft.world.level.storage.ValueOutput.TypedOutputList<StoredItem> savedItems =
+      output.list(ContainerHelper.TAG_ITEMS, STORED_ITEM_CODEC);
+    for (int slot = 0; slot < this.items.size(); ++slot) {
+      ItemStack stack = this.items.get(slot);
+      if (!stack.isEmpty()) {
+        savedItems.add(new StoredItem(slot, stack));
+      }
+    }
   }
 
   @Override
@@ -130,8 +148,7 @@ public class GigaChestBlockEntity extends BaseContainerBlockEntity implements Li
       ItemStack stack = this.items.get(slot);
       if (stack.isEmpty()) continue;
 
-      int originalTab = slot / GigaChestTabs.SLOTS_PER_TAB;
-      int destinationTab = GigaChestTabs.findTabIndex(stack, originalTab);
+      int destinationTab = GigaChestTabs.findTabIndex(stack);
       tabItems.get(destinationTab).add(stack.copy());
     }
 
@@ -221,5 +238,8 @@ public class GigaChestBlockEntity extends BaseContainerBlockEntity implements Li
   @Override
   public float getOpenNess(float partialTick) {
     return this.lidController.getOpenness(partialTick);
+  }
+
+  private record StoredItem(int slot, ItemStack stack) {
   }
 }
