@@ -9,6 +9,10 @@
   "container.mega_chest": "Mega Chest",
   "container.mega_chest.sort": "Sort",
 
+  "key.category.skram.skram": "Skram!",
+  "key.skram.open_skills_ui": "Open Skram UI",
+  "key.skram.cast_spell": "Cast Spell",
+
   "attributes.skram.mana_regeneration": "Mana Regneration",
 
   "effect.skram.burning_rush": "Burning Rush",

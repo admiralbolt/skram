@@ -23,6 +23,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
@@ -59,6 +60,12 @@ public class SkramClient {
     static void registerMenuScreens(RegisterMenuScreensEvent event) {
         event.register(SkramMenus.GIGA_CHEST.get(), GigaChestScreen::new);
         event.register(SkramMenus.MEGA_CHEST.get(), MegaChestScreen::new);
+    }
+
+    @SubscribeEvent
+    public static void registerKeyBindings(RegisterKeyMappingsEvent event) {
+        event.register(OPEN_SKILLS_UI.get());
+        event.register(CAST_SPELL.get());
     }
 
 
