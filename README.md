@@ -2,9 +2,6 @@
 TODO
 ====
 
-* Giga Chest
-
-
 Perks
 ==================
 

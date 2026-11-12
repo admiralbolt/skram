@@ -78,7 +78,7 @@ public final class MiscTab {
       "Enjoy! If you encounter any bugs, or have feedback please let me know!"
     ));
     layout.addChild(textWidget(
-      "Some other general balance notes:\n* Healing from food is nerfed to 25% effectiveness.\n* Food exhaustion from all sources increased by 50%\n* Items & Armor have skill level requirements.\n* Infernal mobs is configured to higher than normal settings.\n* Waystones exist and are craftable, but have a high magic level requirement."
+      "Some other general balance notes:\n* Healing from food is nerfed to 25% effectiveness.\n* Food exhaustion from all sources increased by 50%\n* Items & Armor have skill level requirements.\n* Infernal mobs is configured to higher than normal settings.\n* Waystones exist and are craftable, but have a high magic level requirement.\n* Mega Chests are back, and have an even more powerful evolution."
     ));
     return layout;
   }

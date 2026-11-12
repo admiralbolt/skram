@@ -92,6 +92,8 @@ public class SkramItems {
 
   public static DeferredItem<Item> SPELL_SCROLL;
 
+  public static DeferredItem<Item> GIGA_CHEST_CORE;
+
   // Music dics.
   public static DeferredItem<Item> MUSIC_DISC_ARCTURIA;
   public static DeferredItem<Item> MUSIC_DISC_ABANDONED_MINE_BATTLE;
@@ -153,6 +155,8 @@ public class SkramItems {
           .rarity(Rarity.EPIC)
       )
     );
+
+    GIGA_CHEST_CORE = Skram.ITEMS.registerSimpleItem("giga_chest_core", () -> new Item.Properties().rarity(Rarity.UNCOMMON));
 
     MUSIC_DISC_ARCTURIA = registerMusicDisc("music_disc_arcturia", SkramSounds.ARCTURIA_SONG);
     MUSIC_DISC_ABANDONED_MINE_BATTLE = registerMusicDisc("music_disc_abandoned_mine_battle", SkramSounds.ABANDONED_MINE_BATTLE_SONG);

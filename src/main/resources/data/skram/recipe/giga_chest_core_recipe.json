@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": "skram:mega_chest"
+  },
+  "result": {
+    "id": "skram:giga_chest_core"
+  }
+}
