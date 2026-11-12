@@ -27,15 +27,26 @@ import org.jspecify.annotations.Nullable;
 
 public class MegaChestRenderer<T extends BaseContainerBlockEntity & LidBlockEntity> implements BlockEntityRenderer<T, ChestRenderState> {
 
-  private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(
+  public static final Identifier MEGA_CHEST_TEXTURE = Identifier.fromNamespaceAndPath(
     Skram.MODID,
     "textures/entity/chests/mega_chest.png"
   );
 
+  public static final Identifier GIGA_CHEST_TEXTURE = Identifier.fromNamespaceAndPath(
+    Skram.MODID,
+    "textures/entity/chests/giga_chest.png"
+  );
+
   private final ChestModel model;
+  private final Identifier texture;
 
   public MegaChestRenderer(BlockEntityRendererProvider.Context context) {
+    this(context, MEGA_CHEST_TEXTURE);
+  }
+
+  public MegaChestRenderer(BlockEntityRendererProvider.Context context, Identifier texture) {
     this.model = new ChestModel(context.bakeLayer(ModelLayers.CHEST));
+    this.texture = texture;
   }
 
   @Override
@@ -78,7 +89,7 @@ public class MegaChestRenderer<T extends BaseContainerBlockEntity & LidBlockEnti
       this.model,
       open,
       poseStack,
-      RenderTypes.entityCutoutCull(TEXTURE),
+      RenderTypes.entityCutoutCull(this.texture),
       state.lightCoords,
       OverlayTexture.NO_OVERLAY,
       0
@@ -89,7 +100,7 @@ public class MegaChestRenderer<T extends BaseContainerBlockEntity & LidBlockEnti
         this.model,
         open,
         poseStack,
-        RenderTypes.entityCutoutCull(TEXTURE),
+        RenderTypes.entityCutoutCull(this.texture),
         state.lightCoords,
         OverlayTexture.NO_OVERLAY,
         0,

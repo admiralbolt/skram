@@ -4,7 +4,7 @@
     "base": "skram:item/giga_chest",
     "model": {
       "type": "skram:mega_chest_special",
-      "texture": "skram:textures/entity/chests/mega_chest.png"
+      "texture": "skram:textures/entity/chests/giga_chest.png"
     }
   }
 }
