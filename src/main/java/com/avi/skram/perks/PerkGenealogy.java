@@ -3,18 +3,14 @@ package com.avi.skram.perks;
 import com.avi.skram.skills.SkillHusbandry;
 import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.core.Holder;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent;
-import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;

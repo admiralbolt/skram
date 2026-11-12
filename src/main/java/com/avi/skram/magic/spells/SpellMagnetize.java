@@ -4,8 +4,6 @@ import com.avi.skram.audio.SkramSounds;
 import com.avi.skram.skills.SkillMagic;
 import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.MinecraftUtils;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;

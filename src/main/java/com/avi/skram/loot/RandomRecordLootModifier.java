@@ -1,8 +1,6 @@
 package com.avi.skram.loot;
 
 import com.avi.skram.item.SkramItems;
-import com.avi.skram.item.SpellNameDataComponent;
-import com.avi.skram.magic.spells.Spells;
 import com.avi.skram.utils.MathUtils;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

@@ -31,7 +31,6 @@ import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.common.util.ValueIOSerializable;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
-import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.stream.IntStream;

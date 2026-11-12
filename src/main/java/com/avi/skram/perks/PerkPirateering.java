@@ -6,7 +6,6 @@ import com.avi.skram.skills.SkillSailing;
 import com.avi.skram.skills.Skills;
 import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
