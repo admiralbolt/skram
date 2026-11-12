@@ -8,6 +8,7 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.predicates.AllOfCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithEnchantedBonusCondition;
@@ -119,6 +120,19 @@ public class SkramGlobalLootModifierProvider extends GlobalLootModifierProvider 
       ));
     }
 
+    // The Batman.
+    this.add("add_spawn_egg_to_bat", new AddItemLootModifier(
+      Optional.of(Holder.direct(
+        AllOfCondition.allOf(
+          HolderSet.direct(
+            Holder.direct(new LootTableIdCondition.Builder(Identifier.withDefaultNamespace("entities/bat")).build()),
+            Holder.direct(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(
+              this.registries.lookupOrThrow(Registries.ENCHANTMENT), 0.2f, 0.05f
+            ).build()
+          ))
+        )
+      )), IGlobalLootModifier.DEFAULT_PRIORITY, Items.BAT_SPAWN_EGG
+    ));
   }
 
 
