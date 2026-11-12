@@ -1,5 +1,6 @@
 package com.avi.skram.ui;
 
+import com.avi.skram.Skram;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -7,8 +8,11 @@ import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.resources.Identifier;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
+@Mod(value = Skram.MODID, dist = Dist.CLIENT)
 public class GenericMessageToast implements Toast {
 
   public static final Identifier BACKGROUND_SPRITE = Identifier.withDefaultNamespace("toast/advancement");

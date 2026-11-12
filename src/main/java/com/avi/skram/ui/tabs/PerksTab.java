@@ -2,6 +2,7 @@ package com.avi.skram.ui.tabs;
 
 import com.avi.skram.perks.Perk;
 import com.avi.skram.perks.Perks;
+import com.avi.skram.client.SkramClientSkillHooks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.MultiLineTextWidget;
 import net.minecraft.client.gui.layouts.LinearLayout;
@@ -28,7 +29,7 @@ public final class PerksTab {
         indexContent,
         145,
         28,
-        () -> perk.renderToLayout(Minecraft.getInstance().player, inventoryResources)
+        () -> SkramClientSkillHooks.renderPerk(perk, Minecraft.getInstance().player, inventoryResources)
       ));
     }
 

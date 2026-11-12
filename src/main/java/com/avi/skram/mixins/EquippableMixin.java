@@ -2,10 +2,7 @@ package com.avi.skram.mixins;
 
 import com.avi.skram.skills.SkillHealth;
 import com.avi.skram.skills.Skills;
-import com.avi.skram.ui.GenericMessageToast;
 import com.avi.skram.ui.ToastUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -35,13 +32,11 @@ public class EquippableMixin {
 
     if (!player.level().isClientSide()) return;
 
-    ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
-
-    if (!ToastUtils.hasGenericMessageToast(toastManager, health.getRequiredLevelToastName())) {
-      toastManager.addToast(new GenericMessageToast(
-        health.getRequiredLevelToastName(), Skills.SKILL_ICONS.getOrDefault(health.name, Skills.DEFAULT_ICON), "Using a " + inHand.getItemName().getString() + " requires a " + health.name + " level of " + requiredLevel + "."
-      ));
-    }
+    ToastUtils.showGenericMessageToast(
+      health.getRequiredLevelToastName(),
+      Skills.SKILL_ICONS.getOrDefault(health.name, Skills.DEFAULT_ICON),
+      "Using a " + inHand.getItemName().getString() + " requires a " + health.name + " level of " + requiredLevel + "."
+    );
   }
 
 }

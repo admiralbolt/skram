@@ -7,7 +7,6 @@ import com.avi.skram.network.CastingSyncServerPacket;
 import com.avi.skram.perks.PerkStalwartSpellcaster;
 import com.avi.skram.perks.Perks;
 import com.avi.skram.ui.SpellUI;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -59,33 +58,6 @@ public class SkramMagic {
         .copyOnDeath()
         .build()
     );
-  }
-
-  public static void castStart() {
-    Player player = Minecraft.getInstance().player;
-    SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
-    Spell spell = Spells.SPELLS_BY_NAME.get(castingInfo.equippedSpellName);
-    if (spell == null) return;
-
-    if (castingInfo.isCasting) {
-      castingInfo.cancel = true;
-    } else {
-      if (spell.canCast(player)) {
-        // If we can cast it, do so!
-        castingInfo.currentMana -= spell.manaCost;
-        castingInfo.isCasting = true;
-        castingInfo.castingTimer = spell.castingTimeTicks;
-        castingInfo.spellName = castingInfo.equippedSpellName;
-        castingInfo.startCasting = true;
-      } else {
-        // Otherwise, mark that we failed to cast a spell.
-        castingInfo.failedCasting = true;
-        // Rather than using a separate var to track failed casting, we reuse the same timer.
-        castingInfo.castingTimer = 20;
-      }
-    }
-
-    player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
   }
 
   public static void handleTick(PlayerTickEvent.Pre event) {

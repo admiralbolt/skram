@@ -4,8 +4,8 @@ import com.avi.skram.skills.SkillMelee;
 import com.avi.skram.skills.SkillStealth;
 import com.google.common.collect.ImmutableMap;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
@@ -27,15 +27,20 @@ public class PerkBackstab extends Perk {
     .build();
   public static final StreamCodec<ByteBuf, PerkBackstab> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkBackstab::new);
 
-  public static List<ItemStack> getResearchCost() {
+  public static List<ItemStack> getResearchCost(RegistryAccess registryAccess) {
     ItemStack enchantedBook = new ItemStack(Items.ENCHANTED_BOOK);
-    Holder<Enchantment> swiftSneakHolder = Minecraft.getInstance().level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).get(Enchantments.SWIFT_SNEAK).get();
+    Holder<Enchantment> swiftSneakHolder = registryAccess.lookupOrThrow(Registries.ENCHANTMENT).get(Enchantments.SWIFT_SNEAK).orElseThrow();
     enchantedBook.enchant(swiftSneakHolder, 3);
 
     return List.of(
       new ItemStack(Items.IRON_SWORD, 1),
       enchantedBook
     );
+  }
+
+  @Override
+  public List<ItemStack> getResearchCost(Player player) {
+    return getResearchCost(player.level().registryAccess());
   }
 
   public PerkBackstab() {

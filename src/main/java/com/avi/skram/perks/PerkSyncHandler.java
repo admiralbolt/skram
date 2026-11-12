@@ -1,10 +1,7 @@
 package com.avi.skram.perks;
 
-import com.avi.skram.ui.GenericMessageToast;
-import com.avi.skram.ui.ToastUtils;
-import com.avi.skram.utils.StringUtils;
+import com.avi.skram.client.SkramClientSkillHooks;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,14 +31,8 @@ public class PerkSyncHandler<T extends Perk> implements AttachmentSyncHandler<T>
 
     Player player = (Player) holder;
 
-    if (newValue.discovered && !previousValue.discovered) {
-      if (!ToastUtils.hasGenericMessageToast(Minecraft.getInstance().gui.toastManager(), newValue.name + ":discovered")) {
-        Minecraft.getInstance().gui.toastManager().addToast(new GenericMessageToast(
-          newValue.name + ":discovered",
-          newValue.getIcon(),
-          "Perk discovered: " + StringUtils.snakeToTitle(newValue.name)
-        ));
-      }
+    if (newValue.discovered && !previousValue.discovered && player.level().isClientSide()) {
+      SkramClientSkillHooks.showPerkDiscoveredToast(newValue);
     }
 
     if (newValue.researched != previousValue.researched) {

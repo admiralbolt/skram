@@ -3,20 +3,15 @@ package com.avi.skram.perks;
 import com.avi.skram.Skram;
 import com.avi.skram.attachments.MiscAttachments;
 import com.avi.skram.attachments.SkramEntityModifier;
-import com.avi.skram.network.PerkPacket;
+import com.avi.skram.client.SkramClientSkillHooks;
 import com.avi.skram.skills.Skill;
-import com.avi.skram.ui.GenericMessageToast;
-import com.avi.skram.ui.ToastUtils;
 import com.avi.skram.utils.MathUtils;
-import com.avi.skram.utils.StringUtils;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 import java.util.ArrayList;
@@ -85,7 +80,6 @@ public class Perks {
         .build()
     );
     PERKS_BY_NAME.put(PerkBackstab.NAME, BACKSTAB);
-    PERK_RESEARCH_COST_BY_NAME.put(PerkBackstab.NAME, PerkBackstab::getResearchCost);
     PerkBackstab.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(BACKSTAB));
 
     BATMAN = Skram.ATTACHMENT_TYPES.register(
@@ -495,14 +489,7 @@ public class Perks {
 
     Supplier supplier = toDiscover.getSecond();
     if (syncToServer) {
-      ClientPacketDistributor.sendToServer(new PerkPacket(perkToDiscover.name, true, false, true));
-      if (!ToastUtils.hasGenericMessageToast(Minecraft.getInstance().gui.toastManager(), perkToDiscover.name + ":discovered")) {
-        Minecraft.getInstance().gui.toastManager().addToast(new GenericMessageToast(
-          perkToDiscover.name + ":discovered",
-          perkToDiscover.getIcon(),
-          "Perk discovered: " + StringUtils.snakeToTitle(perkToDiscover.name)
-        ));
-      }
+      SkramClientSkillHooks.discoverPerk(perkToDiscover);
     } else {
       // This should sync back to the client automatically.
       player.setData(supplier, perkToDiscover);

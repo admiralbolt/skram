@@ -1,6 +1,6 @@
 package com.avi.skram.ui;
 
-import com.avi.skram.EventHandler;
+import com.avi.skram.SkramClient;
 import com.avi.skram.ui.tabs.*;
 import com.avi.skram.utils.ReflectionUtils;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -212,7 +212,7 @@ public class SkramScreen extends Screen {
 
   @Override
   public boolean keyPressed(@NotNull KeyEvent event) {
-    if (EventHandler.OPEN_SKILLS_UI.get().isActiveAndMatches(InputConstants.getKey(event))) {
+    if (SkramClient.OPEN_SKILLS_UI.get().isActiveAndMatches(InputConstants.getKey(event))) {
       this.onClose();
       return true;
     }

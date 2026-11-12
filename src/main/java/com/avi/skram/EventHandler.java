@@ -49,10 +49,6 @@ import java.util.function.Supplier;
 @EventBusSubscriber(modid = Skram.MODID)
 public class EventHandler {
 
-  public static final KeyMapping.Category SKRAM_CATEGORY = new KeyMapping.Category(Identifier.fromNamespaceAndPath(Skram.MODID, "skram"));
-  public static final Lazy<KeyMapping> OPEN_SKILLS_UI = Lazy.of(() -> new KeyMapping("key.skram.open_skills_ui", InputConstants.Type.KEYBOARD, InputConstants.KEY_R, SKRAM_CATEGORY));
-  public static final Lazy<KeyMapping> CAST_SPELL = Lazy.of(() -> new KeyMapping("key.skram.cast_spell", InputConstants.Type.KEYBOARD, InputConstants.KEY_C, SKRAM_CATEGORY));
-
   @SubscribeEvent
   public static void ON_PLAYER_PLACED_BLOCK(BlockEvent.EntityPlaceEvent event) {
     if (event.getLevel().isClientSide()) return;
@@ -441,20 +437,6 @@ public class EventHandler {
     event.register(SkillPacket.TYPE, ClientPayloadHandler::handleSkillPacket);
     event.register(PerkPacket.TYPE, ClientPayloadHandler::handlePerkPacket);
     event.register(PerkResearchPacket.TYPE, ClientPayloadHandler::handlePerkResearchPacket);
-  }
-
-  @SubscribeEvent
-  public static void ON_CLIENT_TICK(ClientTickEvent.Post event) {
-    while (OPEN_SKILLS_UI.get().consumeClick()) {
-      Minecraft mc = Minecraft.getInstance();
-      if (!(mc.gui.screen() instanceof SkramScreen)) {
-        Minecraft.getInstance().setScreenAndShow(new SkramScreen());
-      }
-    }
-
-    while (CAST_SPELL.get().consumeClick()) {
-      SkramMagic.castStart();
-    }
   }
 
   @SubscribeEvent
