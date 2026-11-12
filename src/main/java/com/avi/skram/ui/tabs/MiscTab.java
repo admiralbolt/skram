@@ -88,7 +88,7 @@ public final class MiscTab {
     layout.spacing(6);
     layout.addChild(textWidget("There are currently: §6 " + Skills.SKILLS_BY_NAME.size() + "§f skills!"));
     layout.addChild(textWidget("XP per level is based on a cubic formula: " + Skill.XP_FACTOR + " * ((1/2) level^3 + level^2 + 2 * level)"));
-    layout.addChild(textWidget("All the familiar ones, plus some new ones too! Of general note, XP bonus is tracked per skill based on a completion log. See the achievements for the full details."));
+    layout.addChild(textWidget("Skills gain XP bonus from two sources: Total Levels (1% bonus for ALL skills per 20 levels of ALL skills), and additional per-skill bonuses based on a completion log of activities. See the achievements for the full details."));
     layout.addChild(textWidget("Also note, that XP is renderer as ints but tracked with more precision. You CAN gain 1.1 XP, it just shows as 1 XP."));
     return layout;
   }

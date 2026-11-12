@@ -33,6 +33,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.nio.charset.Charset;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 public abstract class Skill implements ValueIOSerializable {
@@ -43,6 +44,7 @@ public abstract class Skill implements ValueIOSerializable {
   public static Identifier WHITE_BAR = Identifier.withDefaultNamespace("textures/gui/sprites/boss_bar/white_progress.png");
 
   public static double PERK_CHANCE = 100000;
+  public static double XP_MULT_PER_LEVEL = 0.0005;
 
   public static Map<Integer, Integer> XP_FOR_LEVEL = new HashMap<>();
 
@@ -140,6 +142,17 @@ public abstract class Skill implements ValueIOSerializable {
     return this.requiredLevelToastName;
   }
 
+  // I don't know how expensive looking up data attachments are, but will optimize if this is too slow.
+  public double getTotalXpMultiplier(Player player) {
+    int totalLevels = 0;
+    for (Supplier supplier : Skills.SKILLS_BY_NAME.values()) {
+      Skill skill = (Skill) player.getData(supplier);
+      totalLevels += skill.level;
+    }
+
+    return this.xpMultiplier + totalLevels * XP_MULT_PER_LEVEL;
+  }
+
   // Overload that assumes server side processing. If you want to do client side processing, make sure that you specify
   // syncToServer = true.
   public void addXp(Player player, double xp) {
@@ -149,7 +162,7 @@ public abstract class Skill implements ValueIOSerializable {
   public void addXp(Player player, double xp, boolean syncToServer) {
     if (xp <= 0) return;
 
-    double gainedXp = this.xpMultiplier * xp;
+    double gainedXp = xp * this.getTotalXpMultiplier(player);
     this.xp += gainedXp;
 
     // Whenever we gain xp, we want to give a chance of discovering a relevant perk.
@@ -241,7 +254,7 @@ public abstract class Skill implements ValueIOSerializable {
 
     vertical.addChild(new MultiLineTextWidget(Component.literal("EXP:  " + String.format("%,d", (int) this.xp)), Minecraft.getInstance().font));
     vertical.addChild(new MultiLineTextWidget(Component.literal("Next: " + String.format("%,d", Skill.getTotalXpForLevel(this.level + 1))), Minecraft.getInstance().font));
-    vertical.addChild(new MultiLineTextWidget(Component.literal("Bonus: +" + (int) ((this.xpMultiplier - 1) * 100) + "%"), Minecraft.getInstance().font));
+    vertical.addChild(new MultiLineTextWidget(Component.literal("Bonus: +" + (int) ((this.getTotalXpMultiplier(Minecraft.getInstance().player) - 1) * 100) + "%"), Minecraft.getInstance().font));
     vertical.addChild(this.renderSkillAbilities());
     vertical.addChild(new ResizableTextureImageWidget(0, 0, 182, 3, WHITE_BAR, 182, 5));
     vertical.addChild(this.renderSkillDetails());
