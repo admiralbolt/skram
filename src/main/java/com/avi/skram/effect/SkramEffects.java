@@ -23,6 +23,14 @@ public class SkramEffects {
     registryName.getPath(),
     new MobEffectInstance(MANA_REGENERATION, 3600)
   ));
+  public static final Holder<Potion> LONG_MANA_REGENERATION_POTION = Skram.POTIONS.register("long_mana_regeneration_potion", registryName -> new Potion(
+    registryName.getPath(),
+    new MobEffectInstance(MANA_REGENERATION, 7200)
+  ));
+  public static final Holder<Potion> STRONG_MANA_REGENERATION_POTION = Skram.POTIONS.register("strong_mana_regeneration_potion", registryName -> new Potion(
+    registryName.getPath(),
+    new MobEffectInstance(MANA_REGENERATION, 3600, 1)
+  ));
 
   public static void register() {
     BURNING_RUSH = Skram.EFFECTS.register(

@@ -12,6 +12,12 @@
   "effect.skram.hexed": "Hexed",
   "effect.skram.mana_regeneration": "Mana Regeneration",
   "item.minecraft.potion.effect.mana_regeneration_potion": "Potion of Mana Regeneration",
+  "item.minecraft.potion.effect.long_mana_regeneration_potion": "Potion of Long Mana Regeneration",
+  "item.minecraft.potion.effect.strong_mana_regeneration_potion": "Potion of Strong Mana Regeneration",
+  "item.minecraft.splash_potion.effect.mana_regeneration_potion": "Splash Potion of Mana Regeneration",
+  "item.minecraft.lingering_potion.effect.mana_regeneration_potion": "Lingering Potion of Mana Regeneration",
+  "item.minecraft.lingering_potion.effect.long_mana_regeneration_potion": "Lingering Potion of Mana Regeneration",
+  "item.minecraft.lingering_potion.effect.strong_mana_regeneration_potion": "Lingering Potion of Mana Regeneration",
 
   "item.skram.example_item": "Example Item",
   "item.skram.awesome_snake": "Awesome Snake",

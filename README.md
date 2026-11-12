@@ -2,10 +2,7 @@
 TODO
 ====
 
-* XP boost for total levels.
-* Mana potion
 * Giga Chest
-
 
 
 Perks
