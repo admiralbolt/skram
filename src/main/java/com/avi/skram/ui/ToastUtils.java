@@ -1,13 +1,10 @@
 package com.avi.skram.ui;
 
-import com.avi.skram.Skram;
 import com.avi.skram.utils.ReflectionUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.resources.Identifier;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.common.Mod;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayDeque;
@@ -15,13 +12,12 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-@Mod(value = Skram.MODID, dist = Dist.CLIENT)
 public class ToastUtils {
 
   public static void showGenericMessageToast(String toastName, Identifier icon, String message) {
     ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
     if (!hasGenericMessageToast(toastManager, toastName)) {
-      toastManager.addToast(new GenericMessageToast(toastName, icon, message));
+      toastManager.addToast(GenericMessageToast.withDefaultDisplayTime(toastName, icon, message));
     }
   }
 

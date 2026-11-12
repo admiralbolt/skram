@@ -1,7 +1,6 @@
 package com.avi.skram.perks;
 
 import com.avi.skram.Skram;
-import com.avi.skram.client.SkramClientSkillHooks;
 import com.avi.skram.skills.Skill;
 import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.StringUtils;

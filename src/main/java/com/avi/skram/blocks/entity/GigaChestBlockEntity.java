@@ -1,10 +1,10 @@
 package com.avi.skram.blocks.entity;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.avi.skram.blocks.SkramBlocks;
 import com.avi.skram.inventory.GigaChestMenu;
 import com.avi.skram.inventory.GigaChestTabs;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;

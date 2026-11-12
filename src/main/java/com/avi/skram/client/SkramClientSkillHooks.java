@@ -1,9 +1,8 @@
 package com.avi.skram.client;
 
-import com.avi.skram.Skram;
-import com.avi.skram.network.SkillPacket;
 import com.avi.skram.network.PerkPacket;
 import com.avi.skram.network.PerkResearchPacket;
+import com.avi.skram.network.SkillPacket;
 import com.avi.skram.perks.Perk;
 import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.Skill;
@@ -14,6 +13,7 @@ import com.avi.skram.ui.WidgetUtils;
 import com.avi.skram.ui.XPGainGui;
 import com.avi.skram.utils.MathUtils;
 import com.avi.skram.utils.StringUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.toasts.ToastManager;
@@ -21,14 +21,11 @@ import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.layouts.Layout;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.layouts.SpacerElement;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.gui.widget.ResizableTextureImageWidget;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
@@ -37,7 +34,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-@Mod(value = Skram.MODID, dist = Dist.CLIENT)
 public class SkramClientSkillHooks {
 
   public static Layout renderSkill(Skill skill) {
@@ -164,7 +160,7 @@ public class SkramClientSkillHooks {
   }
 
   public static void showLevelUpToast(Skill skill) {
-    Minecraft.getInstance().gui.toastManager().addToast(new GenericMessageToast(
+    Minecraft.getInstance().gui.toastManager().addToast(GenericMessageToast.withDefaultDisplayTime(
       skill.name + ":level_up",
       Skills.SKILL_ICONS.getOrDefault(skill.name, Skills.DEFAULT_ICON),
       StringUtils.capitalize(skill.name) + " leveled up to Lvl " + skill.level + "."
@@ -174,7 +170,7 @@ public class SkramClientSkillHooks {
   public static void showRequiredLevelToast(Skill skill, String message) {
     ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
     if (!ToastUtils.hasGenericMessageToast(toastManager, skill.getRequiredLevelToastName())) {
-      toastManager.addToast(new GenericMessageToast(
+      toastManager.addToast(GenericMessageToast.withDefaultDisplayTime(
         skill.getRequiredLevelToastName(),
         Skills.SKILL_ICONS.getOrDefault(skill.name, Skills.DEFAULT_ICON),
         message
@@ -298,7 +294,7 @@ public class SkramClientSkillHooks {
     ToastManager toastManager = Minecraft.getInstance().gui.toastManager();
     String toastId = perk.name + ":discovered";
     if (!ToastUtils.hasGenericMessageToast(toastManager, toastId)) {
-      toastManager.addToast(new GenericMessageToast(
+      toastManager.addToast(GenericMessageToast.withDefaultDisplayTime(
         toastId,
         perk.getIcon(),
         "Perk discovered: " + StringUtils.snakeToTitle(perk.name)

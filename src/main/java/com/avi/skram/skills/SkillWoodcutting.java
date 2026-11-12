@@ -3,7 +3,6 @@ package com.avi.skram.skills;
 import com.avi.skram.client.SkramClientSkillHooks;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;

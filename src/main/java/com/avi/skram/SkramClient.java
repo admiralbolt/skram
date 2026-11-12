@@ -1,13 +1,15 @@
 package com.avi.skram;
 
-import com.avi.skram.client.screens.MegaChestScreen;
 import com.avi.skram.client.screens.GigaChestScreen;
+import com.avi.skram.client.screens.MegaChestScreen;
 import com.avi.skram.inventory.SkramMenus;
 import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.magic.SpellCastingInfo;
 import com.avi.skram.magic.spells.Spell;
 import com.avi.skram.magic.spells.Spells;
 import com.avi.skram.ui.SkramScreen;
+import com.avi.skram.ui.SpellUI;
+import com.avi.skram.ui.XPGainGui;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -20,9 +22,11 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.common.util.Lazy;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
@@ -34,6 +38,8 @@ public class SkramClient {
     public static final KeyMapping.Category SKRAM_CATEGORY = new KeyMapping.Category(Identifier.fromNamespaceAndPath(Skram.MODID, "skram"));
     public static final Lazy<KeyMapping> OPEN_SKILLS_UI = Lazy.of(() -> new KeyMapping("key.skram.open_skills_ui", InputConstants.Type.KEYBOARD, InputConstants.KEY_R, SKRAM_CATEGORY));
     public static final Lazy<KeyMapping> CAST_SPELL = Lazy.of(() -> new KeyMapping("key.skram.cast_spell", InputConstants.Type.KEYBOARD, InputConstants.KEY_C, SKRAM_CATEGORY));
+
+    public static final Identifier CUSTOM_LAYER = Identifier.fromNamespaceAndPath(Skram.MODID, "asdf");
 
     public SkramClient(ModContainer container) {
         // Allows NeoForge to create a config screen for this mod's configs.
@@ -70,6 +76,22 @@ public class SkramClient {
         }
     }
 
+    @SubscribeEvent
+    public static void REGISTER_GUI_LAYERS(RegisterGuiLayersEvent event) {
+        event.registerAbove(
+          VanillaGuiLayers.HOTBAR,
+          CUSTOM_LAYER,
+          XPGainGui.layer
+        );
+
+        event.registerAbove(
+          VanillaGuiLayers.HOTBAR,
+          SpellUI.SPELl_UI,
+          SpellUI.layer
+        );
+
+    }
+
     public static void castStart() {
         Player player = Minecraft.getInstance().player;
         SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
@@ -96,4 +118,6 @@ public class SkramClient {
 
         player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
     }
+
+
 }

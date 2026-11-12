@@ -1,7 +1,7 @@
 package com.avi.skram.skills;
 
-import com.avi.skram.perks.Perks;
 import com.avi.skram.client.SkramClientSkillHooks;
+import com.avi.skram.perks.Perks;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
@@ -15,7 +15,9 @@ import net.neoforged.neoforge.common.util.ValueIOSerializable;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 

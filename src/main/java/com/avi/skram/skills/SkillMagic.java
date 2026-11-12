@@ -3,7 +3,6 @@ package com.avi.skram.skills;
 import com.avi.skram.Skram;
 import com.avi.skram.magic.SkramMagic;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
