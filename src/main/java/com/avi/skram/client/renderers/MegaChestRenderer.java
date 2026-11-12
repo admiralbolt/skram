@@ -2,7 +2,6 @@ package com.avi.skram.client.renderers;
 
 import com.avi.skram.Skram;
 import com.avi.skram.blocks.MegaChestBlock;
-import com.avi.skram.blocks.entity.MegaChestBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.mojang.math.Transformation;
@@ -19,12 +18,14 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 import org.jspecify.annotations.Nullable;
 
-public class MegaChestRenderer<T extends MegaChestBlockEntity> implements BlockEntityRenderer<T, ChestRenderState> {
+public class MegaChestRenderer<T extends BaseContainerBlockEntity & LidBlockEntity> implements BlockEntityRenderer<T, ChestRenderState> {
 
   private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(
     Skram.MODID,

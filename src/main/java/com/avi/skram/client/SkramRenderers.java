@@ -23,6 +23,7 @@ public class SkramRenderers {
     event.registerEntityRenderer(SkramEntities.COLORED_PROJECTILE.get(), ColoredProjectileRenderer::new);
     event.registerEntityRenderer(SkramEntities.DECOY.get(), GoatRenderer::new);
     event.registerEntityRenderer(SkramEntities.ICICLE.get(), IcicleRenderer::new);
+    event.registerBlockEntityRenderer(SkramBlocks.GIGA_CHEST_BLOCK_ENTITY.get(), MegaChestRenderer::new);
     event.registerBlockEntityRenderer(SkramBlocks.MEGA_CHEST_BLOCK_ENTITY.get(), MegaChestRenderer::new);
   }
 

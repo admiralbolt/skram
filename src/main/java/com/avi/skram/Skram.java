@@ -130,6 +130,7 @@ public class Skram {
           output.accept(stack);
         }
         output.accept(SkramBlocks.MEGA_CHEST_ITEM.get());
+        output.accept(SkramBlocks.GIGA_CHEST_ITEM.get());
 
         SkramItems.musicDiscs().forEach(output::accept);
       })

@@ -1,6 +1,7 @@
 package com.avi.skram;
 
 import com.avi.skram.client.screens.MegaChestScreen;
+import com.avi.skram.client.screens.GigaChestScreen;
 import com.avi.skram.inventory.SkramMenus;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
@@ -34,6 +35,7 @@ public class SkramClient {
 
     @SubscribeEvent
     static void registerMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(SkramMenus.GIGA_CHEST.get(), GigaChestScreen::new);
         event.register(SkramMenus.MEGA_CHEST.get(), MegaChestScreen::new);
     }
 }

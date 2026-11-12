@@ -12,6 +12,10 @@ import java.util.function.Supplier;
 public class SkramMenus {
 
   private static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, Skram.MODID);
+  public static final Supplier<MenuType<GigaChestMenu>> GIGA_CHEST = MENUS.register(
+    "giga_chest",
+    () -> IMenuTypeExtension.create((containerId, inventory, data) -> new GigaChestMenu(containerId, inventory))
+  );
   public static final Supplier<MenuType<MegaChestMenu>> MEGA_CHEST = MENUS.register(
     "mega_chest",
     () -> IMenuTypeExtension.create((containerId, inventory, data) -> new MegaChestMenu(containerId, inventory))
