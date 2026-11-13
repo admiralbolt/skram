@@ -1,4 +1,4 @@
-package com.avi.skram.mixins;
+package com.avi.skram.mixins.client;
 
 import com.avi.skram.perks.PerkFlyingDutchman;
 import com.avi.skram.perks.PerkSwiftStrafer;

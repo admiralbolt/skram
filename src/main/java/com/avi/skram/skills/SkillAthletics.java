@@ -131,7 +131,7 @@ public class SkillAthletics extends Skill {
     return java.util.List.of(
       new AbilityDescription("Movement Speed: +" + String.format("%.2f", this.getMovementSpeedBoost()) + ".", MOVEMENT_SPEED_INDEX),
       new AbilityDescription("Swim Speed: +" + String.format("%.2f", this.getMovementSpeedBoost()) + ".", SWIM_SPEED_INDEX),
-      new AbilityDescription("Oxygen Increase: +" + (100 * this.getOxygenBonus()) + "%.", OXYGEN_BONUS_INDEX)
+      new AbilityDescription("Oxygen Increase: +" + String.format("%.1f", (100 * this.getOxygenBonus())) + "%.", OXYGEN_BONUS_INDEX)
     );
   }
 

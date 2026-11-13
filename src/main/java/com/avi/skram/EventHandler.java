@@ -7,6 +7,7 @@ import com.avi.skram.commands.SkramCommands;
 import com.avi.skram.effect.FlankedEffect;
 import com.avi.skram.effect.HexedEffect;
 import com.avi.skram.magic.SkramMagic;
+import com.avi.skram.magic.SpellCastingInfo;
 import com.avi.skram.network.*;
 import com.avi.skram.perks.*;
 import com.avi.skram.skills.*;
@@ -156,15 +157,22 @@ public class EventHandler {
       Skill skill = (Skill) event.getEntity().getData(skillSupplier);
       skill.applyModifiers(event.getEntity());
     }
+
+    SpellCastingInfo info = event.getEntity().getData(SkramMagic.SPELL_CASTING_INFO);
+    info.currentMana = 0;
+    event.getEntity().setData(SkramMagic.SPELL_CASTING_INFO, info);
   }
 
   @SubscribeEvent
   public static void ON_PLAYER_CHANGE_DIMENSION(PlayerEvent.PlayerChangedDimensionEvent event) {
     if (event.getEntity().level().isClientSide()) return;
 
-    // Loop through all skills and apply modifiers.
+
+
+    // Loop through all skills, force sync, and apply modifiers.
     for (Supplier skillSupplier : Skills.SKILLS_BY_NAME.values()) {
       Skill skill = (Skill) event.getEntity().getData(skillSupplier);
+      event.getEntity().syncData(skillSupplier);
       skill.applyModifiers(event.getEntity());
     }
   }
@@ -414,7 +422,7 @@ public class EventHandler {
       PerkPacket.STREAM_CODEC,
       ServerPayloadHandler::handlePerkPacket
     );
-    registrar.playToServer(
+    registrar.playBidirectional(
       PerkResearchPacket.TYPE,
       PerkResearchPacket.STREAM_CODEC,
       ServerPayloadHandler::handlePerkResearchPacket
@@ -439,12 +447,15 @@ public class EventHandler {
       CastingSyncServerPacket.STREAM_CODEC,
       ServerPayloadHandler::handleCastingSyncPacket
     );
+    registrar.playToClient(
+      CastingInfoFromClientPacket.TYPE,
+      CastingInfoFromClientPacket.STREAM_CODEC,
+      ClientPayloadHandler::handleGetCastingInfoFromClient
+    );
   }
 
   @SubscribeEvent
   public static void REGISTER_CLIENT_PAYLOAD_HANDLERS(RegisterClientPayloadHandlersEvent event) {
-    event.register(SkillPacket.TYPE, ClientPayloadHandler::handleSkillPacket);
-    event.register(PerkPacket.TYPE, ClientPayloadHandler::handlePerkPacket);
     event.register(PerkResearchPacket.TYPE, ClientPayloadHandler::handlePerkResearchPacket);
   }
 

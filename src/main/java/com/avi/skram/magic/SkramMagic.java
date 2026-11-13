@@ -148,7 +148,6 @@ public class SkramMagic {
     }
 
     player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
-    ClientPacketDistributor.sendToServer(new CastingSyncServerPacket(castingInfo));
   }
 
 
