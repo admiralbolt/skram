@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -85,6 +86,8 @@ public class SkillMelee extends Skill {
 
   public static void handleDamageEvent(LivingDamageEvent.Pre event) {
     if (!(event.getSource().getDirectEntity() instanceof Player player)) return;
+    // Reliquary implemented their entities backwards for the handgun :/
+    if (event.getSource().getEntity() instanceof Projectile) return;
     if (player.level().isClientSide()) return;
 
     SkillMelee melee = player.getData(Skills.MELEE);
@@ -95,6 +98,7 @@ public class SkillMelee extends Skill {
 
   public static void gainMeleeXP(LivingDamageEvent.Pre event) {
     if (!(event.getSource().getDirectEntity() instanceof Player player)) return;
+    if (event.getSource().getEntity() instanceof Projectile) return;
     if (player.level().isClientSide()) return;
 
     SkillMelee melee = player.getData(Skills.MELEE);

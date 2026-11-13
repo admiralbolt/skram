@@ -9,6 +9,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import reliquary.entity.shot.ShotBase;
 
 public class SkillRanged extends Skill {
 
@@ -47,8 +48,17 @@ public class SkillRanged extends Skill {
   }
 
   public static void handleDamageEvent(LivingDamageEvent.Pre event) {
-    if (!(event.getSource().getDirectEntity() instanceof Projectile)) return;
-    if (!(event.getSource().getEntity() instanceof Player player)) return;
+    Player player = null;
+    if (event.getSource().getEntity() instanceof ShotBase) {
+      if (!(event.getSource().getDirectEntity() instanceof Player)) return;
+
+      player = (Player) event.getSource().getDirectEntity();
+    } else if (event.getSource().getDirectEntity() instanceof Projectile) {
+      if (!(event.getSource().getEntity() instanceof Player)) return;
+
+      player = (Player) event.getSource().getEntity();
+    }
+    if (player == null) return;
     if (player.level().isClientSide()) return;
 
     SkillRanged ranged = player.getData(Skills.RANGED);
@@ -58,8 +68,18 @@ public class SkillRanged extends Skill {
   }
 
   public static void gainRangedXP(LivingDamageEvent.Pre event) {
-    if (!(event.getSource().getDirectEntity() instanceof Projectile)) return;
-    if (!(event.getSource().getEntity() instanceof Player player)) return;
+    // Reliquary implemented their entities backwards for the handgun :/
+    Player player = null;
+    if (event.getSource().getEntity() instanceof ShotBase) {
+      if (!(event.getSource().getDirectEntity() instanceof Player)) return;
+
+      player = (Player) event.getSource().getDirectEntity();
+    } else if (event.getSource().getDirectEntity() instanceof Projectile) {
+      if (!(event.getSource().getEntity() instanceof Player)) return;
+
+      player = (Player) event.getSource().getEntity();
+    }
+    if (player == null) return;
     if (player.level().isClientSide()) return;
 
     SkillRanged ranged = player.getData(Skills.RANGED);
