@@ -1,0 +1,147 @@
+JVM info: Homebrew - 25.0.5.0.3 - 25.0.5.0.3
+java.net.preferIPv4Stack=true
+Current Time: 13/11/2026 14:50:01
+Host: maven.neoforged.net [212.102.46.11]
+Host: libraries.minecraft.net [150.171.110.150]
+Host: launchermeta.mojang.com [150.171.110.150]
+Host: piston-meta.mojang.com [150.171.110.150]
+Host: sessionserver.mojang.com [150.171.110.148]
+Found java version 25.0.5.0.3
+Following redirect: https://neoforged.net/mirrorlist.json
+Extracting json
+Considering minecraft client jar
+Downloading libraries
+Found 1 additional library directories
+Considering library net.neoforged.fancymodloader:earlydisplay:12.0.12
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/fancymodloader/earlydisplay/12.0.12/earlydisplay-12.0.12.jar exists. Checksum valid.
+Considering library net.neoforged.fancymodloader:loader:12.0.12
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/fancymodloader/loader/12.0.12/loader-12.0.12.jar exists. Checksum valid.
+Considering library net.neoforged:accesstransformers:11.0.2
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/accesstransformers/11.0.2/accesstransformers-11.0.2.jar exists. Checksum valid.
+Considering library org.ow2.asm:asm-commons:9.11
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/ow2/asm/asm-commons/9.11/asm-commons-9.11.jar exists. Checksum valid.
+Considering library net.neoforged:mergetool:2.0.7:api
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/mergetool/2.0.7/mergetool-2.0.7-api.jar exists. Checksum valid.
+Considering library org.ow2.asm:asm-util:9.11
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/ow2/asm/asm-util/9.11/asm-util-9.11.jar exists. Checksum valid.
+Considering library org.ow2.asm:asm-analysis:9.11
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/ow2/asm/asm-analysis/9.11/asm-analysis-9.11.jar exists. Checksum valid.
+Considering library org.ow2.asm:asm-tree:9.11
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/ow2/asm/asm-tree/9.11/asm-tree-9.11.jar exists. Checksum valid.
+Considering library net.neoforged:bus:8.0.5
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/bus/8.0.5/bus-8.0.5.jar exists. Checksum valid.
+Considering library org.ow2.asm:asm:9.11
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/ow2/asm/asm/9.11/asm-9.11.jar exists. Checksum valid.
+Considering library com.electronwill.night-config:toml:3.9.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/com/electronwill/night-config/toml/3.9.0/toml-3.9.0.jar exists. Checksum valid.
+Considering library com.electronwill.night-config:core:3.9.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/com/electronwill/night-config/core/3.9.0/core-3.9.0.jar exists. Checksum valid.
+Considering library net.neoforged:JarJarSelector:0.5.3
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/JarJarSelector/0.5.3/JarJarSelector-0.5.3.jar exists. Checksum valid.
+Considering library net.neoforged:JarJarMetadata:0.5.3
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/JarJarMetadata/0.5.3/JarJarMetadata-0.5.3.jar exists. Checksum valid.
+Considering library org.apache.maven:maven-artifact:3.10.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/apache/maven/maven-artifact/3.10.0/maven-artifact-3.10.0.jar exists. Checksum valid.
+Considering library net.jodah:typetools:0.6.3
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/jodah/typetools/0.6.3/typetools-0.6.3.jar exists. Checksum valid.
+Considering library net.minecrell:terminalconsoleappender:1.3.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/minecrell/terminalconsoleappender/1.3.0/terminalconsoleappender-1.3.0.jar exists. Checksum valid.
+Considering library net.fabricmc:sponge-mixin:0.17.4+mixin.0.8.7
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/sponge-mixin-0.17.4+mixin.0.8.7.jar exists. Checksum valid.
+Considering library org.jspecify:jspecify:1.0.1
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar exists. Checksum valid.
+Considering library net.neoforged.accesstransformers:at-parser:11.0.2
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/accesstransformers/at-parser/11.0.2/at-parser-11.0.2.jar exists. Checksum valid.
+Considering library net.neoforged:srgutils:1.0.10
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/srgutils/1.0.10/srgutils-1.0.10.jar exists. Checksum valid.
+Considering library org.codehaus.plexus:plexus-utils:3.6.2
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/codehaus/plexus/plexus-utils/3.6.2/plexus-utils-3.6.2.jar exists. Checksum valid.
+Considering library org.jline:jline-reader:3.20.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/jline/jline-reader/3.20.0/jline-reader-3.20.0.jar exists. Checksum valid.
+Considering library com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar exists. Checksum valid.
+Considering library com.google.errorprone:error_prone_annotations:2.48.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar exists. Checksum valid.
+Considering library com.google.j2objc:j2objc-annotations:3.1
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/com/google/j2objc/j2objc-annotations/3.1/j2objc-annotations-3.1.jar exists. Checksum valid.
+Considering library org.jline:jline-terminal:3.20.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/jline/jline-terminal/3.20.0/jline-terminal-3.20.0.jar exists. Checksum valid.
+Considering library net.neoforged.fancymodloader:earlydisplay:12.0.12
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/fancymodloader/earlydisplay/12.0.12/earlydisplay-12.0.12.jar exists. Checksum valid.
+Considering library net.neoforged.fancymodloader:loader:12.0.12
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/fancymodloader/loader/12.0.12/loader-12.0.12.jar exists. Checksum valid.
+Considering library net.neoforged:accesstransformers:11.0.2
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/accesstransformers/11.0.2/accesstransformers-11.0.2.jar exists. Checksum valid.
+Considering library org.ow2.asm:asm-commons:9.11
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/ow2/asm/asm-commons/9.11/asm-commons-9.11.jar exists. Checksum valid.
+Considering library net.neoforged:mergetool:2.0.7:api
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/mergetool/2.0.7/mergetool-2.0.7-api.jar exists. Checksum valid.
+Considering library org.ow2.asm:asm-util:9.11
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/ow2/asm/asm-util/9.11/asm-util-9.11.jar exists. Checksum valid.
+Considering library org.ow2.asm:asm-analysis:9.11
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/ow2/asm/asm-analysis/9.11/asm-analysis-9.11.jar exists. Checksum valid.
+Considering library org.ow2.asm:asm-tree:9.11
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/ow2/asm/asm-tree/9.11/asm-tree-9.11.jar exists. Checksum valid.
+Considering library net.neoforged:bus:8.0.5
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/bus/8.0.5/bus-8.0.5.jar exists. Checksum valid.
+Considering library org.ow2.asm:asm:9.11
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/ow2/asm/asm/9.11/asm-9.11.jar exists. Checksum valid.
+Considering library com.electronwill.night-config:toml:3.9.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/com/electronwill/night-config/toml/3.9.0/toml-3.9.0.jar exists. Checksum valid.
+Considering library com.electronwill.night-config:core:3.9.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/com/electronwill/night-config/core/3.9.0/core-3.9.0.jar exists. Checksum valid.
+Considering library net.neoforged:JarJarSelector:0.5.3
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/JarJarSelector/0.5.3/JarJarSelector-0.5.3.jar exists. Checksum valid.
+Considering library net.neoforged:JarJarMetadata:0.5.3
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/JarJarMetadata/0.5.3/JarJarMetadata-0.5.3.jar exists. Checksum valid.
+Considering library org.apache.maven:maven-artifact:3.10.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/apache/maven/maven-artifact/3.10.0/maven-artifact-3.10.0.jar exists. Checksum valid.
+Considering library net.jodah:typetools:0.6.3
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/jodah/typetools/0.6.3/typetools-0.6.3.jar exists. Checksum valid.
+Considering library net.minecrell:terminalconsoleappender:1.3.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/minecrell/terminalconsoleappender/1.3.0/terminalconsoleappender-1.3.0.jar exists. Checksum valid.
+Considering library net.fabricmc:sponge-mixin:0.17.4+mixin.0.8.7
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/sponge-mixin-0.17.4+mixin.0.8.7.jar exists. Checksum valid.
+Considering library org.lwjgl:lwjgl-sdl:3.4.3
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/lwjgl/lwjgl-sdl/3.4.3/lwjgl-sdl-3.4.3.jar exists. Checksum valid.
+Considering library org.jspecify:jspecify:1.0.1
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar exists. Checksum valid.
+Considering library net.neoforged.accesstransformers:at-parser:11.0.2
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/accesstransformers/at-parser/11.0.2/at-parser-11.0.2.jar exists. Checksum valid.
+Considering library net.neoforged:srgutils:1.0.10
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/srgutils/1.0.10/srgutils-1.0.10.jar exists. Checksum valid.
+Considering library org.codehaus.plexus:plexus-utils:3.6.2
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/codehaus/plexus/plexus-utils/3.6.2/plexus-utils-3.6.2.jar exists. Checksum valid.
+Considering library org.jline:jline-reader:3.20.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/jline/jline-reader/3.20.0/jline-reader-3.20.0.jar exists. Checksum valid.
+Considering library com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar exists. Checksum valid.
+Considering library com.google.errorprone:error_prone_annotations:2.48.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar exists. Checksum valid.
+Considering library com.google.j2objc:j2objc-annotations:3.1
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/com/google/j2objc/j2objc-annotations/3.1/j2objc-annotations-3.1.jar exists. Checksum valid.
+Considering library org.jline:jline-terminal:3.20.0
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/org/jline/jline-terminal/3.20.0/jline-terminal-3.20.0.jar exists. Checksum valid.
+Considering library net.neoforged.installertools:installertools:4.0.17:fatjar
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/installertools/installertools/4.0.17/installertools-4.0.17-fatjar.jar exists. Checksum valid.
+Considering library net.neoforged:neoforge:26.3.0.103:universal
+File /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/neoforge/26.3.0.103/neoforge-26.3.0.103-universal.jar exists. Checksum valid.
+Created Temporary Directory: /var/folders/g8/hp815ts16l3b05td8rklb7v40000gn/T/neoforge_installer10195069644433569009
+  Extracting: /data/client.lzma
+Building Processor
+===============================================================================
+Processor: net.neoforged.installertools:installertools -> PROCESS_MINECRAFT_JAR
+  MainClass: net.neoforged.installertools.ConsoleTool
+  Classpath:
+    /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/installertools/installertools/4.0.17/installertools-4.0.17-fatjar.jar
+    /Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/installertools/installertools/4.0.17/installertools-4.0.17-fatjar.jar
+  Args: --task, PROCESS_MINECRAFT_JAR, --no-mod-manifest, --input, "/Users/admiralbolt/Library/Application Support/minecraft/versions/26.3/26.3.jar", --output, "/Users/admiralbolt/Library/Application Support/minecraft/libraries/net/neoforged/minecraft-client-patched/26.3.0.103/minecraft-client-patched-26.3.0.103.jar", --extract-libraries-to, "/Users/admiralbolt/Library/Application Support/minecraft/libraries/", --apply-patches, /var/folders/g8/hp815ts16l3b05td8rklb7v40000gn/T/neoforge_installer10195069644433569009/data/client.lzma
+Task: PROCESS_MINECRAFT_JAR
+Using common thread-pool with parallelism 11
+load patch bundle [264ms]
+load input zip [356ms]
+applying patches [133ms]
+write output file [1534ms]
+overall work [2030ms]
+Injecting profile
+Finished!

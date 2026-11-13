@@ -4,6 +4,7 @@ import com.avi.skram.Skram;
 import com.avi.skram.client.SkramClientSkillHooks;
 import com.avi.skram.perks.Perks;
 import com.mojang.datafixers.util.Pair;
+import com.teammetallurgy.aquaculture.init.AquaItems;
 import net.blay09.mods.waystones.block.ModBlocks;
 import net.blay09.mods.waystones.item.ModItems;
 import net.minecraft.resources.Identifier;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import reliquary.Reliquary;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -287,7 +289,7 @@ public class Skills {
     String itemID = stack.getItem().toString();
 
     // A funny-ish hack for melee weapons, but this should work fine.
-    if (itemID.contains("mace")) return 30;
+    if (itemID.contains("mace")) return 25;
     if (itemID.contains("trident")) return 20;
 
     if (itemID.contains("netherite")) return 25;
@@ -327,6 +329,15 @@ public class Skills {
     });
     REQUIRED_LEVELS_FOR_ITEM.put(ModItems.dormantShard.asItem(), Pair.of(SkillMagic.NAME, 45));
     REQUIRED_LEVELS_FOR_ITEM.put(ModItems.attunedShard.asItem(), Pair.of(SkillMagic.NAME, 45));
+
+    // Aqua rods!
+    REQUIRED_LEVELS_FOR_ITEM.put(AquaItems.IRON_FISHING_ROD.get(), Pair.of(SkillFishing.NAME, 15));
+    REQUIRED_LEVELS_FOR_ITEM.put(AquaItems.GOLD_FISHING_ROD.get(),  Pair.of(SkillFishing.NAME, 15));
+    REQUIRED_LEVELS_FOR_ITEM.put(AquaItems.DIAMOND_FISHING_ROD.get(), Pair.of(SkillFishing.NAME, 20));
+    REQUIRED_LEVELS_FOR_ITEM.put(AquaItems.NEPTUNIUM_FISHING_ROD.get(), Pair.of(SkillFishing.NAME, 20));
+
+    // Gun.
+    REQUIRED_LEVELS_FOR_ITEM.put(reliquary.init.ModItems.HANDGUN.get(), Pair.of(SkillRanged.NAME, 15));
   }
 
 

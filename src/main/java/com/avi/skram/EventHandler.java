@@ -3,6 +3,7 @@ package com.avi.skram;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
+import com.avi.skram.client.SkramMagicClient;
 import com.avi.skram.commands.SkramCommands;
 import com.avi.skram.effect.FlankedEffect;
 import com.avi.skram.effect.HexedEffect;
@@ -185,7 +186,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_ATTACK_ENTITY(AttackEntityEvent event) {
     if (event.getEntity().level().isClientSide()) {
-      SkramMagic.cancelSpell(event);
+      SkramMagicClient.cancelSpell(event);
     }
     SkillMelee.handleAttackEvent(event);
   }
@@ -193,7 +194,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_LEFT_CLICK_BLOCK(PlayerInteractEvent.LeftClickBlock event) {
     if (event.getEntity().level().isClientSide()) {
-      SkramMagic.cancelSpell(event);
+      SkramMagicClient.cancelSpell(event);
     }
     SkillDigging.handleLeftClick(event);
     SkillMining.handleLeftClick(event);
@@ -203,7 +204,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_RIGHT_CLICK_BLOCK(PlayerInteractEvent.RightClickBlock event) {
     if (event.getEntity().level().isClientSide()) {
-      SkramMagic.cancelSpell(event);
+      SkramMagicClient.cancelSpell(event);
     }
     SkillDigging.handleRightClick(event);
     SkillFarming.handleRightClick(event);
@@ -216,7 +217,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_RIGHT_CLICK_ITEM(PlayerInteractEvent.RightClickItem event) {
     if (event.getEntity().level().isClientSide()) {
-      SkramMagic.cancelSpell(event);
+      SkramMagicClient.cancelSpell(event);
     }
     PerkBatman.handleBatman(event);
     PerkClusterBomb.handleItemRightClick(event);
@@ -227,7 +228,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_PLAYER_ENTITY_INTERACT(PlayerInteractEvent.EntityInteract event) {
     if (event.getEntity().level().isClientSide()) {
-      SkramMagic.cancelSpell(event);
+      SkramMagicClient.cancelSpell(event);
     }
     SkillHusbandry.handleEntityInteract(event);
     PerkDebonair.handleEntityInteract(event);
@@ -399,14 +400,7 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_TICK(PlayerTickEvent.Pre event) {
-    SkillAthletics.handleTick(event);
     PerkPhotosynthesis.healInSunlight(event);
-    SkramMagic.handleTick(event);
-  }
-
-  @SubscribeEvent
-  public static void ON_TICK_POST(PlayerTickEvent.Post event) {
-    SkramMagic.handleTickPost(event);
   }
 
   @SubscribeEvent

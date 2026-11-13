@@ -1,9 +1,11 @@
 package com.avi.skram;
 
+import com.avi.skram.client.SkramMagicClient;
 import com.avi.skram.client.screens.GigaChestScreen;
 import com.avi.skram.client.screens.MegaChestScreen;
 import com.avi.skram.inventory.SkramMenus;
-import com.avi.skram.magic.SkramMagic;
+import com.avi.skram.skills.SkillAthletics;
+import com.avi.skram.skills.Skills;
 import com.avi.skram.ui.SkramScreen;
 import com.avi.skram.ui.SpellUI;
 import com.avi.skram.ui.XPGainGui;
@@ -11,6 +13,8 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -25,6 +29,8 @@ import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = Skram.MODID, dist = Dist.CLIENT)
@@ -75,7 +81,7 @@ public class SkramClient {
     }
 
     while (CAST_SPELL.get().consumeClick()) {
-      SkramMagic.castStart();
+      SkramMagicClient.castStart();
     }
   }
 
@@ -95,4 +101,51 @@ public class SkramClient {
 
   }
 
+  public static boolean isLocalPlayer(Player player) {
+    return player.level().isClientSide() && player == Minecraft.getInstance().player;
+  }
+
+  public static void handleAthleticsTick(PlayerTickEvent.Pre event) {
+    Player player = event.getEntity();
+    if (!SkramClient.isLocalPlayer(player)) return;
+
+    Vec3 velocity = player.getDeltaMovement();
+    // If we aren't moving at all, don't give xp.
+    if (velocity.x == 0 && velocity.z == 0) return;
+
+    SkillAthletics athletics = player.getData(Skills.ATHLETICS);
+
+    // Sprinting is worth the most.
+    if (player.isSprinting()) {
+      athletics.addXp(player, 4, true);
+      return;
+    }
+
+    // player.isSwimming() checks for sprinting in the water.
+    if (player.isSwimming()) {
+      athletics.addXp(player, 3, true);
+      return;
+    }
+
+    if (player.isInWater()) {
+      athletics.addXp(player, 1, true);
+      return;
+    }
+
+    // We must be grounded, and not on rails.
+    if (!player.onGround() || player.isOnRails()) return;
+
+    athletics.addXp(player, 1, true);
+  }
+
+  @SubscribeEvent
+  public static void ON_TICK(PlayerTickEvent.Pre event) {
+    SkramClient.handleAthleticsTick(event);
+    SkramMagicClient.handleTick(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_TICK_POST(PlayerTickEvent.Post event) {
+    SkramMagicClient.handleTickPost(event);
+  }
 }

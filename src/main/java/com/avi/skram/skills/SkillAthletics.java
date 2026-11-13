@@ -1,7 +1,6 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
-import com.avi.skram.utils.MinecraftUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
@@ -10,9 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public class SkillAthletics extends Skill {
 
@@ -91,39 +88,6 @@ public class SkillAthletics extends Skill {
         oxygenBonus.removeModifier(OXYGEN_BONUS);
       }
     }
-  }
-
-  public static void handleTick(PlayerTickEvent.Pre event) {
-    Player player = event.getEntity();
-    if (!MinecraftUtils.isLocalPlayer(player)) return;
-
-    Vec3 velocity = player.getDeltaMovement();
-    // If we aren't moving at all, don't give xp.
-    if (velocity.x == 0 && velocity.z == 0) return;
-
-    SkillAthletics athletics = player.getData(Skills.ATHLETICS);
-
-    // Sprinting is worth the most.
-    if (player.isSprinting()) {
-      athletics.addXp(player, 4, true);
-      return;
-    }
-
-    // player.isSwimming() checks for sprinting in the water.
-    if (player.isSwimming()) {
-      athletics.addXp(player, 3, true);
-      return;
-    }
-
-    if (player.isInWater()) {
-      athletics.addXp(player, 1, true);
-      return;
-    }
-
-    // We must be grounded, and not on rails.
-    if (!player.onGround() || player.isOnRails()) return;
-
-    athletics.addXp(player, 1, true);
   }
 
   @Override
