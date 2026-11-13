@@ -142,6 +142,27 @@ dependencies {
 
     // Map.
     implementation "curse.maven:xaeros-minimap-263420:9323154"
+
+    // MISC PILE.
+    implementation "curse.maven:better-combat-by-daedelus-639842:8906530"
+    implementation "curse.maven:player-animation-library-1283899:9443585"
+    implementation "curse.maven:cloth-config-348521:8952995"
+
+    implementation "curse.maven:health-bars-1367734:8963068"
+
+    implementation "curse.maven:formations-overworld-915324:8897484"
+    implementation "curse.maven:formations-915115:8888173"
+    implementation "curse.maven:supermartijn642s-core-lib-454372:9447195"
+
+    implementation "curse.maven:tidal-towns-891880:8926736"
+    implementation "curse.maven:gravestone-mod-238551:9027231"
+    implementation "curse.maven:naturalist-627986:9280579"
+    implementation "curse.maven:reliquary-reincarnations-241319:9554997"
+    implementation "curse.maven:mutant-monsters-852665:9084636"
+    implementation "curse.maven:puzzles-lib-495476:9575802"
+
+    implementation "curse.maven:better-archeology-835687:9099998"
+    implementation "curse.maven:resourceful-config-714059:9086226"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

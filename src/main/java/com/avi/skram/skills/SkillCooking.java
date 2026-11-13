@@ -1,5 +1,7 @@
 package com.avi.skram.skills;
 
+import com.crispytwig.naturalist.Naturalist;
+import com.crispytwig.naturalist.registry.NaturalistRegistry;
 import com.teammetallurgy.aquaculture.init.AquaItems;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.component.DataComponents;
@@ -48,6 +50,19 @@ public class SkillCooking extends Skill {
     XP_MAP.put(Items.BREAD, 20);
     XP_MAP.put(Items.CAKE, 200);
     XP_MAP.put(Items.COOKED_BEEF, 70);
+    XP_MAP.put(NaturalistRegistry.COOKED_ANGLERFISH.get(), 70);
+    XP_MAP.put(NaturalistRegistry.COOKED_BASS.get(), 70);
+    XP_MAP.put(NaturalistRegistry.COOKED_BLOBFISH.get(), 70);
+    XP_MAP.put(NaturalistRegistry.COOKED_BUSHMEAT.get(), 70);
+    XP_MAP.put(NaturalistRegistry.COOKED_CATFISH.get(), 70);
+    XP_MAP.put(NaturalistRegistry.COOKED_CLAM_MEAT.get(), 70);
+    XP_MAP.put(NaturalistRegistry.COOKED_CRAB_MEAT.get(), 70);
+    XP_MAP.put(NaturalistRegistry.COOKED_DRUMSTICK.get(), 70);
+    XP_MAP.put(NaturalistRegistry.COOKED_EGG.get(), 50);
+    XP_MAP.put(NaturalistRegistry.COOKED_PIRANHA.get(), 70);
+    XP_MAP.put(NaturalistRegistry.COOKED_VENISON.get(), 70);
+    XP_MAP.put(NaturalistRegistry.COOKED_MAMMOTH_MEAT.get(), 70);
+    XP_MAP.put(NaturalistRegistry.COOKED_DUCK.get(), 70);
     XP_MAP.put(Items.COOKED_CHICKEN, 70);
     XP_MAP.put(Items.COOKED_COD, 70);
     XP_MAP.put(AquaItems.COOKED_FILLET.get(), 40);
