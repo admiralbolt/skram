@@ -9,6 +9,7 @@ import com.avi.skram.skills.SkillSmithing;
 import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.ReflectionUtils;
 import com.llamalad7.mixinextras.sugar.Local;
+import com.teammetallurgy.aquaculture.item.FishItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

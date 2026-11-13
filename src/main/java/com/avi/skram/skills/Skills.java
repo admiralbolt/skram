@@ -292,6 +292,7 @@ public class Skills {
 
     if (itemID.contains("netherite")) return 25;
     if (itemID.contains("diamond")) return 20;
+    if (itemID.contains("neptunium")) return 20;
     if (itemID.contains("gold")) return 15;
     if (itemID.contains("iron")) return 15;
     if (itemID.contains("chainmail")) return 13;

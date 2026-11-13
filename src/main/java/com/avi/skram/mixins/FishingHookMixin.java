@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class FishingHookMixin {
 
   @Shadow
-  private int timeUntilLured;
+  protected int timeUntilLured;
 
   // This took an eternity to figure out, but we need to shift by two here.
   // An assignment like this:

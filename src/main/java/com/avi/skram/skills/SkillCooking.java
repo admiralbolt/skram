@@ -1,5 +1,6 @@
 package com.avi.skram.skills;
 
+import com.teammetallurgy.aquaculture.init.AquaItems;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -49,6 +50,7 @@ public class SkillCooking extends Skill {
     XP_MAP.put(Items.COOKED_BEEF, 70);
     XP_MAP.put(Items.COOKED_CHICKEN, 70);
     XP_MAP.put(Items.COOKED_COD, 70);
+    XP_MAP.put(AquaItems.COOKED_FILLET.get(), 40);
     XP_MAP.put(Items.COOKED_MUTTON, 70);
     XP_MAP.put(Items.COOKED_RABBIT, 100);
     XP_MAP.put(Items.COOKED_SALMON, 70);

@@ -37,6 +37,9 @@ repositories {
     maven {
         url "https://cursemaven.com"
     }
+    maven {
+        url "https://girafi.dk/maven/"
+    }
 }
 
 base {
@@ -123,11 +126,22 @@ dependencies {
     // Infernal Mobs.
     implementation "curse.maven:atomicstrykers-infernal-mobs-227875:8962112"
 
+    // Right click harvest.
+    implementation "curse.maven:rightclickharvest-452834:9580827"
+    implementation "curse.maven:architectury-api-419699:9111315"
+    implementation "curse.maven:jamlib-623764:9563741"
+
     // Waystones & it's dependencies.
     compileOnly "net.blay09.mods:waystones-common:26.3.0.2"
     implementation "net.blay09.mods:waystones-neoforge:26.3.0.2"
     implementation "net.blay09.mods:balm-neoforge:26.3.0.2"
     implementation "net.blay09.mods:shogi-neoforge:26.3.0.2"
+
+    // Aquaculture
+    implementation "com.teammetallurgy.aquaculture:aquaculture2_26.3:26.3-2.11.2"
+
+    // Map.
+    implementation "curse.maven:xaeros-minimap-263420:9323154"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
