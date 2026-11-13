@@ -22,9 +22,9 @@ public class GigaChestScreen extends AbstractContainerScreen<GigaChestMenu> {
   private static final int BACKGROUND_WIDTH = 428;
   private static final int BACKGROUND_HEIGHT = 254;
   private static final int IMAGE_HEIGHT_OFFSET = 40;
-  private static final int TAB_BUTTON_SIZE = 20;
+  private static final int TAB_BUTTON_SIZE = 19;
   private static final int TAB_BUTTON_SPACING = 2;
-  private static final int TAB_BUTTONS_PER_ROW = 5;
+  private static final int TAB_BUTTONS_PER_ROW = 6;
 
   public GigaChestScreen(GigaChestMenu menu, Inventory inventory, Component title) {
     super(menu, inventory, Component.literal(""), BACKGROUND_WIDTH, BACKGROUND_HEIGHT + IMAGE_HEIGHT_OFFSET);
@@ -36,7 +36,6 @@ public class GigaChestScreen extends AbstractContainerScreen<GigaChestMenu> {
   protected void init() {
     super.init();
     int tabCount = GigaChestTabs.TABS.size();
-    int rows = (tabCount + TAB_BUTTONS_PER_ROW - 1) / TAB_BUTTONS_PER_ROW;
     int firstTabButtonY = this.height - 80;
 
     for (int tabIndex = 0; tabIndex < tabCount; ++tabIndex) {
@@ -44,7 +43,7 @@ public class GigaChestScreen extends AbstractContainerScreen<GigaChestMenu> {
       int column = tabIndex % TAB_BUTTONS_PER_ROW;
       int row = tabIndex / TAB_BUTTONS_PER_ROW;
       this.addRenderableWidget(new GigaChestTabButton(
-        this.leftPos + 12 + column * (TAB_BUTTON_SIZE + TAB_BUTTON_SPACING),
+        this.leftPos + 6 + column * (TAB_BUTTON_SIZE + TAB_BUTTON_SPACING),
         firstTabButtonY + row * (TAB_BUTTON_SIZE + TAB_BUTTON_SPACING),
         TAB_BUTTON_SIZE,
         GigaChestTabs.TABS.get(tabIndex),

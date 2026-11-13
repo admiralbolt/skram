@@ -29,7 +29,7 @@ public final class GigaChestTabs {
     List<CreativeModeTab> tabs = new ArrayList<>();
     tabs.add(MISC_TAB);
     CreativeModeTabs.allTabs().stream()
-      .filter(tab -> tab.getType() == CreativeModeTab.Type.CATEGORY && !tab.getDisplayName().getString().equals("Operator Utilities"))
+      .filter(tab -> tab.getType() == CreativeModeTab.Type.CATEGORY && !tab.getDisplayName().getString().equals("Operator Utilities") && !tab.getDisplayName().getString().equals("Formations Development Tools"))
       .forEach(tabs::add);
     return List.copyOf(tabs);
   }
