@@ -21,8 +21,9 @@ public class ServerPlayerMixin {
     // We send a packet to the client, that then sends a packet back to the server.
     ServerPlayer player = (ServerPlayer) (Object) this;
     PacketDistributor.sendToPlayer(player, new CastingInfoFromClientPacket());
+    // DON'T DO THIS. We should wait on a server reply before continuing processing, but I'm LAZY.
     try {
-      Thread.sleep(1000);
+      Thread.sleep(500);
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
