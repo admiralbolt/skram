@@ -1,6 +1,5 @@
 package com.avi.skram.skills;
 
-import com.crispytwig.naturalist.Naturalist;
 import com.crispytwig.naturalist.registry.NaturalistRegistry;
 import com.teammetallurgy.aquaculture.init.AquaItems;
 import io.netty.buffer.ByteBuf;
