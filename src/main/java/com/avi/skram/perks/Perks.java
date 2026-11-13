@@ -490,10 +490,8 @@ public class Perks {
     Supplier supplier = toDiscover.getSecond();
     if (syncToServer) {
       SkramClientSkillHooks.discoverPerk(perkToDiscover);
-    } else {
-      // This should sync back to the client automatically.
-      player.setData(supplier, perkToDiscover);
     }
+    player.setData(supplier, perkToDiscover);
   }
 
   // We are doing this here in case we ever need to attach multiple entity modifier values.
