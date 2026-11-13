@@ -398,17 +398,17 @@ public class EventHandler {
   @SubscribeEvent
   public static void REGISTER_SERVER_PAYLOAD_HANDLERS(RegisterPayloadHandlersEvent event) {
     final PayloadRegistrar registrar = event.registrar("1");
-    registrar.playBidirectional(
+    registrar.playToServer(
       SkillPacket.TYPE,
       SkillPacket.STREAM_CODEC,
       ServerPayloadHandler::handleSkillPacket
     );
-    registrar.playBidirectional(
+    registrar.playToServer(
       PerkPacket.TYPE,
       PerkPacket.STREAM_CODEC,
       ServerPayloadHandler::handlePerkPacket
     );
-    registrar.playBidirectional(
+    registrar.playToServer(
       PerkResearchPacket.TYPE,
       PerkResearchPacket.STREAM_CODEC,
       ServerPayloadHandler::handlePerkResearchPacket
