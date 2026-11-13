@@ -109,7 +109,7 @@ public class SkillFarming extends Skill {
   }
 
   public int getFortuneAmount() {
-    return 2 + (this.level / 40);
+    return 1 + (this.level / 40);
   }
 
   public static boolean isGrowablePlant(BlockState state) {

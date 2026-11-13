@@ -176,13 +176,17 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_ATTACK_ENTITY(AttackEntityEvent event) {
-    SkramMagic.cancelSpell(event);
+    if (event.getEntity().level().isClientSide()) {
+      SkramClient.cancelSpell(event);
+    }
     SkillMelee.handleAttackEvent(event);
   }
 
   @SubscribeEvent
   public static void ON_PLAYER_LEFT_CLICK_BLOCK(PlayerInteractEvent.LeftClickBlock event) {
-    SkramMagic.cancelSpell(event);
+    if (event.getEntity().level().isClientSide()) {
+      SkramClient.cancelSpell(event);
+    }
     SkillDigging.handleLeftClick(event);
     SkillMining.handleLeftClick(event);
     SkillWoodcutting.handleLeftClick(event);
@@ -190,7 +194,9 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_RIGHT_CLICK_BLOCK(PlayerInteractEvent.RightClickBlock event) {
-    SkramMagic.cancelSpell(event);
+    if (event.getEntity().level().isClientSide()) {
+      SkramClient.cancelSpell(event);
+    }
     SkillDigging.handleRightClick(event);
     SkillFarming.handleRightClick(event);
     SkillHusbandry.handleBlockInteract(event);
@@ -201,7 +207,9 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_RIGHT_CLICK_ITEM(PlayerInteractEvent.RightClickItem event) {
-    SkramMagic.cancelSpell(event);
+    if (event.getEntity().level().isClientSide()) {
+      SkramClient.cancelSpell(event);
+    }
     PerkBatman.handleBatman(event);
     PerkClusterBomb.handleItemRightClick(event);
 
@@ -210,7 +218,9 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_ENTITY_INTERACT(PlayerInteractEvent.EntityInteract event) {
-    SkramMagic.cancelSpell(event);
+    if (event.getEntity().level().isClientSide()) {
+      SkramClient.cancelSpell(event);
+    }
     SkillHusbandry.handleEntityInteract(event);
     PerkDebonair.handleEntityInteract(event);
     PerkThievery.handleEntityInteract(event);
@@ -382,13 +392,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_TICK(PlayerTickEvent.Pre event) {
     SkillAthletics.handleTick(event);
-    SkramMagic.handleTick(event);
     PerkPhotosynthesis.healInSunlight(event);
-  }
-
-  @SubscribeEvent
-  public static void ON_TICK_POST(PlayerTickEvent.Post event) {
-    SkramMagic.handleTickPost(event);
   }
 
   @SubscribeEvent
