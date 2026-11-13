@@ -1,5 +1,6 @@
 package com.avi.skram.utils;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
@@ -128,6 +129,10 @@ public class MinecraftUtils {
 
     Vec3 forceVector = sourceLocation.subtract(entity.position()).normalize().scale(power);
     entity.setDeltaMovement(forceVector);
+  }
+
+  public static boolean isLocalPlayer(Player player) {
+    return player.level().isClientSide() && player == Minecraft.getInstance().player;
   }
 
 }

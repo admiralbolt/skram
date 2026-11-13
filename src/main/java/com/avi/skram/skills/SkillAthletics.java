@@ -1,6 +1,7 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
+import com.avi.skram.utils.MinecraftUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
@@ -94,7 +95,7 @@ public class SkillAthletics extends Skill {
 
   public static void handleTick(PlayerTickEvent.Pre event) {
     Player player = event.getEntity();
-    if (!player.level().isClientSide()) return;
+    if (!MinecraftUtils.isLocalPlayer(player)) return;
 
     Vec3 velocity = player.getDeltaMovement();
     // If we aren't moving at all, don't give xp.
