@@ -22,11 +22,11 @@ public class PerkLuckyDog extends Perk {
   public static final String NAME = "lucky_dog";
   public static final String DESCRIPTION = "Gain +1 luck.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillBotany.NAME, 20)
-    .put(SkillFishing.NAME, 20)
-    .put(SkillFarming.NAME, 20)
-    .put(SkillHusbandry.NAME, 20)
-    .put(SkillMining.NAME, 20)
+    .put(SkillBotany.NAME, 15)
+    .put(SkillFishing.NAME, 15)
+    .put(SkillFarming.NAME, 15)
+    .put(SkillHusbandry.NAME, 15)
+    .put(SkillMining.NAME, 15)
     .build();
   public static StreamCodec<ByteBuf, PerkLuckyDog> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkLuckyDog::new);
 

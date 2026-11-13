@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent;
 
 import java.util.List;
@@ -29,7 +30,10 @@ public class PerkGenealogy extends Perk {
 
   public static List<ItemStack> getResearchCost() {
     return List.of(
-
+      new ItemStack(Items.BOOK, 1),
+      new ItemStack(Items.FEATHER, 1),
+      new ItemStack(Items.INK_SAC, 1),
+      new ItemStack(Items.GOLDEN_APPLE, 32)
     );
   }
 

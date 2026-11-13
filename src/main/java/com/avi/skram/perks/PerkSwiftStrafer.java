@@ -16,7 +16,7 @@ public class PerkSwiftStrafer extends Perk {
   public static final String DESCRIPTION = "Move at full speed while aiming down sights.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
     .put(SkillRanged.NAME, 20)
-    .put(SkillAthletics.NAME, 20)
+    .put(SkillAthletics.NAME, 15)
     .build();
   public static final StreamCodec<ByteBuf, PerkSwiftStrafer> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkSwiftStrafer::new);
 
