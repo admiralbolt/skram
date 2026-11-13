@@ -138,6 +138,8 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_JOIN_WORLD(PlayerEvent.PlayerLoggedInEvent event) {
+    if (event.getEntity().level().isClientSide()) return;
+
     // Loop through all skills and apply modifiers.
     for (Supplier skillSupplier : Skills.SKILLS_BY_NAME.values()) {
       Skill skill = (Skill) event.getEntity().getData(skillSupplier);
@@ -147,6 +149,8 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_RESPAWN(PlayerEvent.PlayerRespawnEvent event) {
+    if (event.getEntity().level().isClientSide()) return;
+
     // Loop through all skills and apply modifiers.
     for (Supplier skillSupplier : Skills.SKILLS_BY_NAME.values()) {
       Skill skill = (Skill) event.getEntity().getData(skillSupplier);
@@ -156,6 +160,8 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_CHANGE_DIMENSION(PlayerEvent.PlayerChangedDimensionEvent event) {
+    if (event.getEntity().level().isClientSide()) return;
+
     // Loop through all skills and apply modifiers.
     for (Supplier skillSupplier : Skills.SKILLS_BY_NAME.values()) {
       Skill skill = (Skill) event.getEntity().getData(skillSupplier);
