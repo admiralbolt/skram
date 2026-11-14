@@ -287,6 +287,7 @@ public class SkramClientSkillHooks {
 
   public static void discoverPerk(Perk perk) {
     ClientPacketDistributor.sendToServer(new PerkPacket(perk.name, true, false, true));
+    perk.discovered = true;
     showPerkDiscoveredToast(perk);
   }
 
