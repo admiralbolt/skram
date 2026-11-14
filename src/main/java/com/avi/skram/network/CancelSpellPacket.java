@@ -8,7 +8,7 @@ import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 public record CancelSpellPacket() implements CustomPacketPayload {
-  public static final CustomPacketPayload.Type<@NotNull CancelSpellPacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(Skram.MODID, "casting_info_from_client_packet"));
+  public static final CustomPacketPayload.Type<@NotNull CancelSpellPacket> TYPE = new CustomPacketPayload.Type<>(Identifier.fromNamespaceAndPath(Skram.MODID, "cancel_spell_packet"));
 
   public static final StreamCodec<ByteBuf, CancelSpellPacket> STREAM_CODEC = StreamCodec.unit(new CancelSpellPacket());
 
