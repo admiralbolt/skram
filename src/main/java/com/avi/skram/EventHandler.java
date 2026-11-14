@@ -277,6 +277,11 @@ public class EventHandler {
   }
 
   @SubscribeEvent
+  public static void ON_EXPLOSION_START(ExplosionEvent.Start event) {
+    SkillDemolition.onBoom(event);
+  }
+
+  @SubscribeEvent
   public static void ON_ANVIL_UPDATE(AnvilUpdateEvent event) {
     SkillSmithing.handleAnvilUpdate(event);
     PerkMasterBlacksmith.handleAnvilUpdate(event);

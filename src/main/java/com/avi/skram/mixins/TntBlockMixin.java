@@ -42,32 +42,12 @@ public class TntBlockMixin {
     if (playerData == null) return;
 
     Player owner = playerData.getOwner((ServerLevel) level);
+    if (owner == null) return;
 
-    float explosionPower = 0;
-
-    if (owner != null) {
-      SkillDemolition demolition = owner.getData(Skills.DEMOLITION);
-      if (demolition.enabledAbilities[SkillDemolition.BLAST_POWER_INDEX]) {
-        explosionPower = demolition.getBlastPower();;
-      }
-
-      // We also want to make sure that the owner of the PrimedTnt is set appropriately.
-      try {
-        ReflectionUtils.setFieldValue(primedTnt, "owner", EntityReference.of(owner));
-      } catch (NoSuchFieldException | IllegalAccessException e) {
-        System.out.println("aaaaaaah");
-      }
-    } else {
-      // Fallback to playerData if the player isn't logged in.
-      explosionPower = playerData.explosionPower;
-    }
-
-    // Override the value of explosionPower.
     try {
-      float baseExplosionPower = (float) ReflectionUtils.getFieldValue(primedTnt, "explosionPower");
-      ReflectionUtils.setFieldValue(primedTnt, "explosionPower", baseExplosionPower * (1 + explosionPower));
+      ReflectionUtils.setFieldValue(primedTnt, "owner", EntityReference.of(owner));
     } catch (NoSuchFieldException | IllegalAccessException e) {
-      System.out.println("aaaah2");
+      System.out.println("aaaaaaah" + e);
     }
   }
 }

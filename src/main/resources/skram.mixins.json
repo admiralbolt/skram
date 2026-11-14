@@ -22,7 +22,6 @@
     "ItemMixin",
     "LivingEntityMixin",
     "PlayerMixin",
-    "PrimedTntMixin",
     "ProjectileMixin",
     "ServerPlayerMixin",
     "ThrowablePotionItemMixin",

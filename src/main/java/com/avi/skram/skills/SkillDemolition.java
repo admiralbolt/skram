@@ -1,6 +1,7 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
+import com.avi.skram.utils.ReflectionUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
@@ -11,8 +12,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Explosion;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
 
 public class SkillDemolition extends Skill {
 
@@ -89,6 +92,22 @@ public class SkillDemolition extends Skill {
 
     SkillDemolition demolition = player.getData(Skills.DEMOLITION);
     demolition.addXp(player, 30);
+  }
+
+  public static void onBoom(ExplosionEvent.Start event) {
+    Explosion explosion = event.getExplosion();
+    if (!(explosion.getIndirectSourceEntity() instanceof Player player)) return;
+
+    SkillDemolition demolition = player.getData(Skills.DEMOLITION);
+    if (!demolition.enabledAbilities[BLAST_POWER_INDEX]) return;
+
+    try {
+      ReflectionUtils.setFieldValue(explosion, "radius", explosion.radius() * (1 + demolition.getBlastPower()));
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      System.out.println("Couldn't increase blast radius: " + e);
+    }
+
+    demolition.addXp(player, 100 * explosion.radius());
   }
 
   // Encourage the players to blow up entities :)
