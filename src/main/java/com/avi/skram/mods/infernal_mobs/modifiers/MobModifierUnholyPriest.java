@@ -63,7 +63,7 @@ public class MobModifierUnholyPriest extends MobModifier {
         enemy.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, COOLDOWN_TICKS + 5, 0, false, true));
         enemy.addEffect(new MobEffectInstance(MobEffects.SPEED, COOLDOWN_TICKS + 5, 1, false, true));
         // Many undead are immune to regeneration effect, so we heal directly instead.
-        enemy.heal(4.0f);
+        enemy.heal(1.0f);
       }
 
       mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SkramSounds.SPELL_CAST_GENERIC3, SoundSource.HOSTILE, 0.45f, 1.0f);

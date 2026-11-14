@@ -6,6 +6,7 @@ import atomicstryker.infernalmobs.common.InfernalMobsConfig;
 import atomicstryker.infernalmobs.common.InfernalMobsCore;
 import atomicstryker.infernalmobs.common.MobModifier;
 import atomicstryker.infernalmobs.common.mods.MM_Ender;
+import atomicstryker.infernalmobs.common.mods.MM_Vengeance;
 import com.avi.skram.Skram;
 import com.avi.skram.mods.infernal_mobs.modifiers.*;
 import net.neoforged.bus.api.EventPriority;
@@ -25,7 +26,9 @@ public class InfernalMobsInjector {
 
   public static Set<Class<?>> EXCLUDE = Set.of(
     // This can cause crashes apparently since it calls hurt() inside LivingDamageEvent.Pre.
-    MM_Ender.class
+    MM_Ender.class,
+    // Vengeance is the worst :/
+    MM_Vengeance.class
   );
 
   @SubscribeEvent(priority = EventPriority.LOW)
@@ -58,10 +61,11 @@ public class InfernalMobsInjector {
 
       // Amusingly rarities are ints. Setting a rarity of 15 means a roughly 1 / 15 chance.
       // Defaults are 15, 7, 7.
-      config.setEliteRarity(9);
-      config.setUltraRarity(6);
-      config.setInfernoRarity(5);
+      config.setEliteRarity(10);
+      config.setUltraRarity(12);
+      config.setInfernoRarity(12);
       config.setMaxDamage(20);
+      config.setModHealthFactor(0.5);
 
       // Need to reset the enabled mods config since we've updated the list of mods.
       Map<String, Boolean> modsEnabled = new HashMap<>();

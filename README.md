@@ -2,6 +2,12 @@
 TODO
 ====
 
+* Spears?
+* Combat XP slightly too low.
+* MANA LOG OUT BUG.
+
+
+
 Perks
 ==================
 
