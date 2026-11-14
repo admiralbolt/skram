@@ -1,6 +1,7 @@
 package com.avi.skram.network;
 
 import com.avi.skram.magic.SkramMagic;
+import com.avi.skram.magic.SpellCastingInfo;
 import com.avi.skram.perks.Perk;
 import com.avi.skram.perks.Perks;
 import com.avi.skram.ui.SkramScreen;
@@ -26,6 +27,11 @@ public class ClientPayloadHandler {
 
   public static void handleGetCastingInfoFromClient(final CastingInfoFromClientPacket packet, final IPayloadContext context) {
     ClientPacketDistributor.sendToServer(new CastingSyncServerPacket(context.player().getData(SkramMagic.SPELL_CASTING_INFO)));
+  }
+
+  public static void cancelSpell(final CancelSpellPacket packet, final IPayloadContext context) {
+    SpellCastingInfo castingInfo = context.player().getData(SkramMagic.SPELL_CASTING_INFO);
+    castingInfo.cancel = true;
   }
 
 }

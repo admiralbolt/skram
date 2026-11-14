@@ -446,6 +446,11 @@ public class EventHandler {
       CastingInfoFromClientPacket.STREAM_CODEC,
       ClientPayloadHandler::handleGetCastingInfoFromClient
     );
+    registrar.playToClient(
+      CancelSpellPacket.TYPE,
+      CancelSpellPacket.STREAM_CODEC,
+      ClientPayloadHandler::cancelSpell
+    );
   }
 
   @SubscribeEvent

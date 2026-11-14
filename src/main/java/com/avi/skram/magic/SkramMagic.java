@@ -1,14 +1,17 @@
 package com.avi.skram.magic;
 
 import com.avi.skram.Skram;
+import com.avi.skram.network.CancelSpellPacket;
 import com.avi.skram.perks.PerkStalwartSpellcaster;
 import com.avi.skram.perks.Perks;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.function.Supplier;
 
@@ -57,9 +60,7 @@ public class SkramMagic {
     PerkStalwartSpellcaster perk = player.getData(Perks.STALWART_SPELLCASTER);
     if (perk.isFullyEnabled()) return;
 
-    SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
-    castingInfo.cancel = true;
-    player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
+    PacketDistributor.sendToPlayer((ServerPlayer) player, new CancelSpellPacket());
   }
 
 }
