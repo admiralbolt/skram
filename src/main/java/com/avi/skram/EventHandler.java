@@ -121,6 +121,7 @@ public class EventHandler {
       SkillBotany.applyFortune(event);
       SkillFarming.applyFortune(event);
       SkillMining.applyFortune(event);
+      SkillWoodcutting.applyFortune(event);
     }
   }
 

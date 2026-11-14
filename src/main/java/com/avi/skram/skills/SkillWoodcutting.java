@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -14,9 +15,11 @@ import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SkillWoodcutting extends Skill {
@@ -31,14 +34,29 @@ public class SkillWoodcutting extends Skill {
   public static Map<Block, Integer> XP_MAP;
 
   public static final int WOODCUTTING_SPEED_INDEX = 0;
+  public static final int WOODCUTTING_FORTUNE_INDEX = 1;
 
   public SkillWoodcutting() {
     super(NAME, 1, 0);
-    this.enabledAbilities = new boolean[]{true};
+    this.enabledAbilities = new boolean[]{true, true};
   }
 
   public SkillWoodcutting(ByteBuf buffer) {
     super(buffer);
+    this.ensureFortuneAbility();
+  }
+
+  private void ensureFortuneAbility() {
+    if (this.enabledAbilities.length <= WOODCUTTING_FORTUNE_INDEX) {
+      this.enabledAbilities = java.util.Arrays.copyOf(this.enabledAbilities, WOODCUTTING_FORTUNE_INDEX + 1);
+      this.enabledAbilities[WOODCUTTING_FORTUNE_INDEX] = true;
+    }
+  }
+
+  @Override
+  public void deserialize(net.minecraft.world.level.storage.ValueInput input) {
+    super.deserialize(input);
+    this.ensureFortuneAbility();
   }
 
   public static void setupXPMap() {
@@ -68,6 +86,14 @@ public class SkillWoodcutting extends Skill {
     return 0.03f * this.level;
   }
 
+  public double getFortuneChance() {
+    return 0.01 * this.level;
+  }
+
+  public int getFortuneAmount() {
+    return 1 + (this.level / 30);
+  }
+
   public static void applySpeed(PlayerEvent.BreakSpeed event) {
     if (!event.getState().is(BlockTags.MINEABLE_WITH_AXE)) return;
 
@@ -82,6 +108,24 @@ public class SkillWoodcutting extends Skill {
 
     SkillWoodcutting woodcutting = event.getPlayer().getData(Skills.WOODCUTTING);
     woodcutting.addXp(event.getPlayer(), XP_MAP.getOrDefault(event.getState().getBlock(), 10));
+  }
+
+  public static void applyFortune(BlockDropsEvent event) {
+    if (!XP_MAP.containsKey(event.getState().getBlock())) return;
+    if (!(event.getBreaker() instanceof Player player)) return;
+
+    SkillWoodcutting woodcutting = player.getData(Skills.WOODCUTTING);
+    if (!woodcutting.enabledAbilities[WOODCUTTING_FORTUNE_INDEX]) return;
+    if (Math.random() > woodcutting.getFortuneChance()) return;
+
+    List<ItemEntity> drops = event.getDrops();
+    int dropSize = drops.size();
+    for (int i = 0; i < dropSize; ++i) {
+      ItemEntity drop = drops.get(i);
+      for (int j = 0; j < woodcutting.getFortuneAmount(); ++j) {
+        drops.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), drop.getItem().copy()));
+      }
+    }
   }
 
   public static void handleLeftClick(PlayerInteractEvent.LeftClickBlock event) {
@@ -137,10 +181,16 @@ public class SkillWoodcutting extends Skill {
 
   @Override
   public java.util.List<AbilityDescription> getAbilityDescriptions() {
-    return java.util.List.of(new AbilityDescription(
-      "Woodcutting Speed: +" + (int) (100 * this.getSpeedBonus()) + "%.",
-      WOODCUTTING_SPEED_INDEX
-    ));
+    return java.util.List.of(
+      new AbilityDescription(
+        "Woodcutting Speed: +" + (int) (100 * this.getSpeedBonus()) + "%.",
+        WOODCUTTING_SPEED_INDEX
+      ),
+      new AbilityDescription(
+        "Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items.",
+        WOODCUTTING_FORTUNE_INDEX
+      )
+    );
   }
 
   @Override
