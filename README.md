@@ -3,6 +3,14 @@ TODO
 ====
 
 * Spears?
+* Smokers / blast furnaces don't give xp.
+* Spell Equip Change MANA BUG
+* Make luck work for everything?
+* Search feature
+* Infinite stacking for giga chests?
+* Piglin trades?
+* Infernal Mobs crashing.
+
 
 Perks
 ==================

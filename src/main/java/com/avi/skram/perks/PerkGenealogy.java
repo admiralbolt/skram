@@ -52,6 +52,9 @@ public class PerkGenealogy extends Perk {
     if (player.level().isClientSide()) return;
     if (!(event.getChild() instanceof AbstractHorse horse)) return;
 
+    PerkGenealogy perk = player.getData(Perks.GENEALOGY);
+    if (!perk.isFullyEnabled()) return;
+
     applyAttributes(event.getParentA(), event.getParentB(), horse);
   }
 
