@@ -2,10 +2,9 @@
 TODO
 ====
 
-* Make luck work for everything?
 * Search feature
 * Infernal Mobs crashing.
-* Right click horse armor
+* Right click horse armor shouldn't display an error message.
 
 
 Perks
