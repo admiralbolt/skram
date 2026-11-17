@@ -17,6 +17,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class Skills {
@@ -281,11 +282,17 @@ public class Skills {
     SkillWoodcutting.setupXPMap();
   }
 
+  public static Set<String> EXCLUDE_FROM_LEVEL_CHECK = Set.of(
+    "horse_armor"
+  );
+
   public static int requiredLevel(ItemStack stack) {
     // This is a pretty unfortunate way of checking, but the materials themselves aren't actually stored on the items
     // in any way, they are simply used to set attribute values on construction.
     // We instead check the names for the appropriate material.
     String itemID = stack.getItem().toString();
+
+    if (EXCLUDE_FROM_LEVEL_CHECK.contains(itemID)) return 1;
 
     // A funny-ish hack for melee weapons, but this should work fine.
     if (itemID.contains("mace")) return 25;
