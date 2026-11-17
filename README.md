@@ -7,6 +7,19 @@ TODO
 * Right click horse armor shouldn't display an error message.
 
 
+Version 1.0.3
+=============
+
+* Fixed a bug where mana values were overwritten on spell swap.
+* Fixed a bug where you received the benefits of the Genealogy perk without researching it.
+* Items in GigaChest now stack past their normal allowed maximum.
+* You now gain Mercantile on Piglin trade.
+* Roughly doubled XP from ALL sources for ALL skills, except for athletics & acrobatics.
+* Increased drop chance for spells from all sources.
+* Blast furnaces & smokers now properly show ownership.
+* Added cooked porkchops to cooking XP.
+
+
 Perks
 ==================
 
