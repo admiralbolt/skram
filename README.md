@@ -4,7 +4,6 @@ TODO
 
 * Make luck work for everything?
 * Search feature
-* Infinite stacking for giga chests?
 * Piglin trades?
 * Infernal Mobs crashing.
 * Right click horse armor

@@ -4,9 +4,11 @@ import com.avi.skram.blocks.SkramBlocks;
 import com.avi.skram.inventory.GigaChestMenu;
 import com.avi.skram.inventory.GigaChestTabs;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -16,6 +18,7 @@ import net.minecraft.world.entity.ContainerUser;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
@@ -31,9 +34,17 @@ import java.util.List;
 public class GigaChestBlockEntity extends BaseContainerBlockEntity implements LidBlockEntity {
 
   public static final String NAME = "giga_chest_block_entity";
+  private static final MapCodec<ItemStack> GIGA_ITEM_STACK_MAP_CODEC = MapCodec.recursive(
+    "GigaChestItemStack",
+    stackCodec -> RecordCodecBuilder.mapCodec(instance -> instance.group(
+      Item.CODEC_WITH_BOUND_COMPONENTS.fieldOf("id").forGetter(ItemStack::typeHolder),
+      Codec.intRange(1, Integer.MAX_VALUE).optionalFieldOf("count", 1).forGetter(ItemStack::getCount),
+      DataComponentPatch.CODEC.optionalFieldOf("components", DataComponentPatch.EMPTY).forGetter(ItemStack::getComponentsPatch)
+    ).apply(instance, ItemStack::new))
+  );
   private static final Codec<StoredItem> STORED_ITEM_CODEC = RecordCodecBuilder.create(instance -> instance.group(
     Codec.INT.fieldOf("Slot").forGetter(StoredItem::slot),
-    ItemStack.MAP_CODEC.forGetter(StoredItem::stack)
+    GIGA_ITEM_STACK_MAP_CODEC.forGetter(StoredItem::stack)
   ).apply(instance, StoredItem::new));
   private NonNullList<ItemStack> items = NonNullList.withSize(GigaChestTabs.CONTAINER_SIZE, ItemStack.EMPTY);
   private final ChestLidController lidController = new ChestLidController();
@@ -135,6 +146,16 @@ public class GigaChestBlockEntity extends BaseContainerBlockEntity implements Li
     return slot >= 0 && slot < GigaChestTabs.CONTAINER_SIZE;
   }
 
+  @Override
+  public int getMaxStackSize() {
+    return Integer.MAX_VALUE;
+  }
+
+  @Override
+  public int getMaxStackSize(ItemStack stack) {
+    return Integer.MAX_VALUE;
+  }
+
   public void sortAllTabs(Player player) {
     if (this.level == null || this.level.isClientSide()) return;
 
@@ -191,21 +212,22 @@ public class GigaChestBlockEntity extends BaseContainerBlockEntity implements Li
     List<ItemStack> compacted = new ArrayList<>();
 
     for (ItemStack source : sorted) {
+      long remaining = source.getCount();
       for (ItemStack target : compacted) {
+        if (remaining == 0) break;
         if (!ItemStack.isSameItemSameComponents(source, target)) continue;
 
-        int transfer = Math.min(target.getMaxStackSize() - target.getCount(), source.getCount());
+        int transfer = (int) Math.min((long) Integer.MAX_VALUE - target.getCount(), remaining);
         if (transfer > 0) {
           target.grow(transfer);
-          source.shrink(transfer);
+          remaining -= transfer;
         }
-        if (source.isEmpty()) break;
       }
 
-      while (!source.isEmpty()) {
-        int stackSize = Math.min(source.getCount(), source.getMaxStackSize());
+      while (remaining > 0) {
+        int stackSize = (int) Math.min(Integer.MAX_VALUE, remaining);
         compacted.add(source.copyWithCount(stackSize));
-        source.shrink(stackSize);
+        remaining -= stackSize;
       }
     }
 

@@ -6,6 +6,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
@@ -21,7 +22,21 @@ public class GigaChestMenu extends AbstractContainerMenu {
   private int selectedTab;
 
   public GigaChestMenu(int containerId, Inventory playerInventory) {
-    this(containerId, playerInventory, new SimpleContainer(GigaChestTabs.CONTAINER_SIZE));
+    this(containerId, playerInventory, createContainer());
+  }
+
+  private static Container createContainer() {
+    return new SimpleContainer(GigaChestTabs.CONTAINER_SIZE) {
+      @Override
+      public int getMaxStackSize() {
+        return Integer.MAX_VALUE;
+      }
+
+      @Override
+      public int getMaxStackSize(ItemStack stack) {
+        return Integer.MAX_VALUE;
+      }
+    };
   }
 
   public GigaChestMenu(int containerId, Inventory playerInventory, Container chest) {
@@ -32,12 +47,71 @@ public class GigaChestMenu extends AbstractContainerMenu {
     for (int row = 0; row < ROWS; ++row) {
       for (int column = 0; column < COLUMNS; ++column) {
         int slot = column + row * COLUMNS;
-        this.addSlot(new Slot(this.tabContainer, slot, 8 + column * 18, 27 + row * 18));
+        this.addSlot(new Slot(this.tabContainer, slot, 8 + column * 18, 27 + row * 18) {
+          @Override
+          public int getMaxStackSize() {
+            return Integer.MAX_VALUE;
+          }
+
+          @Override
+          public int getMaxStackSize(ItemStack stack) {
+            return Integer.MAX_VALUE;
+          }
+        });
       }
     }
 
     this.addStandardInventorySlots(playerInventory, 134, 194);
     this.chest.startOpen(playerInventory.player);
+  }
+
+  @Override
+  public void clicked(int slotIndex, int buttonNum, ContainerInput containerInput, Player player) {
+    if (containerInput == ContainerInput.QUICK_MOVE
+      && slotIndex >= 0
+      && slotIndex < CHEST_SLOT_COUNT) {
+      this.quickMoveChestStackToPlayer(slotIndex, player);
+      return;
+    }
+
+    if (containerInput == ContainerInput.PICKUP
+      && (buttonNum == 0 || buttonNum == 1)
+      && slotIndex >= 0
+      && slotIndex < CHEST_SLOT_COUNT
+      && this.getCarried().isEmpty()) {
+      Slot slot = this.slots.get(slotIndex);
+      ItemStack stack = slot.getItem();
+      if (!stack.isEmpty()) {
+        int amount = buttonNum == 0 ? Math.min(stack.getCount(), stack.getMaxStackSize()) : 1;
+        ItemStack taken = slot.remove(amount);
+        this.setCarried(taken);
+        slot.onTake(player, taken);
+        this.broadcastChanges();
+        return;
+      }
+    }
+
+    super.clicked(slotIndex, buttonNum, containerInput, player);
+  }
+
+  private void quickMoveChestStackToPlayer(int slotIndex, Player player) {
+    Slot slot = this.slots.get(slotIndex);
+    if (!slot.hasItem() || !slot.mayPickup(player)) return;
+
+    ItemStack storedStack = slot.getItem();
+    int amount = Math.min(storedStack.getCount(), storedStack.getMaxStackSize());
+    ItemStack transferStack = storedStack.copyWithCount(amount);
+    if (!this.moveItemStackTo(transferStack, CHEST_SLOT_COUNT, this.slots.size(), true)) return;
+
+    int transferred = amount - transferStack.getCount();
+    storedStack.shrink(transferred);
+    if (storedStack.isEmpty()) {
+      slot.setByPlayer(ItemStack.EMPTY);
+    } else {
+      slot.setChanged();
+    }
+    slot.onTake(player, storedStack);
+    this.broadcastChanges();
   }
 
   @Override
@@ -76,7 +150,7 @@ public class GigaChestMenu extends AbstractContainerMenu {
         continue;
       }
 
-      int maxCount = Math.min(this.tabContainer.getMaxStackSize(stack), existing.getMaxStackSize());
+      int maxCount = this.tabContainer.getMaxStackSize(existing);
       int transfer = Math.min(maxCount - existing.getCount(), stack.getCount());
       if (transfer > 0) {
         existing.grow(transfer);
@@ -201,6 +275,16 @@ public class GigaChestMenu extends AbstractContainerMenu {
     @Override
     public boolean canPlaceItem(int slot, ItemStack stack) {
       return this.backing.canPlaceItem(this.toBackingIndex(slot), stack);
+    }
+
+    @Override
+    public int getMaxStackSize() {
+      return Integer.MAX_VALUE;
+    }
+
+    @Override
+    public int getMaxStackSize(ItemStack stack) {
+      return Integer.MAX_VALUE;
     }
 
     @Override
