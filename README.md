@@ -19,6 +19,7 @@ Version 1.0.3
 * Blast furnaces & smokers now properly show ownership.
 * Added cooked porkchops to cooking XP.
 * Added Knockback Resistance enchantment.
+* Actually exclude some particular enchantments from Infernal Mobs.
 
 
 Perks
