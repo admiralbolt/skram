@@ -2,8 +2,6 @@
 TODO
 ====
 
-* Spears?
-* Smokers / blast furnaces don't give xp.
 * Make luck work for everything?
 * Search feature
 * Infinite stacking for giga chests?

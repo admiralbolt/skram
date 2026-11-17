@@ -67,6 +67,7 @@ public class SkillCooking extends Skill {
     XP_MAP.put(AquaItems.COOKED_FILLET.get(), 40);
     XP_MAP.put(Items.COOKED_MUTTON, 70);
     XP_MAP.put(Items.COOKED_RABBIT, 100);
+    XP_MAP.put(Items.COOKED_PORKCHOP, 80);
     XP_MAP.put(Items.COOKED_SALMON, 70);
     XP_MAP.put(Items.COOKIE, 2);
     XP_MAP.put(Items.DRIED_KELP, 30);
