@@ -101,7 +101,7 @@ public class ServerPayloadHandler {
 
     SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
     castingInfo.equippedSpellName = packet.name();
-    player.setData(SkramMagic.SPELL_CASTING_INFO, castingInfo);
+    // Don't call player.setData(), we don't need to sync back to the client.
   }
 
   // We receive this from the client, and should update the values of the server side data attachment accordingly.

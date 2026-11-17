@@ -89,6 +89,8 @@ public final class MagicTab {
         Component.literal(equipped ? "Equipped" : "Equip"),
         button -> {
           ClientPacketDistributor.sendToServer(new SpellEquipPacket(spell.name));
+          SpellCastingInfo castingInfo = player.getData(SkramMagic.SPELL_CASTING_INFO);
+          castingInfo.equippedSpellName = spell.name;
           button.setMessage(Component.literal("Equipped"));
           button.active = false;
         }
