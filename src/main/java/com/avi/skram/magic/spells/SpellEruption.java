@@ -29,7 +29,7 @@ public class SpellEruption extends Spell {
     SkillDemolition demolition = player.getData(Skills.DEMOLITION);
     SkillMagic magic = player.getData(Skills.MAGIC);
     float explosionPower = (float) (BASE_EXPLOSION_POWER * (1 + magic.getSpellPower()) * (1 + demolition.getBlastPower()));
-    demolition.addXp(player, 50 * explosionPower);
+    demolition.addXp(player, 100 * explosionPower);
     player.level().explode(player, Explosion.getDefaultDamageSource(player.level(), player), null, player.getX(), player.getY(0.0625F), player.getZ(), explosionPower, false, Level.ExplosionInteraction.TNT);
   }
 

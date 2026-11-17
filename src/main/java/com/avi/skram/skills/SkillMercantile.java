@@ -50,16 +50,16 @@ public class SkillMercantile extends Skill {
     Player player = event.getEntity();
 
     SkillMercantile mercantile = player.getData(Skills.MERCANTILE);
-    double baseXp = 400;
+    double baseXp = 800;
 
     // Modify XP based on uses and demand, to mildly encourage not spamming the same trade.
     MerchantOffer offer = event.getMerchantOffer();
     if (offer.getDemand() > 0) {
-      baseXp -= 75 * offer.getDemand();
+      baseXp -= 100 * offer.getDemand();
     }
-    baseXp -= 10 * offer.getUses();
+    baseXp -= 20 * offer.getUses();
 
-    mercantile.addXp(player, Math.max(baseXp, 50));
+    mercantile.addXp(player, Math.max(baseXp, 100));
 
     // Also send a trigger based on the villager profession type.
     AbstractVillager abstractVillager = event.getAbstractVillager();

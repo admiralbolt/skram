@@ -76,8 +76,8 @@ public class PerkPirateering extends Perk {
     SkillMercantile mercantile = player.getData(Skills.MERCANTILE);
     SkillSailing sailing = player.getData(Skills.SAILING);
 
-    melee.addXp(player, 10);
-    mercantile.addXp(player, 15);
-    sailing.addXp(player, 15);
+    melee.addXp(player, 20);
+    mercantile.addXp(player, 30);
+    sailing.addXp(player, 30);
   }
 }

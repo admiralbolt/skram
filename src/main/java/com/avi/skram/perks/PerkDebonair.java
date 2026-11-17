@@ -100,8 +100,8 @@ public class PerkDebonair extends Perk {
     event.getItemStack().shrink(1);
 
     // Add some XP
-    botany.addXp(player, 30);
-    mercantile.addXp(player, 30);
+    botany.addXp(player, 60);
+    mercantile.addXp(player, 60);
 
     // Finally, if it worked, we should cancel the event:
     event.setCanceled(true);

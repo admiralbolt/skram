@@ -123,7 +123,7 @@ public class SkillStealth extends Skill {
     // Modify the XP gained based on the distance between the player and the mob they hit.
     // Nerfing stealth archer even in pre-release.
     float distanceBetween = event.getEntity().distanceTo(player);
-    double xpMult = 30 / Math.max(1, distanceBetween);
+    double xpMult = 50 / Math.max(1, distanceBetween);
 
     if (event.getSource().is(DamageTypes.PLAYER_EXPLOSION)) {
       xpMult *= SkillDemolition.EXPLOSION_DAMAGE_XP_MODIFIER;

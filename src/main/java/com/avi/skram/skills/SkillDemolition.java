@@ -91,7 +91,7 @@ public class SkillDemolition extends Skill {
     if (!(event.getEntity() instanceof Creeper)) return;
 
     SkillDemolition demolition = player.getData(Skills.DEMOLITION);
-    demolition.addXp(player, 30);
+    demolition.addXp(player, 60);
   }
 
   public static void onBoom(ExplosionEvent.Start event) {
@@ -107,7 +107,7 @@ public class SkillDemolition extends Skill {
       System.out.println("Couldn't increase blast radius: " + e);
     }
 
-    demolition.addXp(player, 100 * explosion.radius());
+    demolition.addXp(player, 200 * explosion.radius());
   }
 
   // Encourage the players to blow up entities :)
@@ -118,7 +118,7 @@ public class SkillDemolition extends Skill {
     if (event.getEntity().getType().getCategory().isFriendly()) return;
 
     SkillDemolition demolition = player.getData(Skills.DEMOLITION);
-    demolition.addXp(player, event.getNewDamage());
+    demolition.addXp(player, event.getNewDamage() * 2);
   }
 
   @Override

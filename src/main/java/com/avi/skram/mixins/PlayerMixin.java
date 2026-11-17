@@ -73,7 +73,7 @@ public class PlayerMixin {
   private void giveSkillMagicXP(ItemStack itemStack, int enchantmentCost, CallbackInfo ci) {
     Player player = (Player) (Object) this;
     SkillMagic magic = player.getData(Skills.MAGIC);
-    magic.addXp(player, 50 * enchantmentCost);
+    magic.addXp(player, 120 * enchantmentCost);
   }
 
   @ModifyArg(

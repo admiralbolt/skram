@@ -21,9 +21,9 @@ public class SkillBotany extends Skill {
     Gain XP by breaking flowers!
     
     Base XP rates are:
-     - Tall flowers: 180
-     - Small flowers: 80
-     - Other flowers: 20
+     - Tall flowers: 360
+     - Small flowers: 180
+     - Other flowers: 30
     """;
 
   public static final int BOTANY_FORTUNE_INDEX = 0;
@@ -55,12 +55,12 @@ public class SkillBotany extends Skill {
     BlockState state = event.getState();
     if (!state.is(BlockTags.FLOWERS)) return;
 
-    int xp = 20;
+    int xp = 30;
     // We want to give more XP for tall flowers and small flowers.
     if (state.is(Tags.BlockItems.FLOWERS_TALL.block())) {
-      xp = 180;
+      xp = 360;
     } else if (state.is(Tags.BlockItems.FLOWERS_SMALL.block())) {
-      xp = 80;
+      xp = 180;
     }
 
     SkillBotany botany = event.getPlayer().getData(Skills.BOTANY);

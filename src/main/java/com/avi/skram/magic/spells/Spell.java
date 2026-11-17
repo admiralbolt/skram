@@ -48,7 +48,7 @@ public abstract class Spell {
   public void doEffect(Player player, BlockHitResult hitResult) {
     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), this.spellSound.value(), SoundSource.PLAYERS, 0.35f, 1.0f);
     SkillMagic magic = player.getData(Skills.MAGIC);
-    magic.addXp(player, 10 + ((double) this.requiredMagicLevel / 3) + ((double) this.manaCost / 5));
+    magic.addXp(player, 2 * (10 + ((double) this.requiredMagicLevel / 3) + ((double) this.manaCost / 5)));
   }
 
   public void sendCastPacket(Player player) {

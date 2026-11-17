@@ -45,40 +45,40 @@ public class SkillSmithing extends Skill {
     XP_MAP = new HashMap<>();
 
     // Ingots.
-    XP_MAP.put(Items.COPPER_INGOT, 100);
-    XP_MAP.put(Items.IRON_INGOT, 120);
-    XP_MAP.put(Items.GOLD_INGOT, 170);
-    XP_MAP.put(Items.NETHERITE_SCRAP, 240);
+    XP_MAP.put(Items.COPPER_INGOT, 200);
+    XP_MAP.put(Items.IRON_INGOT, 240);
+    XP_MAP.put(Items.GOLD_INGOT, 340);
+    XP_MAP.put(Items.NETHERITE_SCRAP, 480);
 
     // Nuggets, from smelting things down.
-    XP_MAP.put(Items.COPPER_NUGGET, 20);
-    XP_MAP.put(Items.IRON_NUGGET, 30);
-    XP_MAP.put(Items.GOLD_NUGGET, 40);
+    XP_MAP.put(Items.COPPER_NUGGET, 40);
+    XP_MAP.put(Items.IRON_NUGGET, 60);
+    XP_MAP.put(Items.GOLD_NUGGET, 80);
 
     // Stone.
-    XP_MAP.put(Items.STONE, 20);
-    XP_MAP.put(Items.SMOOTH_STONE, 20);
-    XP_MAP.put(Items.CRACKED_STONE_BRICKS, 20);
-    XP_MAP.put(Items.DEEPSLATE, 20);
-    XP_MAP.put(Items.CRACKED_DEEPSLATE_BRICKS, 20);
-    XP_MAP.put(Items.CRACKED_DEEPSLATE_TILES, 20);
-    XP_MAP.put(Items.SMOOTH_SANDSTONE, 40);
-    XP_MAP.put(Items.SMOOTH_RED_SANDSTONE, 60);
-    XP_MAP.put(Items.CRACKED_NETHER_BRICKS, 40);
-    XP_MAP.put(Items.SMOOTH_BASALT, 20);
-    XP_MAP.put(Items.CRACKED_POLISHED_BLACKSTONE_BRICKS, 20);
-    XP_MAP.put(Items.SMOOTH_QUARTZ, 20);
-    XP_MAP.put(Items.TERRACOTTA, 40);
+    XP_MAP.put(Items.STONE, 40);
+    XP_MAP.put(Items.SMOOTH_STONE, 40);
+    XP_MAP.put(Items.CRACKED_STONE_BRICKS, 40);
+    XP_MAP.put(Items.DEEPSLATE, 40);
+    XP_MAP.put(Items.CRACKED_DEEPSLATE_BRICKS, 40);
+    XP_MAP.put(Items.CRACKED_DEEPSLATE_TILES, 40);
+    XP_MAP.put(Items.SMOOTH_SANDSTONE, 80);
+    XP_MAP.put(Items.SMOOTH_RED_SANDSTONE, 120);
+    XP_MAP.put(Items.CRACKED_NETHER_BRICKS, 80);
+    XP_MAP.put(Items.SMOOTH_BASALT, 40);
+    XP_MAP.put(Items.CRACKED_POLISHED_BLACKSTONE_BRICKS, 40);
+    XP_MAP.put(Items.SMOOTH_QUARTZ, 40);
+    XP_MAP.put(Items.TERRACOTTA, 80);
 
     for (Item item : Items.GLAZED_TERRACOTTA.asList()) {
-      XP_MAP.put(item, 60);
+      XP_MAP.put(item, 120);
     }
 
     // Misc.
-    XP_MAP.put(Items.GLASS, 30);
-    XP_MAP.put(Items.BRICK, 40);
-    XP_MAP.put(Items.NETHER_BRICK, 50);
-    XP_MAP.put(Items.RESIN_BRICK, 60);
+    XP_MAP.put(Items.GLASS, 60);
+    XP_MAP.put(Items.BRICK, 80);
+    XP_MAP.put(Items.NETHER_BRICK, 100);
+    XP_MAP.put(Items.RESIN_BRICK, 120);
   }
 
   @Override
@@ -126,7 +126,7 @@ public class SkillSmithing extends Skill {
 
     if (player.level().isClientSide()) return;
 
-    smithing.addXp(player, left.getDamageValue() - output.getDamageValue());
+    smithing.addXp(player, 2 * (left.getDamageValue() - output.getDamageValue()));
   }
 
   @Override

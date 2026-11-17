@@ -44,42 +44,42 @@ public class SkillMining extends Skill {
   public static void setupXPMap() {
     XP_MAP = new HashMap<>();
 
-    XP_MAP.put(Blocks.ANCIENT_DEBRIS, 500);
-    XP_MAP.put(Blocks.ANDESITE, 25);
-    XP_MAP.put(Blocks.BASALT, 30);
-    XP_MAP.put(Blocks.BLACKSTONE, 30);
-    XP_MAP.put(Blocks.CALCITE, 25);
-    XP_MAP.put(Blocks.CINNABAR, 30);
-    XP_MAP.put(Blocks.COAL_ORE, 100);
-    XP_MAP.put(Blocks.COBBLESTONE, 20);
-    XP_MAP.put(Blocks.COPPER_ORE, 140);
-    XP_MAP.put(Blocks.CRYING_OBSIDIAN, 1000);
-    XP_MAP.put(Blocks.DEEPSLATE, 30);
-    XP_MAP.put(Blocks.DEEPSLATE_COAL_ORE, 140);
-    XP_MAP.put(Blocks.DEEPSLATE_COPPER_ORE, 190);
-    XP_MAP.put(Blocks.DEEPSLATE_DIAMOND_ORE, 370);
-    XP_MAP.put(Blocks.DEEPSLATE_EMERALD_ORE, 700);
-    XP_MAP.put(Blocks.DEEPSLATE_GOLD_ORE, 300);
-    XP_MAP.put(Blocks.DEEPSLATE_IRON_ORE, 250);
-    XP_MAP.put(Blocks.DEEPSLATE_LAPIS_ORE, 280);
-    XP_MAP.put(Blocks.DEEPSLATE_REDSTONE_ORE, 250);
-    XP_MAP.put(Blocks.DIAMOND_ORE, 340);
-    XP_MAP.put(Blocks.DIORITE, 25);
-    XP_MAP.put(Blocks.DRIPSTONE_BLOCK, 30);
-    XP_MAP.put(Blocks.EMERALD_ORE, 500);
-    XP_MAP.put(Blocks.GOLD_ORE, 220);
-    XP_MAP.put(Blocks.GRANITE, 25);
-    XP_MAP.put(Blocks.INFESTED_COBBLESTONE, 50);
-    XP_MAP.put(Blocks.IRON_ORE, 180);
-    XP_MAP.put(Blocks.LAPIS_ORE, 200);
-    XP_MAP.put(Blocks.MOSSY_COBBLESTONE, 50);
-    XP_MAP.put(Blocks.NETHER_GOLD_ORE, 300);
-    XP_MAP.put(Blocks.OBSIDIAN, 130);
-    XP_MAP.put(Blocks.REDSTONE_ORE, 180);
-    XP_MAP.put(Blocks.SANDSTONE, 30);
-    XP_MAP.put(Blocks.STONE, 20);
-    XP_MAP.put(Blocks.SULFUR, 25);
-    XP_MAP.put(Blocks.TUFF, 30);
+    XP_MAP.put(Blocks.ANCIENT_DEBRIS, 1000);
+    XP_MAP.put(Blocks.ANDESITE, 50);
+    XP_MAP.put(Blocks.BASALT, 60);
+    XP_MAP.put(Blocks.BLACKSTONE, 60);
+    XP_MAP.put(Blocks.CALCITE, 50);
+    XP_MAP.put(Blocks.CINNABAR, 60);
+    XP_MAP.put(Blocks.COAL_ORE, 200);
+    XP_MAP.put(Blocks.COBBLESTONE, 40);
+    XP_MAP.put(Blocks.COPPER_ORE, 280);
+    XP_MAP.put(Blocks.CRYING_OBSIDIAN, 2000);
+    XP_MAP.put(Blocks.DEEPSLATE, 60);
+    XP_MAP.put(Blocks.DEEPSLATE_COAL_ORE, 280);
+    XP_MAP.put(Blocks.DEEPSLATE_COPPER_ORE, 380);
+    XP_MAP.put(Blocks.DEEPSLATE_DIAMOND_ORE, 740);
+    XP_MAP.put(Blocks.DEEPSLATE_EMERALD_ORE, 1400);
+    XP_MAP.put(Blocks.DEEPSLATE_GOLD_ORE, 600);
+    XP_MAP.put(Blocks.DEEPSLATE_IRON_ORE, 500);
+    XP_MAP.put(Blocks.DEEPSLATE_LAPIS_ORE, 560);
+    XP_MAP.put(Blocks.DEEPSLATE_REDSTONE_ORE, 500);
+    XP_MAP.put(Blocks.DIAMOND_ORE, 680);
+    XP_MAP.put(Blocks.DIORITE, 50);
+    XP_MAP.put(Blocks.DRIPSTONE_BLOCK, 60);
+    XP_MAP.put(Blocks.EMERALD_ORE, 1000);
+    XP_MAP.put(Blocks.GOLD_ORE, 440);
+    XP_MAP.put(Blocks.GRANITE, 50);
+    XP_MAP.put(Blocks.INFESTED_COBBLESTONE, 100);
+    XP_MAP.put(Blocks.IRON_ORE, 360);
+    XP_MAP.put(Blocks.LAPIS_ORE, 400);
+    XP_MAP.put(Blocks.MOSSY_COBBLESTONE, 100);
+    XP_MAP.put(Blocks.NETHER_GOLD_ORE, 600);
+    XP_MAP.put(Blocks.OBSIDIAN, 260);
+    XP_MAP.put(Blocks.REDSTONE_ORE, 360);
+    XP_MAP.put(Blocks.SANDSTONE, 60);
+    XP_MAP.put(Blocks.STONE, 40);
+    XP_MAP.put(Blocks.SULFUR, 50);
+    XP_MAP.put(Blocks.TUFF, 60);
   }
 
   @Override
@@ -113,7 +113,7 @@ public class SkillMining extends Skill {
     if (!event.getState().is(BlockTags.MINEABLE_WITH_PICKAXE)) return;
 
     SkillMining mining = event.getPlayer().getData(Skills.MINING);
-    mining.addXp(event.getPlayer(), XP_MAP.getOrDefault(event.getState().getBlock(), 10));
+    mining.addXp(event.getPlayer(), XP_MAP.getOrDefault(event.getState().getBlock(), 20));
   }
 
   public static void applyFortune(BlockDropsEvent event) {

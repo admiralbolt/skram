@@ -87,7 +87,7 @@ public class SkillHealth extends Skill {
     SkillHealth health = player.getData(Skills.HEALTH);
 
     LivingEntity targetEntity = event.getEntity();
-    double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 4 : 0.4;
+    double xpMult = (!targetEntity.getType().getCategory().isFriendly()) ? 8 : 0.8;
     if (event.getSource().is(DamageTypes.PLAYER_EXPLOSION)) {
       xpMult *= SkillDemolition.EXPLOSION_DAMAGE_XP_MODIFIER;
     }
@@ -101,7 +101,7 @@ public class SkillHealth extends Skill {
     if (event.getBlockedDamage() <= 0) return;
 
     SkillHealth health = player.getData(Skills.HEALTH);
-    health.addXp(player, event.getBlockedDamage() * 10);
+    health.addXp(player, event.getBlockedDamage() * 12);
   }
 
   public static void handleHealEvent(LivingHealEvent event) {
@@ -115,7 +115,7 @@ public class SkillHealth extends Skill {
     }
 
     // Gain a little XP.
-    health.addXp(player, event.getAmount());
+    health.addXp(player, event.getAmount() * 2);
   }
 
   @Override

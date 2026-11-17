@@ -89,7 +89,7 @@ public class PerkThievery extends Perk {
 
     SkillStealth stealth = player.getData(Skills.STEALTH);
     player.getInventory().add(new ItemStack(Items.EMERALD, 1 + (stealth.level / 50)));
-    stealth.addXp(player, 50);
+    stealth.addXp(player, 100);
 
     // Attach our entity modifier data.
     modifier.lastStealTime = currentTime;
