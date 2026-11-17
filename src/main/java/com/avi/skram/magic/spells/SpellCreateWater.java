@@ -23,7 +23,7 @@ import java.util.Optional;
 public class SpellCreateWater extends Spell {
 
   public static String NAME = "create_water";
-  public static int REQUIRED_MAGIC_LEVEL = 5;
+  public static int REQUIRED_MAGIC_LEVEL = 4;
   public static int COST = 500;
   public static int CASTING_TICKS = 100;
 

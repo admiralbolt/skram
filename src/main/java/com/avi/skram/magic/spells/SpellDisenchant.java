@@ -18,7 +18,7 @@ import java.util.Map;
 public class SpellDisenchant extends Spell {
 
   public static String NAME = "disenchant";
-  public static int REQUIRED_MAGIC_LEVEL = 23;
+  public static int REQUIRED_MAGIC_LEVEL = 20;
   public static int COST = 2000;
   public static int CASTING_TICKS = 100;
 

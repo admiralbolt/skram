@@ -17,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 public class SpellHex extends Spell {
 
   public static String NAME = "hex";
-  public static int REQUIRED_MAGIC_LEVEL = 24;
+  public static int REQUIRED_MAGIC_LEVEL = 17;
   public static int COST = 1200;
   public static int CASTING_TICKS = 45;
 

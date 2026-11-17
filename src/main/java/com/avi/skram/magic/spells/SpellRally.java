@@ -15,7 +15,7 @@ import java.util.List;
 public class SpellRally extends Spell {
 
   public static String NAME = "rally";
-  public static int REQUIRED_MAGIC_LEVEL = 24;
+  public static int REQUIRED_MAGIC_LEVEL = 19;
   public static int COST = 3000;
   public static int CASTING_TICKS = 100;
 

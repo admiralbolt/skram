@@ -12,7 +12,7 @@ import net.minecraft.world.phys.BlockHitResult;
 public class SpellEruption extends Spell {
 
   public static String NAME = "eruption";
-  public static int REQUIRED_MAGIC_LEVEL = 20;
+  public static int REQUIRED_MAGIC_LEVEL = 21;
   public static int COST = 1000;
   public static int CASTING_TICKS = 10;
 

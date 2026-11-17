@@ -22,7 +22,7 @@ import java.util.Optional;
 public class SpellCreateLava extends Spell {
 
   public static String NAME = "create_lava";
-  public static int REQUIRED_MAGIC_LEVEL = 22;
+  public static int REQUIRED_MAGIC_LEVEL = 17;
   public static int COST = 1800;
   public static int CASTING_TICKS = 120;
 

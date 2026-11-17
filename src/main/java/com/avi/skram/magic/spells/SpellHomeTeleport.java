@@ -15,7 +15,7 @@ import net.minecraft.world.phys.Vec3;
 public class SpellHomeTeleport extends Spell {
 
   public static String NAME = "home_teleport";
-  public static int REQUIRED_MAGIC_LEVEL = 12;
+  public static int REQUIRED_MAGIC_LEVEL = 11;
   public static int COST = 2000;
   public static int CASTING_TICKS = 200;
 

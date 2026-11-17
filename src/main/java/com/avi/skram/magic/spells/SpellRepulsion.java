@@ -14,7 +14,7 @@ import java.util.List;
 public class SpellRepulsion extends Spell {
 
   public static String NAME = "repulsion";
-  public static int REQUIRED_MAGIC_LEVEL = 15;
+  public static int REQUIRED_MAGIC_LEVEL = 14;
   public static int COST = 1900;
   public static int CASTING_TICKS = 6;
 

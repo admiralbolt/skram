@@ -14,7 +14,7 @@ import java.util.List;
 public class SpellMagnetize extends Spell {
 
   public static String NAME = "magnetize";
-  public static int REQUIRED_MAGIC_LEVEL = 11;
+  public static int REQUIRED_MAGIC_LEVEL = 10;
   public static int COST = 800;
   public static int CASTING_TICKS = 30;
 

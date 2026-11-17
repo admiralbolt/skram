@@ -17,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 public class SpellSap extends Spell {
 
   public static String NAME = "sap";
-  public static int REQUIRED_MAGIC_LEVEL = 18;
+  public static int REQUIRED_MAGIC_LEVEL = 17;
   public static int COST = 1800;
   public static int CASTING_TICKS = 25;
 

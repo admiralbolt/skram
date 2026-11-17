@@ -21,7 +21,7 @@ import java.util.Optional;
 public class SpellDimensionDoor extends Spell {
 
   public static String NAME = "dimension_door";
-  public static int REQUIRED_MAGIC_LEVEL = 16;
+  public static int REQUIRED_MAGIC_LEVEL = 15;
   public static int COST = 1300;
   public static int CASTING_TICKS = 20;
 

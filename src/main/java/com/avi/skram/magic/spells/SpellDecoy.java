@@ -17,7 +17,7 @@ import java.util.List;
 public class SpellDecoy extends Spell {
 
   public static String NAME = "decoy";
-  public static int REQUIRED_MAGIC_LEVEL = 14;
+  public static int REQUIRED_MAGIC_LEVEL = 13;
   public static int COST = 1400;
   public static int CASTING_TICKS = 15;
 

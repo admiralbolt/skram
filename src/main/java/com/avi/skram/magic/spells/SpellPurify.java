@@ -7,7 +7,7 @@ import net.minecraft.world.phys.BlockHitResult;
 public class SpellPurify extends Spell {
 
   public static String NAME = "purify";
-  public static int REQUIRED_MAGIC_LEVEL = 25;
+  public static int REQUIRED_MAGIC_LEVEL = 18;
   public static int COST = 2000;
   public static int CASTING_TICKS = 10;
 

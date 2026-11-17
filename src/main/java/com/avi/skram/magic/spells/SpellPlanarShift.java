@@ -9,7 +9,7 @@ import net.minecraft.world.phys.BlockHitResult;
 public class SpellPlanarShift extends Spell {
 
   public static String NAME = "planar_shift";
-  public static int REQUIRED_MAGIC_LEVEL = 35;
+  public static int REQUIRED_MAGIC_LEVEL = 30;
   public static int COST = 2600;
   public static int CASTING_TICKS = 200;
 

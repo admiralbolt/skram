@@ -4,8 +4,6 @@ TODO
 
 * Search feature
 * Infernal Mobs crashing.
-* Right click horse armor shouldn't display an error message.
-
 
 Version 1.0.3
 =============
@@ -20,6 +18,8 @@ Version 1.0.3
 * Added cooked porkchops to cooking XP.
 * Added Knockback Resistance enchantment.
 * Actually exclude some particular enchantments from Infernal Mobs.
+* Right clicking with horse armor no longer yells at you.
+* Reduced level requirements for most spells.
 
 
 Perks
