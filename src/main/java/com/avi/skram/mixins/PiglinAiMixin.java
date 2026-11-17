@@ -17,7 +17,7 @@ import java.util.List;
 public class PiglinAiMixin {
 
   @Inject(
-    method = {"Lnet/minecraft/world/entity/monster/piglin/PiglinAi;throwItemsTowardPlayer(Lnet/minecraft/world/entity/monster/piglin/Piglin;Lnet/minecraft/world/entity/player/Player;Ljava/util/List;)V"},
+    method = {"throwItemsTowardPlayer(Lnet/minecraft/world/entity/monster/piglin/Piglin;Lnet/minecraft/world/entity/player/Player;Ljava/util/List;)V"},
     at = {@At(value = "HEAD")}
   )
   private static void givePlayerXPOnPiglinTrade(Piglin body, Player player, List<ItemStack> itemStacks, CallbackInfo ci) {
