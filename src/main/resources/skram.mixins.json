@@ -22,6 +22,7 @@
     "InventoryMenuMixin",
     "ItemMixin",
     "LivingEntityMixin",
+    "PiglinAiMixin",
     "PlayerMixin",
     "ProjectileMixin",
     "ServerPlayerMixin",
