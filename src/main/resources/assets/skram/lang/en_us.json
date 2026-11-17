@@ -19,6 +19,8 @@
   "effect.skram.flanked": "Flanked",
   "effect.skram.hexed": "Hexed",
   "effect.skram.mana_regeneration": "Mana Regeneration",
+  "enchantment.skram.knockback_resistance": "Knockback Resistance",
+
   "item.minecraft.potion.effect.mana_regeneration_potion": "Potion of Mana Regeneration",
   "item.minecraft.potion.effect.long_mana_regeneration_potion": "Potion of Long Mana Regeneration",
   "item.minecraft.potion.effect.strong_mana_regeneration_potion": "Potion of Strong Mana Regeneration",

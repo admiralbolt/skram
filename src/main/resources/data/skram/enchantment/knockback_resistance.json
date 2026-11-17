@@ -1,0 +1,35 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.skram.knockback_resistance"
+  },
+  "supported_items": "#minecraft:enchantable/armor",
+  "exclusive_set": "#minecraft:exclusive_set/armor",
+  "slots": [
+    "armor"
+  ],
+  "max_level": 5,
+  "min_cost": {
+    "base": 4,
+    "per_level_above_first": 6
+  },
+  "max_cost": {
+    "base": 10,
+    "per_level_above_first": 6
+  },
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 0.2,
+          "per_level_above_first": 0.2
+        },
+        "attribute": "minecraft:knockback_resistance",
+        "id": "skram:enchantment.knockback_resistance",
+        "operation": "add_value"
+      }
+    ]
+  },
+  "weight": 10
+}

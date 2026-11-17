@@ -18,6 +18,7 @@ Version 1.0.3
 * Increased drop chance for spells from all sources.
 * Blast furnaces & smokers now properly show ownership.
 * Added cooked porkchops to cooking XP.
+* Added Knockback Resistance enchantment.
 
 
 Perks
