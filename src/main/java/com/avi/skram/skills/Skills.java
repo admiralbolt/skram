@@ -13,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import reliquary.Reliquary;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -3,8 +3,6 @@ package com.avi.skram.mixins;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
-import com.avi.skram.skills.SkillDemolition;
-import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.ReflectionUtils;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
