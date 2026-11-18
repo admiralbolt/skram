@@ -5,6 +5,12 @@ TODO
 * Search feature
 * Infernal Mobs crashing.
 
+Version 1.0.4
+=============
+
+* Fixed a bug where ranged advancements were granting significantly more health XP scaling than intended.
+* Goat created by Decoy spell now has a proper name.
+
 Version 1.0.3
 =============
 
