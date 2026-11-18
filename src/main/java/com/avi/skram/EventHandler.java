@@ -9,6 +9,7 @@ import com.avi.skram.effect.FlankedEffect;
 import com.avi.skram.effect.HexedEffect;
 import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.magic.SpellCastingInfo;
+import com.avi.skram.misc.GenieEvent;
 import com.avi.skram.network.*;
 import com.avi.skram.perks.*;
 import com.avi.skram.skills.*;
@@ -35,6 +36,7 @@ import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import net.neoforged.neoforge.event.level.block.CropGrowEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -407,6 +409,11 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_TICK(PlayerTickEvent.Pre event) {
     PerkPhotosynthesis.healInSunlight(event);
+  }
+
+  @SubscribeEvent
+  public static void ON_SERVER_TICK(ServerTickEvent.Post event) {
+    GenieEvent.handleTick(event);
   }
 
   @SubscribeEvent

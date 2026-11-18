@@ -1,4 +1,11 @@
 {
+  "random_treasure": {
+    "sounds": [
+      {
+        "name": "skram:random_treasure"
+      }
+    ]
+  },
   "spell_cast_start": {
     "sounds": [
       {

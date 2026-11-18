@@ -21,6 +21,11 @@ public class SkramSounds {
   public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
     DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, Skram.MODID);
 
+  public static final Holder<SoundEvent> RANDOM_TREASURE = SOUND_EVENTS.register(
+    "random_treasure", SoundEvent::createVariableRangeEvent
+  );
+
+  // Shpells.
   public static final Holder<SoundEvent> SPELL_CAST_START = SOUND_EVENTS.register(
     "spell_cast_start", SoundEvent::createVariableRangeEvent
   );

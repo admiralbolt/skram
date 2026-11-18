@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
 public class Skills {
@@ -375,6 +376,10 @@ public class Skills {
     if (!event.getLevel().isClientSide()) return;
 
     SkramClientSkillHooks.showRequiredLevelToast(skill, "Using a " + item.getName(event.getItemStack()) + " requires a " + skill.name + " level of " + skillReq.getSecond() + ".");
+  }
+
+  public static String getRandomSkill() {
+    return Skills.SKILLS_BY_NAME.keySet().stream().skip(ThreadLocalRandom.current().nextInt(Skills.SKILLS_BY_NAME.size())).findFirst().get();
   }
 
 }
