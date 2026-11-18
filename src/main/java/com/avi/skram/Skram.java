@@ -10,6 +10,7 @@ import com.avi.skram.blocks.SkramBlocks;
 import com.avi.skram.effect.SkramEffects;
 import com.avi.skram.entity.SkramEntities;
 import com.avi.skram.inventory.SkramMenus;
+import com.avi.skram.item.SkillNameDataComponent;
 import com.avi.skram.item.SkramItems;
 import com.avi.skram.item.SpellNameDataComponent;
 import com.avi.skram.magic.SkramMagic;
@@ -131,6 +132,11 @@ public class Skram {
         }
         output.accept(SkramBlocks.MEGA_CHEST_ITEM.get());
         output.accept(SkramBlocks.GIGA_CHEST_ITEM.get());
+        for (String skillName : Skills.SKILLS_BY_NAME.keySet().stream().sorted().toList()) {
+          ItemStack stack = new ItemStack(SkramItems.ANCIENT_LAMP.get());
+          stack.set(SkramItems.SKILL_NAME_DATA_COMPONENT.get(), new SkillNameDataComponent(skillName));
+          output.accept(stack);
+        }
 
         SkramItems.musicDiscs().forEach(output::accept);
       })

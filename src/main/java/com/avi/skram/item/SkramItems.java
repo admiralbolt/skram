@@ -90,6 +90,11 @@ public class SkramItems {
     "spell_name", builder -> builder.persistent(SpellNameDataComponent.CODEC)
   );
 
+  public static final Supplier<DataComponentType<SkillNameDataComponent>> SKILL_NAME_DATA_COMPONENT = Skram.DATA_COMPONENTS.registerComponentType(
+    "skill_name", builder -> builder.persistent(SkillNameDataComponent.CODEC)
+  );
+
+  public static DeferredItem<Item> ANCIENT_LAMP;
   public static DeferredItem<Item> SPELL_SCROLL;
 
   public static DeferredItem<Item> GIGA_CHEST_CORE;
@@ -146,6 +151,16 @@ public class SkramItems {
   }
 
   public static void register() {
+    ANCIENT_LAMP = Skram.ITEMS.register(AncientLamp.NAME,
+      registryName -> new AncientLamp(
+        new Item.Properties()
+          .setId(ResourceKey.create(Registries.ITEM, registryName))
+          .stacksTo(1)
+          .durability(1)
+          .rarity(Rarity.EPIC)
+      )
+    );
+
     SPELL_SCROLL = Skram.ITEMS.register(SpellScroll.NAME,
       registryName -> new SpellScroll(
         new Item.Properties()
