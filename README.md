@@ -20,6 +20,7 @@ Version 1.0.3
 * Actually exclude some particular enchantments from Infernal Mobs.
 * Right clicking with horse armor no longer yells at you.
 * Reduced level requirements for most spells.
+* Ancient Lamps added! Every ~1 hour of time on the server all players gain a random XP lamp!
 
 
 Perks
