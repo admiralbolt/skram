@@ -5,8 +5,6 @@ TODO
 * Search feature
 * Infernal Mobs crashing.
 * Wandering Merchant Mercantile
-* Chest blocks don't drop anything.
-
 
 
 Version 1.0.4
@@ -17,6 +15,7 @@ Version 1.0.4
 * Reduce volume from random lamp event.
 * Tripled the XP gain from ancient lamps.
 * Nether Quartz now in XP map for mining!
+* Mega / Giga chests are now mineable with axes, and actually drop themselves.
 
 
 

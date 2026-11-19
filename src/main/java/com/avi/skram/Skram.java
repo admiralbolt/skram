@@ -19,6 +19,7 @@ import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.Skills;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.MapCodec;
+import fuzs.puzzleslib.neoforge.api.data.v3.core.DataProviderBuilder;
 import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -33,6 +34,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -74,6 +76,8 @@ public class Skram {
   public static final DeferredRegister<MapCodec<? extends IGlobalLootModifier>> GLOBAL_LOOT_MODIFIER_SERIALIZERS =
     DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Skram.MODID);
 
+  public static final DeferredRegister<LootTable> LOOT_TABLES = DeferredRegister.create(Registries.LOOT_TABLE, MODID);
+
   public static Supplier<CreativeModeTab> SKRAM_TAB;
   // Creates a new Block with the id "skram:example_block", combining the namespace and path
   public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", p -> p.mapColor(MapColor.STONE));
@@ -112,7 +116,7 @@ public class Skram {
     SkramBlocks.registerBlockEntities();
     BLOCK_ENTITY_TYPES.register(modEventBus);
 
-
+    LOOT_TABLES.register(modEventBus);
     DATA_COMPONENTS.register(modEventBus);
 
 

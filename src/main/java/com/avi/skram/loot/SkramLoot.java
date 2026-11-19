@@ -26,5 +26,4 @@ public class SkramLoot {
     event.createProvider(SkramGlobalLootModifierProvider::new);
   }
 
-
 }

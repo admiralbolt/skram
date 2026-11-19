@@ -28,7 +28,7 @@ public class SkramBlocks {
     GIGA_CHEST = Skram.BLOCKS.register(
       GigaChestBlock.NAME, (registryName) -> new GigaChestBlock(
         BlockBehaviour.Properties.of()
-          .destroyTime(12.0f)
+          .destroyTime(18.0f)
           .explosionResistance(1200.0f)
           .noOcclusion()
           .sound(SoundType.WOOD)
