@@ -16,6 +16,7 @@ Version 1.0.4
 * Tripled the XP gain from ancient lamps.
 * Nether Quartz now in XP map for mining!
 * Mega / Giga chests are now mineable with axes, and actually drop themselves.
+* Buffed fishing xp again.
 
 
 

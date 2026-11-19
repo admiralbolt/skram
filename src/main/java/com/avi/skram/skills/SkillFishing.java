@@ -23,8 +23,8 @@ public class SkillFishing extends Skill {
   public static final String DESCRIPTION = """
     Fishy fishy!
     
-    Fishing additional loot is rolled from the Buried Treasure loot table, excluding the Heart of the Sea.
-    You gain 200 XP per fish caught.
+    Fishing additional loot is rolled from the Buried Treasure loot table.
+    You gain 500 XP per fish caught.
     """;
 
   public static final int FISHING_SPEED_INDEX = 0;
@@ -80,7 +80,7 @@ public class SkillFishing extends Skill {
       player.level().addFreshEntity(entity);
     }
 
-    fishing.addXp(player, 450);
+    fishing.addXp(player, 500);
   }
 
   @Override
