@@ -31,7 +31,8 @@
     "ThrownLingeringPotionMixin",
     "ThrownSplashPotionMixin",
     "TntBlockMixin",
-    "VillagerMixin"
+    "VillagerMixin",
+    "WanderingTraderMixin"
   ],
   "injectors": {
     "defaultRequire": 1
