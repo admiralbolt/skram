@@ -7,11 +7,15 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 public class GigaChestScreen extends AbstractContainerScreen<GigaChestMenu> {
 
@@ -53,6 +57,11 @@ public class GigaChestScreen extends AbstractContainerScreen<GigaChestMenu> {
     }
 
     this.addRenderableWidget(Button.builder(
+      Component.translatable("container.giga_chest.deposit"),
+      button -> this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, this.menu.getDepositButtonId())
+    ).bounds(this.leftPos + BACKGROUND_WIDTH - 98, this.height - 70, 64, 16).build());
+
+    this.addRenderableWidget(Button.builder(
       Component.translatable("container.giga_chest.sort"),
       button -> this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, this.menu.getSortButtonId())
     ).bounds(this.leftPos + BACKGROUND_WIDTH - 98, this.height - 50, 64, 16).build());
@@ -61,6 +70,38 @@ public class GigaChestScreen extends AbstractContainerScreen<GigaChestMenu> {
   private void selectTab(int tabIndex) {
     this.menu.setSelectedTab(tabIndex);
     this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, tabIndex);
+  }
+
+  @Override
+  protected void renderSlotContents(GuiGraphicsExtractor graphics, ItemStack itemStack, Slot slot, String itemCount) {
+    int count = itemStack.getCount();
+    int digits = String.valueOf(count).length();
+    if (slot.index >= GigaChestMenu.CHEST_SLOT_COUNT || digits < 4) {
+      super.renderSlotContents(graphics, itemStack, slot, itemCount);
+      return;
+    }
+
+    int x = slot.x;
+    int y = slot.y;
+    int seed = slot.x + slot.y * this.imageWidth;
+    if (slot.isFake()) {
+      graphics.fakeItem(itemStack, x, y, seed);
+    } else {
+      graphics.item(itemStack, x, y, seed);
+    }
+
+    Font countFont = IClientItemExtensions.of(itemStack)
+      .getFont(itemStack, IClientItemExtensions.FontContext.ITEM_COUNT);
+    if (countFont == null) countFont = this.font;
+    graphics.itemDecorations(countFont, itemStack, x, y, "");
+
+    String amount = itemCount == null ? String.valueOf(count) : itemCount;
+    float scale = digits == 4 ? 0.65f : digits == 5 ? 0.5f : Math.min(0.45f, 16.0f / countFont.width(amount));
+    graphics.pose().pushMatrix();
+    graphics.pose().translate(x + 17, y + 9);
+    graphics.pose().scale(scale, scale);
+    graphics.text(countFont, amount, -countFont.width(amount), 0, -1, true);
+    graphics.pose().popMatrix();
   }
 
   @Override

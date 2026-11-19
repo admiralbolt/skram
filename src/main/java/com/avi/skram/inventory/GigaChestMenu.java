@@ -14,8 +14,9 @@ public class GigaChestMenu extends AbstractContainerMenu {
 
   public static final int COLUMNS = 23;
   public static final int ROWS = GigaChestTabs.SLOTS_PER_TAB / COLUMNS;
-  private static final int CHEST_SLOT_COUNT = GigaChestTabs.SLOTS_PER_TAB;
+  public static final int CHEST_SLOT_COUNT = GigaChestTabs.SLOTS_PER_TAB;
   private static final int SORT_BUTTON_ID = GigaChestTabs.TABS.size();
+  private static final int DEPOSIT_BUTTON_ID = SORT_BUTTON_ID + 1;
 
   private final Container chest;
   private final TabContainer tabContainer;
@@ -178,12 +179,44 @@ public class GigaChestMenu extends AbstractContainerMenu {
       this.broadcastChanges();
       return true;
     }
+    if (buttonId == DEPOSIT_BUTTON_ID) {
+      this.depositInventory(player);
+      this.broadcastChanges();
+      return true;
+    }
     if (buttonId == SORT_BUTTON_ID && this.chest instanceof GigaChestBlockEntity gigaChest) {
       gigaChest.sortAllTabs(player);
       this.broadcastChanges();
       return true;
     }
     return false;
+  }
+
+  private void depositInventory(Player player) {
+    Inventory inventory = player.getInventory();
+    int previousTab = this.selectedTab;
+    GigaChestTabs.rebuildDisplayItems(player);
+
+    for (int inventorySlot = 9; inventorySlot < Inventory.INVENTORY_SIZE; ++inventorySlot) {
+      ItemStack stack = inventory.getItem(inventorySlot);
+      if (stack.isEmpty()) continue;
+
+      int preferredTab = GigaChestTabs.findTabIndex(stack);
+      this.tabContainer.setTab(preferredTab);
+      this.insertIntoChest(stack);
+
+      for (int offset = 1; offset < GigaChestTabs.TABS.size() && !stack.isEmpty(); ++offset) {
+        this.tabContainer.setTab((preferredTab + offset) % GigaChestTabs.TABS.size());
+        this.insertIntoChest(stack);
+      }
+
+      if (stack.isEmpty()) {
+        inventory.setItem(inventorySlot, ItemStack.EMPTY);
+      }
+    }
+
+    this.setSelectedTab(previousTab);
+    inventory.setChanged();
   }
 
   public void setSelectedTab(int tabIndex) {
@@ -202,6 +235,10 @@ public class GigaChestMenu extends AbstractContainerMenu {
 
   public int getSortButtonId() {
     return SORT_BUTTON_ID;
+  }
+
+  public int getDepositButtonId() {
+    return DEPOSIT_BUTTON_ID;
   }
 
   @Override

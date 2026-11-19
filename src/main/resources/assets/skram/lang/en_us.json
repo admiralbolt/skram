@@ -5,8 +5,10 @@
   "block.skram.mega_chest": "Mega Chest",
   "container.giga_chest": "Giga Chest",
   "container.giga_chest.misc": "Misc",
+  "container.giga_chest.deposit": "Deposit",
   "container.giga_chest.sort": "Sort",
   "container.mega_chest": "Mega Chest",
+  "container.mega_chest.deposit": "Deposit",
   "container.mega_chest.sort": "Sort",
 
   "key.category.skram.skram": "Skram!",

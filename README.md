@@ -3,8 +3,6 @@ TODO
 ====
 
 * Search feature
-* Infernal Mobs crashing.
-
 
 Version 1.0.4
 =============
@@ -15,6 +13,8 @@ Version 1.0.4
 * Tripled the XP gain from ancient lamps.
 * Nether Quartz now in XP map for mining!
 * Mega / Giga chests are now mineable with axes, and actually drop themselves.
+* Font size of amounts for giga chests now decreases as the digits increase.
+* Mega / Giga chests now have a dump inventory button to quick move all non-hot bar items.
 * Buffed fishing xp again.
 * Mercantile now properly works on Wandering Traders!
 * Buffed stealth xp again.

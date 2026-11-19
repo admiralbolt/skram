@@ -31,6 +31,11 @@ public class MegaChestScreen extends AbstractContainerScreen<MegaChestMenu> {
   protected void init() {
     super.init();
     this.addRenderableWidget(Button.builder(
+      Component.translatable("container.mega_chest.deposit"),
+      button -> this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 1)
+    ).bounds(this.leftPos + BACKGROUND_WIDTH - 98, this.height - 70, 64, 16).build());
+
+    this.addRenderableWidget(Button.builder(
       Component.translatable("container.mega_chest.sort"),
       button -> this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 0)
     ).bounds(this.leftPos + BACKGROUND_WIDTH - 98, this.height - 50, 64, 16).build());

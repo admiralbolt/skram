@@ -14,6 +14,8 @@ public class MegaChestMenu extends AbstractContainerMenu {
   public static final int COLUMNS = 23;
   public static final int ROWS = MegaChestBlockEntity.CONTAINER_SIZE / COLUMNS;
   private static final int CHEST_SLOT_COUNT = MegaChestBlockEntity.CONTAINER_SIZE;
+  private static final int SORT_BUTTON_ID = 0;
+  private static final int DEPOSIT_BUTTON_ID = 1;
 
   private final Container chest;
 
@@ -94,12 +96,32 @@ public class MegaChestMenu extends AbstractContainerMenu {
 
   @Override
   public boolean clickMenuButton(Player player, int buttonId) {
-    if (buttonId != 0 || !this.stillValid(player)) return false;
-    if (this.chest instanceof MegaChestBlockEntity megaChest) {
+    if (!this.stillValid(player)) return false;
+    if (buttonId == DEPOSIT_BUTTON_ID) {
+      this.depositInventory(player);
+      this.broadcastChanges();
+      return true;
+    }
+    if (buttonId == SORT_BUTTON_ID && this.chest instanceof MegaChestBlockEntity megaChest) {
       megaChest.sort();
       this.broadcastChanges();
+      return true;
     }
-    return true;
+    return false;
+  }
+
+  private void depositInventory(Player player) {
+    Inventory inventory = player.getInventory();
+    for (int inventorySlot = 9; inventorySlot < Inventory.INVENTORY_SIZE; ++inventorySlot) {
+      ItemStack stack = inventory.getItem(inventorySlot);
+      if (stack.isEmpty()) continue;
+
+      this.insertIntoChest(stack);
+      if (stack.isEmpty()) {
+        inventory.setItem(inventorySlot, ItemStack.EMPTY);
+      }
+    }
+    inventory.setChanged();
   }
 
   @Override
