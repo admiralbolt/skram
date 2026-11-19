@@ -18,6 +18,7 @@ Version 1.0.4
 * Buffed fishing xp again.
 * Mercantile now properly works on Wandering Traders!
 * Buffed stealth xp again.
+* Mildly nerfed overall perk discovery chance (from X / 200,000 -> X / 250,000).
 
 
 

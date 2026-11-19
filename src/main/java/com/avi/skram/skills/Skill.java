@@ -28,7 +28,7 @@ public abstract class Skill implements ValueIOSerializable {
   public static Identifier YELLOW_BAR_BACKGROUND = Identifier.withDefaultNamespace("textures/gui/sprites/boss_bar/yellow_background.png");
   public static Identifier WHITE_BAR = Identifier.withDefaultNamespace("textures/gui/sprites/boss_bar/white_progress.png");
 
-  public static double PERK_CHANCE = 200000;
+  public static double PERK_CHANCE = 250000;
   public static double XP_MULT_PER_LEVEL = 0.0005;
 
   public static Map<Integer, Integer> XP_FOR_LEVEL = new HashMap<>();
