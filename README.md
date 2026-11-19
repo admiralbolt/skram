@@ -20,7 +20,7 @@ Version 1.0.4
 * Buffed stealth xp again.
 * Mildly nerfed overall perk discovery chance (from X / 200,000 -> X / 250,000).
 * Exclude Berserk from InfernalMobs config to avoid crashes.
-
+* Slightly buffed botany xp.
 
 
 Version 1.0.3
