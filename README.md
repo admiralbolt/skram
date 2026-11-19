@@ -11,7 +11,7 @@ Version 1.0.4
 
 * Fixed a bug where ranged advancements were granting significantly more health XP scaling than intended.
 * Goat created by Decoy spell now has a proper name.
-* Reduce volume from random lamp event.
+* Reduce volume of the sound played from the random lamp event.
 * Tripled the XP gain from ancient lamps.
 * Nether Quartz now in XP map for mining!
 * Mega / Giga chests are now mineable with axes, and actually drop themselves.
@@ -19,6 +19,7 @@ Version 1.0.4
 * Mercantile now properly works on Wandering Traders!
 * Buffed stealth xp again.
 * Mildly nerfed overall perk discovery chance (from X / 200,000 -> X / 250,000).
+* Exclude Berserk from InfernalMobs config to avoid crashes.
 
 
 

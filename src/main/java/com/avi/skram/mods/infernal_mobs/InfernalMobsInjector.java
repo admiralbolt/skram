@@ -5,6 +5,7 @@ package com.avi.skram.mods.infernal_mobs;
 import atomicstryker.infernalmobs.common.InfernalMobsConfig;
 import atomicstryker.infernalmobs.common.InfernalMobsCore;
 import atomicstryker.infernalmobs.common.MobModifier;
+import atomicstryker.infernalmobs.common.mods.MM_Berserk;
 import atomicstryker.infernalmobs.common.mods.MM_Ender;
 import atomicstryker.infernalmobs.common.mods.MM_Vengeance;
 import com.avi.skram.Skram;
@@ -25,7 +26,8 @@ import java.util.Set;
 public class InfernalMobsInjector {
 
   public static Set<Class<?>> EXCLUDE = Set.of(
-    // This can cause crashes apparently since it calls hurt() inside LivingDamageEvent.Pre.
+    // These can cause crashes apparently since it calls hurt() inside LivingDamageEvent.Pre.
+    MM_Berserk.class,
     MM_Ender.class,
     // Vengeance is the worst :/
     MM_Vengeance.class
