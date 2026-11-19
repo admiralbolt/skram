@@ -17,6 +17,7 @@ Version 1.0.4
 * Mega / Giga chests are now mineable with axes, and actually drop themselves.
 * Buffed fishing xp again.
 * Mercantile now properly works on Wandering Traders!
+* Buffed stealth xp again.
 
 
 

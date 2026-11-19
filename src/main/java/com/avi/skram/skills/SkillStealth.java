@@ -27,7 +27,7 @@ public class SkillStealth extends Skill {
     The logic for determining if an enemy has noticed you is suspicious at best, but it works okay enough.
     Visibility detection range is once again logarithmic based on 1 / (1 + 0.04 * this.level).
     XP is gained by dealing damage to unaware entities:
-     - Base XP gained is 30x damage dealt (no xp for friendly mobs).
+     - Base XP gained is 60x damage dealt (no xp for friendly mobs).
      - XP gained is divided by the number of blocks between you and your target. (I'm nerfing stealth archer in pre-release).
     """;
 
@@ -123,7 +123,7 @@ public class SkillStealth extends Skill {
     // Modify the XP gained based on the distance between the player and the mob they hit.
     // Nerfing stealth archer even in pre-release.
     float distanceBetween = event.getEntity().distanceTo(player);
-    double xpMult = 50 / Math.max(1, distanceBetween);
+    double xpMult = 60 / Math.max(1, distanceBetween);
 
     if (event.getSource().is(DamageTypes.PLAYER_EXPLOSION)) {
       xpMult *= SkillDemolition.EXPLOSION_DAMAGE_XP_MODIFIER;
