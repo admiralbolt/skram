@@ -6,7 +6,6 @@ TODO
 * Infernal Mobs crashing.
 * Wandering Merchant Mercantile
 * Chest blocks don't drop anything.
-* Nether Quartz missing from mining XP.
 
 
 
@@ -17,6 +16,8 @@ Version 1.0.4
 * Goat created by Decoy spell now has a proper name.
 * Reduce volume from random lamp event.
 * Tripled the XP gain from ancient lamps.
+* Nether Quartz now in XP map for mining!
+
 
 
 Version 1.0.3

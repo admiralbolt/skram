@@ -73,6 +73,7 @@ public class SkillMining extends Skill {
     XP_MAP.put(Blocks.IRON_ORE, 360);
     XP_MAP.put(Blocks.LAPIS_ORE, 400);
     XP_MAP.put(Blocks.MOSSY_COBBLESTONE, 100);
+    XP_MAP.put(Blocks.NETHER_QUARTZ_ORE, 300);
     XP_MAP.put(Blocks.NETHER_GOLD_ORE, 600);
     XP_MAP.put(Blocks.OBSIDIAN, 260);
     XP_MAP.put(Blocks.REDSTONE_ORE, 360);
