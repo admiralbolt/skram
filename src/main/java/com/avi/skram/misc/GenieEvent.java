@@ -30,7 +30,7 @@ public class GenieEvent {
       stack.set(SkramItems.SKILL_NAME_DATA_COMPONENT, new SkillNameDataComponent(Skills.getRandomSkill()));
       ItemEntity entity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), stack);
       player.level().addFreshEntity(entity);
-      player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SkramSounds.RANDOM_TREASURE.value(), SoundSource.PLAYERS);
+      player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SkramSounds.RANDOM_TREASURE.value(), SoundSource.PLAYERS, 0.6f, 1.0f);
     });
 
     tickCounter = BASE_TICK_TIME + (int) (20 * 60 * 60 * (MathUtils.RANDOM.nextDouble() + MathUtils.RANDOM.nextDouble()) / 2);

@@ -58,7 +58,7 @@ public class AncientLamp extends Item {
 
     Supplier skillSupplier = Skills.SKILLS_BY_NAME.get(skillName);
     Skill skill = (Skill) player.getData(skillSupplier);
-    skill.addXp(player, 100 * skill.level);
+    skill.addXp(player, 300 * skill.level);
 
     stack.hurtAndBreak(1, player, hand);
     return InteractionResult.SUCCESS_SERVER;

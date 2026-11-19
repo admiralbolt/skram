@@ -4,12 +4,20 @@ TODO
 
 * Search feature
 * Infernal Mobs crashing.
+* Wandering Merchant Mercantile
+* Chest blocks don't drop anything.
+* Nether Quartz missing from mining XP.
+
+
 
 Version 1.0.4
 =============
 
 * Fixed a bug where ranged advancements were granting significantly more health XP scaling than intended.
 * Goat created by Decoy spell now has a proper name.
+* Reduce volume from random lamp event.
+* Tripled the XP gain from ancient lamps.
+
 
 Version 1.0.3
 =============
