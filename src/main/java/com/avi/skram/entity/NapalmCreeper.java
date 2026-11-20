@@ -41,7 +41,7 @@ public class NapalmCreeper extends Creeper {
   }
 
   public static AttributeSupplier.@NonNull Builder createAttributes() {
-    return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, 0.35).add(Attributes.MAX_HEALTH, 30).add(Attributes.ATTACK_DAMAGE, 6).add(Attributes.JUMP_STRENGTH, 0.9).add(Attributes.SAFE_FALL_DISTANCE, 20).add(Attributes.KNOCKBACK_RESISTANCE, 0.2);
+    return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, 0.3).add(Attributes.MAX_HEALTH, 30).add(Attributes.ATTACK_DAMAGE, 6).add(Attributes.JUMP_STRENGTH, 0.9).add(Attributes.SAFE_FALL_DISTANCE, 20).add(Attributes.KNOCKBACK_RESISTANCE, 0.2);
   }
 
 }

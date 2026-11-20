@@ -28,4 +28,8 @@ public class MathUtils {
     return String.format("%.1f seconds", ((double) ticks) / 20);
   }
 
+  public static int randomSign() {
+    return RANDOM.nextBoolean() ? 1 : -1;
+  }
+
 }

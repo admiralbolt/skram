@@ -19,8 +19,9 @@ public class SkramRenderers {
   public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
     event.registerEntityRenderer(SkramEntities.COLORED_PROJECTILE.get(), ColoredProjectileRenderer::new);
     event.registerEntityRenderer(SkramEntities.DECOY.get(), GoatRenderer::new);
+    event.registerEntityRenderer(SkramEntities.ENDER_CREEPER.get(), EnderCreeperRenderer::new);
     event.registerEntityRenderer(SkramEntities.ICICLE.get(), IcicleRenderer::new);
-    event.registerEntityRenderer(SkramEntities.NAPALM_CREEPER.get(), SkramCreeperRenderer::new);
+    event.registerEntityRenderer(SkramEntities.NAPALM_CREEPER.get(), NapalmCreeperRenderer::new);
 
     event.registerBlockEntityRenderer(
       SkramBlocks.GIGA_CHEST_BLOCK_ENTITY.get(),

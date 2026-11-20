@@ -24,8 +24,10 @@
   "enchantment.skram.knockback_resistance": "Knockback Resistance",
 
   "entity.skram.decoy": "Scapegoat",
+  "entity.skram.ender_creeper": "Ender Creeper",
   "entity.skram.napalm_creeper": "Napalm Creeper",
 
+  "item.skram.ender_creeper_spawn_egg": "Ender Creeper Spawn Egg",
   "item.skram.napalm_creeper_spawn_egg": "Napalm Creeper Spawn Egg",
   "item.minecraft.potion.effect.mana_regeneration_potion": "Potion of Mana Regeneration",
   "item.minecraft.potion.effect.long_mana_regeneration_potion": "Potion of Long Mana Regeneration",

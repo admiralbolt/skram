@@ -102,6 +102,7 @@ public class SkramItems {
   public static DeferredItem<Item> GIGA_CHEST_CORE;
 
   // Spawn Eggs.
+  public static DeferredItem<Item> SPAWN_EGG_ENDER_CREEPER;
   public static DeferredItem<Item> SPAWN_EGG_NAPALM_CREEPER;
 
   // Music dics.
@@ -178,6 +179,7 @@ public class SkramItems {
 
     GIGA_CHEST_CORE = Skram.ITEMS.registerSimpleItem("giga_chest_core", () -> new Item.Properties().rarity(Rarity.UNCOMMON));
 
+    SPAWN_EGG_ENDER_CREEPER = Skram.ITEMS.register("ender_creeper_spawn_egg", registryName -> new SpawnEggItem(new Item.Properties().spawnEgg(SkramEntities.ENDER_CREEPER.get()).setId(ResourceKey.create(Registries.ITEM, registryName))));
     SPAWN_EGG_NAPALM_CREEPER = Skram.ITEMS.register("napalm_creeper_spawn_egg", registryName -> new SpawnEggItem(new Item.Properties().spawnEgg(SkramEntities.NAPALM_CREEPER.get()).setId(ResourceKey.create(Registries.ITEM, registryName))));
 
     MUSIC_DISC_ARCTURIA = registerMusicDisc("music_disc_arcturia", SkramSounds.ARCTURIA_SONG);

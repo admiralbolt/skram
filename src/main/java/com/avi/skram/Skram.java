@@ -203,6 +203,10 @@ public class Skram {
     if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
       event.accept(EXAMPLE_BLOCK_ITEM);
     }
+    if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
+      event.accept(SkramItems.SPAWN_EGG_NAPALM_CREEPER.get());
+      event.accept(SkramItems.SPAWN_EGG_ENDER_CREEPER.get());
+    }
   }
 
   // You can use SubscribeEvent and let the Event Bus discover methods to call

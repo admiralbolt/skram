@@ -8,6 +8,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacementType;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -23,6 +24,7 @@ public class SkramEntities {
 
   public static Supplier<EntityType<SkramColoredProjectile>> COLORED_PROJECTILE;
   public static Supplier<EntityType<Decoy>> DECOY;
+  public static Supplier<EntityType<EnderCreeper>> ENDER_CREEPER;
   public static Supplier<EntityType<Icicle>> ICICLE;
   public static Supplier<EntityType<NapalmCreeper>> NAPALM_CREEPER;
 
@@ -46,6 +48,21 @@ public class SkramEntities {
         .build(ResourceKey.create(
           Registries.ENTITY_TYPE,
           Identifier.fromNamespaceAndPath(Skram.MODID, Decoy.NAME)
+        ))
+    );
+
+    ENDER_CREEPER = Skram.ENTITY_TYPES.register(
+      EnderCreeper.NAME, () -> EntityType.Builder.of(
+          EnderCreeper::new, MobCategory.MONSTER
+        )
+        .sized(1.0f, 1.0f)
+        .spawnDimensionsScale(1.0f)
+        .clientTrackingRange(8)
+        .updateInterval(10)
+        .fireImmune()
+        .build(ResourceKey.create(
+          Registries.ENTITY_TYPE,
+          Identifier.fromNamespaceAndPath(Skram.MODID, EnderCreeper.NAME)
         ))
     );
 
@@ -81,10 +98,12 @@ public class SkramEntities {
   public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
     event.put(DECOY.get(), Decoy.createAttributes().build());
     event.put(NAPALM_CREEPER.get(), NapalmCreeper.createAttributes().build());
+    event.put(ENDER_CREEPER.get(), EnderCreeper.createAttributes().build());
   }
 
   @SubscribeEvent
   public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
+    event.register(ENDER_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
     event.register(NAPALM_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.REPLACE);
   }
 }

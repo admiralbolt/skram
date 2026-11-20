@@ -7,11 +7,11 @@ import net.minecraft.client.renderer.entity.state.CreeperRenderState;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
-public class SkramCreeperRenderer extends CreeperRenderer {
+public class NapalmCreeperRenderer extends CreeperRenderer {
 
   public static final Identifier NAPALM_CREEPER_TEXTURE = Identifier.fromNamespaceAndPath(Skram.MODID, "textures/entity/napalm_creeper.png");
 
-  public SkramCreeperRenderer(EntityRendererProvider.Context context) {
+  public NapalmCreeperRenderer(EntityRendererProvider.Context context) {
     super(context);
   }
 
