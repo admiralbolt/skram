@@ -1,6 +1,8 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.Skram;
+import com.avi.skram.entity.EnderCreeper;
+import com.avi.skram.entity.NapalmCreeper;
 import com.avi.skram.utils.ReflectionUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -90,8 +92,15 @@ public class SkillDemolition extends Skill {
     if (player.level().isClientSide()) return;
     if (!(event.getEntity() instanceof Creeper)) return;
 
+    double xp = 60;
+    if (event.getEntity() instanceof NapalmCreeper) {
+      xp = 120;
+    } else if (event.getEntity() instanceof EnderCreeper) {
+      xp = 180;
+    }
+
     SkillDemolition demolition = player.getData(Skills.DEMOLITION);
-    demolition.addXp(player, 60);
+    demolition.addXp(player, xp);
   }
 
   public static void onBoom(ExplosionEvent.Start event) {
