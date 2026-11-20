@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_spawn_costs",
+  "biomes": "#c:is_nether",
+  "entity_types": "skram:napalm_creeper",
+  "spawn_cost": {
+    "energy_budget": 1,
+    "charge": 1
+  }
+}

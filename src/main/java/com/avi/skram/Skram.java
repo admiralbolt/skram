@@ -143,6 +143,8 @@ public class Skram {
         }
 
         SkramItems.musicDiscs().forEach(output::accept);
+
+        output.accept(SkramItems.SPAWN_EGG_NAPALM_CREEPER.get());
       })
       .build()
     );

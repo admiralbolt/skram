@@ -2,12 +2,14 @@ package com.avi.skram.item;
 
 import com.avi.skram.Skram;
 import com.avi.skram.audio.SkramSounds;
+import com.avi.skram.entity.SkramEntities;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.ArrayList;
@@ -99,6 +101,9 @@ public class SkramItems {
 
   public static DeferredItem<Item> GIGA_CHEST_CORE;
 
+  // Spawn Eggs.
+  public static DeferredItem<Item> SPAWN_EGG_NAPALM_CREEPER;
+
   // Music dics.
   public static DeferredItem<Item> MUSIC_DISC_ARCTURIA;
   public static DeferredItem<Item> MUSIC_DISC_ABANDONED_MINE_BATTLE;
@@ -172,6 +177,8 @@ public class SkramItems {
     );
 
     GIGA_CHEST_CORE = Skram.ITEMS.registerSimpleItem("giga_chest_core", () -> new Item.Properties().rarity(Rarity.UNCOMMON));
+
+    SPAWN_EGG_NAPALM_CREEPER = Skram.ITEMS.register("napalm_creeper_spawn_egg", registryName -> new SpawnEggItem(new Item.Properties().spawnEgg(SkramEntities.NAPALM_CREEPER.get()).setId(ResourceKey.create(Registries.ITEM, registryName))));
 
     MUSIC_DISC_ARCTURIA = registerMusicDisc("music_disc_arcturia", SkramSounds.ARCTURIA_SONG);
     MUSIC_DISC_ABANDONED_MINE_BATTLE = registerMusicDisc("music_disc_abandoned_mine_battle", SkramSounds.ABANDONED_MINE_BATTLE_SONG);

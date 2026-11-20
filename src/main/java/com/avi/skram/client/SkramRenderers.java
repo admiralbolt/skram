@@ -2,10 +2,7 @@ package com.avi.skram.client;
 
 import com.avi.skram.Skram;
 import com.avi.skram.blocks.SkramBlocks;
-import com.avi.skram.client.renderers.ColoredProjectileRenderer;
-import com.avi.skram.client.renderers.IcicleRenderer;
-import com.avi.skram.client.renderers.MegaChestItemRenderer;
-import com.avi.skram.client.renderers.MegaChestRenderer;
+import com.avi.skram.client.renderers.*;
 import com.avi.skram.entity.SkramEntities;
 import net.minecraft.client.renderer.entity.GoatRenderer;
 import net.minecraft.resources.Identifier;
@@ -23,6 +20,8 @@ public class SkramRenderers {
     event.registerEntityRenderer(SkramEntities.COLORED_PROJECTILE.get(), ColoredProjectileRenderer::new);
     event.registerEntityRenderer(SkramEntities.DECOY.get(), GoatRenderer::new);
     event.registerEntityRenderer(SkramEntities.ICICLE.get(), IcicleRenderer::new);
+    event.registerEntityRenderer(SkramEntities.NAPALM_CREEPER.get(), SkramCreeperRenderer::new);
+
     event.registerBlockEntityRenderer(
       SkramBlocks.GIGA_CHEST_BLOCK_ENTITY.get(),
       context -> new MegaChestRenderer<>(context, MegaChestRenderer.GIGA_CHEST_TEXTURE)
