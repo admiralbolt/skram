@@ -3,6 +3,18 @@ TODO
 ====
 
 * Search feature
+* Very gentle farming nerf.
+* New entities.
+* Next level of gear after netherite.
+* New bosses.
+* New dimension.
+
+Version 1.0.5
+==============
+
+* Right click to harvest now correctly applies farming fortune chance.
+* Added napalm creepers to the nether.
+* Added ender creepers to the end.
 
 Version 1.0.4
 =============

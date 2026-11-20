@@ -138,7 +138,8 @@ dependencies {
     implementation "net.blay09.mods:shogi-neoforge:26.3.0.2"
 
     // Aquaculture
-    implementation "com.teammetallurgy.aquaculture:aquaculture2_26.3:26.3-2.11.2"
+    // implementation "com.teammetallurgy.aquaculture:aquaculture2_26.3:26.3-2.11.3"
+    implementation files("Aquaculture-26.3-2.11.3.jenkins8.jar")
 
     // Map.
     implementation "curse.maven:xaeros-minimap-263420:9323154"

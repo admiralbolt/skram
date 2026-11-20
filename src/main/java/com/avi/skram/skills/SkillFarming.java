@@ -230,7 +230,7 @@ public class SkillFarming extends Skill {
   public java.util.List<AbilityDescription> getAbilityDescriptions() {
     return java.util.List.of(
       new AbilityDescription("Bonus Crop Growth Chance: " + (int) (100 * this.getCropGrowthChance()) + "%.", CROP_GROWTH_CHANCE_INDEX),
-      new AbilityDescription("Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items.", FARMING_FORTUNE_INDEX)
+      new AbilityDescription("Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + this.getFortuneAmount() + "x items.", FARMING_FORTUNE_INDEX)
     );
   }
 

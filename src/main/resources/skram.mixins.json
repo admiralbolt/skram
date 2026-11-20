@@ -25,6 +25,7 @@
     "PiglinAiMixin",
     "PlayerMixin",
     "ProjectileMixin",
+    "RightClickHarvestMixin",
     "ServerPlayerMixin",
     "SmokerBlockEntityMixin",
     "ThrowablePotionItemMixin",
