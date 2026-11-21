@@ -19,7 +19,6 @@ import com.avi.skram.perks.Perks;
 import com.avi.skram.skills.Skills;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.MapCodec;
-import fuzs.puzzleslib.neoforge.api.data.v3.core.DataProviderBuilder;
 import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -27,26 +26,21 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -79,14 +73,6 @@ public class Skram {
   public static final DeferredRegister<LootTable> LOOT_TABLES = DeferredRegister.create(Registries.LOOT_TABLE, MODID);
 
   public static Supplier<CreativeModeTab> SKRAM_TAB;
-  // Creates a new Block with the id "skram:example_block", combining the namespace and path
-  public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", p -> p.mapColor(MapColor.STONE));
-  // Creates a new BlockItem with the id "skram:example_block", combining the namespace and path
-  public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block", EXAMPLE_BLOCK);
-
-  // Creates a new food item with the id "skram:example_id", nutrition 1 and saturation 2
-  public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", p -> p.food(new FoodProperties.Builder()
-    .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
 
   public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES =
     DeferredRegister.create(Registries.TRIGGER_TYPE, Skram.MODID);
@@ -106,6 +92,9 @@ public class Skram {
   public Skram(IEventBus modEventBus, ModContainer modContainer) {
     // Register the commonSetup method for modloading
     modEventBus.addListener(this::commonSetup);
+
+    SkramEntities.register();
+    ENTITY_TYPES.register(modEventBus);
 
     // Register the Deferred Register to the mod event bus so blocks get registered
     SkramBlocks.registerBlocks();
@@ -143,8 +132,6 @@ public class Skram {
         }
 
         SkramItems.musicDiscs().forEach(output::accept);
-
-        output.accept(SkramItems.SPAWN_EGG_NAPALM_CREEPER.get());
       })
       .build()
     );
@@ -163,15 +150,8 @@ public class Skram {
     EFFECTS.register(modEventBus);
     POTIONS.register(modEventBus);
 
-    SkramEntities.register();
-    ENTITY_TYPES.register(modEventBus);
     SkramSounds.SOUND_EVENTS.register(modEventBus);
     GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
-
-    // Register ourselves for server and other game events we are interested in.
-    // Note that this is necessary if and only if we want *this* class (skram) to respond directly to events.
-    // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
-    NeoForge.EVENT_BUS.register(this);
 
     // Register the item to a creative tab
     modEventBus.addListener(this::addCreative);
@@ -185,34 +165,13 @@ public class Skram {
     event.enqueueWork(Skills::setupSkillXPMaps);
     event.enqueueWork(Skills::setupRequiredLevels);
     event.enqueueWork(EventHandler::overwriteVanilla);
-
-    // Some common setup code
-    LOGGER.info("HELLO FROM COMMON SETUP");
-
-    if (Config.LOG_DIRT_BLOCK.getAsBoolean()) {
-      LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
-    }
-
-    LOGGER.info("{}{}", Config.MAGIC_NUMBER_INTRODUCTION.get(), Config.MAGIC_NUMBER.getAsInt());
-
-    Config.ITEM_STRINGS.get().forEach((item) -> LOGGER.info("ITEM >> {}", item));
   }
 
-  // Add the example block item to the building blocks tab
   private void addCreative(BuildCreativeModeTabContentsEvent event) {
-    if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-      event.accept(EXAMPLE_BLOCK_ITEM);
-    }
     if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
-      event.accept(SkramItems.SPAWN_EGG_NAPALM_CREEPER.get());
-      event.accept(SkramItems.SPAWN_EGG_ENDER_CREEPER.get());
+      for (DeferredItem<Item> itemHolder : SkramItems.ALL_SPAWN_EGGS) {
+        event.accept(itemHolder.get());
+      }
     }
-  }
-
-  // You can use SubscribeEvent and let the Event Bus discover methods to call
-  @SubscribeEvent
-  public void onServerStarting(ServerStartingEvent event) {
-    // Do something when the server starts
-    LOGGER.info("HELLO from server starting");
   }
 }

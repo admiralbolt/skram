@@ -1,6 +1,5 @@
 package com.avi.skram.entity;
 
-import com.avi.skram.utils.ReflectionUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -20,13 +19,6 @@ public class EnderCreeper extends Creeper {
 
   public EnderCreeper(EntityType<? extends Creeper> type, Level level) {
     super(type, level);
-
-    // This technically has private access, so we do a funny thing and use reflection.
-    try {
-      ReflectionUtils.setFieldValue(this, "explosionRadius", 6);
-    } catch (NoSuchFieldException | IllegalAccessException e) {
-      System.out.println("Can't set explosionRadius for Ender Creeper. Ah: " + e);
-    }
   }
 
   @Override

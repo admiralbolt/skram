@@ -6,6 +6,8 @@ import com.avi.skram.entity.SkramEntities;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.item.Rarity;
@@ -88,24 +90,17 @@ public class SkramItems {
   public static DeferredItem<Item> WINDSWEPT_SAVANNA;
   public static DeferredItem<Item> WOODED_BADLANDS;
 
-  public static final Supplier<DataComponentType<SpellNameDataComponent>> SPELL_NAME_DATA_COMPONENT = Skram.DATA_COMPONENTS.registerComponentType(
-    "spell_name", builder -> builder.persistent(SpellNameDataComponent.CODEC)
-  );
-
-  public static final Supplier<DataComponentType<SkillNameDataComponent>> SKILL_NAME_DATA_COMPONENT = Skram.DATA_COMPONENTS.registerComponentType(
-    "skill_name", builder -> builder.persistent(SkillNameDataComponent.CODEC)
-  );
-
+  // "Real" items.
   public static DeferredItem<Item> ANCIENT_LAMP;
+  public static DeferredItem<Item> GIGA_CHEST_CORE;
   public static DeferredItem<Item> SPELL_SCROLL;
 
-  public static DeferredItem<Item> GIGA_CHEST_CORE;
 
   // Spawn Eggs.
   public static DeferredItem<Item> SPAWN_EGG_ENDER_CREEPER;
   public static DeferredItem<Item> SPAWN_EGG_NAPALM_CREEPER;
 
-  // Music dics.
+  // Music discs.
   public static DeferredItem<Item> MUSIC_DISC_ARCTURIA;
   public static DeferredItem<Item> MUSIC_DISC_ABANDONED_MINE_BATTLE;
   public static DeferredItem<Item> MUSIC_DISC_ABANDONED_RESEARCH_BATTLE;
@@ -128,6 +123,14 @@ public class SkramItems {
   public static DeferredItem<Item> MUSIC_DISC_SHROUDED_DEN_BOSS;
   public static DeferredItem<Item> MUSIC_DISC_SUNKEN_TEMPLE;
   public static DeferredItem<Item> MUSIC_DISC_WATERFALL_CAVE_BOSS_FIGHT;
+
+  public static final Supplier<DataComponentType<SpellNameDataComponent>> SPELL_NAME_DATA_COMPONENT = Skram.DATA_COMPONENTS.registerComponentType(
+    "spell_name", builder -> builder.persistent(SpellNameDataComponent.CODEC)
+  );
+
+  public static final Supplier<DataComponentType<SkillNameDataComponent>> SKILL_NAME_DATA_COMPONENT = Skram.DATA_COMPONENTS.registerComponentType(
+    "skill_name", builder -> builder.persistent(SkillNameDataComponent.CODEC)
+  );
 
   public static List<DeferredItem<Item>> musicDiscs() {
     return List.of(
@@ -167,6 +170,8 @@ public class SkramItems {
       )
     );
 
+    GIGA_CHEST_CORE = Skram.ITEMS.registerSimpleItem("giga_chest_core", () -> new Item.Properties().rarity(Rarity.UNCOMMON));
+
     SPELL_SCROLL = Skram.ITEMS.register(SpellScroll.NAME,
       registryName -> new SpellScroll(
         new Item.Properties()
@@ -177,10 +182,8 @@ public class SkramItems {
       )
     );
 
-    GIGA_CHEST_CORE = Skram.ITEMS.registerSimpleItem("giga_chest_core", () -> new Item.Properties().rarity(Rarity.UNCOMMON));
-
-    SPAWN_EGG_ENDER_CREEPER = Skram.ITEMS.register("ender_creeper_spawn_egg", registryName -> new SpawnEggItem(new Item.Properties().spawnEgg(SkramEntities.ENDER_CREEPER.get()).setId(ResourceKey.create(Registries.ITEM, registryName))));
-    SPAWN_EGG_NAPALM_CREEPER = Skram.ITEMS.register("napalm_creeper_spawn_egg", registryName -> new SpawnEggItem(new Item.Properties().spawnEgg(SkramEntities.NAPALM_CREEPER.get()).setId(ResourceKey.create(Registries.ITEM, registryName))));
+    SPAWN_EGG_ENDER_CREEPER = registerSpawnEgg("ender_creeper_spawn_egg", () -> SkramEntities.ENDER_CREEPER.get());
+    SPAWN_EGG_NAPALM_CREEPER = registerSpawnEgg("napalm_creeper_spawn_egg", () -> SkramEntities.NAPALM_CREEPER.get());
 
     MUSIC_DISC_ARCTURIA = registerMusicDisc("music_disc_arcturia", SkramSounds.ARCTURIA_SONG);
     MUSIC_DISC_ABANDONED_MINE_BATTLE = registerMusicDisc("music_disc_abandoned_mine_battle", SkramSounds.ABANDONED_MINE_BATTLE_SONG);
@@ -287,6 +290,14 @@ public class SkramItems {
         .setId(ResourceKey.create(Registries.ITEM, registryName))
     ));
     ALL_RECORDS.add(item);
+    return item;
+  }
+
+  public static List<DeferredItem<Item>> ALL_SPAWN_EGGS = new ArrayList<>();
+
+  private static DeferredItem<Item> registerSpawnEgg(String name, Supplier<EntityType<?>> entityType) {
+    DeferredItem<Item> item = Skram.ITEMS.register(name, registryName -> new SpawnEggItem(new Item.Properties().spawnEgg(entityType.get()).setId(ResourceKey.create(Registries.ITEM, registryName))));
+    ALL_SPAWN_EGGS.add(item);
     return item;
   }
 

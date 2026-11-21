@@ -3,7 +3,6 @@ package com.avi.skram.loot;
 import com.avi.skram.Skram;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.data.loot.packs.VanillaEntityLoot;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
