@@ -2,9 +2,13 @@ package com.avi.skram.loot;
 
 import com.avi.skram.Skram;
 import com.mojang.serialization.MapCodec;
+import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.loot.packs.VanillaEntityLoot;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.data.event.GatherDataRegistryEntriesEvent;
 
 import java.util.function.Supplier;
 
@@ -24,6 +28,11 @@ public class SkramLoot {
   @SubscribeEvent
   public static void gatherData(GatherDataEvent.Client event) {
     event.createProvider(SkramGlobalLootModifierProvider::new);
+  }
+
+  @SubscribeEvent
+  public static void gatherRegistryData(GatherDataRegistryEntriesEvent event) {
+    event.gatherFor(Skram.MODID).lootTable(new LootTableProvider.SubProviderEntry(SkramEntityLootProvider::new, LootContextParamSets.ENTITY));
   }
 
 }
