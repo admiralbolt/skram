@@ -96,7 +96,6 @@ public class Skram {
     SkramEntities.register();
     ENTITY_TYPES.register(modEventBus);
 
-    // Register the Deferred Register to the mod event bus so blocks get registered
     SkramBlocks.registerBlocks();
     BLOCKS.register(modEventBus);
     SkramMenus.register(modEventBus);
@@ -107,11 +106,6 @@ public class Skram {
 
     LOOT_TABLES.register(modEventBus);
     DATA_COMPONENTS.register(modEventBus);
-
-
-    // Register the Deferred Register to the mod event bus so items get registered
-
-    // Register the Deferred Register to the mod event bus so tabs get registered
 
     SKRAM_TAB = Skram.CREATIVE_MODE_TABS.register("skram", () -> CreativeModeTab.builder()
       .title(Component.literal("Skram!"))
