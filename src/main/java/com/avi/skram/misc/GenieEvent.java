@@ -5,13 +5,10 @@ import com.avi.skram.item.SkillNameDataComponent;
 import com.avi.skram.item.SkramItems;
 import com.avi.skram.skills.Skills;
 import com.avi.skram.utils.MathUtils;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 // You get a lamp! You get a lamp!
 public class GenieEvent {

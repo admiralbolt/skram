@@ -2,8 +2,6 @@ package com.avi.skram.mixins;
 
 import com.avi.skram.skills.SkillMercantile;
 import com.avi.skram.skills.Skills;
-import com.avi.skram.utils.ReflectionUtils;
-import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.npc.wanderingtrader.WanderingTrader;
