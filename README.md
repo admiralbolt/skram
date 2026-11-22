@@ -8,6 +8,7 @@ TODO
 * Next level of gear after netherite.
 * New bosses.
 * New dimension.
+* Some new perks!
 
 Version 1.0.5
 ==============
@@ -15,6 +16,7 @@ Version 1.0.5
 * Right click to harvest now correctly applies farming fortune chance.
 * Added napalm creepers to the nether.
 * Added ender creepers to the end.
+* Added dimensional scaling -- enemies in the Nether are stronger, and enemies in the End are much stronger.
 
 Version 1.0.4
 =============
