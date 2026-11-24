@@ -22,6 +22,7 @@ public class SkramRenderers {
     event.registerEntityRenderer(SkramEntities.ENDER_CREEPER.get(), EnderCreeperRenderer::new);
     event.registerEntityRenderer(SkramEntities.ICICLE.get(), IcicleRenderer::new);
     event.registerEntityRenderer(SkramEntities.NAPALM_CREEPER.get(), NapalmCreeperRenderer::new);
+    event.registerEntityRenderer(SkramEntities.THROWN_FLOWER.get(), ThrownFlowerRenderer::new);
 
     event.registerBlockEntityRenderer(
       SkramBlocks.GIGA_CHEST_BLOCK_ENTITY.get(),

@@ -222,9 +222,11 @@ public class EventHandler {
     if (event.getEntity().level().isClientSide()) {
       SkramMagicClient.cancelSpell(event);
     }
+
     SkillBrewing.handleThrownPotion(event);
     PerkBatman.handleBatman(event);
     PerkClusterBomb.handleItemRightClick(event);
+    PerkThornSpitter.throwFlower(event);
 
     Skills.handleRequiredLevels(event);
   }

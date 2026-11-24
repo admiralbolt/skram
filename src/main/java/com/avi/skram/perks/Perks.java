@@ -61,6 +61,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkSwiftStrafer>> SWIFT_STRAFER;
   public static Supplier<AttachmentType<PerkThievery>> THIEVERY;
   public static Supplier<AttachmentType<PerkTeamwork>> TEAMWORK;
+  public static Supplier<AttachmentType<PerkThornSpitter>> THORN_SPITTER;
   public static Supplier<AttachmentType<PerkTrawler>> TRAWLER;
   public static Supplier<AttachmentType<PerkVampirism>> VAMPIRISM;
   public static Supplier<AttachmentType<PerkVitalicBreathing>> VITALIC_BREATHING;
@@ -413,6 +414,16 @@ public class Perks {
     PERKS_BY_NAME.put(PerkThievery.NAME, THIEVERY);
     PERK_RESEARCH_COST_BY_NAME.put(PerkThievery.NAME, PerkThievery::getResearchCost);
     PerkThievery.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(THIEVERY));
+
+    THORN_SPITTER = Skram.ATTACHMENT_TYPES.register(
+      PerkThornSpitter.NAME, () -> AttachmentType.serializable(() -> new PerkThornSpitter())
+        .sync(new PerkSyncHandler<>(PerkThornSpitter.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkThornSpitter.NAME, THORN_SPITTER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkThornSpitter.NAME, PerkThornSpitter::getResearchCost);
+    PerkThornSpitter.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(THORN_SPITTER));
 
     TEAMWORK = Skram.ATTACHMENT_TYPES.register(
       PerkTeamwork.NAME, () -> AttachmentType.serializable(() -> new PerkTeamwork())

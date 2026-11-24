@@ -3,6 +3,7 @@ package com.avi.skram.entity;
 import com.avi.skram.Skram;
 import com.avi.skram.entity.projectile.Icicle;
 import com.avi.skram.entity.projectile.SkramColoredProjectile;
+import com.avi.skram.entity.projectile.ThrownFlower;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -26,6 +27,7 @@ public class SkramEntities {
   public static Supplier<EntityType<EnderCreeper>> ENDER_CREEPER;
   public static Supplier<EntityType<Icicle>> ICICLE;
   public static Supplier<EntityType<NapalmCreeper>> NAPALM_CREEPER;
+  public static Supplier<EntityType<ThrownFlower>> THROWN_FLOWER;
 
   public static void register() {
     COLORED_PROJECTILE = Skram.ENTITY_TYPES.register(
@@ -89,6 +91,18 @@ public class SkramEntities {
         .build(ResourceKey.create(
           Registries.ENTITY_TYPE,
           Identifier.fromNamespaceAndPath(Skram.MODID, NapalmCreeper.NAME)
+        ))
+    );
+
+    THROWN_FLOWER = Skram.ENTITY_TYPES.register(
+      ThrownFlower.NAME, () -> EntityType.Builder.<ThrownFlower>of(
+          ThrownFlower::new, MobCategory.MISC
+        ).sized(0.5F, 0.5F)
+        .clientTrackingRange(4)
+        .updateInterval(10)
+        .build(ResourceKey.create(
+          Registries.ENTITY_TYPE,
+          Identifier.fromNamespaceAndPath(Skram.MODID, ThrownFlower.NAME)
         ))
     );
   }
