@@ -61,6 +61,7 @@ public class Perks {
   public static Supplier<AttachmentType<PerkSwiftStrafer>> SWIFT_STRAFER;
   public static Supplier<AttachmentType<PerkThievery>> THIEVERY;
   public static Supplier<AttachmentType<PerkTeamwork>> TEAMWORK;
+  public static Supplier<AttachmentType<PerkTrawler>> TRAWLER;
   public static Supplier<AttachmentType<PerkVampirism>> VAMPIRISM;
   public static Supplier<AttachmentType<PerkVitalicBreathing>> VITALIC_BREATHING;
   public static Supplier<AttachmentType<PerkVolcanicSailor>> VOLCANIC_SAILOR;
@@ -422,6 +423,16 @@ public class Perks {
     PERKS_BY_NAME.put(PerkTeamwork.NAME, TEAMWORK);
     PERK_RESEARCH_COST_BY_NAME.put(PerkTeamwork.NAME, PerkTeamwork::getResearchCost);
     PerkTeamwork.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(TEAMWORK));
+
+    TRAWLER = Skram.ATTACHMENT_TYPES.register(
+      PerkTrawler.NAME, () -> AttachmentType.serializable(() -> new PerkTrawler())
+        .sync(new PerkSyncHandler<>(PerkTrawler.STREAM_CODEC))
+        .copyOnDeath()
+        .build()
+    );
+    PERKS_BY_NAME.put(PerkTrawler.NAME, TRAWLER);
+    PERK_RESEARCH_COST_BY_NAME.put(PerkTrawler.NAME, PerkTrawler::getResearchCost);
+    PerkTrawler.REQUIRED_SKILLS.keySet().forEach((skillName) -> SKILLS_TO_PERKS.get(skillName).add(TRAWLER));
 
     VAMPIRISM = Skram.ATTACHMENT_TYPES.register(
       PerkVampirism.NAME, () -> AttachmentType.serializable(() -> new PerkVampirism())

@@ -9,6 +9,14 @@ TODO
 * New dimension.
 * Some new perks!
 
+
+Maybe board:
+
+* Tailwind: Spell that increases boating speed.
+* Trawler: Fishing + Sailing perk that does something? Pull and murder nearby fish? Yes.
+
+
+
 Version 1.0.5
 ==============
 

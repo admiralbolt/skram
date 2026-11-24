@@ -411,6 +411,7 @@ public class EventHandler {
   @SubscribeEvent
   public static void ON_TICK(PlayerTickEvent.Pre event) {
     PerkPhotosynthesis.healInSunlight(event);
+    PerkTrawler.murderFishies(event);
   }
 
   @SubscribeEvent
