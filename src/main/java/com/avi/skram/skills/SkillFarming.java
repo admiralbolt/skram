@@ -56,18 +56,18 @@ public class SkillFarming extends Skill {
     XP_MAP = new HashMap<>();
 
     // "Regular" crops.
-    XP_MAP.put(Blocks.WHEAT, 120);
-    XP_MAP.put(Blocks.CARROTS, 160);
-    XP_MAP.put(Blocks.POTATOES, 160);
-    XP_MAP.put(Blocks.BEETROOTS, 180);
-    XP_MAP.put(Blocks.PUMPKIN, 220);
-    XP_MAP.put(Blocks.MELON, 240);
+    XP_MAP.put(Blocks.WHEAT, 110);
+    XP_MAP.put(Blocks.CARROTS, 150);
+    XP_MAP.put(Blocks.POTATOES, 150);
+    XP_MAP.put(Blocks.BEETROOTS, 160);
+    XP_MAP.put(Blocks.PUMPKIN, 200);
+    XP_MAP.put(Blocks.MELON, 220);
 
     // Mushrooms.
-    XP_MAP.put(Blocks.BROWN_MUSHROOM, 80);
-    XP_MAP.put(Blocks.BROWN_MUSHROOM_BLOCK, 120);
-    XP_MAP.put(Blocks.RED_MUSHROOM, 80);
-    XP_MAP.put(Blocks.RED_MUSHROOM_BLOCK, 120);
+    XP_MAP.put(Blocks.BROWN_MUSHROOM, 60);
+    XP_MAP.put(Blocks.BROWN_MUSHROOM_BLOCK, 110);
+    XP_MAP.put(Blocks.RED_MUSHROOM, 60);
+    XP_MAP.put(Blocks.RED_MUSHROOM_BLOCK, 110);
 
 
     // Both a flower and a crop!
@@ -75,17 +75,17 @@ public class SkillFarming extends Skill {
     XP_MAP.put(Blocks.TORCHFLOWER_CROP, 100);
 
     // ???
-    XP_MAP.put(Blocks.SWEET_BERRY_BUSH, 120);
+    XP_MAP.put(Blocks.SWEET_BERRY_BUSH, 100);
     XP_MAP.put(Blocks.CHORUS_FLOWER, 120);
-    XP_MAP.put(Blocks.COCOA, 80);
+    XP_MAP.put(Blocks.COCOA, 60);
 
     // Nether!
-    XP_MAP.put(Blocks.NETHER_WART, 180);
-    XP_MAP.put(Blocks.CRIMSON_FUNGUS, 120);
-    XP_MAP.put(Blocks.WARPED_FUNGUS, 160);
+    XP_MAP.put(Blocks.NETHER_WART, 160);
+    XP_MAP.put(Blocks.CRIMSON_FUNGUS, 100);
+    XP_MAP.put(Blocks.WARPED_FUNGUS, 140);
 
     // Tall.
-    XP_MAP.put(Blocks.BAMBOO, 40);
+    XP_MAP.put(Blocks.BAMBOO, 30);
     XP_MAP.put(Blocks.SUGAR_CANE, 20);
 
     // Weeds!

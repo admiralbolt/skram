@@ -35,12 +35,12 @@ public class SkillHusbandry extends Skill {
     Its own skill!!!
     
     You get husbandry XP for a wide variety of animal related activities, including:
-     - Breeding: 220xp.
-     - Taming: 350xp.
-     - Gathering Honey: 100xp.
-     - Getting Milk: 40xp.
-     - Shearing Sheep: 40xp.
-     - Harvesting Animals: 30xp.
+     - Breeding: 260xp.
+     - Taming: 450xp.
+     - Gathering Honey: 120xp.
+     - Getting Milk: 50xp.
+     - Shearing Sheep: 50xp.
+     - Harvesting Animals: 35xp.
     """;
 
   public static final int HUSBANDRY_BREEDING_XP_INDEX = 0;
@@ -75,7 +75,7 @@ public class SkillHusbandry extends Skill {
       player.level().addFreshEntity(orb);
     }
 
-    husbandry.addXp(player, 220);
+    husbandry.addXp(player, 260);
   }
 
   public static void applyFortune(LivingDropsEvent event) {
@@ -125,7 +125,7 @@ public class SkillHusbandry extends Skill {
     if (!(event.getEntity() instanceof Animal)) return;
 
     SkillHusbandry husbandry = player.getData(Skills.HUSBANDRY);
-    husbandry.addXp(player, 30);
+    husbandry.addXp(player, 35);
   }
 
   public static void handleAnimalTamed(AnimalTameEvent event) {
@@ -133,7 +133,7 @@ public class SkillHusbandry extends Skill {
     if (player.level().isClientSide()) return;
 
     SkillHusbandry husbandry = player.getData(Skills.HUSBANDRY);
-    husbandry.addXp(player, 350);
+    husbandry.addXp(player, 450);
   }
 
   public static void handleEntityInteract(PlayerInteractEvent.EntityInteract event) {
@@ -146,7 +146,7 @@ public class SkillHusbandry extends Skill {
 
       Player player = event.getEntity();
       SkillHusbandry husbandry = player.getData(Skills.HUSBANDRY);
-      husbandry.addXp(player, 40);
+      husbandry.addXp(player, 50);
       return;
     }
 
@@ -157,7 +157,7 @@ public class SkillHusbandry extends Skill {
 
       Player player = event.getEntity();
       SkillHusbandry husbandry = player.getData(Skills.HUSBANDRY);
-      husbandry.addXp(player, 40);
+      husbandry.addXp(player, 50);
     }
 
   }
@@ -176,7 +176,7 @@ public class SkillHusbandry extends Skill {
 
     Player player = event.getEntity();
     SkillHusbandry husbandry = player.getData(Skills.HUSBANDRY);
-    husbandry.addXp(player, 100);
+    husbandry.addXp(player, 120);
   }
 
   @Override

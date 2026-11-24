@@ -3,7 +3,6 @@ TODO
 ====
 
 * Search feature
-* Very gentle farming nerf.
 * New entities.
 * Next level of gear after netherite.
 * New bosses.
@@ -19,6 +18,11 @@ Version 1.0.5
 * Added ender creepers to the end.
 * Added dimensional scaling -- enemies in the Nether are stronger, and enemies in the End are much stronger.
 * Reworked fortune. %chance scales past 100%, and amount of items given is based on total chance. 150% chance means you always get 2x items, with a chance at 3x items.
+* Minor XP balance changes:
+  * Slight nerf to farming (about -10% XP).
+  * Slight buff to fishing (about +10% XP).
+  * Slight buff to sailing (about +10% XP).
+  * Medium buff to husbandry (about +20% XP).
 
 
 Version 1.0.4

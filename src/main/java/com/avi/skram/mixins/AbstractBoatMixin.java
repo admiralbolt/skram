@@ -74,7 +74,7 @@ public class AbstractBoatMixin {
     SkillSailing sailing = player.getData(Skills.SAILING);
     double speed = boat.getDeltaMovement().length();
     // Make sure we sync to the server, as this is called on the client side.
-    sailing.addXp(player, 8 * speed, true);
+    sailing.addXp(player, 9 * speed, true);
   }
 
   @Inject(
