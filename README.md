@@ -19,6 +19,7 @@ Version 1.0.5
 * Added dimensional scaling -- enemies in the Nether are stronger, and enemies in the End are much stronger.
 * Reworked fortune. %chance scales past 100%, and amount of items given is based on total chance. 150% chance means you always get 2x items, with a chance at 3x items.
 * Minor XP balance changes:
+  * Slight buff to brewing, drinking or throwing potions grants brewing xp!
   * Slight nerf to farming (about -10% XP).
   * Slight buff to fishing (about +10% XP).
   * Slight buff to sailing (about +10% XP).
@@ -26,7 +27,7 @@ Version 1.0.5
   * Medium buff to stealth (about +25% XP).
 * A handful of adjustments to spell casting times & mana costs. Slight reductions in casting time + mana cost for many spells.
 * A few small reductions to perk item & level requirements (particularly for stealth, obsidian, and blaze rods).
-
+* Fixed a bug where mana regeneration potions could be made from mana regeneration potions.
 
 Version 1.0.4
 =============

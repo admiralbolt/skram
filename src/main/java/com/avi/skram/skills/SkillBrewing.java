@@ -1,15 +1,22 @@
 package com.avi.skram.skills;
 
+import com.avi.skram.perks.PerkClusterBomb;
+import com.avi.skram.perks.PerkGrenadier;
+import com.avi.skram.perks.Perks;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +32,10 @@ public class SkillBrewing extends Skill {
     If you brew in someone else's brewing stand, THEY will get XP.
     If you open the brewing stand interface and see your name, it is YOUR brewing stand.
     If you open the brewing stand interface and see someone else's name, it is THEIR brewing stand.
+    
+    XP:
+     - 250XP per potion brewed (750 for a set of 3).
+     - 40XP per potion used (drank or thrown).
     """;
   public static Map<String, Integer> XP_MAP;
 
@@ -62,6 +73,28 @@ public class SkillBrewing extends Skill {
       totalXp += XP_MAP.getOrDefault(translatableContents.getKey(), 250);
     }
     this.addXp(player, totalXp);
+  }
+
+  public static void handleDrinkPotion(LivingEntityUseItemEvent.Finish event) {
+    if (!(event.getEntity() instanceof Player player)) return;
+    if (player.level().isClientSide()) return;
+
+    PotionContents contents = event.getItem().get(DataComponents.POTION_CONTENTS);
+    if (contents == null) return;
+
+    SkillBrewing brewing = player.getData(Skills.BREWING);
+    brewing.addXp(player, 40);
+  }
+
+  public static void handleThrownPotion(PlayerInteractEvent.RightClickItem event) {
+    if (event.getLevel().isClientSide()) return;
+
+    Item item = event.getItemStack().getItem();
+    if (!(item instanceof ThrowablePotionItem)) return;
+
+    Player player = event.getEntity();
+    SkillBrewing brewing = player.getData(Skills.BREWING);
+    brewing.addXp(player, 40);
   }
 
   public float getBrewingSpeed() {

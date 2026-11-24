@@ -222,6 +222,7 @@ public class EventHandler {
     if (event.getEntity().level().isClientSide()) {
       SkramMagicClient.cancelSpell(event);
     }
+    SkillBrewing.handleThrownPotion(event);
     PerkBatman.handleBatman(event);
     PerkClusterBomb.handleItemRightClick(event);
 
@@ -253,6 +254,7 @@ public class EventHandler {
 
   @SubscribeEvent
   public static void ON_PLAYER_USE_ITEM_FINISH(LivingEntityUseItemEvent.Finish event) {
+    SkillBrewing.handleDrinkPotion(event);
     PerkGlutton.handleEat(event);
   }
 
