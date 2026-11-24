@@ -242,8 +242,8 @@ public class Skills {
     Perks.SKILLS_TO_PERKS.put(SkillWoodcutting.NAME, new ArrayList<>());
 
     // Using this for other scripts.
-    System.out.println("HEY! LISTEN!");
-    System.out.println(SKILLS_BY_NAME.keySet().stream().sorted().toList());
+    Skram.LOGGER.debug("HEY! LISTEN!");
+    Skram.LOGGER.debug("Registered skills: {}", SKILLS_BY_NAME.keySet().stream().sorted().toList());
   }
 
   // This needs to be done in a separate handler to ensure that items have been registered.

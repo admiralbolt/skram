@@ -1,5 +1,6 @@
 package com.avi.skram.ui;
 
+import com.avi.skram.Skram;
 import com.avi.skram.SkramClient;
 import com.avi.skram.ui.tabs.*;
 import com.avi.skram.utils.ReflectionUtils;
@@ -176,7 +177,7 @@ public class SkramScreen extends Screen {
       method.invoke(container, amount);
     } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException |
              NoSuchFieldException e) {
-      System.out.println(e);
+      Skram.LOGGER.error("Failed to restore scroll position", e);
     }
   }
 

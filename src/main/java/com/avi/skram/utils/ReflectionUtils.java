@@ -1,5 +1,7 @@
 package com.avi.skram.utils;
 
+import com.avi.skram.Skram;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -13,7 +15,7 @@ public class ReflectionUtils {
       Object obj = getFieldValue(target, fieldName);
       return (T) obj;
     } catch (Exception e) {
-      System.out.println(e);
+      Skram.LOGGER.warn("Failed to read field '{}'; using the default value", fieldName, e);
       return defaultValue;
     }
   }

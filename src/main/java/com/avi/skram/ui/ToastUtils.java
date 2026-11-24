@@ -1,5 +1,6 @@
 package com.avi.skram.ui;
 
+import com.avi.skram.Skram;
 import com.avi.skram.utils.ReflectionUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -49,7 +50,7 @@ public class ToastUtils {
       }
 
     } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-      System.out.println(e);
+      Skram.LOGGER.error("Failed to inspect visible toasts", e);
     }
 
     return false;

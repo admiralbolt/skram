@@ -3,6 +3,7 @@ package com.avi.skram.perks;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
+import com.avi.skram.Skram;
 import com.avi.skram.skills.SkillFarming;
 import com.avi.skram.utils.ReflectionUtils;
 import com.google.common.collect.ImmutableMap;
@@ -76,7 +77,7 @@ public class PerkChainReaction extends Perk {
       }
       ReflectionUtils.invokeMethod(state.getBlock(), "randomTick", state, level, pos, level.getRandom());
     } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-      System.out.println("Can't invoke randomTick: " + e);
+      Skram.LOGGER.warn("Failed to invoke randomTick for block {}", state.getBlock(), e);
     }
   }
 

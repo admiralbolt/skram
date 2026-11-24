@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": "minecraft:golden_helmet",
+  "result": {
+    "count": 15,
+    "id": "minecraft:gold_nugget"
+  }
+}

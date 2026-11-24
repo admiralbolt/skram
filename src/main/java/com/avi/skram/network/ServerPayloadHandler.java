@@ -1,5 +1,6 @@
 package com.avi.skram.network;
 
+import com.avi.skram.Skram;
 import com.avi.skram.magic.SkramMagic;
 import com.avi.skram.magic.SpellCastingInfo;
 import com.avi.skram.magic.Spellbook;
@@ -74,7 +75,7 @@ public class ServerPayloadHandler {
     try {
       status = (AbstractBoat.Status) ReflectionUtils.invokeMethod(boat, "getStatus");
     } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
-      System.out.println("no status for you.");
+      Skram.LOGGER.warn("Failed to read the boat status for the Flying Dutchman jump", e);
     }
 
     if (status == null || status == AbstractBoat.Status.IN_AIR) return;

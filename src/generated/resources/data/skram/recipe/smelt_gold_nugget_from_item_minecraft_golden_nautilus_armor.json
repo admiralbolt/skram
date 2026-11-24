@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": "minecraft:golden_nautilus_armor",
+  "result": {
+    "count": 24,
+    "id": "minecraft:gold_nugget"
+  }
+}

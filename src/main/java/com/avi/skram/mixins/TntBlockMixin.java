@@ -1,5 +1,6 @@
 package com.avi.skram.mixins;
 
+import com.avi.skram.Skram;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
@@ -45,7 +46,7 @@ public class TntBlockMixin {
     try {
       ReflectionUtils.setFieldValue(primedTnt, "owner", EntityReference.of(owner));
     } catch (NoSuchFieldException | IllegalAccessException e) {
-      System.out.println("aaaaaaah" + e);
+      Skram.LOGGER.error("Failed to set the owner of primed TNT", e);
     }
   }
 }

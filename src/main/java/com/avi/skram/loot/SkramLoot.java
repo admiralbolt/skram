@@ -32,6 +32,8 @@ public class SkramLoot {
   @SubscribeEvent
   public static void gatherRegistryData(GatherDataRegistryEntriesEvent event) {
     event.gatherFor(Skram.MODID).lootTable(new LootTableProvider.SubProviderEntry(SkramEntityLootProvider::new, LootContextParamSets.ENTITY));
+    event.gatherFor(Skram.MODID).recipe(SkramRecipeProvider::new);
+
   }
 
 }

@@ -113,7 +113,7 @@ public class SkillDemolition extends Skill {
     try {
       ReflectionUtils.setFieldValue(explosion, "radius", explosion.radius() * (1 + demolition.getBlastPower()));
     } catch (NoSuchFieldException | IllegalAccessException e) {
-      System.out.println("Couldn't increase blast radius: " + e);
+      Skram.LOGGER.error("Failed to increase the explosion radius", e);
     }
 
     demolition.addXp(player, 200 * explosion.radius());

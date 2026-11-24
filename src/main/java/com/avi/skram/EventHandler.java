@@ -491,7 +491,7 @@ public class EventHandler {
     try {
       ReflectionUtils.setFieldValue(lavaType, "supportsBoating", true);
     } catch (NoSuchFieldException | IllegalAccessException e) {
-      System.out.println("LAVA_BOATING FAILURE: " + e);
+      Skram.LOGGER.error("Failed to enable boating on lava", e);
     }
   }
 

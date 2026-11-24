@@ -1,5 +1,6 @@
 package com.avi.skram.mixins;
 
+import com.avi.skram.Skram;
 import com.avi.skram.attachments.MiscAttachments;
 import com.avi.skram.attachments.SkramEntityModifier;
 import com.avi.skram.entity.EnderCreeper;
@@ -72,7 +73,7 @@ public class CreeperMixin {
           // Early return from the normal explode method.
           ci.cancel();
         } catch (Exception e) {
-          System.out.println("Bad reflection: " + e);
+          Skram.LOGGER.error("Failed to apply the Napalm Creeper explosion behavior", e);
         }
       }
     }
@@ -116,7 +117,7 @@ public class CreeperMixin {
           // Early return from the normal explode method.
           ci.cancel();
         } catch (Exception e) {
-          System.out.println("Bad reflection: " + e);
+          Skram.LOGGER.error("Failed to apply the Ender Creeper explosion behavior", e);
         }
       }
     }

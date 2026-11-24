@@ -476,9 +476,9 @@ public class Perks {
 
 
     // Logging purposes.
-    System.out.println("SKILLS_TO_PERKS");
+    Skram.LOGGER.debug("SKILLS_TO_PERKS");
     for (String skillName : SKILLS_TO_PERKS.keySet().stream().sorted().toList()) {
-      System.out.println(skillName + ": " + SKILLS_TO_PERKS.get(skillName).size());
+      Skram.LOGGER.debug("{}: {}", skillName, SKILLS_TO_PERKS.get(skillName).size());
     }
   }
 

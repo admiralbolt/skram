@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": "minecraft:golden_boots",
+  "result": {
+    "count": 12,
+    "id": "minecraft:gold_nugget"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": [
+    "minecraft:golden_pickaxe"
+  ],
+  "result": {
+    "count": 9,
+    "id": "minecraft:gold_nugget"
+  }
+}

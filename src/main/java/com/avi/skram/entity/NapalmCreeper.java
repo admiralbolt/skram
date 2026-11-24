@@ -1,5 +1,6 @@
 package com.avi.skram.entity;
 
+import com.avi.skram.Skram;
 import com.avi.skram.utils.ReflectionUtils;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -24,7 +25,7 @@ public class NapalmCreeper extends Creeper {
     try {
       ReflectionUtils.setFieldValue(this, "explosionRadius", 6);
     } catch (NoSuchFieldException | IllegalAccessException e) {
-      System.out.println("Can't set explosionRadius for Napalm Creeper. Ah: " + e);
+      Skram.LOGGER.error("Failed to set the Napalm Creeper explosion radius", e);
     }
   }
 

@@ -81,7 +81,7 @@ public class InfernalMobsInjector {
       mobMods.removeIf((cx) -> !config.getModsEnabled().containsKey(cx.getSimpleName()) || !(Boolean)config.getModsEnabled().get(cx.getSimpleName()));
 
     } catch (NoSuchFieldException | IllegalAccessException e) {
-      System.out.println("UH OH SPAGHET => " + e);
+      Skram.LOGGER.error("Failed to inject Infernal Mobs modifiers", e);
     }
   }
 

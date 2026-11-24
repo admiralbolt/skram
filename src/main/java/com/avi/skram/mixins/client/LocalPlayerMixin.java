@@ -1,5 +1,6 @@
 package com.avi.skram.mixins.client;
 
+import com.avi.skram.Skram;
 import com.avi.skram.perks.PerkFlyingDutchman;
 import com.avi.skram.perks.PerkSwiftStrafer;
 import com.avi.skram.perks.Perks;
@@ -41,7 +42,7 @@ public class LocalPlayerMixin {
     try {
       status = (AbstractBoat.Status) ReflectionUtils.invokeMethod(boat, "getStatus");
     } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
-      System.out.println("no status for you.");
+      Skram.LOGGER.warn("Failed to read the boat status for the Flying Dutchman jump", e);
     }
 
     if (status == null || status == AbstractBoat.Status.IN_AIR) return;
