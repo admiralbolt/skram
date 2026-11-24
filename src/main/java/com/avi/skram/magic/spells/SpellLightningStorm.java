@@ -23,7 +23,7 @@ public class SpellLightningStorm extends Spell {
   public static String NAME = "lightning_storm";
   public static int REQUIRED_MAGIC_LEVEL = 25;
   public static int COST = 2100;
-  public static int CASTING_TICKS = 60;
+  public static int CASTING_TICKS = 30;
 
   public static double MAX_DISTANCE = 60;
   public static double BASE_RADIUS = 2;

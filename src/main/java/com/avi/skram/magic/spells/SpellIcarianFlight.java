@@ -14,7 +14,7 @@ public class SpellIcarianFlight extends Spell {
   public static String NAME = "icarian_flight";
   public static int REQUIRED_MAGIC_LEVEL = 22;
   public static int COST = 3000;
-  public static int CASTING_TICKS = 80;
+  public static int CASTING_TICKS = 60;
 
   public static int DURATION_TICKS = 140;
   public static int AMPLIFIER = 100;

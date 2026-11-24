@@ -11,7 +11,7 @@ public class SpellConjureSupplies extends Spell {
   public static String NAME = "conjure_supplies";
   public static int REQUIRED_MAGIC_LEVEL = 9;
   public static int COST = 1600;
-  public static int CASTING_TICKS = 120;
+  public static int CASTING_TICKS = 100;
 
   public SpellConjureSupplies() {
     super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC4);

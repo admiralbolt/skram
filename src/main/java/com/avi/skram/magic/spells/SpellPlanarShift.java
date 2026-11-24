@@ -11,7 +11,7 @@ public class SpellPlanarShift extends Spell {
   public static String NAME = "planar_shift";
   public static int REQUIRED_MAGIC_LEVEL = 30;
   public static int COST = 2600;
-  public static int CASTING_TICKS = 200;
+  public static int CASTING_TICKS = 180;
 
   public SpellPlanarShift() {
     super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, Holder.direct(SoundEvents.PLAYER_TELEPORT));

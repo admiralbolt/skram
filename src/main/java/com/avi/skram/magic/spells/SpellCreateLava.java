@@ -24,7 +24,7 @@ public class SpellCreateLava extends Spell {
   public static String NAME = "create_lava";
   public static int REQUIRED_MAGIC_LEVEL = 17;
   public static int COST = 1800;
-  public static int CASTING_TICKS = 120;
+  public static int CASTING_TICKS = 100;
 
   public SpellCreateLava() {
     super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC6);

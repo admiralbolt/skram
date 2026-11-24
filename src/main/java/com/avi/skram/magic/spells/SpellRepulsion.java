@@ -15,7 +15,7 @@ public class SpellRepulsion extends Spell {
 
   public static String NAME = "repulsion";
   public static int REQUIRED_MAGIC_LEVEL = 14;
-  public static int COST = 1900;
+  public static int COST = 1600;
   public static int CASTING_TICKS = 6;
 
   public static int RADIUS = 7;

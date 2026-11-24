@@ -13,7 +13,7 @@ public class SpellFireBolt extends Spell {
   public static String NAME = "fire_bolt";
   public static int REQUIRED_MAGIC_LEVEL = 5;
   public static int COST = 500;
-  public static int CASTING_TICKS = 20;
+  public static int CASTING_TICKS = 15;
 
   public static double BASE_DAMAGE = 4.0;
 

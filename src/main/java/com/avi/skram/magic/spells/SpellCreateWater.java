@@ -25,7 +25,7 @@ public class SpellCreateWater extends Spell {
   public static String NAME = "create_water";
   public static int REQUIRED_MAGIC_LEVEL = 4;
   public static int COST = 500;
-  public static int CASTING_TICKS = 100;
+  public static int CASTING_TICKS = 80;
 
   public SpellCreateWater() {
     super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC6);

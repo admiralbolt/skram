@@ -17,7 +17,7 @@ public class SpellHomeTeleport extends Spell {
   public static String NAME = "home_teleport";
   public static int REQUIRED_MAGIC_LEVEL = 11;
   public static int COST = 2000;
-  public static int CASTING_TICKS = 200;
+  public static int CASTING_TICKS = 180;
 
   public SpellHomeTeleport() {
     super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, Holder.direct(SoundEvents.PLAYER_TELEPORT));

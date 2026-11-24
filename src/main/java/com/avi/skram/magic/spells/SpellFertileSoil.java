@@ -19,7 +19,7 @@ public class SpellFertileSoil extends Spell {
   public static String NAME = "fertile_soil";
   public static int REQUIRED_MAGIC_LEVEL = 7;
   public static int COST = 400;
-  public static int CASTING_TICKS = 25;
+  public static int CASTING_TICKS = 20;
 
   public SpellFertileSoil() {
     super(NAME, REQUIRED_MAGIC_LEVEL, COST, CASTING_TICKS, SkramSounds.SPELL_CAST_GENERIC4);

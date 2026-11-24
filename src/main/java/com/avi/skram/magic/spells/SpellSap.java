@@ -18,8 +18,8 @@ public class SpellSap extends Spell {
 
   public static String NAME = "sap";
   public static int REQUIRED_MAGIC_LEVEL = 17;
-  public static int COST = 1800;
-  public static int CASTING_TICKS = 25;
+  public static int COST = 1700;
+  public static int CASTING_TICKS = 20;
 
   public static final int AMPLIFIER = 0;
   public static final int DURATION_TICKS = 200;

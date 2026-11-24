@@ -13,7 +13,7 @@ public class SpellIceSpike extends Spell {
   public static String NAME = "ice_spike";
   public static int REQUIRED_MAGIC_LEVEL = 12;
   public static int COST = 900;
-  public static int CASTING_TICKS = 20;
+  public static int CASTING_TICKS = 15;
 
   public static double BASE_DAMAGE = 6.0;
 
