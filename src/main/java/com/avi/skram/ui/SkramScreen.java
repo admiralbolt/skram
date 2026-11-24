@@ -65,7 +65,7 @@ public class SkramScreen extends Screen {
     String selectedEntryKey = selectedEntry;
 
     LinearLayout index = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-    index.spacing(2).defaultCellSetting().paddingTop(4);
+    index.spacing(1).defaultCellSetting().paddingTop(2);
     for (TabEntry entry : entries) {
       index.addChild(new LayoutButton(
         entry.indexWidth(),

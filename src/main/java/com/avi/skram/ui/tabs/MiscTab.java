@@ -59,7 +59,7 @@ public final class MiscTab {
       key,
       indexContent,
       145,
-      28,
+      24,
       details
     );
   }

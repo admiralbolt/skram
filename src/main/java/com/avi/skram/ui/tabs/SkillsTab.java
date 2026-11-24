@@ -32,7 +32,7 @@ public final class SkillsTab {
       ));
 
       LinearLayout skillInfo = new LinearLayout(0, 0, LinearLayout.Orientation.VERTICAL);
-      skillInfo.spacing(2).defaultCellSetting();
+      skillInfo.spacing(1).defaultCellSetting();
       skillInfo.addChild(new MultiLineTextWidget(
         Component.literal(StringUtils.snakeToTitle(skillName) + " " + skill.level),
         Minecraft.getInstance().font
@@ -54,7 +54,7 @@ public final class SkillsTab {
         skillName,
         indexContent,
         145,
-        32,
+        28,
         () -> SkramClientSkillHooks.renderSkill(skill)
       ));
     }

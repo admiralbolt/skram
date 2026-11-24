@@ -8,7 +8,6 @@ TODO
 * New bosses.
 * New dimension.
 * Some new perks!
-* XP for using potions.
 
 Version 1.0.5
 ==============
@@ -28,6 +27,8 @@ Version 1.0.5
 * A handful of adjustments to spell casting times & mana costs. Slight reductions in casting time + mana cost for many spells.
 * A few small reductions to perk item & level requirements (particularly for stealth, obsidian, and blaze rods).
 * Fixed a bug where mana regeneration potions could be made from mana regeneration potions.
+* Vertically condensed UI screens a bit.
+
 
 Version 1.0.4
 =============

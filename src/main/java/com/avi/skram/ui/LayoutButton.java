@@ -9,7 +9,8 @@ import net.minecraft.network.chat.Component;
 
 public class LayoutButton extends AbstractWidget {
 
-  private static final int PADDING = 3;
+  private static final int HORIZONTAL_PADDING = 3;
+  private static final int VERTICAL_PADDING = 2;
 
   private final Layout content;
   private final Runnable onPress;
@@ -57,8 +58,8 @@ public class LayoutButton extends AbstractWidget {
 
   private void arrangeContent() {
     this.content.arrangeElements();
-    int verticalOffset = Math.max(0, (this.getHeight() - 2 * PADDING - this.content.getHeight()) / 2);
-    this.content.setPosition(this.getX() + PADDING, this.getY() + PADDING + verticalOffset);
+    int verticalOffset = Math.max(0, (this.getHeight() - 2 * VERTICAL_PADDING - this.content.getHeight()) / 2);
+    this.content.setPosition(this.getX() + HORIZONTAL_PADDING, this.getY() + VERTICAL_PADDING + verticalOffset);
     this.content.arrangeElements();
   }
 

@@ -28,7 +28,7 @@ public final class PerksTab {
         perkName,
         indexContent,
         145,
-        28,
+        24,
         () -> SkramClientSkillHooks.renderPerk(perk, Minecraft.getInstance().player, inventoryResources)
       ));
     }

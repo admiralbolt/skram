@@ -56,7 +56,7 @@ public final class MagicTab {
         spellName,
         indexContent,
         145,
-        28,
+        24,
         () -> renderSpellDetails(player, spell, unlocked, spell.name.equals(castingInfo.equippedSpellName))
       ));
     }
