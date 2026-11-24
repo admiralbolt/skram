@@ -15,7 +15,6 @@ Maybe board:
 * Tailwind: Spell that increases boating speed.
 * Silk Road: Athletics/Sailing/Mercantile -- some kind of trade between villages quest thing?
 * Tempered Edge: Smithing -- Weapons you craft have +1 damage?
-* Thorn Style: Botany/Ranged -- Use flowers as throwing knives.
 
 
 Version 1.0.5
