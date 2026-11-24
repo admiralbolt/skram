@@ -33,7 +33,7 @@ public class PerkHeartOfTheForge extends Perk {
   public static List<ItemStack> getResearchCost() {
     return List.of(
       new ItemStack(Items.IRON_INGOT, 256),
-      new ItemStack(Items.BLAZE_ROD, 128)
+      new ItemStack(Items.BLAZE_ROD, 64)
     );
   }
 

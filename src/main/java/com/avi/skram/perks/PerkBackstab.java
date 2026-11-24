@@ -22,7 +22,7 @@ public class PerkBackstab extends Perk {
   public static final String NAME = "backstab";
   public static final String DESCRIPTION = "Deal +50% melee damage to unaware entities.";
   public static final Map<String, Integer> REQUIRED_SKILLS = ImmutableMap.<String, Integer>builder()
-    .put(SkillStealth.NAME, 30)
+    .put(SkillStealth.NAME, 20)
     .put(SkillMelee.NAME, 20)
     .build();
   public static final StreamCodec<ByteBuf, PerkBackstab> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkBackstab::new);

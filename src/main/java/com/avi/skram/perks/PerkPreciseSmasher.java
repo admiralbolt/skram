@@ -24,7 +24,7 @@ public class PerkPreciseSmasher extends Perk {
 
   public static List<ItemStack> getResearchCost() {
     return List.of(
-      new ItemStack(Items.OBSIDIAN, 256)
+      new ItemStack(Items.OBSIDIAN, 128)
     );
   }
 

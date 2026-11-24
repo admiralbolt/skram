@@ -26,7 +26,7 @@ public class PerkBountifulCatch extends Perk {
       new ItemStack(Items.COD, 128),
       new ItemStack(Items.SALMON, 128),
       new ItemStack(Items.PUFFERFISH, 64),
-      new ItemStack(Items.TROPICAL_FISH, 64)
+      new ItemStack(Items.TROPICAL_FISH, 32)
     );
   }
 

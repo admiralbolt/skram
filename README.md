@@ -23,7 +23,9 @@ Version 1.0.5
   * Slight buff to fishing (about +10% XP).
   * Slight buff to sailing (about +10% XP).
   * Medium buff to husbandry (about +20% XP).
+  * Medium buff to stealth (about +25% XP).
 * A handful of adjustments to spell casting times & mana costs. Slight reductions in casting time + mana cost for many spells.
+* A few small reductions to perk item & level requirements (particularly for stealth, obsidian, and blaze rods).
 
 
 Version 1.0.4

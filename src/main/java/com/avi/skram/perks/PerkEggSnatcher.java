@@ -27,7 +27,7 @@ public class PerkEggSnatcher extends Perk {
     .put(SkillMelee.NAME, 30)
     .put(SkillRanged.NAME, 30)
     .put(SkillHusbandry.NAME, 40)
-    .put(SkillStealth.NAME, 20)
+    .put(SkillStealth.NAME, 15)
     .build();
   public static final StreamCodec<ByteBuf, PerkEggSnatcher> STREAM_CODEC = StreamCodec.ofMember(Perk::encode, PerkEggSnatcher::new);
 
