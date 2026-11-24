@@ -1,5 +1,6 @@
 package com.avi.skram.skills;
 
+import com.avi.skram.utils.MathUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.BlockTags;
@@ -94,11 +95,7 @@ public class SkillMining extends Skill {
   }
 
   public double getFortuneChance() {
-    return 0.01 * this.level;
-  }
-
-  public int getFortuneAmount() {
-    return 1 + (this.level / 40);
+    return 0.015 * this.level;
   }
 
   public static void applySpeed(PlayerEvent.BreakSpeed event) {
@@ -123,7 +120,9 @@ public class SkillMining extends Skill {
 
     SkillMining mining = player.getData(Skills.MINING);
     if (!mining.enabledAbilities[MINING_FORTUNE_INDEX]) return;
-    if (Math.random() > mining.getFortuneChance()) return;
+
+    int fortuneAmount = MathUtils.getScalingRandom(mining.getFortuneChance());
+    if (fortuneAmount == 0) return;
 
     List<ItemEntity> drops = event.getDrops();
     // Probably unnecessary, but I want to make sure we double ALL drops.
@@ -133,7 +132,7 @@ public class SkillMining extends Skill {
       ItemEntity drop = drops.get(i);
       ItemStack dupItem = new ItemStack(drop.getItem().getItem(), drop.getItem().count());
       // Doing this as a loop to make N additional drops instead of 1 additional drop with N items.
-      for (int j = 0; j < mining.getFortuneAmount(); ++j) {
+      for (int j = 0; j < fortuneAmount; ++j) {
         drops.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), dupItem));
       }
     }
@@ -151,7 +150,7 @@ public class SkillMining extends Skill {
   public java.util.List<AbilityDescription> getAbilityDescriptions() {
     return java.util.List.of(
       new AbilityDescription("Mining Speed: +" + (int) (100 * this.getSpeedBonus()) + "%.", MINING_SPEED_INDEX),
-      new AbilityDescription("Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items.", MINING_SPEED_INDEX)
+      new AbilityDescription(MathUtils.formatFortune(this.getFortuneChance()), MINING_FORTUNE_INDEX)
     );
   }
 

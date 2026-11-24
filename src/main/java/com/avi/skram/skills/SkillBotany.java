@@ -1,5 +1,6 @@
 package com.avi.skram.skills;
 
+import com.avi.skram.utils.MathUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.BlockTags;
@@ -44,11 +45,7 @@ public class SkillBotany extends Skill {
   }
 
   public double getFortuneChance() {
-    return 0.01 * this.level;
-  }
-
-  public int getFortuneAmount() {
-    return 1 + (this.level / 20);
+    return 0.03 * this.level;
   }
 
   public static void gainXp(BreakBlockEvent event) {
@@ -74,7 +71,8 @@ public class SkillBotany extends Skill {
     SkillBotany botany = player.getData(Skills.BOTANY);
     if (!botany.enabledAbilities[BOTANY_FORTUNE_INDEX]) return;
 
-    if (Math.random() > botany.getFortuneChance()) return;
+    int fortuneAmount = MathUtils.getScalingRandom(botany.getFortuneChance());
+    if (fortuneAmount == 0) return;
 
     List<ItemEntity> drops = event.getDrops();
     // Probably unnecessary, but I want to make sure we double ALL drops.
@@ -84,7 +82,7 @@ public class SkillBotany extends Skill {
       ItemEntity drop = drops.get(i);
       ItemStack dupItem = new ItemStack(drop.getItem().getItem(), drop.getItem().count());
       // Doing this as a loop to make N additional drops instead of 1 additional drop with N items.
-      for (int j = 0; j < botany.getFortuneAmount(); ++j) {
+      for (int j = 0; j < fortuneAmount; ++j) {
         drops.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), dupItem));
       }
     }
@@ -92,10 +90,9 @@ public class SkillBotany extends Skill {
 
   @Override
   public java.util.List<AbilityDescription> getAbilityDescriptions() {
-    return java.util.List.of(new AbilityDescription(
-      "Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items.",
-      BOTANY_FORTUNE_INDEX
-    ));
+    return java.util.List.of(
+      new AbilityDescription(MathUtils.formatFortune(this.getFortuneChance()), BOTANY_FORTUNE_INDEX)
+    );
   }
 
   @Override

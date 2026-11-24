@@ -9,6 +9,7 @@ TODO
 * New bosses.
 * New dimension.
 * Some new perks!
+* XP for using potions.
 
 Version 1.0.5
 ==============
@@ -17,6 +18,8 @@ Version 1.0.5
 * Added napalm creepers to the nether.
 * Added ender creepers to the end.
 * Added dimensional scaling -- enemies in the Nether are stronger, and enemies in the End are much stronger.
+* Reworked fortune. %chance scales past 100%, and amount of items given is based on total chance. 150% chance means you always get 2x items, with a chance at 3x items.
+
 
 Version 1.0.4
 =============

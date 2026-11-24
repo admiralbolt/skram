@@ -31,11 +31,7 @@ public class RightClickHarvestMixin {
     final int countMultiplier;
     if (entity instanceof Player player) {
       SkillFarming farming = player.getData(Skills.FARMING);
-      if (MathUtils.RANDOM.nextDouble() < farming.getFortuneChance()) {
-        countMultiplier = farming.getFortuneAmount();
-      } else {
-        countMultiplier = 1;
-      }
+      countMultiplier = MathUtils.getScalingRandom(farming.getFortuneChance());
     } else {
       countMultiplier = 1;
     }

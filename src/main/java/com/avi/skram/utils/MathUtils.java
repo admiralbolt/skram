@@ -17,11 +17,20 @@ public class MathUtils {
   }
 
   // A helper function for generating an int from a random chance when the chance value can be greater than 1.
-  // In cases where we have a random chance like 1.5 (i.e. 150%), we return either 1 OR 2.
+  // This returns the multiplier amount i.e. 2 means 2x items, 3 means 3x items.
+  // In cases where we have a random chance like 1.5 (i.e. 150%), we return either 2 OR 3.
   public static int getScalingRandom(double chance) {
     int flat = (int) chance;
 
-    return flat + ((Math.random() < (chance - flat)) ? 1 : 0);
+    return 1 + flat + ((Math.random() < (chance - flat)) ? 1 : 0);
+  }
+
+  public static String formatFortune(double chance) {
+    if (chance <= 1)
+      return String.format("Fortune: %.1f%% for 2x items.", chance * 100.0);
+
+    int flat = (int) chance;
+    return String.format("Base: %d items. Fortune: %.1f%% for %dx items.", (1 + flat), (chance - flat) * 100.0, (2 + flat));
   }
 
   public static String formatTicks(int ticks) {

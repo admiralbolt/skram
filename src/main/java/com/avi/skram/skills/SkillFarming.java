@@ -3,6 +3,7 @@ package com.avi.skram.skills;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
+import com.avi.skram.utils.MathUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.StreamCodec;
@@ -108,10 +109,6 @@ public class SkillFarming extends Skill {
     return 0.02 * this.level;
   }
 
-  public int getFortuneAmount() {
-    return 1 + (this.level / 40);
-  }
-
   public static boolean isGrowablePlant(BlockState state) {
     Block block = state.getBlock();
     return (block instanceof CropBlock || block instanceof NetherWartBlock || block instanceof PitcherCropBlock || block instanceof TorchflowerCropBlock || block instanceof CocoaBlock);
@@ -147,7 +144,8 @@ public class SkillFarming extends Skill {
     SkillFarming farming = player.getData(Skills.FARMING);
     if (!farming.enabledAbilities[FARMING_FORTUNE_INDEX]) return;
 
-    if (Math.random() > farming.getFortuneChance()) return;
+    int fortuneAmount = MathUtils.getScalingRandom(farming.getFortuneChance());
+    if (fortuneAmount == 0) return;
 
     List<ItemEntity> drops = event.getDrops();
     // Probably unnecessary, but I want to make sure we double ALL drops.
@@ -157,7 +155,7 @@ public class SkillFarming extends Skill {
       ItemEntity drop = drops.get(i);
       ItemStack dupItem = new ItemStack(drop.getItem().getItem(), drop.getItem().count());
       // Doing this as a loop to make N additional drops instead of 1 additional drop with N items.
-      for (int j = 0; j < farming.getFortuneAmount(); ++j) {
+      for (int j = 0; j < fortuneAmount; ++j) {
         drops.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), dupItem));
       }
     }
@@ -230,7 +228,7 @@ public class SkillFarming extends Skill {
   public java.util.List<AbilityDescription> getAbilityDescriptions() {
     return java.util.List.of(
       new AbilityDescription("Bonus Crop Growth Chance: " + (int) (100 * this.getCropGrowthChance()) + "%.", CROP_GROWTH_CHANCE_INDEX),
-      new AbilityDescription("Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + this.getFortuneAmount() + "x items.", FARMING_FORTUNE_INDEX)
+      new AbilityDescription(MathUtils.formatFortune(this.getFortuneChance()), FARMING_FORTUNE_INDEX)
     );
   }
 

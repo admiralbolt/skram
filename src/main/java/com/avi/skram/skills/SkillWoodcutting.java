@@ -1,6 +1,7 @@
 package com.avi.skram.skills;
 
 import com.avi.skram.client.SkramClientSkillHooks;
+import com.avi.skram.utils.MathUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.StreamCodec;
@@ -87,11 +88,7 @@ public class SkillWoodcutting extends Skill {
   }
 
   public double getFortuneChance() {
-    return 0.01 * this.level;
-  }
-
-  public int getFortuneAmount() {
-    return 1 + (this.level / 30);
+    return 0.02 * this.level;
   }
 
   public static void applySpeed(PlayerEvent.BreakSpeed event) {
@@ -116,13 +113,15 @@ public class SkillWoodcutting extends Skill {
 
     SkillWoodcutting woodcutting = player.getData(Skills.WOODCUTTING);
     if (!woodcutting.enabledAbilities[WOODCUTTING_FORTUNE_INDEX]) return;
-    if (Math.random() > woodcutting.getFortuneChance()) return;
+
+    int fortuneAmount = MathUtils.getScalingRandom(woodcutting.getFortuneChance());
+    if (fortuneAmount == 0) return;
 
     List<ItemEntity> drops = event.getDrops();
     int dropSize = drops.size();
     for (int i = 0; i < dropSize; ++i) {
       ItemEntity drop = drops.get(i);
-      for (int j = 0; j < woodcutting.getFortuneAmount(); ++j) {
+      for (int j = 0; j < fortuneAmount; ++j) {
         drops.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), drop.getItem().copy()));
       }
     }
@@ -182,14 +181,8 @@ public class SkillWoodcutting extends Skill {
   @Override
   public java.util.List<AbilityDescription> getAbilityDescriptions() {
     return java.util.List.of(
-      new AbilityDescription(
-        "Woodcutting Speed: +" + (int) (100 * this.getSpeedBonus()) + "%.",
-        WOODCUTTING_SPEED_INDEX
-      ),
-      new AbilityDescription(
-        "Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items.",
-        WOODCUTTING_FORTUNE_INDEX
-      )
+      new AbilityDescription("Woodcutting Speed: +" + (int) (100 * this.getSpeedBonus()) + "%.", WOODCUTTING_SPEED_INDEX),
+      new AbilityDescription(MathUtils.formatFortune(this.getFortuneChance()), WOODCUTTING_FORTUNE_INDEX)
     );
   }
 

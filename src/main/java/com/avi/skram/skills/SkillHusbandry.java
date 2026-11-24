@@ -1,5 +1,6 @@
 package com.avi.skram.skills;
 
+import com.avi.skram.utils.MathUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.StreamCodec;
@@ -59,11 +60,7 @@ public class SkillHusbandry extends Skill {
   }
 
   public double getFortuneChance() {
-    return 0.01 * this.level;
-  }
-
-  public int getFortuneAmount() {
-    return 1 + (this.level / 20);
+    return 0.025 * this.level;
   }
 
   public static void handleBreedEvent(BabyEntitySpawnEvent event) {
@@ -96,7 +93,9 @@ public class SkillHusbandry extends Skill {
 
     SkillHusbandry husbandry = player.getData(Skills.HUSBANDRY);
     if (!husbandry.enabledAbilities[HUSBANDRY_FORTUNE_INDEX]) return;
-    if (Math.random() > husbandry.getFortuneChance()) return;
+
+    int fortuneAmount = MathUtils.getScalingRandom(husbandry.getFortuneChance());
+    if (fortuneAmount == 0) return;
 
     List<ItemEntity> baseDrops = new ArrayList<>(event.getDrops());
     // Probably unnecessary, but I want to make sure we double ALL drops.
@@ -106,7 +105,7 @@ public class SkillHusbandry extends Skill {
       ItemEntity drop = baseDrops.get(i);
       ItemStack dupItem = new ItemStack(drop.getItem().getItem(), drop.getItem().count());
       // Doing this as a loop to make N additional drops instead of 1 additional drop with N items.
-      for (int j = 0; j < husbandry.getFortuneAmount(); ++j) {
+      for (int j = 0; j < fortuneAmount; ++j) {
         event.getDrops().add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), dupItem));
       }
     }
@@ -184,7 +183,7 @@ public class SkillHusbandry extends Skill {
   public java.util.List<AbilityDescription> getAbilityDescriptions() {
     return java.util.List.of(
       new AbilityDescription("Breeding Bonus XP: +" + this.getBonusXPOnBreed() + ".", HUSBANDRY_BREEDING_XP_INDEX),
-      new AbilityDescription("Fortune: " + (int) (100 * this.getFortuneChance()) + "% for " + (1 + this.getFortuneAmount()) + "x items.", HUSBANDRY_FORTUNE_INDEX)
+      new AbilityDescription(MathUtils.formatFortune(this.getFortuneChance()), HUSBANDRY_FORTUNE_INDEX)
     );
   }
 
