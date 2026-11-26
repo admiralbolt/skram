@@ -8,6 +8,8 @@ TODO
 * New bosses.
 * New dimension.
 * Some new perks!
+* Fix nether bug!
+
 
 
 Maybe board:
@@ -15,6 +17,10 @@ Maybe board:
 * Tailwind: Spell that increases boating speed.
 * Silk Road: Athletics/Sailing/Mercantile -- some kind of trade between villages quest thing?
 * Tempered Edge: Smithing -- Weapons you craft have +1 damage?
+
+Version 1.0.6
+==============
+* Fixed a bug where fortune was giving 1 more multiple than intended.
 
 
 Version 1.0.5

@@ -115,13 +115,13 @@ public class SkillWoodcutting extends Skill {
     if (!woodcutting.enabledAbilities[WOODCUTTING_FORTUNE_INDEX]) return;
 
     int fortuneAmount = MathUtils.getScalingRandom(woodcutting.getFortuneChance());
-    if (fortuneAmount == 0) return;
+    if (fortuneAmount <= 1) return;
 
     List<ItemEntity> drops = event.getDrops();
     int dropSize = drops.size();
     for (int i = 0; i < dropSize; ++i) {
       ItemEntity drop = drops.get(i);
-      for (int j = 0; j < fortuneAmount; ++j) {
+      for (int j = 0; j < fortuneAmount - 1; ++j) {
         drops.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), drop.getItem().copy()));
       }
     }

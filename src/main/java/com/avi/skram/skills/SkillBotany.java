@@ -72,7 +72,7 @@ public class SkillBotany extends Skill {
     if (!botany.enabledAbilities[BOTANY_FORTUNE_INDEX]) return;
 
     int fortuneAmount = MathUtils.getScalingRandom(botany.getFortuneChance());
-    if (fortuneAmount == 0) return;
+    if (fortuneAmount == 1) return;
 
     List<ItemEntity> drops = event.getDrops();
     // Probably unnecessary, but I want to make sure we double ALL drops.
@@ -82,7 +82,7 @@ public class SkillBotany extends Skill {
       ItemEntity drop = drops.get(i);
       ItemStack dupItem = new ItemStack(drop.getItem().getItem(), drop.getItem().count());
       // Doing this as a loop to make N additional drops instead of 1 additional drop with N items.
-      for (int j = 0; j < fortuneAmount; ++j) {
+      for (int j = 0; j < fortuneAmount - 1; ++j) {
         drops.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), dupItem));
       }
     }
