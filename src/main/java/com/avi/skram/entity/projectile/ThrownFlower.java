@@ -1,11 +1,9 @@
 package com.avi.skram.entity.projectile;
 
 import com.avi.skram.entity.SkramEntities;
-import com.avi.skram.utils.MathUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
@@ -15,11 +13,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
-
-import java.awt.*;
-import java.util.function.Consumer;
 
 public class ThrownFlower extends ThrowableItemProjectile {
 

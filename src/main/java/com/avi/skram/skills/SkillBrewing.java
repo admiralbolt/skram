@@ -1,19 +1,16 @@
 package com.avi.skram.skills;
 
-import com.avi.skram.perks.PerkClusterBomb;
-import com.avi.skram.perks.PerkGrenadier;
-import com.avi.skram.perks.Perks;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.ThrowablePotionItem;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
