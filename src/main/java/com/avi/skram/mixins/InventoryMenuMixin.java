@@ -16,7 +16,7 @@ public class InventoryMenuMixin {
 
   @Inject(
     method = "quickMoveStack(Lnet/minecraft/world/entity/player/Player;I)Lnet/minecraft/world/item/ItemStack;",
-    at = {@At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;copy()Lnet/minecraft/world/item/ItemStack;")}
+    at = {@At(value = "INVOKE", target = "Lnet/minecraft/world/inventory/InventoryMenu;moveItemStackTo(Lnet/minecraft/world/item/ItemStack;IIZ)Z", shift = At.Shift.BEFORE)}
   )
   private static void handleCraftingShiftClick(Player player, int slotIndex, CallbackInfoReturnable<ItemStack> cir, @Local(name = {"stack"}) ItemStack stack) {
     SkillCooking.overrideFood(player, stack);

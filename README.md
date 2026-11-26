@@ -8,8 +8,6 @@ TODO
 * New bosses.
 * New dimension.
 * Some new perks!
-* Fix nether bug!
-
 
 
 Maybe board:
@@ -17,11 +15,13 @@ Maybe board:
 * Tailwind: Spell that increases boating speed.
 * Silk Road: Athletics/Sailing/Mercantile -- some kind of trade between villages quest thing?
 * Tempered Edge: Smithing -- Weapons you craft have +1 damage?
+* Freedom of Movement: Athletics - Break spiderwebs if you are entangled in them + immunity to slowness.
+
 
 Version 1.0.6
 ==============
 * Fixed a bug where fortune was giving 1 more multiple than intended.
-
+* Fixed a bug where shift-clicking food in the inventory infinitely re-applied cooking overrides.
 
 Version 1.0.5
 ==============
