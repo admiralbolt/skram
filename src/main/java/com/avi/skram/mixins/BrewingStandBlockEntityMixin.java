@@ -1,5 +1,6 @@
 package com.avi.skram.mixins;
 
+import com.avi.skram.Skram;
 import com.avi.skram.blocks.BlockData;
 import com.avi.skram.blocks.PlayerOwnedBlocks;
 import com.avi.skram.blocks.PlayerOwnedData;
@@ -9,11 +10,14 @@ import com.avi.skram.utils.ReflectionUtils;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BrewingStandBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -72,6 +76,28 @@ public class BrewingStandBlockEntityMixin {
     if (owner == null) return;
 
     SkillBrewing brewing = owner.getData(Skills.BREWING);
+
+    for (ItemStack stack : items) {
+      PotionContents contents = stack.get(DataComponents.POTION_CONTENTS);
+      if (contents == null) return;
+
+      for (MobEffectInstance instance : contents.getAllEffects()) {
+        try {
+          if (instance.getDuration() <= 1) {
+            int newAmplifier = (int) (instance.getAmplifier() * (1 + brewing.getPotionEfficacy()));
+            if (newAmplifier == instance.getAmplifier()) continue;
+
+            ReflectionUtils.setFieldValue(instance, "amplifier", newAmplifier);
+          } else {
+            int newDuration = (int) (instance.getDuration() * (1 + brewing.getPotionEfficacy()));
+            ReflectionUtils.setFieldValue(instance, "duration", newDuration);
+          }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+          Skram.LOGGER.error("Failed to increase thrown potion effect duration: ", e);
+        }
+      }
+    }
+
     brewing.addXpForItems(owner, items);
   }
 

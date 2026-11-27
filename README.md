@@ -22,6 +22,8 @@ Version 1.0.6
 ==============
 * Fixed a bug where fortune was giving 1 more multiple than intended.
 * Fixed a bug where shift-clicking food in the inventory infinitely re-applied cooking overrides.
+* Added a new ability to brewing that improves the duration of your potions! For instant health / damage this affects the amplifier instead.
+
 
 Version 1.0.5
 ==============

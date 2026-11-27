@@ -1,11 +1,16 @@
 package com.avi.skram.skills;
 
+import com.avi.skram.Skram;
+import com.avi.skram.utils.ReflectionUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +20,7 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,14 +43,29 @@ public class SkillBrewing extends Skill {
   public static Map<String, Integer> XP_MAP;
 
   public static final int BREWING_SPEED_INDEX = 0;
+  public static final int POTION_EFFICACY_INDEX = 1;
 
   public SkillBrewing() {
     super(NAME, 1, 0);
-    this.enabledAbilities = new boolean[]{true};
+    this.enabledAbilities = new boolean[]{true, true};
   }
 
   public SkillBrewing(ByteBuf buffer) {
     super(buffer);
+    this.ensurePotionEfficacyAbility();
+  }
+
+  private void ensurePotionEfficacyAbility() {
+    if (this.enabledAbilities.length <= POTION_EFFICACY_INDEX) {
+      this.enabledAbilities = Arrays.copyOf(this.enabledAbilities, POTION_EFFICACY_INDEX + 1);
+      this.enabledAbilities[POTION_EFFICACY_INDEX] = true;
+    }
+  }
+
+  @Override
+  public void deserialize(net.minecraft.world.level.storage.ValueInput input) {
+    super.deserialize(input);
+    this.ensurePotionEfficacyAbility();
   }
 
   public static void registerXPMap() {
@@ -86,7 +107,8 @@ public class SkillBrewing extends Skill {
   public static void handleThrownPotion(PlayerInteractEvent.RightClickItem event) {
     if (event.getLevel().isClientSide()) return;
 
-    Item item = event.getItemStack().getItem();
+    ItemStack stack = event.getItemStack();
+    Item item = stack.getItem();
     if (!(item instanceof ThrowablePotionItem)) return;
 
     Player player = event.getEntity();
@@ -98,12 +120,22 @@ public class SkillBrewing extends Skill {
     return 0.03f * this.level;
   }
 
+  public float getPotionEfficacy() {
+    return 0.02f * this.level;
+  }
+
   @Override
   public java.util.List<AbilityDescription> getAbilityDescriptions() {
-    return java.util.List.of(new AbilityDescription(
-      "Brewing Speed: +" + (int) (100 * this.getBrewingSpeed()) + "%.",
-      BREWING_SPEED_INDEX
-    ));
+    return java.util.List.of(
+      new AbilityDescription(
+        "Brewing Speed: +" + (int) (100 * this.getBrewingSpeed()) + "%.",
+        BREWING_SPEED_INDEX
+      ),
+      new AbilityDescription(
+        "Potion Duration: +" + (int) (100 * this.getPotionEfficacy()) + "%.",
+        POTION_EFFICACY_INDEX
+      )
+    );
   }
 
   @Override
